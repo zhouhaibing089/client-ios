@@ -1,0 +1,29 @@
+PODS:
+  - CRToast (0.0.7)
+  - NJKWebViewProgress (0.2.3):
+    - NJKWebViewProgress/Core (= 0.2.3)
+    - NJKWebViewProgress/ProgressView (= 0.2.3)
+  - NJKWebViewProgress/Core (0.2.3)
+  - NJKWebViewProgress/ProgressView (0.2.3)
+  - SQLite.swift (1.0.0.pre)
+
+DEPENDENCIES:
+  - CRToast (~> 0.0.7)
+  - NJKWebViewProgress
+  - SQLite.swift (from `https://github.com/stephencelis/SQLite.swift.git`)
+
+EXTERNAL SOURCES:
+  SQLite.swift:
+    :git: https://github.com/stephencelis/SQLite.swift.git
+
+CHECKOUT OPTIONS:
+  SQLite.swift:
+    :commit: e01cb82f63a7f59c28fc89a79b7f9cb59780a0f4
+    :git: https://github.com/stephencelis/SQLite.swift.git
+
+SPEC CHECKSUMS:
+  CRToast: 99a28f4387def43b439ad88f957ce31357ff7373
+  NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
+  SQLite.swift: 5dfee5c783b93f4c0035c0317a11c3c92cc91910
+
+COCOAPODS: 0.38.2

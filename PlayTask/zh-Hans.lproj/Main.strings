@@ -1,0 +1,45 @@
+
+/* Class = "UINavigationItem"; title = "新建任务"; ObjectID = "48u-zW-RBS"; */
+"48u-zW-RBS.title" = "新建任务";
+
+/* Class = "UISegmentedControl"; Bss-bb-e4G.segmentTitles[0] = "每日任务"; ObjectID = "Bss-bb-e4G"; */
+"Bss-bb-e4G.segmentTitles[0]" = "每日任务";
+
+/* Class = "UISegmentedControl"; Bss-bb-e4G.segmentTitles[1] = "每周任务"; ObjectID = "Bss-bb-e4G"; */
+"Bss-bb-e4G.segmentTitles[1]" = "每周任务";
+
+/* Class = "UIBarButtonItem"; title = "24"; ObjectID = "CZe-ro-ERv"; */
+"CZe-ro-ERv.title" = "24";
+
+/* Class = "UISegmentedControl"; Er1-c3-GTP.segmentTitles[0] = "每日"; ObjectID = "Er1-c3-GTP"; */
+"Er1-c3-GTP.segmentTitles[0]" = "每日";
+
+/* Class = "UISegmentedControl"; Er1-c3-GTP.segmentTitles[1] = "每周"; ObjectID = "Er1-c3-GTP"; */
+"Er1-c3-GTP.segmentTitles[1]" = "每周";
+
+/* Class = "UINavigationItem"; title = "欲望"; ObjectID = "FeY-8f-Z0e"; */
+"FeY-8f-Z0e.title" = "欲望";
+
+/* Class = "UITextField"; placeholder = "标题"; ObjectID = "JNZ-AY-Ai5"; */
+"JNZ-AY-Ai5.placeholder" = "标题";
+
+/* Class = "UIBarButtonItem"; title = "完成"; ObjectID = "KnO-cq-OUj"; */
+"KnO-cq-OUj.title" = "完成";
+
+/* Class = "UIBarButtonItem"; title = "新建"; ObjectID = "MIY-la-nTc"; */
+"MIY-la-nTc.title" = "新建";
+
+/* Class = "UITextField"; placeholder = "可获取的成就点数"; ObjectID = "ToH-Hi-hD9"; */
+"ToH-Hi-hD9.placeholder" = "可获取的成就点数";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "Z8W-3h-Y1N"; */
+"Z8W-3h-Y1N.title" = "Item";
+
+/* Class = "UITabBarItem"; title = "任务"; ObjectID = "ZqT-wP-1du"; */
+"ZqT-wP-1du.title" = "任务";
+
+/* Class = "UITabBarItem"; title = "欲望"; ObjectID = "d9L-C0-TE2"; */
+"d9L-C0-TE2.title" = "欲望";
+
+/* Class = "UIBarButtonItem"; title = "新建"; ObjectID = "mtI-gd-sba"; */
+"mtI-gd-sba.title" = "新建";
