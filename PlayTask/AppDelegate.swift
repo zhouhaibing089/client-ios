@@ -21,25 +21,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // 创建 sqlite
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        var dbPath: String! = userDefaults.stringForKey("db_path")
+        let path = NSSearchPathForDirectoriesInDomains(
+            .DocumentDirectory, .UserDomainMask, true
+        ).first!
+        let dbPath = "\(path)/db.sqlite3"
         
-        if dbPath == nil {
-            let path = NSSearchPathForDirectoriesInDomains(
-                .DocumentDirectory, .UserDomainMask, true
-                ).first!
-            dbPath = "\(path)/db.sqlite3"
-            userDefaults.setObject(dbPath, forKey: "dp_path")
-            userDefaults.synchronize()
-            
-            self.db = try! Connection(dbPath)
-            
-            // 创建表
-            Task.createTable(self.db)
-            History.createTable(self.db)
-        } else {
-            self.db = try! Connection(dbPath)
-        }
+        self.db = try! Connection(dbPath)
+        
+        // 创建表
+        Task.createTable(self.db)
+        TaskHistory.createTable(self.db)
+        Wish.createTable(self.db)
+        WishHistory.createTable(self.db)
         
         // 配置 CRToast
         let defaultOptions: [NSObject: AnyObject] = [

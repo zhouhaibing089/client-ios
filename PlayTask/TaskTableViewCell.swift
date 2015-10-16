@@ -29,36 +29,41 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var completionSwitch: UISwitch!
     
     @IBAction func toggle(sender: UISwitch) {
-        let score = Int(self.scoreBarButton.title!)!
+        var score = Int(self.scoreBarButton.title!)!
         if let history = self.getHistory() {
             history.deleted = !history.deleted
             if !history.deleted {
-                self.scoreBarButton.title = "\(score + self.task.score)"
+                score += Int(self.task.score)
                 history.completionTime = NSDate()
             } else {
-                self.scoreBarButton.title = "\(score - Int(self.task.score))"
+                score -= Int(self.task.score)
             }
             history.update()
         } else {
-            let history = History(id: nil, taskId: self.task.id!, completionTime: NSDate(), deleted: false)
-            self.scoreBarButton.title = "\(score + Int(self.task.score))"
+            let history = TaskHistory(task: self.task, completionTime: NSDate(), deleted: false)
+            score += Int(self.task.score)
             history.save()
+        }
+        UIView.performWithoutAnimation {
+            self.scoreBarButton.title = "\(score)"
         }
         let standardUserDefaults = NSUserDefaults.standardUserDefaults()
         standardUserDefaults.setInteger(Int(self.scoreBarButton.title!)!, forKey: "score")
         standardUserDefaults.synchronize()
     }
     
-    func getHistory() -> History? {
+    func getHistory() -> TaskHistory? {
         let now = NSDate()
-        if let row = Util.db.pluck(History.SQLite.histories.filter(
-            History.SQLite.taskId == self.task.id!
+        if let row = Util.db.pluck(TaskHistory.SQLite.histories.filter(
+            TaskHistory.SQLite.taskId == self.task.id!
         ).filter(
-            History.SQLite.completionTime >= Int64(now.beginOfDay().timeIntervalSince1970)
+            TaskHistory.SQLite.completionTime >= Int64(now.beginOfDay().timeIntervalSince1970)
         ).filter(
-            History.SQLite.completionTime <= Int64(now.endOfDay().timeIntervalSince1970)
+            TaskHistory.SQLite.completionTime <= Int64(now.endOfDay().timeIntervalSince1970)
         )) {
-            return History(id: row[History.SQLite.id], taskId: row[History.SQLite.taskId], completionTime: NSDate(timeIntervalSince1970: Double(row[History.SQLite.completionTime])), deleted: row[History.SQLite.deleted])
+            let h = TaskHistory(task: self.task, completionTime: NSDate(timeIntervalSince1970: Double(row[TaskHistory.SQLite.completionTime])), deleted: row[TaskHistory.SQLite.deleted])
+            h.id = row[TaskHistory.SQLite.id]
+            return h
         } else {
             return nil
         }

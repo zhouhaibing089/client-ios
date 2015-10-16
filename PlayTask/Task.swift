@@ -18,12 +18,13 @@ enum TaskType: Int64 {
 class Task {
     
     struct SQLite {
-        static let tasks = Table("users")
+        static let tasks = Table("tasks")
         static let id = Expression<Int64>("id")
         static let title = Expression<String>("title")
         static let score = Expression<Int64>("score")
         static let type = Expression<Int64>("type")
         static let deleted = Expression<Bool>("deleted")
+
     }
     
     var id: Int64?
@@ -32,8 +33,7 @@ class Task {
     var type: TaskType
     var deleted: Bool
     
-    init(id: Int64?, title: String, score: Int64, type: TaskType, deleted: Bool) {
-        self.id = id
+    init(title: String, score: Int64, type: TaskType, deleted: Bool) {
         self.title = title
         self.score = score
         self.type = type
@@ -58,26 +58,38 @@ class Task {
         ))
     }
     
+    class func getTask(taskId: Int64) -> Task? {
+        if let t = Util.db.pluck(Task.SQLite.tasks.filter(Task.SQLite.id == taskId)) {
+            return Task(title: t[Task.SQLite.title],
+                score: t[Task.SQLite.score],
+                type: TaskType(rawValue: t[Task.SQLite.type])!,
+                deleted: t[Task.SQLite.deleted])
+        }
+        return nil
+    }
+    
     class func getTasks() -> [Int64: [Task]] {
         var everyDayTasks = [Task]()
         for task in Util.db.prepare(Task.SQLite.tasks.filter(Task.SQLite.deleted == false).filter(Task.SQLite.type == TaskType.EveryDay.rawValue)) {
-            everyDayTasks.append(Task(
-                id: task[Task.SQLite.id],
+            let t = Task(
                 title: task[Task.SQLite.title],
                 score: task[Task.SQLite.score],
                 type: TaskType.init(rawValue: task[Task.SQLite.type])!,
                 deleted: task[Task.SQLite.deleted]
-            ))
+            )
+            t.id = task[Task.SQLite.id]
+            everyDayTasks.append(t)
         }
         var everyWeekTasks = [Task]()
         for task in Util.db.prepare(Task.SQLite.tasks.filter(Task.SQLite.deleted == false).filter(Task.SQLite.type == TaskType.EveryWeek.rawValue)) {
-            everyWeekTasks.append(Task(
-                id: task[Task.SQLite.id],
+            let t = Task(
                 title: task[Task.SQLite.title],
                 score: task[Task.SQLite.score],
                 type: TaskType.init(rawValue: task[Task.SQLite.type])!,
                 deleted: task[Task.SQLite.deleted]
-            ))
+            )
+            t.id = task[Task.SQLite.id]
+            everyWeekTasks.append(t)
         }
         return [TaskType.EveryDay.rawValue: everyDayTasks, TaskType.EveryWeek.rawValue: everyWeekTasks]
     }

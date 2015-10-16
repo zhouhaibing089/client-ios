@@ -8,10 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		495EB5C31BCFDB8B00E0E829 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C21BCFDB8B00E0E829 /* NSDate.swift */; settings = {ASSET_TAGS = (); }; };
-		49840DCF1BCF988B001F493D /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DCE1BCF988B001F493D /* History.swift */; settings = {ASSET_TAGS = (); }; };
+		495EB5C51BD09F5B00E0E829 /* BillItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C41BD09F5B00E0E829 /* BillItem.swift */; settings = {ASSET_TAGS = (); }; };
+		495EB5C71BD0A80800E0E829 /* BillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C61BD0A80800E0E829 /* BillViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		49840DCF1BCF988B001F493D /* TaskHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DCE1BCF988B001F493D /* TaskHistory.swift */; settings = {ASSET_TAGS = (); }; };
 		49840DD11BCF9B61001F493D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD01BCF9B61001F493D /* Util.swift */; settings = {ASSET_TAGS = (); }; };
 		49840DD41BCF9D46001F493D /* ViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD31BCF9D46001F493D /* ViewUtil.swift */; settings = {ASSET_TAGS = (); }; };
 		49840DD91BCFA997001F493D /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD81BCFA997001F493D /* TaskTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		498BAC901BD0CDE600ABB357 /* WishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		498BAC921BD0CE7400ABB357 /* NewWishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC911BD0CE7400ABB357 /* NewWishViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		498BAC941BD0CFD500ABB357 /* Wish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC931BD0CFD500ABB357 /* Wish.swift */; settings = {ASSET_TAGS = (); }; };
+		498BAC961BD0D49400ABB357 /* WishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC951BD0D49400ABB357 /* WishTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		498BAC981BD0DC0900ABB357 /* WishHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC971BD0DC0900ABB357 /* WishHistory.swift */; settings = {ASSET_TAGS = (); }; };
+		498BAC9A1BD0E2C800ABB357 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC991BD0E2C800ABB357 /* UIColor.swift */; settings = {ASSET_TAGS = (); }; };
 		499708BF1BCF506E00424F5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499708BE1BCF506E00424F5E /* AppDelegate.swift */; };
 		499708C41BCF506E00424F5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499708C21BCF506E00424F5E /* Main.storyboard */; };
 		499708C61BCF506E00424F5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 499708C51BCF506E00424F5E /* Assets.xcassets */; };
@@ -45,10 +54,19 @@
 		116641E9AD5D4333FD531049 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		27FE39AB88BE9E71239939D4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		495EB5C21BCFDB8B00E0E829 /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
-		49840DCE1BCF988B001F493D /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		495EB5C41BD09F5B00E0E829 /* BillItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillItem.swift; sourceTree = "<group>"; };
+		495EB5C61BD0A80800E0E829 /* BillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillViewController.swift; sourceTree = "<group>"; };
+		495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillItemTableViewCell.swift; sourceTree = "<group>"; };
+		49840DCE1BCF988B001F493D /* TaskHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskHistory.swift; sourceTree = "<group>"; };
 		49840DD01BCF9B61001F493D /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		49840DD31BCF9D46001F493D /* ViewUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtil.swift; sourceTree = "<group>"; };
 		49840DD81BCFA997001F493D /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishViewController.swift; sourceTree = "<group>"; };
+		498BAC911BD0CE7400ABB357 /* NewWishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewWishViewController.swift; sourceTree = "<group>"; };
+		498BAC931BD0CFD500ABB357 /* Wish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wish.swift; sourceTree = "<group>"; };
+		498BAC951BD0D49400ABB357 /* WishTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishTableViewCell.swift; sourceTree = "<group>"; };
+		498BAC971BD0DC0900ABB357 /* WishHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishHistory.swift; sourceTree = "<group>"; };
+		498BAC991BD0E2C800ABB357 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		499708BB1BCF506E00424F5E /* PlayTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		499708BE1BCF506E00424F5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		499708C31BCF506E00424F5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -99,6 +117,7 @@
 		495EB5C11BCFDB7700E0E829 /* extension */ = {
 			isa = PBXGroup;
 			children = (
+				498BAC991BD0E2C800ABB357 /* UIColor.swift */,
 				495EB5C21BCFDB8B00E0E829 /* NSDate.swift */,
 			);
 			name = extension;
@@ -119,6 +138,9 @@
 			children = (
 				499708EE1BCF63F500424F5E /* NewTaskViewController.swift */,
 				499708EC1BCF635A00424F5E /* TaskViewController.swift */,
+				495EB5C61BD0A80800E0E829 /* BillViewController.swift */,
+				498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */,
+				498BAC911BD0CE7400ABB357 /* NewWishViewController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -127,7 +149,10 @@
 			isa = PBXGroup;
 			children = (
 				499708F01BCF657F00424F5E /* Task.swift */,
-				49840DCE1BCF988B001F493D /* History.swift */,
+				49840DCE1BCF988B001F493D /* TaskHistory.swift */,
+				495EB5C41BD09F5B00E0E829 /* BillItem.swift */,
+				498BAC931BD0CFD500ABB357 /* Wish.swift */,
+				498BAC971BD0DC0900ABB357 /* WishHistory.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -136,6 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				49840DD81BCFA997001F493D /* TaskTableViewCell.swift */,
+				495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */,
+				498BAC951BD0D49400ABB357 /* WishTableViewCell.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -402,15 +429,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				498BAC961BD0D49400ABB357 /* WishTableViewCell.swift in Sources */,
 				49840DD91BCFA997001F493D /* TaskTableViewCell.swift in Sources */,
 				499708F11BCF657F00424F5E /* Task.swift in Sources */,
 				49840DD41BCF9D46001F493D /* ViewUtil.swift in Sources */,
+				495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */,
+				498BAC921BD0CE7400ABB357 /* NewWishViewController.swift in Sources */,
+				495EB5C51BD09F5B00E0E829 /* BillItem.swift in Sources */,
 				49840DD11BCF9B61001F493D /* Util.swift in Sources */,
 				495EB5C31BCFDB8B00E0E829 /* NSDate.swift in Sources */,
 				499708BF1BCF506E00424F5E /* AppDelegate.swift in Sources */,
+				495EB5C71BD0A80800E0E829 /* BillViewController.swift in Sources */,
+				498BAC981BD0DC0900ABB357 /* WishHistory.swift in Sources */,
+				498BAC941BD0CFD500ABB357 /* Wish.swift in Sources */,
+				498BAC9A1BD0E2C800ABB357 /* UIColor.swift in Sources */,
 				499708EF1BCF63F500424F5E /* NewTaskViewController.swift in Sources */,
 				499708ED1BCF635A00424F5E /* TaskViewController.swift in Sources */,
-				49840DCF1BCF988B001F493D /* History.swift in Sources */,
+				498BAC901BD0CDE600ABB357 /* WishViewController.swift in Sources */,
+				49840DCF1BCF988B001F493D /* TaskHistory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

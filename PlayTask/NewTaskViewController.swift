@@ -31,7 +31,7 @@ class NewTaskViewController: UITableViewController {
             CRToastManager.showNotificationWithMessage("请输入成就点数", completionBlock: nil)
             return
         }
-        let task = Task(id: nil, title: taskTitle!, score: Int64(taskScore!)!, type: taskType, deleted: false)
+        let task = Task(title: taskTitle!, score: Int64(taskScore!)!, type: taskType, deleted: false)
         task.save()
         self.onTaskAdded?(task)
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)

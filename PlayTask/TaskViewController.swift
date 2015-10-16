@@ -28,16 +28,18 @@ class TaskViewController: UITableViewController {
         
         self.tasks = Task.getTasks()
         self.navigationItem.title = "任务"
+
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-        let standardUserDefaults = NSUserDefaults.standardUserDefaults()
-        let score = standardUserDefaults.integerForKey("score")
-        self.scoreBarButton.title = "\(score)"
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        UIView.performWithoutAnimation {
+            let standardUserDefaults = NSUserDefaults.standardUserDefaults()
+            let score = standardUserDefaults.integerForKey("score")
+            self.scoreBarButton.title = "\(score)"
+        }
+        
     }
 
     // MARK: - Table view data source
