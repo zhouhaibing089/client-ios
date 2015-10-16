@@ -33,19 +33,25 @@ extension NSDate {
     
     func beginOfWeek() -> NSDate {
         let cal = NSCalendar.currentCalendar()
-        cal.firstWeekday = 2
         let components = cal.components(NSCalendarUnit.Weekday, fromDate: self)
         let substract = NSDateComponents()
-        substract.day = 1 - components.weekday
-        return cal.dateByAddingComponents(NSDateComponents(), toDate: self.beginOfDay(), options: [])!
+        if components.weekday == 1 {
+            substract.day = -6
+        } else {
+            substract.day = 2 - components.weekday
+        }
+        return cal.dateByAddingComponents(substract, toDate: self.beginOfDay(), options: [])!
     }
     
     func endOfWeek() -> NSDate {
         let cal = NSCalendar.currentCalendar()
-        cal.firstWeekday = 2
         let components = cal.components(NSCalendarUnit.Weekday, fromDate: self)
         let substract = NSDateComponents()
-        substract.day = 7 - components.weekday
-        return cal.dateByAddingComponents(NSDateComponents(), toDate: self.beginOfDay(), options: [])!
+        if components.weekday == 1 {
+            substract.day = 0
+        } else {
+            substract.day = 8 - components.weekday
+        }
+        return cal.dateByAddingComponents(substract, toDate: self.beginOfDay(), options: [])!
     }
 }

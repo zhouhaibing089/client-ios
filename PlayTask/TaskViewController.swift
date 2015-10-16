@@ -26,13 +26,21 @@ class TaskViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tasks = Task.getTasks()
         self.navigationItem.title = "任务"
-
+        
+        self.tasks = Task.getTasks()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didBecomeActive:", name: UIApplicationDidBecomeActiveNotification, object: nil)
+    }
+    
+    func didBecomeActive(notification: NSNotification) {
+        self.tableView.reloadData()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.tableView.reloadData()
         
         UIView.performWithoutAnimation {
             let standardUserDefaults = NSUserDefaults.standardUserDefaults()

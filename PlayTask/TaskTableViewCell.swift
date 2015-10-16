@@ -15,7 +15,7 @@ class TaskTableViewCell: UITableViewCell {
         didSet {
             self.titleLabel.text = self.task.title
             self.scoreLabel.text = "+\(self.task.score)"
-            if let history = self.getHistory() {
+            if let history = self.getHistory(self.task.type) {
                 self.completionSwitch.setOn(!history.deleted, animated: false)
             } else {
                 self.completionSwitch.setOn(false, animated: false)
@@ -30,7 +30,7 @@ class TaskTableViewCell: UITableViewCell {
     
     @IBAction func toggle(sender: UISwitch) {
         var score = Int(self.scoreBarButton.title!)!
-        if let history = self.getHistory() {
+        if let history = self.getHistory(self.task.type) {
             history.deleted = !history.deleted
             if !history.deleted {
                 score += Int(self.task.score)
@@ -52,14 +52,23 @@ class TaskTableViewCell: UITableViewCell {
         standardUserDefaults.synchronize()
     }
     
-    func getHistory() -> TaskHistory? {
+    func getHistory(taskType: TaskType) -> TaskHistory? {
         let now = NSDate()
+        var begin: Int64
+        var end: Int64
+        if taskType == TaskType.EveryDay {
+            begin = Int64(now.beginOfDay().timeIntervalSince1970)
+            end = Int64(now.endOfDay().timeIntervalSince1970)
+        } else {
+            begin = Int64(now.beginOfWeek().timeIntervalSince1970)
+            end = Int64(now.endOfWeek().timeIntervalSince1970)
+        }
         if let row = Util.db.pluck(TaskHistory.SQLite.histories.filter(
             TaskHistory.SQLite.taskId == self.task.id!
         ).filter(
-            TaskHistory.SQLite.completionTime >= Int64(now.beginOfDay().timeIntervalSince1970)
+            TaskHistory.SQLite.completionTime >= begin
         ).filter(
-            TaskHistory.SQLite.completionTime <= Int64(now.endOfDay().timeIntervalSince1970)
+            TaskHistory.SQLite.completionTime <= end
         )) {
             let h = TaskHistory(task: self.task, completionTime: NSDate(timeIntervalSince1970: Double(row[TaskHistory.SQLite.completionTime])), deleted: row[TaskHistory.SQLite.deleted])
             h.id = row[TaskHistory.SQLite.id]
