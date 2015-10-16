@@ -33,5 +33,9 @@ class BillItem {
             return $0.modifiedTime.compare($1.modifiedTime) == NSComparisonResult.OrderedDescending
         }
     }
+    
+    func update() {
+        
+    }
 
 }

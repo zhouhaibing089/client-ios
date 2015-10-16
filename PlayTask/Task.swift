@@ -24,7 +24,8 @@ class Task {
         static let score = Expression<Int64>("score")
         static let type = Expression<Int64>("type")
         static let deleted = Expression<Bool>("deleted")
-
+        static let createdTime = Expression<Int64>("createdTime")
+        static let modifiedTime = Expression<Int64>("modifiedTime")
     }
     
     var id: Int64?
@@ -45,7 +46,9 @@ class Task {
             Task.SQLite.title <- self.title,
             Task.SQLite.score <- self.score,
             Task.SQLite.type <- self.type.rawValue,
-            Task.SQLite.deleted <- self.deleted
+            Task.SQLite.deleted <- self.deleted,
+            Task.SQLite.createdTime <- Int64(NSDate().timeIntervalSince1970),
+            Task.SQLite.modifiedTime <- Int64(NSDate().timeIntervalSince1970)
         ))
     }
     
@@ -54,7 +57,8 @@ class Task {
             Task.SQLite.title <- self.title,
             Task.SQLite.score <- self.score,
             Task.SQLite.type <- self.type.rawValue,
-            Task.SQLite.deleted <- self.deleted
+            Task.SQLite.deleted <- self.deleted,
+            Task.SQLite.modifiedTime <- Int64(NSDate().timeIntervalSince1970)
         ))
     }
     
@@ -107,6 +111,8 @@ class Task {
             t.column(Task.SQLite.score)
             t.column(Task.SQLite.type)
             t.column(Task.SQLite.deleted, defaultValue: false)
+            t.column(Task.SQLite.createdTime)
+            t.column(Task.SQLite.modifiedTime)
         })
     }
 }

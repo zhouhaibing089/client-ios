@@ -1,16 +1,12 @@
 PODS:
-  - CRToast (0.0.7)
-  - NJKWebViewProgress (0.2.3):
-    - NJKWebViewProgress/Core (= 0.2.3)
-    - NJKWebViewProgress/ProgressView (= 0.2.3)
-  - NJKWebViewProgress/Core (0.2.3)
-  - NJKWebViewProgress/ProgressView (0.2.3)
+  - CRToast (0.0.8)
   - SQLite.swift (1.0.0.pre)
+  - UMengAnalytics-NO-IDFA (3.6.5)
 
 DEPENDENCIES:
   - CRToast (~> 0.0.7)
-  - NJKWebViewProgress
   - SQLite.swift (from `https://github.com/stephencelis/SQLite.swift.git`)
+  - UMengAnalytics-NO-IDFA
 
 EXTERNAL SOURCES:
   SQLite.swift:
@@ -22,8 +18,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/stephencelis/SQLite.swift.git
 
 SPEC CHECKSUMS:
-  CRToast: 99a28f4387def43b439ad88f957ce31357ff7373
-  NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
+  CRToast: b087127369b4c603726ef6249d74d0d737629ab8
   SQLite.swift: 5dfee5c783b93f4c0035c0317a11c3c92cc91910
+  UMengAnalytics-NO-IDFA: 279e28990a08efb56cff1821d2954bb00aa6975a
 
 COCOAPODS: 0.38.2

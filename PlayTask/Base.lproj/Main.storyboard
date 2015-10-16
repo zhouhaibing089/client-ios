@@ -41,13 +41,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="跑步30分钟" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7p-S7-yKv">
-                                            <rect key="frame" x="8" y="11" width="498" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="跑步30分钟" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7p-S7-yKv">
+                                            <rect key="frame" x="8" y="8" width="498" height="27"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wKb-6z-lU8">
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wKb-6z-lU8">
                                             <rect key="frame" x="543" y="6" width="51" height="31"/>
                                             <connections>
                                                 <action selector="toggle:" destination="hRC-zL-A7t" eventType="valueChanged" id="Jgm-Y1-oTN"/>
@@ -61,6 +61,7 @@
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="d7p-S7-yKv" secondAttribute="bottom" id="0fg-Xe-kgU"/>
                                         <constraint firstItem="G36-fp-8OI" firstAttribute="centerX" secondItem="N0B-kO-Ud3" secondAttribute="centerX" id="3Lu-CM-tgO"/>
                                         <constraint firstItem="wKb-6z-lU8" firstAttribute="leading" secondItem="d7p-S7-yKv" secondAttribute="trailing" constant="8" symbolic="YES" id="Cle-Gi-B8A"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="wKb-6z-lU8" secondAttribute="trailing" id="JFb-RV-YyO"/>
@@ -69,6 +70,7 @@
                                         <constraint firstItem="d7p-S7-yKv" firstAttribute="centerY" secondItem="N0B-kO-Ud3" secondAttribute="centerY" id="iXi-I3-cVG"/>
                                         <constraint firstItem="wKb-6z-lU8" firstAttribute="leading" secondItem="G36-fp-8OI" secondAttribute="trailing" constant="8" symbolic="YES" id="oPv-ve-X3S"/>
                                         <constraint firstItem="G36-fp-8OI" firstAttribute="centerY" secondItem="N0B-kO-Ud3" secondAttribute="centerY" id="smf-ez-Qlv"/>
+                                        <constraint firstItem="d7p-S7-yKv" firstAttribute="top" secondItem="N0B-kO-Ud3" secondAttribute="topMargin" id="z02-27-oOv"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="d7p-S7-yKv" secondAttribute="leading" id="zHV-KZ-TXY"/>
                                     </constraints>
                                     <variation key="default">
@@ -141,7 +143,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="71"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Running" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWp-YD-jzP">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Running" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWp-YD-jzP">
                                             <rect key="frame" x="8" y="8" width="555" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -297,8 +299,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="吃个蛋糕" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8K-gw-OfP">
-                                            <rect key="frame" x="8" y="11" width="558" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="吃个蛋糕" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8K-gw-OfP">
+                                            <rect key="frame" x="8" y="8" width="558" height="27"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -313,6 +315,8 @@
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="iX8-2q-E4Q" secondAttribute="trailing" id="4G5-Yf-X1E"/>
                                         <constraint firstItem="iX8-2q-E4Q" firstAttribute="leading" secondItem="s8K-gw-OfP" secondAttribute="trailing" constant="8" symbolic="YES" id="Bfk-Kk-leR"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="s8K-gw-OfP" secondAttribute="bottom" id="FnC-mN-uQK"/>
+                                        <constraint firstItem="s8K-gw-OfP" firstAttribute="top" secondItem="DDW-jr-zWZ" secondAttribute="topMargin" id="Xna-nE-lAS"/>
                                         <constraint firstItem="iX8-2q-E4Q" firstAttribute="centerY" secondItem="DDW-jr-zWZ" secondAttribute="centerY" id="cFW-N9-Gyr"/>
                                         <constraint firstItem="s8K-gw-OfP" firstAttribute="centerY" secondItem="DDW-jr-zWZ" secondAttribute="centerY" id="cda-YR-Ivj"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="s8K-gw-OfP" secondAttribute="leading" id="dfw-FF-x4A"/>

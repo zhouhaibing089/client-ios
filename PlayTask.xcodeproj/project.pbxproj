@@ -69,6 +69,7 @@
 		498BAC971BD0DC0900ABB357 /* WishHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishHistory.swift; sourceTree = "<group>"; };
 		498BAC991BD0E2C800ABB357 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		498BAC9B1BD0EA5300ABB357 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		498BACA01BD1446900ABB357 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		499708BB1BCF506E00424F5E /* PlayTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		499708BE1BCF506E00424F5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		499708C31BCF506E00424F5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -238,6 +239,7 @@
 		7E14BC58D189A1B880D48C2B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				498BACA01BD1446900ABB357 /* libz.tbd */,
 				27FE39AB88BE9E71239939D4 /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -596,6 +598,10 @@
 				INFOPLIST_FILE = PlayTask/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PlayTask",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = im.yon.PlayTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = PlayTask/BridgeHeader.h;
@@ -610,6 +616,10 @@
 				INFOPLIST_FILE = PlayTask/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PlayTask",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = im.yon.PlayTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = PlayTask/BridgeHeader.h;

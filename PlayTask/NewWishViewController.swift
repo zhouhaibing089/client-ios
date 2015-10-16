@@ -37,4 +37,15 @@ class NewWishViewController: UITableViewController {
         self.onWishAdded?(wish)
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        MobClick.beginLogPageView("new_wish")
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        MobClick.endLogPageView("new_wish")
+    }
+    
 }

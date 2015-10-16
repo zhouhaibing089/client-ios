@@ -10,5 +10,6 @@
 #define BridgeHeader_h
 
 #import <CRToast/CRToast.h>
+#import <MobClick.h>
 
 #endif /* BridgeHeader_h */

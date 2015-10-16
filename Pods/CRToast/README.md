@@ -1,6 +1,6 @@
 # CRToast
 
-[![Build Status](http://img.shields.io/travis/cruffenach/CRToast.svg?style=flat)](https://travis-ci.org/cruffenach/CRToast)
+[![Build Status](https://travis-ci.org/cruffenach/CRToast.svg?branch=master)](https://travis-ci.org/cruffenach/CRToast)
 [![Pod Version](http://img.shields.io/cocoapods/v/CRToast.svg?style=flat)](http://cocoadocs.org/docsets/CRToast)
 
 `CRToast` is a library that allows you to easily create notifications that appear on top of or by pushing out the status bar or navigation bar. `CRToast` was originally based on [CWStatusBarNotification](https://github.com/cezarywojcik/CWStatusBarNotification).
@@ -15,7 +15,7 @@
 
 ### CocoaPods
 
-`pod 'CRToast', '~> 0.0.6'`
+`pod 'CRToast', '~> 0.0.7'`
 
 ### Manual
 
@@ -81,18 +81,18 @@ Title and Subtitle text with:
 
 ### Touch Interactions
 
-`CRToast` allows for any notification to respond to different types of touch interactions (tap, swipe). Interaction responders can be set as defaults or on a per notification basis. 
+`CRToast` allows for any notification to respond to different types of touch interactions (tap, swipe). Interaction responders can be set as defaults or on a per notification basis.
 The types of interactions you can set up to respond to are:
 
 ```Obj-C
-CRToastInteractionTypeSwipeUp          
-CRToastInteractionTypeSwipeLeft        
-CRToastInteractionTypeSwipeDown        
-CRToastInteractionTypeSwipeRight       
-CRToastInteractionTypeTapOnce          
-CRToastInteractionTypeTapTwice         
-CRToastInteractionTypeTwoFingerTapOnce 
-CRToastInteractionTypeTwoFingerTapTwice              
+CRToastInteractionTypeSwipeUp
+CRToastInteractionTypeSwipeLeft
+CRToastInteractionTypeSwipeDown
+CRToastInteractionTypeSwipeRight
+CRToastInteractionTypeTapOnce
+CRToastInteractionTypeTapTwice
+CRToastInteractionTypeTwoFingerTapOnce
+CRToastInteractionTypeTwoFingerTapTwice
 ```
 
 There are also wild card interaction types which cover a range of interactions

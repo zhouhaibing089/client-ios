@@ -18,6 +18,9 @@ class WishViewController: UITableViewController {
         super.viewDidLoad()
 
         self.wishes = Wish.getWishes()
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -29,11 +32,13 @@ class WishViewController: UITableViewController {
             self.scoreBarButton.title = "\(score)"
         }
         
-    }
+        MobClick.beginLogPageView("wish")
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        MobClick.endLogPageView("wish")
     }
 
     // MARK: - Table view data source

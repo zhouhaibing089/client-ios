@@ -18,7 +18,8 @@ class TaskHistory: BillItem {
         static let taskId = Expression<Int64>("task_id")
         static let completionTime = Expression<Int64>("completion_time")
         static let deleted = Expression<Bool>("deleted")
-
+        static let createdTime = Expression<Int64>("createdTime")
+        static let modifiedTime = Expression<Int64>("modifiedTime")
     }
     
     var id: Int64?
@@ -35,15 +36,18 @@ class TaskHistory: BillItem {
         self.id = try! Util.db.run(TaskHistory.SQLite.histories.insert(
             TaskHistory.SQLite.taskId <- self.taskId,
             TaskHistory.SQLite.completionTime <- Int64(self.completionTime.timeIntervalSince1970),
-            TaskHistory.SQLite.deleted <- self.deleted
+            TaskHistory.SQLite.deleted <- self.deleted,
+            TaskHistory.SQLite.createdTime <- Int64(NSDate().timeIntervalSince1970),
+            TaskHistory.SQLite.modifiedTime <- Int64(NSDate().timeIntervalSince1970)
         ))
     }
     
-    func update() {
-        try! Util.db.run(TaskHistory.SQLite.histories.filter(TaskHistory.SQLite.id == self.id ?? 0).update(
+    override func update() {
+        try! Util.db.run(TaskHistory.SQLite.histories.filter(TaskHistory.SQLite.id == self.id!).update(
             TaskHistory.SQLite.taskId <- self.taskId,
             TaskHistory.SQLite.completionTime <- Int64(self.completionTime.timeIntervalSince1970),
-            TaskHistory.SQLite.deleted <- self.deleted
+            TaskHistory.SQLite.deleted <- self.deleted,
+            TaskHistory.SQLite.modifiedTime <- Int64(NSDate().timeIntervalSince1970)
         ))
     }
     
@@ -58,6 +62,7 @@ class TaskHistory: BillItem {
             let h = TaskHistory(task: task,
                 completionTime: NSDate(timeIntervalSince1970: Double(row[TaskHistory.SQLite.completionTime])),
                 deleted: row[TaskHistory.SQLite.histories[TaskHistory.SQLite.deleted]])
+            h.id = row[TaskHistory.SQLite.histories[TaskHistory.SQLite.id]]
             histories.append(h)
         }
         return histories
@@ -69,6 +74,8 @@ class TaskHistory: BillItem {
             t.column(TaskHistory.SQLite.taskId)
             t.column(TaskHistory.SQLite.completionTime)
             t.column(TaskHistory.SQLite.deleted, defaultValue: false)
+            t.column(TaskHistory.SQLite.createdTime)
+            t.column(TaskHistory.SQLite.modifiedTime)
         })
     }
 }

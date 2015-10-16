@@ -47,6 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]
         CRToastManager.setDefaultOptions(defaultOptions)
         
+        // 友盟统计
+        MobClick.startWithAppkey("5620ffafe0f55a758500000c")
+        
         return true
     }
 

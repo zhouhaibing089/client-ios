@@ -30,6 +30,9 @@ class TaskViewController: UITableViewController {
         
         self.tasks = Task.getTasks()
         
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didBecomeActive:", name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
     
@@ -47,7 +50,13 @@ class TaskViewController: UITableViewController {
             let score = standardUserDefaults.integerForKey("score")
             self.scoreBarButton.title = "\(score)"
         }
-        
+        MobClick.beginLogPageView("task")
+
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        MobClick.endLogPageView("task")
     }
 
     // MARK: - Table view data source

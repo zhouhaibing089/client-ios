@@ -16,6 +16,8 @@ class Wish {
         static let title = Expression<String>("title")
         static let score = Expression<Int64>("score")
         static let deleted = Expression<Bool>("deleted")
+        static let createdTime = Expression<Int64>("createdTime")
+        static let modifiedTime = Expression<Int64>("modifiedTime")
     }
     
     var id: Int64?
@@ -33,7 +35,9 @@ class Wish {
         self.id = try! Util.db.run(Wish.SQLite.wishes.insert(
             Wish.SQLite.title <- self.title,
             Wish.SQLite.score <- self.score,
-            Wish.SQLite.deleted <- self.deleted
+            Wish.SQLite.deleted <- self.deleted,
+            Wish.SQLite.createdTime <- Int64(NSDate().timeIntervalSince1970),
+            Wish.SQLite.modifiedTime <- Int64(NSDate().timeIntervalSince1970)
         ))
     }
     
@@ -41,7 +45,8 @@ class Wish {
         try! Util.db.run(Wish.SQLite.wishes.filter(Wish.SQLite.id == self.id ?? 0).update(
             Wish.SQLite.title <- self.title,
             Wish.SQLite.score <- self.score,
-            Wish.SQLite.deleted <- self.deleted
+            Wish.SQLite.deleted <- self.deleted,
+            Wish.SQLite.modifiedTime <- Int64(NSDate().timeIntervalSince1970)
         ))
     }
     
@@ -64,6 +69,8 @@ class Wish {
             t.column(Wish.SQLite.title)
             t.column(Wish.SQLite.score)
             t.column(Wish.SQLite.deleted, defaultValue: false)
+            t.column(Wish.SQLite.createdTime)
+            t.column(Wish.SQLite.modifiedTime)
         })
     }
 }
