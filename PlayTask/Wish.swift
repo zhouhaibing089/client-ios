@@ -53,7 +53,9 @@ class Wish {
             w.id = row[Wish.SQLite.id]
             wishes.append(w)
         }
-        return wishes
+        return wishes.sort {
+            return $0.score < $1.score
+        }
     }
     
     class func createTable(db: Connection) {

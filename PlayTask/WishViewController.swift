@@ -94,11 +94,16 @@ class WishViewController: UITableViewController {
             if let nwvc = nc.viewControllers.first as? NewWishViewController {
                 nwvc.onWishAdded = { wish in
                     self.wishes.append(wish)
+                    self.wishes = self.wishes.sort {
+                        return $0.score < $1.score
+                    }
                     self.tableView.reloadData()
                 }
             }
         }
     }
 
-
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.min
+    }
 }

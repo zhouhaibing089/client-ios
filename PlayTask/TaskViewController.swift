@@ -80,11 +80,18 @@ class TaskViewController: UITableViewController {
             if let ntvc = nc.viewControllers.first as? NewTaskViewController {
                 ntvc.onTaskAdded = { task in
                     self.tasks[task.type.rawValue]?.append(task)
+                    self.tasks[task.type.rawValue] = self.tasks[task.type.rawValue]?.sort {
+                        return $0.score < $1.score
+                    }
                     self.taskTypeSegmentControl.selectedSegmentIndex = Int(task.type.rawValue)
                     self.tableView.reloadData()
                 }
             }
         }
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.min
     }
 
 }

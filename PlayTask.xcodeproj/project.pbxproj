@@ -21,6 +21,7 @@
 		498BAC961BD0D49400ABB357 /* WishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC951BD0D49400ABB357 /* WishTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		498BAC981BD0DC0900ABB357 /* WishHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC971BD0DC0900ABB357 /* WishHistory.swift */; settings = {ASSET_TAGS = (); }; };
 		498BAC9A1BD0E2C800ABB357 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC991BD0E2C800ABB357 /* UIColor.swift */; settings = {ASSET_TAGS = (); }; };
+		498BAC9C1BD0EA5300ABB357 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC9B1BD0EA5300ABB357 /* MoreViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		499708BF1BCF506E00424F5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499708BE1BCF506E00424F5E /* AppDelegate.swift */; };
 		499708C41BCF506E00424F5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499708C21BCF506E00424F5E /* Main.storyboard */; };
 		499708C61BCF506E00424F5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 499708C51BCF506E00424F5E /* Assets.xcassets */; };
@@ -67,6 +68,7 @@
 		498BAC951BD0D49400ABB357 /* WishTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishTableViewCell.swift; sourceTree = "<group>"; };
 		498BAC971BD0DC0900ABB357 /* WishHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishHistory.swift; sourceTree = "<group>"; };
 		498BAC991BD0E2C800ABB357 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		498BAC9B1BD0EA5300ABB357 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		499708BB1BCF506E00424F5E /* PlayTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		499708BE1BCF506E00424F5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		499708C31BCF506E00424F5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				495EB5C61BD0A80800E0E829 /* BillViewController.swift */,
 				498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */,
 				498BAC911BD0CE7400ABB357 /* NewWishViewController.swift */,
+				498BAC9B1BD0EA5300ABB357 /* MoreViewController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				495EB5C31BCFDB8B00E0E829 /* NSDate.swift in Sources */,
 				499708BF1BCF506E00424F5E /* AppDelegate.swift in Sources */,
 				495EB5C71BD0A80800E0E829 /* BillViewController.swift in Sources */,
+				498BAC9C1BD0EA5300ABB357 /* MoreViewController.swift in Sources */,
 				498BAC981BD0DC0900ABB357 /* WishHistory.swift in Sources */,
 				498BAC941BD0CFD500ABB357 /* Wish.swift in Sources */,
 				498BAC9A1BD0E2C800ABB357 /* UIColor.swift in Sources */,

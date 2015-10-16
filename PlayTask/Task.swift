@@ -80,6 +80,9 @@ class Task {
             t.id = task[Task.SQLite.id]
             everyDayTasks.append(t)
         }
+        everyDayTasks = everyDayTasks.sort {
+            return $0.score < $1.score
+        }
         var everyWeekTasks = [Task]()
         for task in Util.db.prepare(Task.SQLite.tasks.filter(Task.SQLite.deleted == false).filter(Task.SQLite.type == TaskType.EveryWeek.rawValue)) {
             let t = Task(
@@ -90,6 +93,9 @@ class Task {
             )
             t.id = task[Task.SQLite.id]
             everyWeekTasks.append(t)
+        }
+        everyWeekTasks = everyWeekTasks.sort {
+            return $0.score < $1.score
         }
         return [TaskType.EveryDay.rawValue: everyDayTasks, TaskType.EveryWeek.rawValue: everyWeekTasks]
     }
