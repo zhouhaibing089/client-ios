@@ -52,6 +52,6 @@ extension NSDate {
         } else {
             substract.day = 8 - components.weekday
         }
-        return cal.dateByAddingComponents(substract, toDate: self.beginOfDay(), options: [])!
+        return cal.dateByAddingComponents(substract, toDate: self.endOfDay(), options: [])!
     }
 }
