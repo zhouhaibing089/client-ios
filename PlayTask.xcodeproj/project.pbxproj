@@ -123,7 +123,7 @@
 				498BAC991BD0E2C800ABB357 /* UIColor.swift */,
 				495EB5C21BCFDB8B00E0E829 /* NSDate.swift */,
 			);
-			name = extension;
+			path = extension;
 			sourceTree = "<group>";
 		};
 		49840DD21BCF9B69001F493D /* util */ = {
@@ -133,7 +133,7 @@
 				49840DD01BCF9B61001F493D /* Util.swift */,
 				49840DD31BCF9D46001F493D /* ViewUtil.swift */,
 			);
-			name = util;
+			path = util;
 			sourceTree = "<group>";
 		};
 		49840DD51BCFA928001F493D /* controller */ = {
@@ -146,7 +146,7 @@
 				498BAC911BD0CE7400ABB357 /* NewWishViewController.swift */,
 				498BAC9B1BD0EA5300ABB357 /* MoreViewController.swift */,
 			);
-			name = controller;
+			path = controller;
 			sourceTree = "<group>";
 		};
 		49840DD61BCFA940001F493D /* model */ = {
@@ -158,7 +158,7 @@
 				498BAC931BD0CFD500ABB357 /* Wish.swift */,
 				498BAC971BD0DC0900ABB357 /* WishHistory.swift */,
 			);
-			name = model;
+			path = model;
 			sourceTree = "<group>";
 		};
 		49840DD71BCFA977001F493D /* view */ = {
@@ -168,7 +168,7 @@
 				495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */,
 				498BAC951BD0D49400ABB357 /* WishTableViewCell.swift */,
 			);
-			name = view;
+			path = view;
 			sourceTree = "<group>";
 		};
 		499708B21BCF506E00424F5E = {
