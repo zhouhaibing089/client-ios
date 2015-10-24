@@ -34,6 +34,6 @@ class TaskHistory: Table, Bill {
     
     static func getTaskHistories() -> [TaskHistory] {
         let realm = try! Realm()
-        return realm.objects(TaskHistory).filter("deleted = false AND canceled = false").map { $0 }
+        return realm.objects(TaskHistory).filter("deleted == false AND canceled == false").map { $0 }
     }
 }

@@ -31,7 +31,7 @@ class WishHistory: Table, Bill {
     
     static func getWishHistories() -> [WishHistory] {
         let realm = try! Realm()
-        return realm.objects(WishHistory).filter("deleted = false").map { $0 }
+        return realm.objects(WishHistory).filter("deleted == false").map { $0 }
     }
     
 }

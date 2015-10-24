@@ -30,9 +30,9 @@ class Task: Table {
     
     static func getTasks() -> [Int: [Task]] {
         let realm = try! Realm()
-        let dailyTasks = realm.objects(Task).filter("deleted = false AND type = %@", TaskType.Daily.rawValue).map { $0 }
-        let weeklyTasks = realm.objects(Task).filter("deleted = false AND type = %@", TaskType.Weekly.rawValue).map { $0 }
-        let normalTasks = realm.objects(Task).filter("deleted = false AND type = %@", TaskType.Normal.rawValue).map { $0 }
+        let dailyTasks = realm.objects(Task).filter("deleted == false AND type == %@", TaskType.Daily.rawValue).map { $0 }
+        let weeklyTasks = realm.objects(Task).filter("deleted == false AND type == %@", TaskType.Weekly.rawValue).map { $0 }
+        let normalTasks = realm.objects(Task).filter("deleted == false AND type == %@", TaskType.Normal.rawValue).map { $0 }
         return [TaskType.Daily.rawValue: dailyTasks, TaskType.Weekly.rawValue: weeklyTasks, TaskType.Normal.rawValue: normalTasks]
     }
     
@@ -78,7 +78,7 @@ class Task: Table {
             begin = now.beginOfWeek()
             end = now.endOfDay()
         }
-        return realm.objects(TaskHistory).filter("canceled = false AND completionTime >= %@ AND completionTime <= %@", begin, end).count
+        return realm.objects(TaskHistory).filter("task == %@ AND canceled == false AND completionTime >= %@ AND completionTime <= %@", self, begin, end).count
     }
     
     func getLastHistory(canceled: Bool) -> TaskHistory? {
@@ -94,11 +94,11 @@ class Task: Table {
             end = now.endOfDay()
         }
 
-        var query = "task = %@ AND completionTime >= %@ AND completionTime <= %@";
+        var query = "task == %@ AND completionTime >= %@ AND completionTime <= %@";
         if (canceled) {
-            query += " AND canceled = true";
+            query += " AND canceled == true";
         } else {
-            query += " AND canceled = false";
+            query += " AND canceled == false";
         }
         let taskHistories = realm.objects(TaskHistory).filter(query, self, begin, end).sorted("completionTime")
 
