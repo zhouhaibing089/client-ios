@@ -14,10 +14,10 @@ class TaskViewController: UITableViewController {
     @IBOutlet weak var taskTypeSegmentControl: UISegmentedControl!
     
     var taskType: TaskType {
-        return TaskType(rawValue: Int64(self.taskTypeSegmentControl.selectedSegmentIndex))!
+        return TaskType(rawValue: self.taskTypeSegmentControl.selectedSegmentIndex)!
     }
     
-    var tasks: [Int64: [Task]]!
+    var tasks: [Int: [Task]]!
 
     @IBAction func changeTaskType(sender: UISegmentedControl) {
         self.tableView.reloadData()
@@ -84,8 +84,7 @@ class TaskViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let task = self.tasks[self.taskType.rawValue]![indexPath.row]
-            task.deleted = true
-            task.update()
+            task.delete()
             self.tasks[self.taskType.rawValue]?.removeAtIndex(indexPath.row)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         }
@@ -96,11 +95,11 @@ class TaskViewController: UITableViewController {
             let nc = segue.destinationViewController as! UINavigationController
             if let ntvc = nc.viewControllers.first as? NewTaskViewController {
                 ntvc.onTaskAdded = { task in
-                    self.tasks[task.type.rawValue]?.append(task)
-                    self.tasks[task.type.rawValue] = self.tasks[task.type.rawValue]?.sort {
+                    self.tasks[task.type]?.append(task)
+                    self.tasks[task.type] = self.tasks[task.type]?.sort {
                         return $0.score < $1.score
                     }
-                    self.taskTypeSegmentControl.selectedSegmentIndex = Int(task.type.rawValue)
+                    self.taskTypeSegmentControl.selectedSegmentIndex = task.type
                     self.tableView.reloadData()
                 }
             }

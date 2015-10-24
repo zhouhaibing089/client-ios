@@ -66,7 +66,7 @@ class WishViewController: UITableViewController {
         let wish = self.wishes[indexPath.row]
         let alert = UIAlertController(title: "满足欲望", message: "确定花费 \(wish.score) 点成就来满足你的欲望?", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default) { _ in
-            let wishHistory = WishHistory(wish: wish, createdTime: NSDate(), deleted: false)
+            let wishHistory = WishHistory(wish: wish)
             wishHistory.save()
             let score = Int64(self.scoreBarButton.title!)!
             UIView.performWithoutAnimation {
@@ -85,8 +85,7 @@ class WishViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let wish = self.wishes[indexPath.row]
-            wish.deleted = true
-            wish.update()
+            wish.delete()
             self.wishes.removeAtIndex(indexPath.row)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         }

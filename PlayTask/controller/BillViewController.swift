@@ -10,12 +10,20 @@ import UIKit
 
 class BillViewController: UITableViewController {
     
-    var billItems: [BillItem]!
+    var billItems: [Bill]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.billItems = BillItem.getBillItems()
+        self.billItems = [Bill]()
+        let th: [Bill] = TaskHistory.getTaskHistories()
+        let wh: [Bill] = WishHistory.getWishHistories()
+        self.billItems.appendContentsOf(th)
+        self.billItems.appendContentsOf(wh)
+        
+        self.billItems = self.billItems.sort {
+            return $0.getBillTime().compare($1.getBillTime()) == NSComparisonResult.OrderedDescending
+        }
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 72
@@ -60,8 +68,7 @@ class BillViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let billItem = self.billItems[indexPath.row]
-            billItem.deleted = true
-            billItem.update()
+            billItem.delete()
             self.billItems.removeAtIndex(indexPath.row)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         }

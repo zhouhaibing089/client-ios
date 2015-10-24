@@ -32,7 +32,7 @@ class NewWishViewController: UITableViewController {
             CRToastManager.showNotificationWithMessage("请输入消耗的成就点数", completionBlock: nil)
             return
         }
-        let wish = Wish(title: title!, score: Int64(score!)!, deleted: false)
+        let wish = Wish(title: title!, score: Int(score!)!)
         wish.save()
         self.onWishAdded?(wish)
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)

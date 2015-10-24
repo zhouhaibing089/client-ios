@@ -2,117 +2,106 @@
 //  Task.swift
 //  PlayTask
 //
-//  Created by Yoncise on 10/15/15.
+//  Created by Yoncise on 10/24/15.
 //  Copyright © 2015 yon. All rights reserved.
 //
 
 import Foundation
-import SQLite
-import UIKit
+import RealmSwift
 
-enum TaskType: Int64 {
-    case EveryDay = 0
-    case EveryWeek = 1
+enum TaskType: Int {
+    case Daily = 0
+    case Weekly = 1
+    case Normal = 2
 }
 
-class Task {
+class Task: Table {
+    dynamic var title = ""
+    dynamic var score = 0
+    dynamic var type = 0
+    dynamic var loop = 1
     
-    struct SQLite {
-        static let tasks = Table("tasks")
-        static let id = Expression<Int64>("id")
-        static let title = Expression<String>("title")
-        static let score = Expression<Int64>("score")
-        static let type = Expression<Int64>("type")
-        static let deleted = Expression<Bool>("deleted")
-        static let createdTime = Expression<Int64>("createdTime")
-        static let modifiedTime = Expression<Int64>("modifiedTime")
-    }
-    
-    var id: Int64?
-    var title: String
-    var score: Int64
-    var type: TaskType
-    var deleted: Bool
-    
-    init(title: String, score: Int64, type: TaskType, deleted: Bool) {
+    convenience init(title: String, score: Int, type: TaskType) {
+        self.init()
         self.title = title
         self.score = score
-        self.type = type
-        self.deleted = deleted
+        self.type = type.rawValue
     }
     
-    func save() {
-        self.id = try! Util.db.run(Task.SQLite.tasks.insert(
-            Task.SQLite.title <- self.title,
-            Task.SQLite.score <- self.score,
-            Task.SQLite.type <- self.type.rawValue,
-            Task.SQLite.deleted <- self.deleted,
-            Task.SQLite.createdTime <- Int64(NSDate().timeIntervalSince1970),
-            Task.SQLite.modifiedTime <- Int64(NSDate().timeIntervalSince1970)
-        ))
+    static func getTasks() -> [Int: [Task]] {
+        let realm = try! Realm()
+        let dailyTasks = realm.objects(Task).filter("deleted = false AND type = %@", TaskType.Daily.rawValue).map { $0 }
+        let weeklyTasks = realm.objects(Task).filter("deleted = false AND type = %@", TaskType.Weekly.rawValue).map { $0 }
+        let normalTasks = realm.objects(Task).filter("deleted = false AND type = %@", TaskType.Normal.rawValue).map { $0 }
+        return [TaskType.Daily.rawValue: dailyTasks, TaskType.Weekly.rawValue: weeklyTasks, TaskType.Normal.rawValue: normalTasks]
     }
     
-    func update() {
-        try! Util.db.run(Task.SQLite.tasks.filter(Task.SQLite.id == self.id ?? 0).update(
-            Task.SQLite.title <- self.title,
-            Task.SQLite.score <- self.score,
-            Task.SQLite.type <- self.type.rawValue,
-            Task.SQLite.deleted <- self.deleted,
-            Task.SQLite.modifiedTime <- Int64(NSDate().timeIntervalSince1970)
-        ))
+    func isDone() -> Bool {
+        return self.loop != 0 && self.loop == self.getCompletedTimes()
     }
     
-    class func getTask(taskId: Int64) -> Task? {
-        if let t = Util.db.pluck(Task.SQLite.tasks.filter(Task.SQLite.id == taskId)) {
-            return Task(title: t[Task.SQLite.title],
-                score: t[Task.SQLite.score],
-                type: TaskType(rawValue: t[Task.SQLite.type])!,
-                deleted: t[Task.SQLite.deleted])
+    func setDone(done: Bool) {
+        if (done) {
+            if let th = self.getHistory() {
+                th.update(["canceled": false, "deleted": false, "completionTime": NSDate()])
+            } else {
+                let th = TaskHistory(task: self)
+                th.save()
+            }
+        } else {
+            self.undo()
         }
-        return nil
     }
     
-    class func getTasks() -> [Int64: [Task]] {
-        var everyDayTasks = [Task]()
-        for task in Util.db.prepare(Task.SQLite.tasks.filter(Task.SQLite.deleted == false).filter(Task.SQLite.type == TaskType.EveryDay.rawValue)) {
-            let t = Task(
-                title: task[Task.SQLite.title],
-                score: task[Task.SQLite.score],
-                type: TaskType.init(rawValue: task[Task.SQLite.type])!,
-                deleted: task[Task.SQLite.deleted]
-            )
-            t.id = task[Task.SQLite.id]
-            everyDayTasks.append(t)
+    func undo() {
+        if let th = self.getLastHistory(false) {
+            th.update(["canceled": true])
         }
-        everyDayTasks = everyDayTasks.sort {
-            return $0.score < $1.score
-        }
-        var everyWeekTasks = [Task]()
-        for task in Util.db.prepare(Task.SQLite.tasks.filter(Task.SQLite.deleted == false).filter(Task.SQLite.type == TaskType.EveryWeek.rawValue)) {
-            let t = Task(
-                title: task[Task.SQLite.title],
-                score: task[Task.SQLite.score],
-                type: TaskType.init(rawValue: task[Task.SQLite.type])!,
-                deleted: task[Task.SQLite.deleted]
-            )
-            t.id = task[Task.SQLite.id]
-            everyWeekTasks.append(t)
-        }
-        everyWeekTasks = everyWeekTasks.sort {
-            return $0.score < $1.score
-        }
-        return [TaskType.EveryDay.rawValue: everyDayTasks, TaskType.EveryWeek.rawValue: everyWeekTasks]
     }
     
-    class func createTable(db: Connection) {
-        try! db.run(Task.SQLite.tasks.create(temporary: false, ifNotExists: true) { t in
-            t.column(Task.SQLite.id, primaryKey: PrimaryKey.Autoincrement)
-            t.column(Task.SQLite.title)
-            t.column(Task.SQLite.score)
-            t.column(Task.SQLite.type)
-            t.column(Task.SQLite.deleted, defaultValue: false)
-            t.column(Task.SQLite.createdTime)
-            t.column(Task.SQLite.modifiedTime)
-        })
+    func getHistory() -> TaskHistory? {
+        if !self.isDone() {
+            return self.getLastHistory(true)
+        }
+        return self.getLastHistory(false)
+    }
+    
+    func getCompletedTimes() -> Int {
+        let realm = try! Realm()
+        let now = NSDate()
+        var begin = NSDate(timeIntervalSince1970: 0)
+        var end = now
+        if self.type == TaskType.Daily.rawValue {
+            begin = now.beginOfDay()
+            end = now.endOfDay()
+        } else if self.type == TaskType.Weekly.rawValue {
+            begin = now.beginOfWeek()
+            end = now.endOfDay()
+        }
+        return realm.objects(TaskHistory).filter("canceled = false AND completionTime >= %@ AND completionTime <= %@", begin, end).count
+    }
+    
+    func getLastHistory(canceled: Bool) -> TaskHistory? {
+        let realm = try! Realm()
+        let now = NSDate()
+        var begin = NSDate(timeIntervalSince1970: 0)
+        var end = now
+        if self.type == TaskType.Daily.rawValue {
+            begin = now.beginOfDay()
+            end = now.endOfDay()
+        } else if self.type == TaskType.Weekly.rawValue {
+            begin = now.beginOfWeek()
+            end = now.endOfDay()
+        }
+
+        var query = "task = %@ AND completionTime >= %@ AND completionTime <= %@";
+        if (canceled) {
+            query += " AND canceled = true";
+        } else {
+            query += " AND canceled = false";
+        }
+        let taskHistories = realm.objects(TaskHistory).filter(query, self, begin, end).sorted("completionTime")
+
+        return taskHistories.first;
     }
 }

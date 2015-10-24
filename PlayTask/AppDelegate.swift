@@ -28,12 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.db = try! Connection(dbPath)
         
-        // 创建表
-        Task.createTable(self.db)
-        TaskHistory.createTable(self.db)
-        Wish.createTable(self.db)
-        WishHistory.createTable(self.db)
-        
         // 配置 CRToast
         let defaultOptions: [NSObject: AnyObject] = [
             kCRToastNotificationTypeKey: CRToastType.NavigationBar.rawValue,
