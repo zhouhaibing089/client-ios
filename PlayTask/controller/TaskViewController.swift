@@ -21,10 +21,26 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         return TaskType(rawValue: self.taskTypeSegmentControl.selectedSegmentIndex)!
     }
     
-    var tasks: [Int: [Task]]!
+    // [0: doing, 1: done]
+    var tasks = [[Int: [Task]](), [Int: [Task]]()]
+    
+    var showDone = false
 
     @IBAction func changeTaskType(sender: UISegmentedControl) {
-        self.tableView.reloadData()
+        self.refresh()
+    }
+    @IBAction func showDone(sender: UIButton) {
+        self.showDone = !self.showDone
+        UIView.performWithoutAnimation {
+            if self.showDone {
+                sender.setTitle("显示未完成的任务", forState: UIControlState.Normal)
+            } else {
+                sender.setTitle("显示已完成的任务", forState: UIControlState.Normal)
+            }
+            sender.layoutIfNeeded()
+        }
+        self.refresh()
+
     }
     
     override func viewDidLoad() {
@@ -48,8 +64,6 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         self.tableView.dataSource = self
         self.tableView.contentInset = UIEdgeInsets(top: self.toolbar.frame.height, left: 0, bottom: 0, right: 0)
         
-        self.tasks = Task.getTasks()
-        
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
         
@@ -63,7 +77,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.tableView.reloadData()
+        self.refresh()
         
         let user = User.getInstance()
         UIView.performWithoutAnimation {
@@ -92,26 +106,25 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (self.tasks[self.taskType.rawValue]?.count)!
+        return (self.getCurrentTasks()[self.taskType.rawValue]?.count)!
     }
 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("task", forIndexPath: indexPath) as! TaskTableViewCell
-        
-        cell.task = self.tasks[self.taskType.rawValue]![indexPath.row]
+        if self.showDone {
+            cell.mode = TaskTableViewCell.Mode.Done
+        } else {
+            cell.mode = TaskTableViewCell.Mode.Normal
+        }
+        cell.task = self.getCurrentTasks()[self.taskType.rawValue]![indexPath.row]
         cell.scoreBarButton = self.scoreBarButton
 
         return cell
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.Delete {
-            let task = self.tasks[self.taskType.rawValue]![indexPath.row]
-            task.delete()
-            self.tasks[self.taskType.rawValue]?.removeAtIndex(indexPath.row)
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-        }
+        return
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -119,19 +132,50 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
             let nc = segue.destinationViewController as! UINavigationController
             if let ntvc = nc.viewControllers.first as? NewTaskViewController {
                 ntvc.onTaskAdded = { task in
-                    self.tasks[task.type]?.append(task)
-                    self.tasks[task.type] = self.tasks[task.type]?.sort {
-                        return $0.score < $1.score
-                    }
                     self.taskTypeSegmentControl.selectedSegmentIndex = task.type
-                    self.tableView.reloadData()
+                    self.refresh()
                 }
             }
         }
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat.min
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let sortAction  = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "排序") { (action, indexPath) -> Void in
+        }
+        sortAction.backgroundColor = UIColor.lightGrayColor()
+        let deleteAction  = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "删除") { [unowned self] (action, indexPath) -> Void in
+            var currentTasks = self.getCurrentTasks()
+            let task = currentTasks[self.taskType.rawValue]![indexPath.row]
+            task.delete()
+            currentTasks[self.taskType.rawValue]?.removeAtIndex(indexPath.row)
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            
+        }
+        return [deleteAction, sortAction]
+    }
+    
+    func getCurrentTasks() -> [Int: [Task]] {
+        if self.showDone {
+            return self.tasks[1]
+        }
+        return self.tasks[0]
     }
 
+    func refresh() {
+        for (type, tasks) in Task.getTasks() {
+            self.tasks[0][type] = [Task]()
+            self.tasks[1][type] = [Task]()
+            for t in tasks {
+                if t.isDone() {
+                    self.tasks[1][type]?.append(t)
+                } else {
+                    self.tasks[0][type]?.append(t)
+                    if t.getCompletedTimes() > 0 {
+                        self.tasks[1][type]?.append(t)
+                    }
+                }
+            }
+        }
+        self.tableView.reloadData()
+    }
 }

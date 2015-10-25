@@ -10,19 +10,41 @@ import UIKit
 
 class TaskTableViewCell: UITableViewCell {
     
+    enum Mode {
+        case Normal
+        case Done
+    }
+    
+    var mode = Mode.Normal
+    
     var task: Task! {
         didSet {
             self.titleLabel.text = self.task.title
             self.scoreLabel.text = "+\(self.task.score)"
+            let completedTimes = self.task.getCompletedTimes()
             if self.task.loop == 0 {
-                self.loopLabel.text = "\(self.task.getCompletedTimes())/∞"
+                self.loopLabel.text = "\(completedTimes)/∞"
             } else {
-                self.loopLabel.text = "\(self.task.getCompletedTimes())/\(self.task.loop)"
+                self.loopLabel.text = "\(completedTimes)/\(self.task.loop)"
             }
-            self.completionSwitch.setOn(self.task.isDone(), animated: false)
+            switch self.mode {
+            case .Normal:
+                self.completionSwitch.setOn(self.task.isDone(), animated: false)
+                self.titleLabel.textColor = UIColor.blackColor()
+                break
+            case .Done:
+                if completedTimes == 0 {
+                    self.completionSwitch.setOn(false, animated: false)
+                    self.titleLabel.textColor = UIColor.blackColor()
+                } else {
+                    self.titleLabel.textColor = UIColor.lightGrayColor()
+                    self.completionSwitch.setOn(true, animated: false)
+                }
+                break
+            }
         }
     }
-    
+        
     weak var scoreBarButton: UIBarButtonItem!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -40,21 +62,8 @@ class TaskTableViewCell: UITableViewCell {
         UIView.performWithoutAnimation {
             self.scoreBarButton.title = "\(user.score)"
         }
-        if self.task.isDone() || !sender.on {
-            let task = self.task
-            self.task = task
-            return
-        }
-        UIView.animateWithDuration(0.6, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-            self.alpha = 0
-            }, completion: { _ in
-                let task = self.task
-                self.task = task
-                UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
-                        self.alpha = 1
-
-                    }, completion: nil)
-        })
+        let task = self.task
+        self.task = task
     }
 
 }

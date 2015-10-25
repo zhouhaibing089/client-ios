@@ -38,12 +38,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="nfR-b9-p1C">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nfR-b9-p1C">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="505"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="task" rowHeight="73" id="hRC-zL-A7t" customClass="TaskTableViewCell" customModule="PlayTask" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="114" width="600" height="73"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hRC-zL-A7t" id="N0B-kO-Ud3">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="72"/>
@@ -141,6 +141,13 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUx-s0-ymt">
+                                <rect key="frame" x="240" y="513" width="120" height="30"/>
+                                <state key="normal" title="显示已完成的任务"/>
+                                <connections>
+                                    <action selector="showDone:" destination="R3m-mU-SDD" eventType="touchUpInside" id="IY1-r2-2dS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -148,10 +155,13 @@
                             <constraint firstItem="nfR-b9-p1C" firstAttribute="trailing" secondItem="sVE-Oo-5pL" secondAttribute="trailing" id="7Lk-hE-hDU"/>
                             <constraint firstAttribute="bottom" secondItem="nfR-b9-p1C" secondAttribute="bottom" id="7uW-gx-eY1"/>
                             <constraint firstItem="5Bg-FO-MdG" firstAttribute="trailing" secondItem="sVE-Oo-5pL" secondAttribute="trailing" id="89T-ZF-8Hc"/>
+                            <constraint firstItem="sUx-s0-ymt" firstAttribute="centerX" secondItem="rFn-jz-a13" secondAttribute="centerX" id="BUe-dh-4Ek"/>
                             <constraint firstItem="sVE-Oo-5pL" firstAttribute="height" secondItem="5Bg-FO-MdG" secondAttribute="height" id="Bf4-Oz-JeH"/>
+                            <constraint firstItem="9Nz-Mw-wUu" firstAttribute="top" secondItem="sUx-s0-ymt" secondAttribute="bottom" constant="8" symbolic="YES" id="BgH-ZB-55k"/>
                             <constraint firstItem="sVE-Oo-5pL" firstAttribute="leading" secondItem="rFn-jz-a13" secondAttribute="leading" id="CfM-58-BWK"/>
                             <constraint firstItem="nfR-b9-p1C" firstAttribute="top" secondItem="rFn-jz-a13" secondAttribute="top" id="JQy-ZS-gVQ"/>
                             <constraint firstAttribute="trailing" secondItem="sVE-Oo-5pL" secondAttribute="trailing" id="LsB-Y6-uOi"/>
+                            <constraint firstItem="sUx-s0-ymt" firstAttribute="top" secondItem="nfR-b9-p1C" secondAttribute="bottom" constant="8" symbolic="YES" id="S2F-F4-iPl"/>
                             <constraint firstItem="nfR-b9-p1C" firstAttribute="leading" secondItem="rFn-jz-a13" secondAttribute="leading" id="fkF-Pn-t1M"/>
                             <constraint firstItem="5Bg-FO-MdG" firstAttribute="leading" secondItem="sVE-Oo-5pL" secondAttribute="leading" id="hYU-V6-0w7"/>
                             <constraint firstItem="sVE-Oo-5pL" firstAttribute="top" secondItem="NuF-PS-rr3" secondAttribute="bottom" id="jLW-af-8IF"/>
@@ -161,6 +171,7 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="7Lk-hE-hDU"/>
+                                <exclude reference="7uW-gx-eY1"/>
                                 <exclude reference="6LR-Mq-vRl"/>
                             </mask>
                         </variation>
@@ -173,7 +184,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="新建" id="VQK-28-epI">
                             <connections>
-                                <segue destination="pzF-rG-QF3" kind="show" identifier="new" id="5XW-Ay-Wit"/>
+                                <segue destination="pzF-rG-QF3" kind="presentation" identifier="new" id="5XW-Ay-Wit"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -695,6 +706,6 @@
         <image name="top_charts" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OBY-tC-yKa"/>
+        <segue reference="0lA-nr-mvG"/>
     </inferredMetricsTieBreakers>
 </document>
