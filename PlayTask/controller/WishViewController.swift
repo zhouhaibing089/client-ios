@@ -104,8 +104,4 @@ class WishViewController: UITableViewController {
             }
         }
     }
-
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat.min
-    }
 }

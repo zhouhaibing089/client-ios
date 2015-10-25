@@ -203,13 +203,13 @@
         <scene sceneID="Fwx-GE-McQ">
             <objects>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="Nah-Wp-egE" customClass="BillViewController" customModule="PlayTask" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="XG2-nI-TDQ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="XG2-nI-TDQ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bill_item" rowHeight="72" id="YsX-XT-XxK" customClass="BillItemTableViewCell" customModule="PlayTask" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="114" width="600" height="72"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="72"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YsX-XT-XxK" id="ElT-PR-qnp">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="71"/>
@@ -382,13 +382,13 @@
         <scene sceneID="oWc-Eg-qMR">
             <objects>
                 <tableViewController id="nxW-Bs-HQW" customClass="WishViewController" customModule="PlayTask" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="bU2-X7-65S">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="bU2-X7-65S">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="wish" rowHeight="64" id="JV3-qZ-hss" customClass="WishTableViewCell" customModule="PlayTask" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="114" width="600" height="64"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JV3-qZ-hss" id="DDW-jr-zWZ">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
@@ -706,6 +706,6 @@
         <image name="top_charts" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0lA-nr-mvG"/>
+        <segue reference="OBY-tC-yKa"/>
     </inferredMetricsTieBreakers>
 </document>
