@@ -26,10 +26,9 @@ class WishViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        let user = User.getInstance()
         UIView.performWithoutAnimation {
-            let standardUserDefaults = NSUserDefaults.standardUserDefaults()
-            let score = standardUserDefaults.integerForKey("score")
-            self.scoreBarButton.title = "\(score)"
+            self.scoreBarButton.title = "\(user.score)"
         }
         
         MobClick.beginLogPageView("wish")
@@ -68,13 +67,12 @@ class WishViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default) { _ in
             let wishHistory = WishHistory(wish: wish)
             wishHistory.save()
-            let score = Int64(self.scoreBarButton.title!)!
+
+            let user = User.getInstance()
+            user.update(["score": user.score - wish.score])
             UIView.performWithoutAnimation {
-                self.scoreBarButton.title = "\(score - wish.score)"
+                self.scoreBarButton.title = "\(user.score)"
             }
-            let standardUserDefaults = NSUserDefaults.standardUserDefaults()
-            standardUserDefaults.setInteger(Int(self.scoreBarButton.title!)!, forKey: "score")
-            standardUserDefaults.synchronize()
             self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         })
         alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))

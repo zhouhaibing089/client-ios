@@ -17,11 +17,13 @@ class NewTaskViewController: UITableViewController {
     
     @IBOutlet weak var taskTypeSegmentControl: UISegmentedControl!
     
+    @IBOutlet weak var taskLoopTextField: UITextField!
     var onTaskAdded: ((Task) -> Void)?
     
     @IBAction func addTask(sender: UIBarButtonItem) {
         let taskTitle = taskTitleTextField.text
         let taskScore = taskScoreTextField.text
+        var taskLoop = Int(taskLoopTextField.text!) ?? 1
         let taskType = TaskType(rawValue: taskTypeSegmentControl.selectedSegmentIndex)!
         if taskTitle == "" {
             CRToastManager.showNotificationWithMessage("请输入标题", completionBlock: nil)
@@ -31,7 +33,14 @@ class NewTaskViewController: UITableViewController {
             CRToastManager.showNotificationWithMessage("请输入成就点数", completionBlock: nil)
             return
         }
-        let task = Task(title: taskTitle!, score: Int(taskScore!)!, type: taskType)
+        switch taskType {
+        case .Daily, .Weekly:
+            taskLoop = taskLoop == 0 ? 1 : taskLoop
+            break
+        default:
+            break
+        }
+        let task = Task(title: taskTitle!, score: Int(taskScore!)!, type: taskType, loop: taskLoop)
         task.save()
         self.onTaskAdded?(task)
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)

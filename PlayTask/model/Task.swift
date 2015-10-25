@@ -21,14 +21,15 @@ class Task: Table {
     dynamic var type = 0
     dynamic var loop = 1
     
-    convenience init(title: String, score: Int, type: TaskType) {
+    convenience init(title: String, score: Int, type: TaskType, loop: Int) {
         self.init()
         self.title = title
         self.score = score
         self.type = type.rawValue
+        self.loop = loop
     }
     
-    static func getTasks() -> [Int: [Task]] {
+    class func getTasks() -> [Int: [Task]] {
         let realm = try! Realm()
         let dailyTasks = realm.objects(Task).filter("deleted == false AND type == %@", TaskType.Daily.rawValue).map { $0 }
         let weeklyTasks = realm.objects(Task).filter("deleted == false AND type == %@", TaskType.Weekly.rawValue).map { $0 }

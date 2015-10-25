@@ -8,10 +8,14 @@
 
 import UIKit
 
-class TaskViewController: UITableViewController {
+class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var scoreBarButton: UIBarButtonItem!
     @IBOutlet weak var taskTypeSegmentControl: UISegmentedControl!
+    
+    var hairline: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var toolbar: UIToolbar!
     
     var taskType: TaskType {
         return TaskType(rawValue: self.taskTypeSegmentControl.selectedSegmentIndex)!
@@ -26,7 +30,23 @@ class TaskViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "任务"
+        self.toolbar.delegate = self
+        let navigationBar = self.navigationController!.navigationBar
+        for parent in navigationBar.subviews {
+            for childView in parent.subviews {
+                if let imageView = childView as? UIImageView {
+                    if childView.frame.size.width == navigationBar.frame.size.width && childView.frame.size.height <= 1.0  {
+                        self.hairline = imageView
+                        break
+                    }
+                }
+            }
+        }
+        self.navigationController?.view.backgroundColor = UIColor.whiteColor();
+        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.contentInset = UIEdgeInsets(top: self.toolbar.frame.height, left: 0, bottom: 0, right: 0)
         
         self.tasks = Task.getTasks()
         
@@ -45,34 +65,38 @@ class TaskViewController: UITableViewController {
         
         self.tableView.reloadData()
         
+        let user = User.getInstance()
         UIView.performWithoutAnimation {
-            let standardUserDefaults = NSUserDefaults.standardUserDefaults()
-            let score = standardUserDefaults.integerForKey("score")
-            self.scoreBarButton.title = "\(score)"
+            self.scoreBarButton.title = "\(user.score)"
         }
         MobClick.beginLogPageView("task")
-
+        self.hairline.hidden = true
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         MobClick.endLogPageView("task")
+        self.hairline.hidden = false
+    }
+    
+    func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
+        return UIBarPosition.TopAttached
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return (self.tasks[self.taskType.rawValue]?.count)!
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("task", forIndexPath: indexPath) as! TaskTableViewCell
         
         cell.task = self.tasks[self.taskType.rawValue]![indexPath.row]
@@ -81,7 +105,7 @@ class TaskViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let task = self.tasks[self.taskType.rawValue]![indexPath.row]
             task.delete()
@@ -106,7 +130,7 @@ class TaskViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.min
     }
 

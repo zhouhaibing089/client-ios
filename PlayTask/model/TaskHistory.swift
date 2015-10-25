@@ -32,7 +32,7 @@ class TaskHistory: Table, Bill {
         return self.completionTime
     }
     
-    static func getTaskHistories() -> [TaskHistory] {
+    class func getTaskHistories() -> [TaskHistory] {
         let realm = try! Realm()
         return realm.objects(TaskHistory).filter("deleted == false AND canceled == false").map { $0 }
     }

@@ -19,7 +19,7 @@ class Wish: Table {
         self.score = score
     }
     
-    static func getWishes() -> [Wish] {
+    class func getWishes() -> [Wish] {
         let realm = try! Realm()
         return realm.objects(Wish).filter("deleted == false").map { $0 }
     }
