@@ -20,6 +20,7 @@ class Task: Table {
     dynamic var score = 0
     dynamic var type = 0
     dynamic var loop = 1
+    dynamic var rank = 0
     
     convenience init(title: String, score: Int, type: TaskType, loop: Int) {
         self.init()
@@ -31,9 +32,9 @@ class Task: Table {
     
     class func getTasks() -> [Int: [Task]] {
         let realm = try! Realm()
-        let dailyTasks = realm.objects(Task).filter("deleted == false AND type == %@", TaskType.Daily.rawValue).map { $0 }
-        let weeklyTasks = realm.objects(Task).filter("deleted == false AND type == %@", TaskType.Weekly.rawValue).map { $0 }
-        let normalTasks = realm.objects(Task).filter("deleted == false AND type == %@", TaskType.Normal.rawValue).map { $0 }
+        let dailyTasks = realm.objects(Task).filter("deleted == false AND type == %@", TaskType.Daily.rawValue).sorted("rank").map { $0 }
+        let weeklyTasks = realm.objects(Task).filter("deleted == false AND type == %@", TaskType.Weekly.rawValue).sorted("rank").map { $0 }
+        let normalTasks = realm.objects(Task).filter("deleted == false AND type == %@", TaskType.Normal.rawValue).sorted("rank").map { $0 }
         return [TaskType.Daily.rawValue: dailyTasks, TaskType.Weekly.rawValue: weeklyTasks, TaskType.Normal.rawValue: normalTasks]
     }
     

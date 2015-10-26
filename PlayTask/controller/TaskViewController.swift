@@ -24,6 +24,17 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     // [0: doing, 1: done]
     var tasks = [[Int: [Task]](), [Int: [Task]]()]
     
+    // 由于 swift 的奇葩语法, 当你做了改变数组的长度的操作时, swift 会 copy 一份, 导致你的操作不会在原对象上生效
+    // http://stackoverflow.com/questions/24081009/is-there-a-reason-that-swift-array-assignment-is-inconsistent-neither-a-referen
+    var currentTasks: [Int: [Task]] {
+        get {
+            if self.showDone {
+                return self.tasks[1]
+            }
+            return self.tasks[0]
+        }
+    }
+    
     var showDone = false
 
     @IBAction func changeTaskType(sender: UISegmentedControl) {
@@ -43,6 +54,16 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
 
     }
     
+    @IBAction func endResort(sender: UITapGestureRecognizer) {
+        if self.tableView.editing {
+            var i = 0
+            for t in self.currentTasks[self.taskType.rawValue]! {
+                t.update(["rank": ++i])
+                print("\(t.title):\(t.rank)")
+            }
+            self.tableView.setEditing(false, animated: true)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,6 +79,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
                 }
             }
         }
+        
         self.navigationController?.view.backgroundColor = UIColor.whiteColor();
         
         self.tableView.delegate = self
@@ -106,7 +128,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (self.getCurrentTasks()[self.taskType.rawValue]?.count)!
+        return (self.currentTasks[self.taskType.rawValue]?.count)!
     }
 
     
@@ -117,14 +139,10 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         } else {
             cell.mode = TaskTableViewCell.Mode.Normal
         }
-        cell.task = self.getCurrentTasks()[self.taskType.rawValue]![indexPath.row]
+        cell.task = self.currentTasks[self.taskType.rawValue]![indexPath.row]
         cell.scoreBarButton = self.scoreBarButton
 
         return cell
-    }
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        return
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -140,25 +158,56 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let sortAction  = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "排序") { (action, indexPath) -> Void in
+        let sortAction  = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "排序") { [unowned self] (action, indexPath) -> Void in
+            self.tableView.setEditing(false, animated: true)
+            self.tableView.setEditing(true, animated: true)
         }
         sortAction.backgroundColor = UIColor.lightGrayColor()
         let deleteAction  = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "删除") { [unowned self] (action, indexPath) -> Void in
-            var currentTasks = self.getCurrentTasks()
+            var currentTasks = self.currentTasks
             let task = currentTasks[self.taskType.rawValue]![indexPath.row]
             task.delete()
-            currentTasks[self.taskType.rawValue]?.removeAtIndex(indexPath.row)
+            if self.showDone {
+                self.tasks[1][self.taskType.rawValue]?.removeAtIndex(indexPath.row)
+            } else {
+                self.tasks[0][self.taskType.rawValue]?.removeAtIndex(indexPath.row)
+            }
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-            
         }
         return [deleteAction, sortAction]
     }
     
-    func getCurrentTasks() -> [Int: [Task]] {
+    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
+    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        var tasks = self.currentTasks[self.taskType.rawValue]!
+        let t = tasks[sourceIndexPath.row]
+        tasks.removeAtIndex(sourceIndexPath.row)
+        tasks.insert(t, atIndex: destinationIndexPath.row)
+        
         if self.showDone {
-            return self.tasks[1]
+            self.tasks[1][self.taskType.rawValue] = tasks
+        } else {
+            self.tasks[0][self.taskType.rawValue] = tasks
         }
-        return self.tasks[0]
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        return
+    }
+    
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if self.tableView.editing {
+            return UITableViewCellEditingStyle.None
+        } else {
+            return UITableViewCellEditingStyle.Delete
+        }
     }
 
     func refresh() {

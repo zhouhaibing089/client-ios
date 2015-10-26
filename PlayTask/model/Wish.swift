@@ -12,6 +12,7 @@ import RealmSwift
 class Wish: Table {
     dynamic var title = ""
     dynamic var score = 0
+    dynamic var rank = 0
     
     convenience init(title: String, score: Int) {
         self.init()

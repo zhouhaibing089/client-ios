@@ -150,6 +150,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="9Nz-Mw-wUu" firstAttribute="top" secondItem="sVE-Oo-5pL" secondAttribute="bottom" constant="422" id="6LR-Mq-vRl"/>
                             <constraint firstItem="nfR-b9-p1C" firstAttribute="trailing" secondItem="sVE-Oo-5pL" secondAttribute="trailing" id="7Lk-hE-hDU"/>
@@ -175,6 +176,9 @@
                                 <exclude reference="6LR-Mq-vRl"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="3BC-Ix-BnC" appends="YES" id="HqX-ax-Zek"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="任务" id="8Rr-PK-TSO">
                         <barButtonItem key="leftBarButtonItem" title="0" id="p23-VE-NOh">
@@ -196,6 +200,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TaH-th-6zw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="3BC-Ix-BnC">
+                    <connections>
+                        <action selector="endResort:" destination="R3m-mU-SDD" id="azb-b9-jsu"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1338" y="485"/>
         </scene>
@@ -706,6 +715,6 @@
         <image name="top_charts" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OBY-tC-yKa"/>
+        <segue reference="0lA-nr-mvG"/>
     </inferredMetricsTieBreakers>
 </document>
