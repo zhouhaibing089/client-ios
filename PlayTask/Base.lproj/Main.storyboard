@@ -456,7 +456,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BEZ-rb-y71" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Ikf-qS-Jy7">
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="Ikf-qS-Jy7">
                     <connections>
                         <action selector="endResort:" destination="nxW-Bs-HQW" id="HkV-mI-u2O"/>
                     </connections>
@@ -722,6 +722,6 @@
         <image name="top_charts" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0lA-nr-mvG"/>
+        <segue reference="OBY-tC-yKa"/>
     </inferredMetricsTieBreakers>
 </document>
