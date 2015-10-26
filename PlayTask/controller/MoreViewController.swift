@@ -54,7 +54,7 @@ class MoreViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 let supportAlertTitle = MobClick.getConfigParams("supportAlertTitle") ?? "支付宝帐号"
-                let supportAlertMessage = MobClick.getConfigParams("supportAlertMessage") ?? "alipay@yon.im"
+                let supportAlertMessage = MobClick.getConfigParams("supportAlertMessage") ?? "yoncise@qq.com"
                 let alert = UIAlertController(title: supportAlertTitle, message: supportAlertMessage, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "好", style: UIAlertActionStyle.Cancel, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
