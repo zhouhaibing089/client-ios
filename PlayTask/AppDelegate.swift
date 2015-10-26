@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 友盟统计
         MobClick.startWithAppkey("5620ffafe0f55a758500000c")
+        MobClick.updateOnlineConfig()
         
         // 通知
         
