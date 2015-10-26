@@ -21,6 +21,7 @@ class Task: Table {
     dynamic var type = 0
     dynamic var loop = 1
     dynamic var rank = 0
+    dynamic var pinned = false
     
     convenience init(title: String, score: Int, type: TaskType, loop: Int) {
         self.init()
@@ -105,5 +106,49 @@ class Task: Table {
         let taskHistories = realm.objects(TaskHistory).filter(query, self, begin, end).sorted("completionTime")
 
         return taskHistories.first;
+    }
+    
+    class func getPinnedTasksNumOnTheDate(day: NSDate) -> Int {
+        let tasks = Task.getTasks()
+        var count = 0
+        let onCurrentDay = day.beginOfDay() == NSDate().beginOfDay()
+        for t in tasks[TaskType.Daily.rawValue]! {
+            if onCurrentDay { // 当天
+                if t.pinned && !t.isDone() {
+                    count++
+                }
+            } else {
+                if t.pinned {
+                    count++
+                }
+            }
+        }
+        let onCurrentWeek = day.beginOfWeek() == NSDate().beginOfWeek()
+        for t in tasks[TaskType.Weekly.rawValue]! {
+            if onCurrentWeek { // 当周
+                if t.pinned && !t.isDone() {
+                    count++
+                }
+            } else {
+                if t.pinned {
+                    count++
+                }
+            }
+        }
+        for t in tasks[TaskType.Normal.rawValue]! {
+            if t.pinned && !t.isDone() {
+                count++
+            }
+        }
+        return count
+    }
+    
+    class func scheduleNotification() {
+        let localNotification = UILocalNotification()
+        localNotification.fireDate = NSDate().endOfDay().dateByAddingTimeInterval(1)
+        localNotification.applicationIconBadgeNumber = Task.getPinnedTasksNumOnTheDate(localNotification.fireDate!)
+        let application = UIApplication.sharedApplication()
+        application.cancelAllLocalNotifications()
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
 }

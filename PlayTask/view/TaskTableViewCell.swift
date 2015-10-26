@@ -42,14 +42,26 @@ class TaskTableViewCell: UITableViewCell {
                 }
                 break
             }
+            if self.task.pinned {
+                self.pinButton.setImage(UIImage(named: "pin_checked"), forState: UIControlState.Normal)
+            } else {
+                self.pinButton.setImage(UIImage(named: "pin_unchecked"), forState: UIControlState.Normal)
+            }
         }
     }
         
     weak var scoreBarButton: UIBarButtonItem!
+    @IBOutlet weak var pinButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var completionSwitch: UISwitch!
     @IBOutlet weak var loopLabel: UILabel!
+    
+    @IBAction func pin(sender: UIButton) {
+        self.task.update(["pinned": !self.task.pinned])
+        let task = self.task
+        self.task = task
+    }
     
     @IBAction func toggle(sender: UISwitch) {
         let user = User.getInstance()
