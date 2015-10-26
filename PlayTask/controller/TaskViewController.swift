@@ -59,7 +59,6 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
             var i = 0
             for t in self.currentTasks[self.taskType.rawValue]! {
                 t.update(["rank": ++i])
-                print("\(t.title):\(t.rank)")
             }
             self.tableView.setEditing(false, animated: true)
         }

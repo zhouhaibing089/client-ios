@@ -22,6 +22,6 @@ class Wish: Table {
     
     class func getWishes() -> [Wish] {
         let realm = try! Realm()
-        return realm.objects(Wish).filter("deleted == false").map { $0 }
+        return realm.objects(Wish).filter("deleted == false").sorted("rank").map { $0 }
     }
 }

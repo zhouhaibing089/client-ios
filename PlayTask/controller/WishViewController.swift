@@ -23,6 +23,15 @@ class WishViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 44
     }
     
+    @IBAction func endResort(sender: UITapGestureRecognizer) {
+        if self.tableView.editing {
+            var i = 0
+            for w in self.wishes {
+                w.update(["rank": ++i])
+            }
+            self.tableView.setEditing(false, animated: true)
+        }
+    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -81,11 +90,44 @@ class WishViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.Delete {
+        return super.tableView(tableView, commitEditingStyle: editingStyle, forRowAtIndexPath: indexPath)
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let sortAction  = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "排序") { [unowned self] (action, indexPath) -> Void in
+            self.tableView.setEditing(false, animated: true)
+            self.tableView.setEditing(true, animated: true)
+        }
+        sortAction.backgroundColor = UIColor.lightGrayColor()
+        let deleteAction  = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "删除") { [unowned self] (action, indexPath) -> Void in
             let wish = self.wishes[indexPath.row]
             wish.delete()
             self.wishes.removeAtIndex(indexPath.row)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        }
+        return [deleteAction, sortAction]
+
+    }
+    
+    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        let wish = self.wishes[sourceIndexPath.row]
+        self.wishes.removeAtIndex(sourceIndexPath.row)
+        self.wishes.insert(wish, atIndex: destinationIndexPath.row)
+    }
+    
+    override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if self.tableView.editing {
+            return UITableViewCellEditingStyle.None
+        } else {
+            return UITableViewCellEditingStyle.Delete
         }
     }
     
@@ -95,10 +137,7 @@ class WishViewController: UITableViewController {
             let nc = segue.destinationViewController as! UINavigationController
             if let nwvc = nc.viewControllers.first as? NewWishViewController {
                 nwvc.onWishAdded = { wish in
-                    self.wishes.append(wish)
-                    self.wishes = self.wishes.sort {
-                        return $0.score < $1.score
-                    }
+                    self.wishes.insert(wish, atIndex: 0)
                     self.tableView.reloadData()
                 }
             }

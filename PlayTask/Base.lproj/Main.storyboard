@@ -395,6 +395,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="wish" rowHeight="64" id="JV3-qZ-hss" customClass="WishTableViewCell" customModule="PlayTask" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="64"/>
@@ -435,6 +436,7 @@
                         <connections>
                             <outlet property="dataSource" destination="nxW-Bs-HQW" id="tNj-lf-7rV"/>
                             <outlet property="delegate" destination="nxW-Bs-HQW" id="EWI-YC-pRG"/>
+                            <outletCollection property="gestureRecognizers" destination="Ikf-qS-Jy7" appends="YES" id="XTJ-ZR-TWy"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="欲望" id="FeY-8f-Z0e">
@@ -454,6 +456,11 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BEZ-rb-y71" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Ikf-qS-Jy7">
+                    <connections>
+                        <action selector="endResort:" destination="nxW-Bs-HQW" id="HkV-mI-u2O"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1338" y="-322"/>
         </scene>
@@ -715,6 +722,6 @@
         <image name="top_charts" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0lA-nr-mvG"/>
+        <segue reference="OBY-tC-yKa"/>
     </inferredMetricsTieBreakers>
 </document>
