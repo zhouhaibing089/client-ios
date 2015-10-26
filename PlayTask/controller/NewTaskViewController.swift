@@ -20,6 +20,19 @@ class NewTaskViewController: UITableViewController {
     @IBOutlet weak var taskLoopTextField: UITextField!
     var onTaskAdded: ((Task) -> Void)?
     
+    var modifiedTask: Task?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let t = self.modifiedTask {
+            self.taskTitleTextField.text = t.title
+            self.taskScoreTextField.text = "\(t.score)"
+            self.taskLoopTextField.text = "\(t.loop)"
+            self.taskTypeSegmentControl.selectedSegmentIndex = t.type
+            self.navigationItem.title = "编辑任务"
+        }
+    }
+    
     @IBAction func addTask(sender: UIBarButtonItem) {
         let taskTitle = taskTitleTextField.text
         let taskScore = taskScoreTextField.text
@@ -40,7 +53,9 @@ class NewTaskViewController: UITableViewController {
         default:
             break
         }
+        
         let task = Task(title: taskTitle!, score: Int(taskScore!)!, type: taskType, loop: taskLoop)
+        
         task.save()
         self.onTaskAdded?(task)
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)

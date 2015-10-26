@@ -26,12 +26,12 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     
     // 由于 swift 的奇葩语法, 当你做了改变数组的长度的操作时, swift 会 copy 一份, 导致你的操作不会在原对象上生效
     // http://stackoverflow.com/questions/24081009/is-there-a-reason-that-swift-array-assignment-is-inconsistent-neither-a-referen
-    var currentTasks: [Int: [Task]] {
+    var currentTasks: [Task] {
         get {
             if self.showDone {
-                return self.tasks[1]
+                return self.tasks[1][self.taskType.rawValue]!
             }
-            return self.tasks[0]
+            return self.tasks[0][self.taskType.rawValue]!
         }
     }
     
@@ -57,7 +57,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     @IBAction func endResort(sender: UITapGestureRecognizer) {
         if self.tableView.editing {
             var i = 0
-            for t in self.currentTasks[self.taskType.rawValue]! {
+            for t in self.currentTasks {
                 t.update(["rank": ++i])
             }
             self.tableView.setEditing(false, animated: true)
@@ -127,7 +127,12 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (self.currentTasks[self.taskType.rawValue]?.count)!
+        return self.currentTasks.count
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let t = self.currentTasks[indexPath.row]
+        self.performSegueWithIdentifier("new", sender: t)
     }
 
     
@@ -138,7 +143,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         } else {
             cell.mode = TaskTableViewCell.Mode.Normal
         }
-        cell.task = self.currentTasks[self.taskType.rawValue]![indexPath.row]
+        cell.task = self.currentTasks[indexPath.row]
         cell.scoreBarButton = self.scoreBarButton
 
         return cell
@@ -148,9 +153,18 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         if segue.identifier == "new" {
             let nc = segue.destinationViewController as! UINavigationController
             if let ntvc = nc.viewControllers.first as? NewTaskViewController {
-                ntvc.onTaskAdded = { task in
-                    self.taskTypeSegmentControl.selectedSegmentIndex = task.type
-                    self.refresh()
+                if let t = sender as? Task { // 编辑模式
+                    ntvc.modifiedTask = t
+                    ntvc.onTaskAdded = { task in
+                        task.update(["rank": t.rank])
+                        t.delete()
+                        self.refresh()
+                    }
+                } else {
+                    ntvc.onTaskAdded = { task in
+                        self.taskTypeSegmentControl.selectedSegmentIndex = task.type
+                        self.refresh()
+                    }
                 }
             }
         }
@@ -164,7 +178,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         sortAction.backgroundColor = UIColor.lightGrayColor()
         let deleteAction  = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "删除") { [unowned self] (action, indexPath) -> Void in
             var currentTasks = self.currentTasks
-            let task = currentTasks[self.taskType.rawValue]![indexPath.row]
+            let task = currentTasks[indexPath.row]
             task.delete()
             if self.showDone {
                 self.tasks[1][self.taskType.rawValue]?.removeAtIndex(indexPath.row)
@@ -185,7 +199,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     }
     
     func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-        var tasks = self.currentTasks[self.taskType.rawValue]!
+        var tasks = self.currentTasks
         let t = tasks[sourceIndexPath.row]
         tasks.removeAtIndex(sourceIndexPath.row)
         tasks.insert(t, atIndex: destinationIndexPath.row)
