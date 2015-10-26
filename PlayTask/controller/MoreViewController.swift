@@ -17,7 +17,7 @@ class MoreViewController: UITableViewController {
                 Util.application.openURL(NSURL(string: "itms-apps://itunes.apple.com/cn/app/id1050090187?&mt=8")!)
                 break
             case 1:
-                Util.application.openURL(NSURL(string: "http://www.zhihu.com/question/33453309/answer/59504539")!)
+                Util.application.openURL(NSURL(string: "http://www.yon.im/help")!)
                 break
             case 2:
                 Util.application.openURL(NSURL(string: "http://www.yon.im/feedback")!)
