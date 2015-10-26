@@ -92,7 +92,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     }
     
     func didBecomeActive(notification: NSNotification) {
-        self.tableView.reloadData()
+        self.refresh()
     }
     
     override func viewWillAppear(animated: Bool) {

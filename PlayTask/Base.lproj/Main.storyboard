@@ -348,28 +348,34 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="数量（可选）" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ToH-Hi-hD9">
-                                                    <rect key="frame" x="8" y="0.0" width="454" height="43"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                </textField>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Er1-c3-GTP">
-                                                    <rect key="frame" x="470" y="7" width="122" height="29"/>
+                                                    <rect key="frame" x="470" y="8" width="122" height="29"/>
                                                     <segments>
                                                         <segment title="每日"/>
                                                         <segment title="每周"/>
                                                         <segment title="普通"/>
                                                     </segments>
                                                 </segmentedControl>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="数量（可选）" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wEf-cB-OPz">
+                                                    <rect key="frame" x="8" y="0.0" width="454" height="43"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Er1-c3-GTP" firstAttribute="centerY" secondItem="Jsq-9B-LCW" secondAttribute="centerY" id="0lk-Jx-ipO"/>
-                                                <constraint firstAttribute="bottom" secondItem="ToH-Hi-hD9" secondAttribute="bottom" id="2BV-gB-wfo"/>
+                                                <constraint firstAttribute="bottom" secondItem="wEf-cB-OPz" secondAttribute="bottom" id="I4S-kG-NCx"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Er1-c3-GTP" secondAttribute="trailing" id="RMv-2H-Aem"/>
-                                                <constraint firstAttribute="leadingMargin" secondItem="ToH-Hi-hD9" secondAttribute="leading" id="dYb-X0-ORZ"/>
-                                                <constraint firstItem="Er1-c3-GTP" firstAttribute="leading" secondItem="ToH-Hi-hD9" secondAttribute="trailing" constant="8" symbolic="YES" id="dmr-Be-pe5"/>
-                                                <constraint firstItem="ToH-Hi-hD9" firstAttribute="top" secondItem="Jsq-9B-LCW" secondAttribute="top" id="qgT-fH-qoW"/>
+                                                <constraint firstItem="wEf-cB-OPz" firstAttribute="top" secondItem="Er1-c3-GTP" secondAttribute="bottom" constant="-29" id="Snq-vz-4wn"/>
+                                                <constraint firstItem="Er1-c3-GTP" firstAttribute="leading" secondItem="wEf-cB-OPz" secondAttribute="trailing" constant="8" symbolic="YES" id="aTg-On-8V4"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="wEf-cB-OPz" secondAttribute="leading" id="hoG-aW-hJM"/>
+                                                <constraint firstItem="wEf-cB-OPz" firstAttribute="top" secondItem="Jsq-9B-LCW" secondAttribute="top" id="zaV-Cp-Rkb"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Snq-vz-4wn"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -393,7 +399,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="taskLoopTextField" destination="ToH-Hi-hD9" id="r6K-sX-FBD"/>
+                        <outlet property="taskLoopTextField" destination="wEf-cB-OPz" id="KFc-Kk-JSr"/>
                         <outlet property="taskScoreTextField" destination="2vf-Qm-yXr" id="h2g-SD-3lk"/>
                         <outlet property="taskTitleTextField" destination="JNZ-AY-Ai5" id="1yh-uk-0bg"/>
                         <outlet property="taskTypeSegmentControl" destination="Er1-c3-GTP" id="xrC-So-aj1"/>
