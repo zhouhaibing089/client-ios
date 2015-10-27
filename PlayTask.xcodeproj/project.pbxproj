@@ -7,32 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		495EB5C31BCFDB8B00E0E829 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C21BCFDB8B00E0E829 /* NSDate.swift */; settings = {ASSET_TAGS = (); }; };
-		495EB5C71BD0A80800E0E829 /* BillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C61BD0A80800E0E829 /* BillViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		49840DD11BCF9B61001F493D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD01BCF9B61001F493D /* Util.swift */; settings = {ASSET_TAGS = (); }; };
-		49840DD41BCF9D46001F493D /* ViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD31BCF9D46001F493D /* ViewUtil.swift */; settings = {ASSET_TAGS = (); }; };
-		49840DD91BCFA997001F493D /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD81BCFA997001F493D /* TaskTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		498BAC901BD0CDE600ABB357 /* WishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		498BAC921BD0CE7400ABB357 /* NewWishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC911BD0CE7400ABB357 /* NewWishViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		498BAC961BD0D49400ABB357 /* WishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC951BD0D49400ABB357 /* WishTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
-		498BAC9A1BD0E2C800ABB357 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC991BD0E2C800ABB357 /* UIColor.swift */; settings = {ASSET_TAGS = (); }; };
-		498BAC9C1BD0EA5300ABB357 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC9B1BD0EA5300ABB357 /* MoreViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		49953DFC1BDB1F0400B25EC8 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49953DFB1BDB1F0400B25EC8 /* Table.swift */; settings = {ASSET_TAGS = (); }; };
-		49953DFE1BDB2D6900B25EC8 /* Wish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49953DFD1BDB2D6900B25EC8 /* Wish.swift */; settings = {ASSET_TAGS = (); }; };
-		49953E001BDB2F6500B25EC8 /* TaskHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49953DFF1BDB2F6500B25EC8 /* TaskHistory.swift */; settings = {ASSET_TAGS = (); }; };
-		49953E021BDB316500B25EC8 /* WishHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49953E011BDB316500B25EC8 /* WishHistory.swift */; settings = {ASSET_TAGS = (); }; };
-		49953E041BDB371400B25EC8 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49953E031BDB371400B25EC8 /* Bill.swift */; settings = {ASSET_TAGS = (); }; };
-		49953E061BDC67D900B25EC8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49953E051BDC67D900B25EC8 /* User.swift */; settings = {ASSET_TAGS = (); }; };
+		495EB5C31BCFDB8B00E0E829 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C21BCFDB8B00E0E829 /* NSDate.swift */; };
+		495EB5C71BD0A80800E0E829 /* BillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C61BD0A80800E0E829 /* BillViewController.swift */; };
+		495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */; };
+		49840DD11BCF9B61001F493D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD01BCF9B61001F493D /* Util.swift */; };
+		49840DD41BCF9D46001F493D /* ViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD31BCF9D46001F493D /* ViewUtil.swift */; };
+		49840DD91BCFA997001F493D /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD81BCFA997001F493D /* TaskTableViewCell.swift */; };
+		498BAC901BD0CDE600ABB357 /* WishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */; };
+		498BAC921BD0CE7400ABB357 /* NewWishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC911BD0CE7400ABB357 /* NewWishViewController.swift */; };
+		498BAC961BD0D49400ABB357 /* WishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC951BD0D49400ABB357 /* WishTableViewCell.swift */; };
+		498BAC9A1BD0E2C800ABB357 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC991BD0E2C800ABB357 /* UIColor.swift */; };
+		498BAC9C1BD0EA5300ABB357 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC9B1BD0EA5300ABB357 /* MoreViewController.swift */; };
+		49953DFC1BDB1F0400B25EC8 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49953DFB1BDB1F0400B25EC8 /* Table.swift */; };
+		49953DFE1BDB2D6900B25EC8 /* Wish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49953DFD1BDB2D6900B25EC8 /* Wish.swift */; };
+		49953E001BDB2F6500B25EC8 /* TaskHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49953DFF1BDB2F6500B25EC8 /* TaskHistory.swift */; };
+		49953E021BDB316500B25EC8 /* WishHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49953E011BDB316500B25EC8 /* WishHistory.swift */; };
+		49953E041BDB371400B25EC8 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49953E031BDB371400B25EC8 /* Bill.swift */; };
+		49953E061BDC67D900B25EC8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49953E051BDC67D900B25EC8 /* User.swift */; };
 		499708BF1BCF506E00424F5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499708BE1BCF506E00424F5E /* AppDelegate.swift */; };
 		499708C41BCF506E00424F5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499708C21BCF506E00424F5E /* Main.storyboard */; };
 		499708C61BCF506E00424F5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 499708C51BCF506E00424F5E /* Assets.xcassets */; };
 		499708C91BCF506E00424F5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499708C71BCF506E00424F5E /* LaunchScreen.storyboard */; };
 		499708D41BCF506E00424F5E /* PlayTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499708D31BCF506E00424F5E /* PlayTaskTests.swift */; };
 		499708DF1BCF506E00424F5E /* PlayTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499708DE1BCF506E00424F5E /* PlayTaskUITests.swift */; };
-		499708ED1BCF635A00424F5E /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499708EC1BCF635A00424F5E /* TaskViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		499708EF1BCF63F500424F5E /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499708EE1BCF63F500424F5E /* NewTaskViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		4998593D1BDB169C00C222E7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4998593C1BDB169C00C222E7 /* Task.swift */; settings = {ASSET_TAGS = (); }; };
+		499708ED1BCF635A00424F5E /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499708EC1BCF635A00424F5E /* TaskViewController.swift */; };
+		499708EF1BCF63F500424F5E /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499708EE1BCF63F500424F5E /* NewTaskViewController.swift */; };
+		4998593D1BDB169C00C222E7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4998593C1BDB169C00C222E7 /* Task.swift */; };
 		5177522D0A08272C32C53545 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FE39AB88BE9E71239939D4 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
