@@ -156,7 +156,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
                 if let t = sender as? Task { // 编辑模式
                     ntvc.modifiedTask = t
                     ntvc.onTaskAdded = { task in
-                        task.update(["rank": t.rank])
+                        task.update(["rank": t.rank, "pinned": t.pinned])
                         t.delete()
                         self.refresh()
                     }
