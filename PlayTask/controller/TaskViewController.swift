@@ -145,7 +145,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         }
         cell.task = self.currentTasks[indexPath.row]
         cell.scoreBarButton = self.scoreBarButton
-
+        cell.layoutIfNeeded() // for iOS 8 UILabel to be right
         return cell
     }
     

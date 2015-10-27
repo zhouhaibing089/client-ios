@@ -57,7 +57,7 @@ class BillViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("bill_item", forIndexPath: indexPath) as! BillItemTableViewCell
         
         cell.billItem = self.billItems[indexPath.row]
-
+        cell.layoutIfNeeded()
         return cell
     }
     

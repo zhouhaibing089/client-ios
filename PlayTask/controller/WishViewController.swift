@@ -66,6 +66,7 @@ class WishViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("wish", forIndexPath: indexPath) as! WishTableViewCell
 
         cell.wish = self.wishes[indexPath.row]
+        cell.layoutIfNeeded()
 
         return cell
     }
