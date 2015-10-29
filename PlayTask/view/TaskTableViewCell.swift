@@ -116,7 +116,7 @@ class TaskTableViewCell: UITableViewCell {
         let completedTimesAfter = self.task.getCompletedTimes()
         switch self.mode {
         case .Normal:
-            let animated = !(completedTimesAfter == self.task.loop || completedTimesAfter == 0 || completedTimesBefore == self.task.loop)
+            let animated = !(completedTimesAfter == self.task.loop || completedTimesAfter == 0 || (completedTimesBefore == self.task.loop && self.task.loop != 0))
             updateWithAnimation(animated)
             break
         case .Done:
