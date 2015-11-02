@@ -13,8 +13,11 @@ import SQLite
 class Util {
     static let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     static let application = UIApplication.sharedApplication()
-    static var db: Connection {
-        return Util.appDelegate.db
+    
+    static var loggedUserSid: Int? {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let sid = userDefaults.integerForKey("logged_user_sid")
+        return sid == 0 ? nil : sid
     }
     
 }

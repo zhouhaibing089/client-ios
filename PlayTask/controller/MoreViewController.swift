@@ -10,12 +10,52 @@ import UIKit
 
 class MoreViewController: UITableViewController {
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        let showSupport = MobClick.getConfigParams("showSupport") ?? "false"
-        if showSupport == "true" {
-            return 2
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.showSection(section) {
+            return super.tableView(tableView, numberOfRowsInSection: section)
         } else {
-            return 1
+            return 0
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if self.showSection(section) {
+            return super.tableView(tableView, heightForFooterInSection: section)
+        } else {
+            return CGFloat.min
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if self.showSection(section) {
+            return super.tableView(tableView, heightForHeaderInSection: section)
+        } else {
+            return CGFloat.min
+        }
+    }
+    
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if self.showSection(section) {
+            if section == 1 {
+                return MobClick.getConfigParams("supportFooter") ?? "如果你觉得软件有用, 不妨..."
+            }
+            return super.tableView(tableView, titleForFooterInSection: section)
+        } else {
+            return nil
+        }
+    }
+    
+    func showSection(section: Int) -> Bool {
+        switch section {
+        case 1:
+            let showSupport = MobClick.getConfigParams("showSupport") ?? "false"
+            return showSupport == "true"
+        case 2:
+            return Util.loggedUserSid != nil
+        case 3:
+            return Util.loggedUserSid == nil
+        default:
+            return true
         }
     }
     
@@ -25,14 +65,6 @@ class MoreViewController: UITableViewController {
             cell.textLabel?.text = MobClick.getConfigParams("supportText") ?? "请作者喝杯咖啡"
         }
         return cell
-    }
-    
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        let title = super.tableView(tableView, titleForFooterInSection: section)
-        if section == 1 {
-            return MobClick.getConfigParams("supportFooter") ?? "如果你觉得软件有用, 不妨..."
-        }
-        return title
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

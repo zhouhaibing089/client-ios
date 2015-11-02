@@ -33,6 +33,7 @@
 		499708ED1BCF635A00424F5E /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499708EC1BCF635A00424F5E /* TaskViewController.swift */; };
 		499708EF1BCF63F500424F5E /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499708EE1BCF63F500424F5E /* NewTaskViewController.swift */; };
 		4998593D1BDB169C00C222E7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4998593C1BDB169C00C222E7 /* Task.swift */; };
+		49A976BB1BE73B02001300FB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A976BA1BE73B02001300FB /* LoginViewController.swift */; };
 		5177522D0A08272C32C53545 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FE39AB88BE9E71239939D4 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,7 @@
 		499708F41BCF68FD00424F5E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		499708F51BCF68FD00424F5E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		4998593C1BDB169C00C222E7 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		49A976BA1BE73B02001300FB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5622A60872CC93EF0187300C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +151,7 @@
 				498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */,
 				498BAC911BD0CE7400ABB357 /* NewWishViewController.swift */,
 				498BAC9B1BD0EA5300ABB357 /* MoreViewController.swift */,
+				49A976BA1BE73B02001300FB /* LoginViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				49953E021BDB316500B25EC8 /* WishHistory.swift in Sources */,
 				499708BF1BCF506E00424F5E /* AppDelegate.swift in Sources */,
 				49953E041BDB371400B25EC8 /* Bill.swift in Sources */,
+				49A976BB1BE73B02001300FB /* LoginViewController.swift in Sources */,
 				495EB5C71BD0A80800E0E829 /* BillViewController.swift in Sources */,
 				49953E001BDB2F6500B25EC8 /* TaskHistory.swift in Sources */,
 				498BAC9C1BD0EA5300ABB357 /* MoreViewController.swift in Sources */,
