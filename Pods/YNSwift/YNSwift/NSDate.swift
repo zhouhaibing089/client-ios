@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension NSDate {
-    func beginOfDay() -> NSDate {
+public extension NSDate {
+    public func beginOfDay() -> NSDate {
         let cal = NSCalendar.currentCalendar()
         let components = cal.components([NSCalendarUnit.Year, NSCalendarUnit.Month,
             NSCalendarUnit.Day, NSCalendarUnit.Hour,
@@ -20,7 +20,7 @@ extension NSDate {
         return cal.dateFromComponents(components)!
     }
     
-    func endOfDay() -> NSDate {
+    public func endOfDay() -> NSDate {
         let cal = NSCalendar.currentCalendar()
         let components = cal.components([NSCalendarUnit.Year, NSCalendarUnit.Month,
             NSCalendarUnit.Day, NSCalendarUnit.Hour,
@@ -31,7 +31,7 @@ extension NSDate {
         return cal.dateFromComponents(components)!
     }
     
-    func beginOfWeek() -> NSDate {
+    public func beginOfWeek() -> NSDate {
         let cal = NSCalendar.currentCalendar()
         let components = cal.components(NSCalendarUnit.Weekday, fromDate: self)
         let substract = NSDateComponents()
@@ -43,7 +43,7 @@ extension NSDate {
         return cal.dateByAddingComponents(substract, toDate: self.beginOfDay(), options: [])!
     }
     
-    func endOfWeek() -> NSDate {
+    public func endOfWeek() -> NSDate {
         let cal = NSCalendar.currentCalendar()
         let components = cal.components(NSCalendarUnit.Weekday, fromDate: self)
         let substract = NSDateComponents()

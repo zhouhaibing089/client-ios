@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		495EB5C31BCFDB8B00E0E829 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C21BCFDB8B00E0E829 /* NSDate.swift */; };
 		495EB5C71BD0A80800E0E829 /* BillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C61BD0A80800E0E829 /* BillViewController.swift */; };
 		495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */; };
 		49840DD11BCF9B61001F493D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD01BCF9B61001F493D /* Util.swift */; };
@@ -16,7 +15,6 @@
 		498BAC901BD0CDE600ABB357 /* WishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */; };
 		498BAC921BD0CE7400ABB357 /* NewWishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC911BD0CE7400ABB357 /* NewWishViewController.swift */; };
 		498BAC961BD0D49400ABB357 /* WishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC951BD0D49400ABB357 /* WishTableViewCell.swift */; };
-		498BAC9A1BD0E2C800ABB357 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC991BD0E2C800ABB357 /* UIColor.swift */; };
 		498BAC9C1BD0EA5300ABB357 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC9B1BD0EA5300ABB357 /* MoreViewController.swift */; };
 		49953DFC1BDB1F0400B25EC8 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49953DFB1BDB1F0400B25EC8 /* Table.swift */; };
 		49953DFE1BDB2D6900B25EC8 /* Wish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49953DFD1BDB2D6900B25EC8 /* Wish.swift */; };
@@ -57,7 +55,6 @@
 /* Begin PBXFileReference section */
 		116641E9AD5D4333FD531049 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		27FE39AB88BE9E71239939D4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		495EB5C21BCFDB8B00E0E829 /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
 		495EB5C61BD0A80800E0E829 /* BillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillViewController.swift; sourceTree = "<group>"; };
 		495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillItemTableViewCell.swift; sourceTree = "<group>"; };
 		49840DD01BCF9B61001F493D /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -66,7 +63,6 @@
 		498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishViewController.swift; sourceTree = "<group>"; };
 		498BAC911BD0CE7400ABB357 /* NewWishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewWishViewController.swift; sourceTree = "<group>"; };
 		498BAC951BD0D49400ABB357 /* WishTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishTableViewCell.swift; sourceTree = "<group>"; };
-		498BAC991BD0E2C800ABB357 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		498BAC9B1BD0EA5300ABB357 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		498BACA01BD1446900ABB357 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		49953DFB1BDB1F0400B25EC8 /* Table.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
@@ -123,19 +119,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		495EB5C11BCFDB7700E0E829 /* extension */ = {
-			isa = PBXGroup;
-			children = (
-				498BAC991BD0E2C800ABB357 /* UIColor.swift */,
-				495EB5C21BCFDB8B00E0E829 /* NSDate.swift */,
-			);
-			path = extension;
-			sourceTree = "<group>";
-		};
 		49840DD21BCF9B69001F493D /* util */ = {
 			isa = PBXGroup;
 			children = (
-				495EB5C11BCFDB7700E0E829 /* extension */,
 				49840DD01BCF9B61001F493D /* Util.swift */,
 				49840DD31BCF9D46001F493D /* ViewUtil.swift */,
 			);
@@ -450,7 +436,6 @@
 				495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */,
 				498BAC921BD0CE7400ABB357 /* NewWishViewController.swift in Sources */,
 				49840DD11BCF9B61001F493D /* Util.swift in Sources */,
-				495EB5C31BCFDB8B00E0E829 /* NSDate.swift in Sources */,
 				49953E021BDB316500B25EC8 /* WishHistory.swift in Sources */,
 				499708BF1BCF506E00424F5E /* AppDelegate.swift in Sources */,
 				49953E041BDB371400B25EC8 /* Bill.swift in Sources */,
@@ -461,7 +446,6 @@
 				49953DFE1BDB2D6900B25EC8 /* Wish.swift in Sources */,
 				4998593D1BDB169C00C222E7 /* Task.swift in Sources */,
 				49953DFC1BDB1F0400B25EC8 /* Table.swift in Sources */,
-				498BAC9A1BD0E2C800ABB357 /* UIColor.swift in Sources */,
 				499708EF1BCF63F500424F5E /* NewTaskViewController.swift in Sources */,
 				499708ED1BCF635A00424F5E /* TaskViewController.swift in Sources */,
 				498BAC901BD0CDE600ABB357 /* WishViewController.swift in Sources */,

@@ -1,0 +1,17 @@
+{
+  "name": "YNSwift",
+  "version": "0.1",
+  "summary": "A short description of YNSwift.",
+  "description": "A longer description of YNSwift in Markdown format.\n\n* Think: Why did you write this? What is the focus? What does it do?\n* CocoaPods will be using this to generate tags, and improve search results.\n* Try to keep it short, snappy and to the point.\n* Finally, don't worry about the indent, CocoaPods strips it!",
+  "homepage": "http://EXAMPLE/YNSwift",
+  "license": "MIT (example)",
+  "authors": {
+    "Yoncise": "yoncise@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/Yoncise/YNSwift.git",
+    "tag": "0.1"
+  },
+  "source_files": "YNSwift/**/*.{swift}",
+  "exclude_files": "Classes/Exclude"
+}

@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import YNSwift
 
 enum TaskType: Int {
     case Daily = 0

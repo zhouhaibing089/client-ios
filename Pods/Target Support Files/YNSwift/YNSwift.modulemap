@@ -1,0 +1,6 @@
+framework module YNSwift {
+  umbrella header "YNSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
