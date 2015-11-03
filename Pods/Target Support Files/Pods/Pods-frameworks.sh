@@ -52,6 +52,7 @@ code_sign_if_enabled() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework 'Pods/Alamofire.framework'
   install_framework 'Pods/CRToast.framework'
   install_framework 'Pods/MBProgressHUD.framework'
   install_framework 'Pods/Realm.framework'
@@ -60,9 +61,11 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods/RxCocoa.framework'
   install_framework 'Pods/RxSwift.framework'
   install_framework 'Pods/SQLite.framework'
+  install_framework 'Pods/SwiftyJSON.framework'
   install_framework 'Pods/YNSwift.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework 'Pods/Alamofire.framework'
   install_framework 'Pods/CRToast.framework'
   install_framework 'Pods/MBProgressHUD.framework'
   install_framework 'Pods/Realm.framework'
@@ -71,5 +74,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods/RxCocoa.framework'
   install_framework 'Pods/RxSwift.framework'
   install_framework 'Pods/SQLite.framework'
+  install_framework 'Pods/SwiftyJSON.framework'
   install_framework 'Pods/YNSwift.framework'
 fi

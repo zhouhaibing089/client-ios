@@ -11,7 +11,7 @@ import MBProgressHUD
 
 public extension MBProgressHUD {
     public func switchToSuccess(duration duration: NSTimeInterval?, labelText: String? = nil, completionBlock: (() -> Void)? = nil) {
-        self.customView = UIImageView(image: UIImage(named: "37x-Checkmark"))
+        self.customView = UIImageView(image: UIImage(named: "37x-Checkmark", inBundle: NSBundle(forClass: re.self), compatibleWithTraitCollection: nil))
         self.mode = MBProgressHUDMode.CustomView
         self.labelText = labelText
         self.detailsLabelText = nil

@@ -489,7 +489,7 @@
         <!--注册-->
         <scene sceneID="4Qp-j5-QVH">
             <objects>
-                <tableViewController id="SKB-be-TJ9" sceneMemberID="viewController">
+                <tableViewController id="SKB-be-TJ9" customClass="RegisterViewController" customModule="PlayTask" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Ir7-AY-dy7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -512,6 +512,9 @@
                                             <integer key="value" value="4"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="register:" destination="SKB-be-TJ9" eventType="touchUpInside" id="ezN-Yi-eLZ"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <constraints>
@@ -649,10 +652,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="注册" id="SE6-pJ-j8x"/>
+                    <connections>
+                        <outlet property="accountTextField" destination="GQc-5h-48X" id="2cS-NX-16e"/>
+                        <outlet property="confirmPasswordTextField" destination="432-Ti-4Zl" id="HLk-r4-kDh"/>
+                        <outlet property="emailTextField" destination="y6B-Lc-Yqm" id="q9H-FU-sm1"/>
+                        <outlet property="passwordTextField" destination="f8C-hC-Hj6" id="MqO-hk-IlJ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cVl-BL-MB0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3757" y="-1088"/>
+            <point key="canvasLocation" x="3635" y="-1127"/>
         </scene>
         <!--新建欲望-->
         <scene sceneID="pdV-qi-aYs">
