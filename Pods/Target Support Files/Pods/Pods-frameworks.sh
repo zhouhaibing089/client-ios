@@ -53,6 +53,7 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods/CRToast.framework'
+  install_framework 'Pods/MBProgressHUD.framework'
   install_framework 'Pods/Realm.framework'
   install_framework 'Pods/RealmSwift.framework'
   install_framework 'Pods/RxBlocking.framework'
@@ -63,6 +64,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods/CRToast.framework'
+  install_framework 'Pods/MBProgressHUD.framework'
   install_framework 'Pods/Realm.framework'
   install_framework 'Pods/RealmSwift.framework'
   install_framework 'Pods/RxBlocking.framework'

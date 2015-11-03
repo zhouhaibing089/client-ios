@@ -13,5 +13,11 @@
     "tag": "0.1"
   },
   "source_files": "YNSwift/**/*.{swift}",
-  "exclude_files": "Classes/Exclude"
+  "exclude_files": "Classes/Exclude",
+  "resources": "YNSwift/Resources/**/*.png",
+  "dependencies": {
+    "MBProgressHUD": [
+      "~> 0.9.1"
+    ]
+  }
 }
