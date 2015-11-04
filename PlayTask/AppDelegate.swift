@@ -122,34 +122,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let realm = try! Realm()
+        // TODO: 新版本上线后数据前几这里要配 version
         
-        if realm.objects(Task).count == 0 {
-            // 迁移任务数据表
-            for task in db.prepare(TaskSQLite.tasks) {
-                let t = Task()
-                t.title = task[TaskSQLite.title]
-                t.score = Int(task[TaskSQLite.score])
-                t.type = Int(task[TaskSQLite.type])
-                t.deleted = task[SQL.deleted]
-                t.createdTime = NSDate(timeIntervalSince1970: Double(task[SQL.createdTime]))
-                t.modifiedTime = NSDate(timeIntervalSince1970: Double(task[SQL.modifiedTime]))
-                t.loop = 1
-                t.id = NSUUID().UUIDString
+        try! realm.write {
+            realm.deleteAll()
+        }
+        
+        // 迁移任务数据表
+        for task in db.prepare(TaskSQLite.tasks) {
+            let t = Task()
+            t.title = task[TaskSQLite.title]
+            t.score = Int(task[TaskSQLite.score])
+            t.type = Int(task[TaskSQLite.type])
+            t.deleted = task[SQL.deleted]
+            t.createdTime = NSDate(timeIntervalSince1970: Double(task[SQL.createdTime]))
+            t.modifiedTime = NSDate(timeIntervalSince1970: Double(task[SQL.modifiedTime]))
+            t.loop = 1
+            t.id = NSUUID().UUIDString
+            try! realm.write {
+                realm.add(t)
+            }
+            for history in db.prepare(TaskHistorySQLite.histories.filter(TaskHistorySQLite.taskId == task[TaskSQLite.id])) {
+                let h = TaskHistory()
+                h.task = t
+                h.completionTime = NSDate(timeIntervalSince1970: Double(history[TaskHistorySQLite.completionTime]))
+                h.deleted = history[SQL.deleted]
+                h.createdTime = NSDate(timeIntervalSince1970: Double(history[SQL.createdTime]))
+                h.modifiedTime = NSDate(timeIntervalSince1970: Double(history[SQL.modifiedTime]))
+                h.canceled = h.deleted
+                h.id = NSUUID().UUIDString
                 try! realm.write {
-                    realm.add(t)
-                }
-                for history in db.prepare(TaskHistorySQLite.histories.filter(TaskHistorySQLite.taskId == task[TaskSQLite.id])) {
-                    let h = TaskHistory()
-                    h.task = t
-                    h.completionTime = NSDate(timeIntervalSince1970: Double(history[TaskHistorySQLite.completionTime]))
-                    h.deleted = history[SQL.deleted]
-                    h.createdTime = NSDate(timeIntervalSince1970: Double(history[SQL.createdTime]))
-                    h.modifiedTime = NSDate(timeIntervalSince1970: Double(history[SQL.modifiedTime]))
-                    h.canceled = h.deleted
-                    h.id = NSUUID().UUIDString
-                    try! realm.write {
-                        realm.add(h)
-                    }
+                    realm.add(h)
                 }
             }
         }
