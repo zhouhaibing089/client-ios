@@ -118,34 +118,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             static let histories = SQLite.Table("wish_histories")
             static let id = Expression<Int64>("id")
             static let wishId = Expression<Int64>("wish_id")
+            static let createdTime = Expression<Int64>("created_time")
         }
         
         let realm = try! Realm()
-        // 迁移任务数据表
-        for task in db.prepare(TaskSQLite.tasks) {
-            let t = Task()
-            t.title = task[TaskSQLite.title]
-            t.score = Int(task[TaskSQLite.score])
-            t.type = Int(task[TaskSQLite.type])
-            t.deleted = task[SQL.deleted]
-            t.createdTime = NSDate(timeIntervalSince1970: Double(task[SQL.createdTime]))
-            t.modifiedTime = NSDate(timeIntervalSince1970: Double(task[SQL.modifiedTime]))
-            t.loop = 1
-            t.id = NSUUID().UUIDString
-            try! realm.write {
-                realm.add(t)
-            }
-            for history in db.prepare(TaskHistorySQLite.histories.filter(TaskHistorySQLite.taskId == task[TaskSQLite.id])) {
-                let h = TaskHistory()
-                h.task = t
-                h.completionTime = NSDate(timeIntervalSince1970: Double(history[TaskHistorySQLite.completionTime]))
-                h.deleted = history[SQL.deleted]
-                h.createdTime = NSDate(timeIntervalSince1970: Double(history[SQL.createdTime]))
-                h.modifiedTime = NSDate(timeIntervalSince1970: Double(history[SQL.modifiedTime]))
-                h.canceled = h.deleted
-                h.id = NSUUID().UUIDString
+        
+        if realm.objects(Task).count == 0 {
+            // 迁移任务数据表
+            for task in db.prepare(TaskSQLite.tasks) {
+                let t = Task()
+                t.title = task[TaskSQLite.title]
+                t.score = Int(task[TaskSQLite.score])
+                t.type = Int(task[TaskSQLite.type])
+                t.deleted = task[SQL.deleted]
+                t.createdTime = NSDate(timeIntervalSince1970: Double(task[SQL.createdTime]))
+                t.modifiedTime = NSDate(timeIntervalSince1970: Double(task[SQL.modifiedTime]))
+                t.loop = 1
+                t.id = NSUUID().UUIDString
                 try! realm.write {
-                    realm.add(h)
+                    realm.add(t)
+                }
+                for history in db.prepare(TaskHistorySQLite.histories.filter(TaskHistorySQLite.taskId == task[TaskSQLite.id])) {
+                    let h = TaskHistory()
+                    h.task = t
+                    h.completionTime = NSDate(timeIntervalSince1970: Double(history[TaskHistorySQLite.completionTime]))
+                    h.deleted = history[SQL.deleted]
+                    h.createdTime = NSDate(timeIntervalSince1970: Double(history[SQL.createdTime]))
+                    h.modifiedTime = NSDate(timeIntervalSince1970: Double(history[SQL.modifiedTime]))
+                    h.canceled = h.deleted
+                    h.id = NSUUID().UUIDString
+                    try! realm.write {
+                        realm.add(h)
+                    }
                 }
             }
         }
@@ -166,7 +170,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let h = WishHistory()
                 h.wish = w
                 h.deleted = history[SQL.deleted]
-                h.createdTime = NSDate(timeIntervalSince1970: Double(history[SQL.createdTime]))
+                h.createdTime = NSDate(timeIntervalSince1970: Double(history[WishHistorySQLite.createdTime]))
                 h.modifiedTime = NSDate(timeIntervalSince1970: Double(history[SQL.modifiedTime]))
                 h.id = NSUUID().UUIDString
                 try! realm.write {
