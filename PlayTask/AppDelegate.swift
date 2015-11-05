@@ -118,9 +118,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             static let histories = SQLite.Table("wish_histories")
             static let id = Expression<Int64>("id")
             static let wishId = Expression<Int64>("wish_id")
+            static let createdTime = Expression<Int64>("created_time")
         }
         
         let realm = try! Realm()
+        // TODO: 新版本上线后数据前几这里要配 version
+        
+        try! realm.write {
+            realm.deleteAll()
+        }
+        
         // 迁移任务数据表
         for task in db.prepare(TaskSQLite.tasks) {
             let t = Task()
@@ -166,7 +173,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let h = WishHistory()
                 h.wish = w
                 h.deleted = history[SQL.deleted]
-                h.createdTime = NSDate(timeIntervalSince1970: Double(history[SQL.createdTime]))
+                h.createdTime = NSDate(timeIntervalSince1970: Double(history[WishHistorySQLite.createdTime]))
                 h.modifiedTime = NSDate(timeIntervalSince1970: Double(history[SQL.modifiedTime]))
                 h.id = NSUUID().UUIDString
                 try! realm.write {
