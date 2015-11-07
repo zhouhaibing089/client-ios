@@ -39,10 +39,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MobClick.updateOnlineConfig()
         
         // 通知
-        
         let mySettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        
         UIApplication.sharedApplication().registerUserNotificationSettings(mySettings)
+        
+        // Migrtion
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(
+            schemaVersion: 1,
+            migrationBlock: { migration, oldSchemaVersion in
+                if (oldSchemaVersion < 1) {
+                }
+        })
+        
+        if let sessionId = Util.sessionId {
+            API.loginWithSessionId(sessionId).subscribeError({ error in
+                if let e = error as? APIError {
+                    switch e {
+                    case.Custom(_, let info, _):
+                        Util.sessionId = nil
+                        CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
+                    default:
+                        break
+                    }
+                }
+            })
+        }
         
         return true
     }

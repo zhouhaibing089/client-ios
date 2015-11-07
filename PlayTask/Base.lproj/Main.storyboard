@@ -661,7 +661,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cVl-BL-MB0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3635" y="-1127"/>
+            <point key="canvasLocation" x="3757" y="-1088"/>
         </scene>
         <!--新建欲望-->
         <scene sceneID="pdV-qi-aYs">
@@ -986,6 +986,9 @@
                                             <integer key="value" value="4"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="login:" destination="E02-op-Bjo" eventType="touchUpInside" id="NKs-Eg-f5g"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbB-ws-njD">
                                     <rect key="frame" x="512" y="50" width="68" height="30"/>
@@ -1084,6 +1087,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="accountTextField" destination="aam-w0-4JB" id="Bhd-97-eGo"/>
+                        <outlet property="passwordTextField" destination="GUB-Dk-krV" id="rgu-k7-snx"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fDK-6d-ga5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

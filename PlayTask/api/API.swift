@@ -42,7 +42,7 @@ enum APIError: ErrorType {
 }
 
 extension Request {
-    func resp() -> Observable<JSON> {
+    func resp(suppressError: Bool = false) -> Observable<JSON> {
         return create { observer in
             self.responseJSON { response in
                 switch response.result {
@@ -50,7 +50,7 @@ extension Request {
                     let json = JSON(value)
                     let status = json["status"].intValue
                     if status < 10 { // 成功
-                        observer.onNext(json)
+                        observer.onNext(json["data"])
                         observer.onCompleted()
                     } else {
                         if status < 100 { // 服务器错误
@@ -64,8 +64,14 @@ extension Request {
                     break
                 case .Failure(let error):
                     if error.code == -1001 { //  网络连接超时
+                        if !suppressError {
+                            CRToastManager.showNotificationWithMessage("网络连接超时", completionBlock: nil)
+                        }
                         observer.onError(NetworkError.Timeout)
                     } else { // 未知错误
+                        if !suppressError {
+                            CRToastManager.showNotificationWithMessage("网络连接错误 \(error.code)", completionBlock: nil)
+                        }
                         observer.onError(NetworkError.Unknown(error.code))
                     }
                     break

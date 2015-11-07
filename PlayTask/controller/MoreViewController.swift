@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MBProgressHUD
+import YNSwift
 
 class MoreViewController: UITableViewController {
     
@@ -51,9 +53,9 @@ class MoreViewController: UITableViewController {
             let showSupport = MobClick.getConfigParams("showSupport") ?? "false"
             return showSupport == "true"
         case 2:
-            return Util.loggedUserSid != nil
+            return Util.loggedUser != nil
         case 3:
-            return Util.loggedUserSid == nil
+            return Util.loggedUser == nil
         default:
             return true
         }
@@ -86,10 +88,29 @@ class MoreViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 let supportAlertTitle = MobClick.getConfigParams("supportAlertTitle") ?? "支付宝帐号"
-                let supportAlertMessage = MobClick.getConfigParams("supportAlertMessage") ?? "yoncise@qq.com"
+                let supportAlertMessage = MobClick.getConfigParams("supportAlertMessage") ?? "playtask@qq.com"
                 let alert = UIAlertController(title: supportAlertTitle, message: supportAlertMessage, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "好", style: UIAlertActionStyle.Cancel, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
+                break
+            default:
+                break
+            }
+        } else if indexPath.section == 2 {
+            switch indexPath.row {
+            case 1:
+                let hud = MBProgressHUD.show()
+                API.logoutWithSessionId(Util.sessionId!).subscribe { event in
+                    switch event {
+                    case .Next(_):
+                        self.tableView.reloadData()
+                        hud.switchToSuccess(duration: 1, labelText: "退出成功")
+                        break
+                    default:
+                        hud.hide(true)
+                        break
+                    }
+                }
                 break
             default:
                 break
@@ -100,6 +121,7 @@ class MoreViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.tableView.reloadData()
         MobClick.beginLogPageView("more")
     }
     

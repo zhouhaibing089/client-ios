@@ -9,6 +9,7 @@
 import UIKit
 import YNSwift
 import CRToast
+import RxSwift
 import MBProgressHUD
 
 class RegisterViewController: UITableViewController {
@@ -20,7 +21,7 @@ class RegisterViewController: UITableViewController {
 
     @IBAction func register(sender: UIButton) {
         let account = self.accountTextField.text!
-        let email = self.accountTextField.text!
+        let email = self.emailTextField.text!
         let password = self.passwordTextField.text!
         let confirmPassword = self.confirmPasswordTextField.text!
         if account == "" {
@@ -39,12 +40,31 @@ class RegisterViewController: UITableViewController {
             CRToastManager.showNotificationWithMessage("两次输入的密码不匹配", completionBlock: nil)
             return
         }
-        API.registerWithAccount(account, email: email, password: password).subscribe { event in
+        let hud = MBProgressHUD.show()
+        
+        // Xcode bug, 直接将这个 closure 传给 flatMap 函数, 编译不通过报错
+        let login: (User) -> Observable<Bool> = { user in
+            hud.switchToSuccess(duration: nil, labelText: "注册成功")
+            return API.loginWithAccount(account, password: password)
+        }
+        API.registerWithAccount(account, email: email, password: password).flatMap(login).subscribe { event in
             switch event {
-            case .Next(let user):
+            case .Next(_):
+                hud.hide(true)
+                self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
                 break
             case .Error(let error):
-                CRToastManager.showNotificationWithMessage("error", completionBlock: nil)
+                hud.hide(true)
+                guard let e = error as? APIError else {
+                    break
+                }
+                switch e {
+                case .Custom(_, let info, _):
+                    CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
+                    break
+                default:
+                    break
+                }
                 break
             default:
                 break

@@ -11,6 +11,7 @@ import RealmSwift
 
 class Table: Object {
     dynamic var id = ""
+    let sid = RealmOptional<Int>()
     dynamic var deleted = false
     dynamic var createdTime: NSDate!
     dynamic var modifiedTime: NSDate!
