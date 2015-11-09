@@ -10,6 +10,6 @@ import Foundation
 
 class Config {
     class API {
-        static let ROOT = "http://api.yon.im/playtask/v1"
+        static let ROOT = "http://localhost:8080/playtask/v1"
     }
 }

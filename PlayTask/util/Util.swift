@@ -26,10 +26,10 @@ class Util {
         }
     }
     
-    static var lastLoggedUserSid: Int {
+    static var lastLoggedUserSid: Int? {
         get {
             let userDefaults = NSUserDefaults.standardUserDefaults()
-            return userDefaults.integerForKey("last_logged_user_sid")
+            return userDefaults.objectForKey("last_logged_user_sid") as? Int
         }
         set {
             let userDefaults = NSUserDefaults.standardUserDefaults()
@@ -38,13 +38,16 @@ class Util {
         }
     }
     
-    static var loggedUser: User? = User.getUserWithSid(Util.lastLoggedUserSid) {
+    static var loggedUser: User? = User.getBySid(Util.lastLoggedUserSid ?? -1) {
         didSet {
             if let sid = Util.loggedUser?.sid.value {
                 Util.lastLoggedUserSid = sid
+            } else {
+                Util.lastLoggedUserSid = nil
             }
         }
     }
+    
     static var currentUser: User {
         return Util.loggedUser ?? User.getInstance()
     }

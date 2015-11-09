@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 import YNSwift
+import RxSwift
 
 enum TaskType: Int {
     case Daily = 0
@@ -16,13 +17,14 @@ enum TaskType: Int {
     case Normal = 2
 }
 
-class Task: Table {
+class Task: Table, Synchronizable {
     dynamic var title = ""
     dynamic var score = 0
     dynamic var type = 0
     dynamic var loop = 1
     dynamic var rank = 0
     dynamic var pinned = false
+    let userSid = RealmOptional<Int>()
     
     convenience init(title: String, score: Int, type: TaskType, loop: Int) {
         self.init()
@@ -151,5 +153,51 @@ class Task: Table {
         let application = UIApplication.sharedApplication()
         application.cancelAllLocalNotifications()
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+    }
+    
+    func push() {
+        guard let userSid = Util.loggedUser?.sid.value else {
+            return
+        }
+        if self.userSid.value == nil {
+            self.update(["userSid": userSid])
+        }
+        var observable: Observable<Task>!
+        if self.sid.value == nil {
+            observable = API.createTask(self)
+        } else {
+            observable = API.updateTask(self)
+        }
+        observable.subscribeNext { t in
+            t.update(["synchronizedTime": NSDate()])
+        }
+    }
+    
+    class func push() {
+        guard let userSid = Util.loggedUser?.sid.value else {
+            return
+        }
+        let realm = try! Realm()
+        let pending = realm.objects(Task).filter("(userSid == %@ OR userSid == nil) AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid)
+        pending.asObservable().subscribeNext { t in
+            t.push()
+        }
+    }
+    
+    class func pull() {
+        guard let loggedUser = Util.loggedUser else {
+            return
+        }
+        API.getTasks(loggedUser, after: loggedUser.taskPullTime ?? NSDate(timeIntervalSince1970: 0)).subscribeNext { tasks in
+            if tasks.count == 0 {
+                return
+            }
+            let now = NSDate()
+            for t in tasks {
+                t.update(["synchronizedTime": now])
+            }
+            loggedUser.update(["taskPullTime": tasks.last!.modifiedTime])
+            Task.pull()
+        }
     }
 }

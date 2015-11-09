@@ -14,6 +14,12 @@ class User: Table {
     dynamic var email = ""
     dynamic var score = 0
     
+    dynamic var taskPullTime: NSDate!
+    dynamic var taskHistoryPullTime: NSDate!
+    dynamic var wishPullTime: NSDate!
+    dynamic var wishHistoryPullTime: NSDate!
+
+    
     static var instance: User?
     
     convenience init(account: String, email: String, sid: Int) {
@@ -25,19 +31,13 @@ class User: Table {
     
     class func getInstance() -> User {
         if User.instance == nil {
-            User.instance = User.getUserWithSid(0)
+            let realm = try! Realm()
+            User.instance = realm.objects(User).filter("sid == nil").first
             if User.instance == nil {
                 User.instance = User()
-                // sid 为 0 表示是游客
-                User.instance?.sid.value = 0
                 User.instance?.save()
             }
         }
         return User.instance!
-    }
-    
-    class func getUserWithSid(sid: Int) -> User? {
-        let realm = try! Realm()
-        return realm.objects(User).filter("sid == %@", sid).first
     }
 }

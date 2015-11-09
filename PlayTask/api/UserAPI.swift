@@ -10,19 +10,19 @@ import Foundation
 import RxSwift
 
 extension API {
-    static func registerWithAccount(account: String, email: String, password: String) -> Observable<User> {
+    class func registerWithAccount(account: String, email: String, password: String) -> Observable<User> {
         return API.req(.POST, "/users", parameters: ["account" : account,
-            "email": email, "password": password]).resp().map { json in
+            "email": email, "password": password]).resp(false).map { json in
             let user = User(account: account, email: email, sid: json["sid"].intValue)
             user.save()
             return user
         }
     }
     
-    static func loginWithAccount(account: String, password: String) -> Observable<Bool> {
-        return API.req(.POST, "/sessions", parameters: ["account": account, "password": password]).resp().map { json in
+    class func loginWithAccount(account: String, password: String) -> Observable<Bool> {
+        return API.req(.POST, "/sessions", parameters: ["account": account, "password": password]).resp(false).map { json in
             let sid = json["user"]["id"].intValue
-            if let user = User.getUserWithSid(sid) {
+            if let user = User.getBySid(sid) {
                 Util.loggedUser = user
             } else {
                 let user = User(account: json["account"].stringValue, email: json["email"].stringValue, sid: sid)
@@ -34,10 +34,10 @@ extension API {
         }
     }
     
-    static func loginWithSessionId(sessionId: String) -> Observable<Bool> {
-        return API.req(.GET, "/sessions/\(sessionId)").resp(true).map { json in
+    class func loginWithSessionId(sessionId: String) -> Observable<Bool> {
+        return API.req(.GET, "/sessions/\(sessionId)").resp().map { json in
             let sid = json["user"]["id"].intValue
-            if let user = User.getUserWithSid(sid) {
+            if let user = User.getBySid(sid) {
                 Util.loggedUser = user
             } else {
                 let user = User(account: json["account"].stringValue, email: json["email"].stringValue, sid: sid)
@@ -49,8 +49,8 @@ extension API {
         }
     }
     
-    static func logoutWithSessionId(sessionId: String) -> Observable<Bool> {
-        return API.req(.DELETE, "/sessions/\(sessionId)").resp().map { _ in
+    class func logoutWithSessionId(sessionId: String) -> Observable<Bool> {
+        return API.req(.DELETE, "/sessions/\(sessionId)").resp(false).map { _ in
             Util.loggedUser = nil
             Util.sessionId = nil
             return true

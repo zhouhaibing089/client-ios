@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var db: Connection!
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         self.sqlite2Realm()
@@ -56,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     switch e {
                     case.Custom(_, let info, _):
                         Util.sessionId = nil
+                        Util.loggedUser = nil
                         CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
                     default:
                         break
@@ -81,10 +81,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        Task.push()
+        Task.pull()
     }
 
     func applicationWillTerminate(application: UIApplication) {

@@ -11,10 +11,11 @@ import RealmSwift
 
 class Table: Object {
     dynamic var id = ""
-    let sid = RealmOptional<Int>()
     dynamic var deleted = false
     dynamic var createdTime: NSDate!
     dynamic var modifiedTime: NSDate!
+    let sid = RealmOptional<Int>()
+    dynamic var synchronizedTime: NSDate!
     
     override static func primaryKey() -> String? {
         return "id"
@@ -24,9 +25,12 @@ class Table: Object {
         let realm = try! Realm()
         try! realm.write {
             self.id = NSUUID().UUIDString
-            self.createdTime = NSDate()
-            self.modifiedTime = self.createdTime
+            self.createdTime = self.createdTime ?? NSDate()
+            self.modifiedTime = self.modifiedTime ?? self.createdTime
             realm.add(self)
+        }
+        if let sync = self as? Synchronizable {
+            sync.push()
         }
     }
     
@@ -34,7 +38,11 @@ class Table: Object {
         let realm = try! Realm()
         try! realm.write {
             value["id"] = self.id
+            value["modifiedTime"] = NSDate()
             realm.create(self.dynamicType.self, value: value, update: true)
+        }
+        if let sync = self as? Synchronizable {
+            sync.push()
         }
     }
     
@@ -43,5 +51,11 @@ class Table: Object {
         try! realm.write {
             self.deleted = true
         }
+    }
+    
+    class func getBySid(sid: Int) -> Self? {
+        let realm = try! Realm()
+        let r = realm.objects(self).filter("sid == %@", sid).first
+        return r
     }
 }

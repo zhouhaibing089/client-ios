@@ -23,7 +23,7 @@ class API {
     class func req(method: Alamofire.Method, _ URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL) -> Request {
         return API.manager.request(
             method,
-            "\(Config.API.ROOT)/\(URLString)",
+            "\(Config.API.ROOT)\(URLString)",
             parameters: parameters,
             encoding: encoding
         )
@@ -42,12 +42,13 @@ enum APIError: ErrorType {
 }
 
 extension Request {
-    func resp(suppressError: Bool = false) -> Observable<JSON> {
+    func resp(suppressError: Bool = true) -> Observable<JSON> {
         return create { observer in
             self.responseJSON { response in
                 switch response.result {
                 case .Success(let value):
                     let json = JSON(value)
+                    print(json)
                     let status = json["status"].intValue
                     if status < 10 { // 成功
                         observer.onNext(json["data"])
