@@ -168,9 +168,7 @@ class Task: Table, Synchronizable {
         } else {
             observable = API.updateTask(self)
         }
-        observable.subscribeNext { t in
-            t.update(["synchronizedTime": NSDate()])
-        }
+        observable.subscribeCompleted {}
     }
     
     class func push() {
@@ -179,8 +177,8 @@ class Task: Table, Synchronizable {
         }
         let realm = try! Realm()
         let pending = realm.objects(Task).filter("(userSid == %@ OR userSid == nil) AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid)
-        pending.asObservable().subscribeNext { t in
-            t.push()
+        pending.asObservable().subscribeNext { p in
+            p.push()
         }
     }
     
@@ -191,10 +189,6 @@ class Task: Table, Synchronizable {
         API.getTasks(loggedUser, after: loggedUser.taskPullTime ?? NSDate(timeIntervalSince1970: 0)).subscribeNext { tasks in
             if tasks.count == 0 {
                 return
-            }
-            let now = NSDate()
-            for t in tasks {
-                t.update(["synchronizedTime": now])
             }
             loggedUser.update(["taskPullTime": tasks.last!.modifiedTime])
             Task.pull()
