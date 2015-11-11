@@ -11,7 +11,7 @@ import RealmSwift
 import SwiftyJSON
 import RxSwift
 
-class Table: Object, Synchronizable {
+class Table: Object {
     dynamic var id = ""
     dynamic var deleted = false
     dynamic var createdTime: NSDate!

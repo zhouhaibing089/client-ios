@@ -86,11 +86,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        Task.push().concat(Task.pull()).concat(TaskHistory.push()).concat(TaskHistory.pull()).subscribeCompleted {}
+        self.synchronize()
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func synchronize() {
+        Task.push().concat(Task.pull()).concat(TaskHistory.push()).concat(TaskHistory.pull())
+            .concat(Wish.push()).concat(Wish.pull()).concat(WishHistory.push()).concat(WishHistory.pull())
+            .subscribeCompleted {}
     }
 
 

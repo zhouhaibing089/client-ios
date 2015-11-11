@@ -12,7 +12,8 @@ import SwiftyJSON
 
 extension API {
     class func createTask(task: Task) -> Observable<Task> {
-        return API.req(.POST, "/users/\(task.userSid.value!)/tasks", parameters: ["title": task.title,
+        return API.req(.POST, "/users/\(task.userSid.value!)/tasks", parameters: [
+            "title": task.title,
             "score": task.score,
             "type": task.type,
             "loop": task.loop,
@@ -21,7 +22,7 @@ extension API {
             
             "deleted": task.deleted ? "true" : "false",
             "modified_time": task.modifiedTime.timeIntervalSince1970 * 1000,
-            "created_time": task.createdTime.timeIntervalSince1970 * 1000,
+            "created_time": task.createdTime.timeIntervalSince1970 * 1000
             ]).resp().map { json in
             task.update(json: json)
             return task
@@ -29,7 +30,8 @@ extension API {
     }
     
     class func updateTask(task: Task) -> Observable<Task> {
-        return API.req(.PUT, "/tasks/\(task.sid.value!)", parameters: ["rank": task.rank,
+        return API.req(.PUT, "/tasks/\(task.sid.value!)", parameters: [
+            "rank": task.rank,
             "pinned": task.pinned ? "true" : "false",
             
             "modified_time": task.modifiedTime.timeIntervalSince1970 * 1000,
@@ -41,7 +43,9 @@ extension API {
     }
     
     class func getTasks(user: User, after: NSDate) -> Observable<[Task]> {
-        return API.req(.GET, "/users/\(user.sid.value!)/tasks", parameters: ["after": after.timeIntervalSince1970 * 1000]).resp().map { json in
+        return API.req(.GET, "/users/\(user.sid.value!)/tasks", parameters: [
+            "after": after.timeIntervalSince1970 * 1000
+            ]).resp().map { json in
             var tasks = [Task]()
             for (_, subJson) : (String, JSON) in json {
                 if let t = Task.getBySid(subJson["id"].intValue) { // update
@@ -96,7 +100,9 @@ extension API {
     }
     
     class func getTaskHistories(user: User, after: NSDate) -> Observable<[TaskHistory]> {
-        return API.req(.GET, "/users/\(user.sid.value!)/task_histories", parameters: ["after": after.timeIntervalSince1970 * 1000]).resp().map { json in
+        return API.req(.GET, "/users/\(user.sid.value!)/task_histories", parameters: [
+            "after": after.timeIntervalSince1970 * 1000
+            ]).resp().map { json in
             var taskHistories = [TaskHistory]()
             for (_, subJson) : (String, JSON) in json {
                 if let th = TaskHistory.getBySid(subJson["id"].intValue) {

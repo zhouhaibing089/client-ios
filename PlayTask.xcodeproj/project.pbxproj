@@ -36,7 +36,7 @@
 		49C8D3D41BE8BE1000E8EBF5 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D3D31BE8BE1000E8EBF5 /* Config.swift */; };
 		49C8D3D61BE8F0D800E8EBF5 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D3D51BE8F0D800E8EBF5 /* UserAPI.swift */; };
 		49C8D3DA1BEF6DE700E8EBF5 /* TaskAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D3D91BEF6DE700E8EBF5 /* TaskAPI.swift */; };
-		49D321311BF25F4C00A6E0A7 /* Synchronizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D321301BF25F4C00A6E0A7 /* Synchronizable.swift */; };
+		49D321331BF35DFA00A6E0A7 /* WishAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D321321BF35DFA00A6E0A7 /* WishAPI.swift */; };
 		5177522D0A08272C32C53545 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FE39AB88BE9E71239939D4 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -99,7 +99,7 @@
 		49C8D3D31BE8BE1000E8EBF5 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		49C8D3D51BE8F0D800E8EBF5 /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		49C8D3D91BEF6DE700E8EBF5 /* TaskAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAPI.swift; sourceTree = "<group>"; };
-		49D321301BF25F4C00A6E0A7 /* Synchronizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synchronizable.swift; sourceTree = "<group>"; };
+		49D321321BF35DFA00A6E0A7 /* WishAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishAPI.swift; sourceTree = "<group>"; };
 		5622A60872CC93EF0187300C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,7 +162,6 @@
 				49953E011BDB316500B25EC8 /* WishHistory.swift */,
 				49953E031BDB371400B25EC8 /* Bill.swift */,
 				49953E051BDC67D900B25EC8 /* User.swift */,
-				49D321301BF25F4C00A6E0A7 /* Synchronizable.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -250,6 +249,7 @@
 				49C8D3D11BE8ACC400E8EBF5 /* API.swift */,
 				49C8D3D51BE8F0D800E8EBF5 /* UserAPI.swift */,
 				49C8D3D91BEF6DE700E8EBF5 /* TaskAPI.swift */,
+				49D321321BF35DFA00A6E0A7 /* WishAPI.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -470,8 +470,8 @@
 				498BAC9C1BD0EA5300ABB357 /* MoreViewController.swift in Sources */,
 				49C8D3D21BE8ACC400E8EBF5 /* API.swift in Sources */,
 				49953DFE1BDB2D6900B25EC8 /* Wish.swift in Sources */,
+				49D321331BF35DFA00A6E0A7 /* WishAPI.swift in Sources */,
 				49C8D3D41BE8BE1000E8EBF5 /* Config.swift in Sources */,
-				49D321311BF25F4C00A6E0A7 /* Synchronizable.swift in Sources */,
 				4998593D1BDB169C00C222E7 /* Task.swift in Sources */,
 				49953DFC1BDB1F0400B25EC8 /* Table.swift in Sources */,
 				499708EF1BCF63F500424F5E /* NewTaskViewController.swift in Sources */,
