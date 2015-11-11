@@ -9,8 +9,9 @@
 import Foundation
 import RealmSwift
 import SwiftyJSON
+import RxSwift
 
-class Table: Object {
+class Table: Object, Synchronizable {
     dynamic var id = ""
     dynamic var deleted = false
     dynamic var createdTime: NSDate!
@@ -47,29 +48,30 @@ class Table: Object {
         try! realm.write {
             value["id"] = self.id
             value["modifiedTime"] = value["modifiedTime"] ?? NSDate()
-            realm.create(self.dynamicType.self, value: value, update: true)
+            realm.create(self.dynamicType, value: value, update: true)
         }
         self.sync()
     }
     
-    func update(json json: JSON) {
-        let realm = try! Realm()
-        try! realm.write {
-            self.sid.value = json["id"].intValue
-            self.modifiedTime = NSDate(timeIntervalSince1970: json["modified_time"].doubleValue / 1000)
-            self.deleted = json["deleted"].boolValue
-            self.synchronizedTime = NSDate()
-        }
+    func update(json json: JSON, var value: [String: AnyObject] = [String: AnyObject]()) {
+        value["sid"] = json["id"].intValue
+        value["modifiedTime"] = NSDate(timeIntervalSince1970: json["modified_time"].doubleValue / 1000)
+        value["deleted"] = json["deleted"].boolValue
+        value["synchronizedTime"] = NSDate()
+        self.update(value)
     }
     
     func sync() {
         if let syncTime = self.synchronizedTime {
-            if self.modifiedTime.compare(syncTime) == .OrderedAscending {
+            if self.modifiedTime.compare(syncTime) != .OrderedDescending {
                 return
             }
         }
-        if let sync = self as? Synchronizable {
-            sync.push()
+        self.push().retry(3).subscribeNext { _ in
+            let realm = try! Realm()
+            try! realm.write {
+                self.synchronizedTime = NSDate()
+            }
         }
     }
     
@@ -84,5 +86,17 @@ class Table: Object {
         let realm = try! Realm()
         let r = realm.objects(self).filter("sid == %@", sid).first
         return r
+    }
+    
+    func push() -> Observable<Table> {
+        return empty()
+    }
+    
+    class func push() -> Observable<Table> {
+        return empty()
+    }
+    
+    class func pull() -> Observable<Table> {
+        return empty()
     }
 }

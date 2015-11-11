@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import RxSwift
 
-@objc protocol Synchronizable {
-    func push()
-    static func push()
-    static func pull()
+protocol Synchronizable {
+    func push() -> Observable<Table>
+    static func push() -> Observable<Table>
+    static func pull() -> Observable<Table>
 }

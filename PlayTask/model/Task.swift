@@ -17,7 +17,7 @@ enum TaskType: Int {
     case Normal = 2
 }
 
-class Task: Table, Synchronizable {
+final class Task: Table {
     dynamic var title = ""
     dynamic var score = 0
     dynamic var type = 0
@@ -155,43 +155,50 @@ class Task: Table, Synchronizable {
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
     
-    func push() {
+    override func push() -> Observable<Table> {
         guard let userSid = Util.loggedUser?.sid.value else {
-            return
+            return empty()
         }
         if self.userSid.value == nil {
             self.update(["userSid": userSid])
         }
-        var observable: Observable<Task>!
         if self.sid.value == nil {
-            observable = API.createTask(self)
+            return API.createTask(self).map { $0 as Table }
         } else {
-            observable = API.updateTask(self)
+            return API.updateTask(self).map { $0 as Table }
         }
-        observable.subscribeCompleted {}
     }
     
-    class func push() {
+    override class func push() -> Observable<Table> {
         guard let userSid = Util.loggedUser?.sid.value else {
-            return
+            return empty()
         }
         let realm = try! Realm()
-        let pending = realm.objects(Task).filter("(userSid == %@ OR userSid == nil) AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid)
-        pending.asObservable().subscribeNext { p in
-            p.push()
+        var observable: Observable<Table> = empty()
+        realm.objects(Task).filter("(userSid == %@ OR userSid == nil) AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).map {
+            observable = observable.concat($0.push().retry(3))
         }
+        return observable
     }
     
-    class func pull() {
+    override class func pull() -> Observable<Table> {
         guard let loggedUser = Util.loggedUser else {
-            return
+            return empty()
         }
-        API.getTasks(loggedUser, after: loggedUser.taskPullTime ?? NSDate(timeIntervalSince1970: 0)).subscribeNext { tasks in
-            if tasks.count == 0 {
-                return
+        return create { observer in
+            API.getTasks(loggedUser, after: loggedUser.taskPullTime ?? NSDate(timeIntervalSince1970: 0)).flatMap { tasks -> Observable<Table> in
+                if tasks.count == 0 {
+                    return empty()
+                }
+                tasks.map {
+                    observer.onNext($0)
+                }
+                loggedUser.update(["taskPullTime": tasks.last!.modifiedTime])
+                return Task.pull()
+            }.subscribe {
+                observer.on($0)
             }
-            loggedUser.update(["taskPullTime": tasks.last!.modifiedTime])
-            Task.pull()
+            return NopDisposable.instance
         }
     }
 }
