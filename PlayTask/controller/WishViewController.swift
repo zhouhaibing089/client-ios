@@ -16,8 +16,6 @@ class WishViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.wishes = Wish.getWishes()
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
@@ -35,13 +33,20 @@ class WishViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let user = User.getInstance()
+        let user = Util.currentUser
         UIView.performWithoutAnimation {
             self.scoreBarButton.title = "\(user.score)"
         }
         
+        self.refresh()
+        
         MobClick.beginLogPageView("wish")
 
+    }
+    
+    func refresh() {
+        self.wishes = Wish.getWishes()
+        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -78,7 +83,7 @@ class WishViewController: UITableViewController {
             let wishHistory = WishHistory(wish: wish)
             wishHistory.save()
 
-            let user = User.getInstance()
+            let user = Util.currentUser
             user.update(["score": user.score - wish.score])
             UIView.performWithoutAnimation {
                 self.scoreBarButton.title = "\(user.score)"

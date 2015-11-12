@@ -35,7 +35,14 @@ final class TaskHistory: Table, Bill {
     
     class func getTaskHistories() -> [TaskHistory] {
         let realm = try! Realm()
-        return realm.objects(TaskHistory).filter("deleted == false AND canceled == false").map { $0 }
+        var query = "task.userSid == "
+        if let loggedUser = Util.loggedUser {
+            query += "\(loggedUser.sid.value!)"
+        } else {
+            query += "nil"
+        }
+        query += " AND deleted == false AND canceled == false"
+        return realm.objects(TaskHistory).filter(query).map { $0 }
     }
     
     override func push() -> Observable<Table> {

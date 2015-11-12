@@ -213,7 +213,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let standardUserDefaults = NSUserDefaults.standardUserDefaults()
         let score = standardUserDefaults.integerForKey("score")
         
-        User.getInstance().update(["score": score])
+        Util.currentUser.update(["score": score])
         
         try! fileManager.moveItemAtPath(dbPath, toPath: "\(path)/db_backup.sqlite3")
     }

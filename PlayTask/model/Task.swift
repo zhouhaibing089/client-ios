@@ -36,9 +36,16 @@ final class Task: Table {
     
     class func getTasks() -> [Int: [Task]] {
         let realm = try! Realm()
-        let dailyTasks = realm.objects(Task).filter("deleted == false AND type == %@", TaskType.Daily.rawValue).sorted("rank").map { $0 }
-        let weeklyTasks = realm.objects(Task).filter("deleted == false AND type == %@", TaskType.Weekly.rawValue).sorted("rank").map { $0 }
-        let normalTasks = realm.objects(Task).filter("deleted == false AND type == %@", TaskType.Normal.rawValue).sorted("rank").map { $0 }
+        var query = "userSid == "
+        if let loggedUser = Util.loggedUser {
+            query += "\(loggedUser.sid.value!)"
+        } else {
+            query += "nil"
+        }
+        query += " AND deleted == false AND type == %@"
+        let dailyTasks = realm.objects(Task).filter(query, TaskType.Daily.rawValue).sorted("rank").map { $0 }
+        let weeklyTasks = realm.objects(Task).filter(query, TaskType.Weekly.rawValue).sorted("rank").map { $0 }
+        let normalTasks = realm.objects(Task).filter(query, TaskType.Normal.rawValue).sorted("rank").map { $0 }
         return [TaskType.Daily.rawValue: dailyTasks, TaskType.Weekly.rawValue: weeklyTasks, TaskType.Normal.rawValue: normalTasks]
     }
     

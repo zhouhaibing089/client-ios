@@ -68,7 +68,7 @@ class TaskTableViewCell: UITableViewCell {
     }
     
     @IBAction func toggle(sender: UIButton) {
-        let user = User.getInstance()
+        let user = Util.currentUser
         let completedTimesBefore = self.task.getCompletedTimes()
         if self.task.isDone() { // 任务已完成
             user.update(["score": user.score - self.task.score])

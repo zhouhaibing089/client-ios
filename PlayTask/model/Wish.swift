@@ -25,7 +25,14 @@ class Wish: Table {
     
     class func getWishes() -> [Wish] {
         let realm = try! Realm()
-        return realm.objects(Wish).filter("deleted == false").sorted("rank").map { $0 }
+        var query = "userSid == "
+        if let loggedUser = Util.loggedUser {
+            query += "\(loggedUser.sid.value!)"
+        } else {
+            query += "nil"
+        }
+        query += " AND deleted == false"
+        return realm.objects(Wish).filter(query).sorted("rank").map { $0 }
     }
     
     override func push() -> Observable<Table> {

@@ -32,7 +32,14 @@ class WishHistory: Table, Bill {
     
     class func getWishHistories() -> [WishHistory] {
         let realm = try! Realm()
-        return realm.objects(WishHistory).filter("deleted == false").map { $0 }
+        var query = "wish.userSid == "
+        if let loggedUser = Util.loggedUser {
+            query += "\(loggedUser.sid.value!)"
+        } else {
+            query += "nil"
+        }
+        query += " AND deleted == false"
+        return realm.objects(WishHistory).filter(query).map { $0 }
     }
     
     override func push() -> Observable<Table> {

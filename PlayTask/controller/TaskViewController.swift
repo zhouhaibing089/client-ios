@@ -100,7 +100,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         
         self.refresh()
         
-        let user = User.getInstance()
+        let user = Util.currentUser
         UIView.performWithoutAnimation {
             self.scoreBarButton.title = "\(user.score)"
         }
