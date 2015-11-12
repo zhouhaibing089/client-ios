@@ -12,11 +12,19 @@ class WishTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var loopLabel: UILabel!
     
     var wish: Wish! {
         didSet {
             self.titleLabel.text = self.wish.title
             self.scoreLabel.text = "-\(self.wish.score)"
+            
+            let satisfiedTime = self.wish.getSatisfiedTimes()
+            if self.wish.loop == 0 {
+                self.loopLabel.text = "\(satisfiedTime)/∞"
+            } else {
+                self.loopLabel.text = "\(satisfiedTime)/\(self.wish.loop)"
+            }
         }
     }
     

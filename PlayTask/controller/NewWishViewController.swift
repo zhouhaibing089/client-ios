@@ -14,6 +14,7 @@ class NewWishViewController: UITableViewController {
 
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var scoreTextField: UITextField!
+    @IBOutlet weak var loopSegmentControl: UISegmentedControl!
     
     var onWishAdded: ((Wish) -> Void)?
     var modifiedWish: Wish?
@@ -27,6 +28,7 @@ class NewWishViewController: UITableViewController {
         if let w = self.modifiedWish {
             self.titleTextField.text = w.title
             self.scoreTextField.text = "\(w.score)"
+            self.loopSegmentControl.selectedSegmentIndex = w.loop == 0 ? 1 : 0
             self.navigationItem.title = "编辑欲望"
         }
     }
@@ -42,7 +44,8 @@ class NewWishViewController: UITableViewController {
             CRToastManager.showNotificationWithMessage("请输入消耗的成就点数", completionBlock: nil)
             return
         }
-        let wish = Wish(title: title!, score: Int(score!)!)
+        let loop = self.loopSegmentControl.selectedSegmentIndex == 0 ? 1 : 0
+        let wish = Wish(title: title!, score: Int(score!)!, loop: loop)
         wish.save()
         self.onWishAdded?(wish)
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)

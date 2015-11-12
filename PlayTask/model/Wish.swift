@@ -14,13 +14,15 @@ class Wish: Table {
     dynamic var title = ""
     dynamic var score = 0
     dynamic var rank = 0
+    dynamic var loop = 0
     
     let userSid = RealmOptional<Int>()
     
-    convenience init(title: String, score: Int) {
+    convenience init(title: String, score: Int, loop: Int) {
         self.init()
         self.title = title
         self.score = score
+        self.loop = loop
     }
     
     class func getWishes() -> [Wish] {
@@ -33,6 +35,11 @@ class Wish: Table {
         }
         query += " AND deleted == false"
         return realm.objects(Wish).filter(query).sorted("rank").map { $0 }
+    }
+    
+    func getSatisfiedTimes() -> Int {
+        let realm = try! Realm()
+        return realm.objects(WishHistory).filter("wish == %@ AND deleted == false", self).count
     }
     
     override func push() -> Observable<Table> {
