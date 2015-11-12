@@ -38,7 +38,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nfR-b9-p1C">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nfR-b9-p1C">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="505"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -202,9 +202,9 @@
                                 <segue destination="Nah-Wp-egE" kind="show" id="0lA-nr-mvG"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="新建" id="VQK-28-epI">
+                        <barButtonItem key="rightBarButtonItem" image="plus" id="VQK-28-epI">
                             <connections>
-                                <segue destination="pzF-rG-QF3" kind="presentation" identifier="new" id="5XW-Ay-Wit"/>
+                                <action selector="showMenu:" destination="R3m-mU-SDD" id="t5x-jY-jNf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -213,6 +213,7 @@
                         <outlet property="tableView" destination="nfR-b9-p1C" id="RCv-U8-SbB"/>
                         <outlet property="taskTypeSegmentControl" destination="Ij4-rj-mAn" id="lka-kY-2Ju"/>
                         <outlet property="toolbar" destination="5Bg-FO-MdG" id="KuS-4f-2Mn"/>
+                        <segue destination="pzF-rG-QF3" kind="presentation" identifier="new" id="8sK-xX-aaX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TaH-th-6zw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -467,14 +468,15 @@
                                 <segue destination="Nah-Wp-egE" kind="show" id="OBY-tC-yKa"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="新建" id="mtI-gd-sba">
+                        <barButtonItem key="rightBarButtonItem" image="plus" id="mtI-gd-sba">
                             <connections>
-                                <segue destination="Jyq-UH-ZzK" kind="presentation" identifier="new" id="aJm-vk-mgq"/>
+                                <action selector="showMenu:" destination="nxW-Bs-HQW" id="tiU-MJ-uPj"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="scoreBarButton" destination="Z8W-3h-Y1N" id="1Mf-cK-F56"/>
+                        <segue destination="Jyq-UH-ZzK" kind="presentation" identifier="new" id="Vkn-I9-mrt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BEZ-rb-y71" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1157,9 +1159,10 @@
         <image name="more" width="32" height="32"/>
         <image name="off" width="32" height="32"/>
         <image name="pin_unchecked" width="32" height="32"/>
+        <image name="plus" width="22" height="22"/>
         <image name="top_charts" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0lA-nr-mvG"/>
+        <segue reference="OBY-tC-yKa"/>
     </inferredMetricsTieBreakers>
 </document>

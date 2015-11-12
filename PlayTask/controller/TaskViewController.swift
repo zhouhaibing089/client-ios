@@ -129,13 +129,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         // #warning Incomplete implementation, return the number of rows
         return self.currentTasks.count
     }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let t = self.currentTasks[indexPath.row]
-        self.performSegueWithIdentifier("new", sender: t)
-    }
 
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("task", forIndexPath: indexPath) as! TaskTableViewCell
         if self.showDone {
@@ -172,11 +166,11 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let sortAction  = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "排序") { [unowned self] (action, indexPath) -> Void in
-            self.tableView.setEditing(false, animated: true)
-            self.tableView.setEditing(true, animated: true)
+        let editAction  = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "编辑") { [unowned self] (action, indexPath) -> Void in
+            let t = self.currentTasks[indexPath.row]
+            self.performSegueWithIdentifier("new", sender: t)
         }
-        sortAction.backgroundColor = UIColor.lightGrayColor()
+        editAction.backgroundColor = UIColor.lightGrayColor()
         let deleteAction  = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "删除") { [unowned self] (action, indexPath) -> Void in
             var currentTasks = self.currentTasks
             let task = currentTasks[indexPath.row]
@@ -188,7 +182,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
             }
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         }
-        return [deleteAction, sortAction]
+        return [deleteAction, editAction]
     }
     
     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -222,6 +216,18 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         } else {
             return UITableViewCellEditingStyle.Delete
         }
+    }
+    @IBAction func showMenu(sender: UIBarButtonItem) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        actionSheet.addAction(UIAlertAction(title: "新建任务", style: UIAlertActionStyle.Default, handler: { _ in
+            self.performSegueWithIdentifier("new", sender: nil)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "排序", style: UIAlertActionStyle.Default, handler: { _ in
+            self.tableView.setEditing(false, animated: true)
+            self.tableView.setEditing(true, animated: true)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
+        self.presentViewController(actionSheet, animated: true, completion: nil)
     }
 
     func refresh() {

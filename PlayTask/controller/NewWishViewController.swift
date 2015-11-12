@@ -16,9 +16,19 @@ class NewWishViewController: UITableViewController {
     @IBOutlet weak var scoreTextField: UITextField!
     
     var onWishAdded: ((Wish) -> Void)?
+    var modifiedWish: Wish?
     
     @IBAction func cancel(sender: UIBarButtonItem) {
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let w = self.modifiedWish {
+            self.titleTextField.text = w.title
+            self.scoreTextField.text = "\(w.score)"
+            self.navigationItem.title = "编辑欲望"
+        }
     }
     
     @IBAction func addWish(sender: UIBarButtonItem) {
@@ -46,6 +56,10 @@ class NewWishViewController: UITableViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         MobClick.endLogPageView("new_wish")
+    }
+    
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return MobClick.getConfigParams("newWishGuide")
     }
     
 }

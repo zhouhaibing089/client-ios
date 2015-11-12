@@ -77,4 +77,8 @@ class NewTaskViewController: UITableViewController {
         super.viewWillDisappear(animated)
         MobClick.endLogPageView("new_task")
     }
+    
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return MobClick.getConfigParams("newTaskGuide")
+    }
 }

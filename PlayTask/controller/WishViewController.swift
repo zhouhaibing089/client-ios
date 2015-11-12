@@ -100,18 +100,18 @@ class WishViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let sortAction  = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "排序") { [unowned self] (action, indexPath) -> Void in
-            self.tableView.setEditing(false, animated: true)
-            self.tableView.setEditing(true, animated: true)
+        let editAction  = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "编辑") { [unowned self] (action, indexPath) -> Void in
+            let w = self.wishes[indexPath.row]
+            self.performSegueWithIdentifier("new", sender: w)
         }
-        sortAction.backgroundColor = UIColor.lightGrayColor()
+        editAction.backgroundColor = UIColor.lightGrayColor()
         let deleteAction  = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "删除") { [unowned self] (action, indexPath) -> Void in
             let wish = self.wishes[indexPath.row]
             wish.delete()
             self.wishes.removeAtIndex(indexPath.row)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         }
-        return [deleteAction, sortAction]
+        return [deleteAction, editAction]
 
     }
     
@@ -137,15 +137,37 @@ class WishViewController: UITableViewController {
         }
     }
     
+    @IBAction func showMenu(sender: UIBarButtonItem) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        actionSheet.addAction(UIAlertAction(title: "新建欲望", style: UIAlertActionStyle.Default, handler: { _ in
+            self.performSegueWithIdentifier("new", sender: nil)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "排序", style: UIAlertActionStyle.Default, handler: { _ in
+            self.tableView.setEditing(false, animated: true)
+            self.tableView.setEditing(true, animated: true)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
+        self.presentViewController(actionSheet, animated: true, completion: nil)
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "new" {
             let nc = segue.destinationViewController as! UINavigationController
             if let nwvc = nc.viewControllers.first as? NewWishViewController {
-                nwvc.onWishAdded = { wish in
-                    self.wishes.insert(wish, atIndex: 0)
-                    self.tableView.reloadData()
+                if let w = sender as? Wish { // 编辑模式
+                    nwvc.modifiedWish = w
+                    nwvc.onWishAdded = { wish in
+                        wish.update(["rank": w.rank])
+                        w.delete()
+                        self.refresh()
+                    }
+                } else {
+                    nwvc.onWishAdded = { wish in
+                        self.wishes.insert(wish, atIndex: 0)
+                        self.tableView.reloadData()
+                    }
                 }
+                
             }
         }
     }
