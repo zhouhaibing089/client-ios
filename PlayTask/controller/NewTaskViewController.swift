@@ -21,6 +21,7 @@ class NewTaskViewController: UITableViewController {
     var onTaskAdded: ((Task) -> Void)?
     
     var modifiedTask: Task?
+    var defaultTaskType: TaskType!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,8 @@ class NewTaskViewController: UITableViewController {
             self.taskLoopTextField.text = "\(t.loop)"
             self.taskTypeSegmentControl.selectedSegmentIndex = t.type
             self.navigationItem.title = "编辑任务"
+        } else {
+            self.taskTypeSegmentControl.selectedSegmentIndex = self.defaultTaskType.rawValue
         }
     }
     

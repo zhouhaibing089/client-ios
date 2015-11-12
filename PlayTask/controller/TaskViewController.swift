@@ -161,6 +161,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
                         self.refresh()
                     }
                 } else {
+                    ntvc.defaultTaskType = self.taskType
                     ntvc.onTaskAdded = { task in
                         self.taskTypeSegmentControl.selectedSegmentIndex = task.type
                         self.refresh()
