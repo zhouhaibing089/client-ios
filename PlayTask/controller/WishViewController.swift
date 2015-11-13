@@ -20,7 +20,13 @@ class WishViewController: UITableViewController {
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncStatusChanged:", name: Config.Notification.SYNC, object: nil)
     }
+    
+    func syncStatusChanged(notification: NSNotification) {
+        self.refresh()
+    }
+
     
     @IBAction func endResort(sender: UITapGestureRecognizer) {
         if self.tableView.editing {

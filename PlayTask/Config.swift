@@ -12,4 +12,7 @@ class Config {
     class API {
         static let ROOT = "http://localhost:8080/playtask/v1"
     }
+    class Notification {
+        static let SYNC = "sync"
+    }
 }

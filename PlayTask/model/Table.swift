@@ -50,6 +50,7 @@ class Table: Object {
             value["modifiedTime"] = value["modifiedTime"] ?? NSDate()
             realm.create(self.dynamicType, value: value, update: true)
         }
+        Util.appDelegate.syncStatus = SyncStatus.Unsynced
     }
     
     func update(json json: JSON, var value: [String: AnyObject] = [String: AnyObject]()) {

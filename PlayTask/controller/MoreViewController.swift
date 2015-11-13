@@ -11,6 +11,14 @@ import MBProgressHUD
 import YNSwift
 
 class MoreViewController: UITableViewController {
+    @IBOutlet weak var accountLabel: UILabel!
+    @IBOutlet weak var syncStatusLabel: UILabel!
+    
+    @IBAction func sync(sender: UIButton) {
+        if Util.appDelegate.syncStatus != SyncStatus.Syncing {
+            Util.appDelegate.synchronize()
+        }
+    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.showSection(section) {
@@ -119,10 +127,30 @@ class MoreViewController: UITableViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncStatusChanged:", name: Config.Notification.SYNC, object: nil)
+    }
+
+    func syncStatusChanged(notification: NSNotification!) {
+        switch Util.appDelegate.syncStatus {
+        case .Synced:
+            self.syncStatusLabel.text = "已同步"
+        case .SyncFailed:
+            self.syncStatusLabel.text = "同步出错"
+        case .Syncing:
+            self.syncStatusLabel.text = "同步中"
+        case .Unsynced:
+            self.syncStatusLabel.text = "待同步"
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         MobClick.beginLogPageView("more")
+        self.accountLabel.text = Util.currentUser.account
+        self.syncStatusChanged(nil)
     }
     
     override func viewWillDisappear(animated: Bool) {

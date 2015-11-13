@@ -25,7 +25,7 @@ extension API {
             if let user = User.getBySid(sid) {
                 Util.loggedUser = user
             } else {
-                let user = User(account: json["account"].stringValue, email: json["email"].stringValue, sid: sid)
+                let user = User(account: json["user"]["account"].stringValue, email: json["user"]["email"].stringValue, sid: sid)
                 user.save()
                 Util.loggedUser = user
             }

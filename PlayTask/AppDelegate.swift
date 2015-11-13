@@ -12,11 +12,26 @@ import CRToast
 import RealmSwift
 import RxSwift
 
+enum SyncStatus {
+    case Synced
+    case Syncing
+    case Unsynced
+    case SyncFailed
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var db: Connection!
+
+    var syncStatus = SyncStatus.Unsynced {
+        didSet {
+            let notificationCenter = NSNotificationCenter.defaultCenter()
+            notificationCenter.postNotificationName(Config.Notification.SYNC, object: nil)
+        }
+    }
+    var syncDisposable: Disposable?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -77,6 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
         UIApplication.sharedApplication().applicationIconBadgeNumber = Task.getPinnedTasksNumOnTheDate(NSDate())
         Task.scheduleNotification()
+        self.syncDisposable?.dispose()
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
@@ -99,14 +115,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func synchronize() {
+        self.syncDisposable?.dispose()
+        self.syncStatus = SyncStatus.Syncing
         var pullUser: Observable<Table> = empty()
         if let loggedUser = Util.loggedUser {
             pullUser = API.getUserWithUserSid(loggedUser.sid.value!).map { $0 as Table }
         }
-        Task.push().concat(Task.pull()).concat(TaskHistory.push()).concat(TaskHistory.pull())
+        self.syncDisposable = Task.push().concat(Task.pull()).concat(TaskHistory.push()).concat(TaskHistory.pull())
             .concat(Wish.push()).concat(Wish.pull()).concat(WishHistory.push()).concat(WishHistory.pull())
             .concat(pullUser)
-            .subscribeCompleted {}
+            .subscribe { event in
+                switch event {
+                case .Completed:
+                    self.syncStatus = SyncStatus.Synced
+                    break
+                case .Error(_):
+                    self.syncStatus = SyncStatus.SyncFailed
+                    break
+                default:
+                    break
+                }
+                
+        }
     }
 
 

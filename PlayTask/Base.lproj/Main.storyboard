@@ -887,25 +887,56 @@
                             </tableViewSection>
                             <tableViewSection id="Iwg-Ab-aGF">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Dhz-Kn-Enn" style="IBUITableViewCellStyleDefault" id="L2e-O1-H4X">
-                                        <rect key="frame" x="0.0" y="365" width="600" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="61" id="L2e-O1-H4X">
+                                        <rect key="frame" x="0.0" y="365" width="600" height="61"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L2e-O1-H4X" id="xHi-6j-AJI">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="yoncise" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dhz-Kn-Enn">
-                                                    <rect key="frame" x="15" y="0.0" width="570" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kij-DQ-ysb">
+                                                    <rect key="frame" x="8" y="8" width="64" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BA7-sQ-Ne0">
+                                                    <rect key="frame" x="532" y="15" width="60" height="30"/>
+                                                    <state key="normal" title="立即同步"/>
+                                                    <connections>
+                                                        <action selector="sync:" destination="Mq6-AF-LrE" eventType="touchUpInside" id="bSg-dO-aUV"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待同步" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pjO-0z-vB1">
+                                                    <rect key="frame" x="8" y="37" width="36" height="15"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pjO-0z-vB1" firstAttribute="leading" secondItem="kij-DQ-ysb" secondAttribute="leading" id="1v9-Iz-130"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="kij-DQ-ysb" secondAttribute="leading" id="2lC-aE-msL"/>
+                                                <constraint firstItem="BA7-sQ-Ne0" firstAttribute="centerY" secondItem="xHi-6j-AJI" secondAttribute="centerY" id="5ts-8c-2Ta"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="BA7-sQ-Ne0" secondAttribute="trailing" id="Hwf-9x-cRg"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="pjO-0z-vB1" secondAttribute="bottom" id="Ify-vW-ogX"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="pjO-0z-vB1" secondAttribute="bottom" id="NNV-Cw-x1D"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="pjO-0z-vB1" secondAttribute="bottom" id="ROF-7d-P8D"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="pjO-0z-vB1" secondAttribute="bottom" constant="13" id="ag6-vl-TUh"/>
+                                                <constraint firstItem="pjO-0z-vB1" firstAttribute="top" secondItem="kij-DQ-ysb" secondAttribute="bottom" constant="8" symbolic="YES" id="bnE-qG-LpK"/>
+                                                <constraint firstAttribute="topMargin" secondItem="kij-DQ-ysb" secondAttribute="top" id="z1L-n5-rxY"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Ify-vW-ogX"/>
+                                                    <exclude reference="ROF-7d-P8D"/>
+                                                    <exclude reference="ag6-vl-TUh"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="I0L-tV-u4v" style="IBUITableViewCellStyleDefault" id="zJS-hu-gBb">
-                                        <rect key="frame" x="0.0" y="409" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="426" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zJS-hu-gBb" id="C7o-yh-YBO">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -926,7 +957,7 @@
                             <tableViewSection footerTitle="登录后数据可以同步到云端" id="R7q-uC-knv">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Xnc-FP-aNF" style="IBUITableViewCellStyleDefault" id="07x-9C-xwJ">
-                                        <rect key="frame" x="0.0" y="489" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="506" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="07x-9C-xwJ" id="xUb-Cb-UWS">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -954,6 +985,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="更多" id="v6B-Kk-YVH"/>
+                    <connections>
+                        <outlet property="accountLabel" destination="kij-DQ-ysb" id="QX8-ef-IX3"/>
+                        <outlet property="syncStatusLabel" destination="pjO-0z-vB1" id="FnO-LO-nUr"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6nO-YU-DL5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

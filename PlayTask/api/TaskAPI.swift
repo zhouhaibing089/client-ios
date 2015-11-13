@@ -115,6 +115,7 @@ extension API {
                     if let t = Task.getBySid(subJson["task_id"].intValue) {
                         let th = TaskHistory(json: subJson)
                         th.completionTime = NSDate(timeIntervalSince1970: subJson["completion_time"].doubleValue / 1000)
+                        th.canceled = subJson["canceled"].boolValue
                         th.task = t
                         
                         th.save()

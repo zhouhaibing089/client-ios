@@ -89,8 +89,14 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         self.tableView.estimatedRowHeight = 44
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didBecomeActive:", name: UIApplicationDidBecomeActiveNotification, object: nil)
-    }
     
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncStatusChanged:", name: Config.Notification.SYNC, object: nil)
+    }
+
+    func syncStatusChanged(notification: NSNotification) {
+        self.refresh()
+    }
+
     func didBecomeActive(notification: NSNotification) {
         self.refresh()
     }
