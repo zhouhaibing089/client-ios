@@ -895,7 +895,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kij-DQ-ysb">
-                                                    <rect key="frame" x="8" y="8" width="64" height="21"/>
+                                                    <rect key="frame" x="16" y="8" width="64" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -908,7 +908,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待同步" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pjO-0z-vB1">
-                                                    <rect key="frame" x="8" y="37" width="36" height="15"/>
+                                                    <rect key="frame" x="16" y="37" width="36" height="15"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -916,7 +916,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="pjO-0z-vB1" firstAttribute="leading" secondItem="kij-DQ-ysb" secondAttribute="leading" id="1v9-Iz-130"/>
-                                                <constraint firstAttribute="leadingMargin" secondItem="kij-DQ-ysb" secondAttribute="leading" id="2lC-aE-msL"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="kij-DQ-ysb" secondAttribute="leading" constant="-8" id="2lC-aE-msL"/>
                                                 <constraint firstItem="BA7-sQ-Ne0" firstAttribute="centerY" secondItem="xHi-6j-AJI" secondAttribute="centerY" id="5ts-8c-2Ta"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="BA7-sQ-Ne0" secondAttribute="trailing" id="Hwf-9x-cRg"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="pjO-0z-vB1" secondAttribute="bottom" id="Ify-vW-ogX"/>
