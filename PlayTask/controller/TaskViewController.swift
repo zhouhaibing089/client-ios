@@ -108,10 +108,6 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         
         self.refresh()
         
-        let user = Util.currentUser
-        UIView.performWithoutAnimation {
-            self.scoreBarButton.title = "\(user.score)"
-        }
         MobClick.beginLogPageView("task")
         self.hairline.hidden = true
     }
@@ -239,6 +235,10 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     }
 
     func refresh() {
+        let user = Util.currentUser
+        UIView.performWithoutAnimation {
+            self.scoreBarButton.title = "\(user.score)"
+        }
         for (type, tasks) in Task.getTasks() {
             self.tasks[0][type] = [Task]()
             self.tasks[1][type] = [Task]()

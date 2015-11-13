@@ -42,11 +42,6 @@ class WishViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let user = Util.currentUser
-        UIView.performWithoutAnimation {
-            self.scoreBarButton.title = "\(user.score)"
-        }
-        
         self.refresh()
         
         MobClick.beginLogPageView("wish")
@@ -54,6 +49,10 @@ class WishViewController: UITableViewController {
     }
     
     func refresh() {
+        let user = Util.currentUser
+        UIView.performWithoutAnimation {
+            self.scoreBarButton.title = "\(user.score)"
+        }
         self.wishes = Wish.getWishes()
         self.tableView.reloadData()
     }
