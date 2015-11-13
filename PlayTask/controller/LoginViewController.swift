@@ -36,6 +36,7 @@ class LoginViewController: UITableViewController {
         API.loginWithAccount(account, password: password).subscribe { event in
             switch event {
             case .Next(_):
+                Util.appDelegate.synchronize()
                 hud.switchToSuccess(duration: 1, labelText: "登录成功") {
                     self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
                 }

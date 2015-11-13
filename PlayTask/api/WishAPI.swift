@@ -67,6 +67,9 @@ extension API {
     // MARK: WishHistory
     class func createWishHistory(wishHistory: WishHistory) -> Observable<WishHistory> {
         return API.req(.POST, "/wishes/\(wishHistory.wish.sid.value!)/wish_histories", parameters: [
+            "satisfied_time": wishHistory.satisfiedTime.timeIntervalSince1970 * 1000,
+            "canceled": wishHistory.canceled ? "true" : "false",
+            
             "deleted": wishHistory.deleted ? "true" : "false",
             "modified_time": wishHistory.modifiedTime.timeIntervalSince1970 * 1000,
             "created_time": wishHistory.createdTime.timeIntervalSince1970 * 1000
@@ -78,6 +81,9 @@ extension API {
     
     class func updateWishHistory(wishHistory: WishHistory) -> Observable<WishHistory> {
         return API.req(.PUT, "/wish_histories/\(wishHistory.sid.value!)", parameters: [
+            "satisfied_time": wishHistory.satisfiedTime.timeIntervalSince1970 * 1000,
+            "canceled": wishHistory.canceled ? "true" : "false",
+            
             "deleted": wishHistory.deleted ? "true" : "false",
             "modified_time": wishHistory.modifiedTime.timeIntervalSince1970 * 1000
             ]).resp().map { json in

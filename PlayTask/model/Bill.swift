@@ -13,4 +13,5 @@ import Foundation
     func getBillScore() -> Int
     func getBillTime() -> NSDate
     func delete()
+    func cancel()
 }

@@ -33,6 +33,15 @@ final class TaskHistory: Table, Bill {
         return self.completionTime
     }
     
+    func cancel() {
+        self.update(["canceled": true])
+        var user = User.getInstance()
+        if let userSid = self.task.userSid.value {
+            user = User.getBySid(userSid)!
+        }
+        user.update(["score": user.score - self.task.score])
+    }
+    
     class func getTaskHistories() -> [TaskHistory] {
         let realm = try! Realm()
         var query = "task.userSid == "

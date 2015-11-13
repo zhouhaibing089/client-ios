@@ -64,9 +64,21 @@ class BillViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let billItem = self.billItems[indexPath.row]
-            billItem.delete()
-            self.billItems.removeAtIndex(indexPath.row)
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+
+            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            actionSheet.addAction(UIAlertAction(title: "仅删除", style: UIAlertActionStyle.Destructive, handler: { _ in
+                billItem.delete()
+                self.billItems.removeAtIndex(indexPath.row)
+                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            }))
+            actionSheet.addAction(UIAlertAction(title: "删除并恢复成就", style: UIAlertActionStyle.Default, handler: { _ in
+                billItem.cancel()
+                billItem.delete()
+                self.billItems.removeAtIndex(indexPath.row)
+                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            }))
+            actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
+            self.presentViewController(actionSheet, animated: true, completion: nil)
         }
     }
 

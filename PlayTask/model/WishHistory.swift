@@ -12,10 +12,13 @@ import RxSwift
 
 class WishHistory: Table, Bill {
     dynamic var wish: Wish!
+    dynamic var satisfiedTime: NSDate!
+    dynamic var canceled = false
     
     convenience init(wish: Wish) {
         self.init()
         self.wish = wish
+        self.satisfiedTime = NSDate()
     }
     
     func getBillTitle() -> String {
@@ -27,7 +30,16 @@ class WishHistory: Table, Bill {
     }
     
     func getBillTime() -> NSDate {
-        return self.createdTime
+        return self.satisfiedTime
+    }
+    
+    func cancel() {
+        self.update(["canceled": true])
+        var user = User.getInstance()
+        if let userSid = self.wish.userSid.value {
+            user = User.getBySid(userSid)!
+        }
+        user.update(["score": user.score + self.wish.score])
     }
     
     class func getWishHistories() -> [WishHistory] {
@@ -38,7 +50,7 @@ class WishHistory: Table, Bill {
         } else {
             query += "nil"
         }
-        query += " AND deleted == false"
+        query += " AND deleted == false AND canceled == false"
         return realm.objects(WishHistory).filter(query).map { $0 }
     }
     

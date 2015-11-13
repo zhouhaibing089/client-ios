@@ -10,6 +10,7 @@ import UIKit
 import SQLite
 import CRToast
 import RealmSwift
+import RxSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -46,6 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             schemaVersion: 1,
             migrationBlock: { migration, oldSchemaVersion in
                 if (oldSchemaVersion < 1) {
+                    migration.enumerate(WishHistory.className()) { oldObject, newObject in
+                        let createdTime = oldObject!["createdTime"] as! NSDate
+                        newObject!["satisfiedTime"] = createdTime
+                    }
                 }
         })
         
@@ -94,8 +99,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func synchronize() {
+        var pullUser: Observable<Table> = empty()
+        if let loggedUser = Util.loggedUser {
+            pullUser = API.getUserWithUserSid(loggedUser.sid.value!).map { $0 as Table }
+        }
         Task.push().concat(Task.pull()).concat(TaskHistory.push()).concat(TaskHistory.pull())
             .concat(Wish.push()).concat(Wish.pull()).concat(WishHistory.push()).concat(WishHistory.pull())
+            .concat(pullUser)
             .subscribeCompleted {}
     }
 
@@ -150,7 +160,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let realm = try! Realm()
-        // TODO: 新版本上线后数据前几这里要配 version
         
         try! realm.write {
             realm.deleteAll()
@@ -203,6 +212,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 h.deleted = history[SQL.deleted]
                 h.createdTime = NSDate(timeIntervalSince1970: Double(history[WishHistorySQLite.createdTime]))
                 h.modifiedTime = NSDate(timeIntervalSince1970: Double(history[SQL.modifiedTime]))
+                h.satisfiedTime = NSDate(timeIntervalSince1970: Double(history[WishHistorySQLite.createdTime]))
+                h.canceled = false
                 h.id = NSUUID().UUIDString
                 try! realm.write {
                     realm.add(h)
