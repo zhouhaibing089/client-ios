@@ -20,31 +20,14 @@ class API {
         return Manager(configuration: configuration)
     }()
     
-    class func req(method: Alamofire.Method, _ URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL) -> Request {
-        return API.manager.request(
-            method,
-            "\(Config.API.ROOT)\(URLString)",
-            parameters: parameters,
-            encoding: encoding
-        )
-    }
-}
-
-enum NetworkError: ErrorType {
-    case Timeout
-    case Unknown(Int)
-}
-
-enum APIError: ErrorType {
-    case Server(Int, String, JSON)
-    case Common(Int, String, JSON)
-    case Custom(Int, String, JSON)
-}
-
-extension Request {
-    func resp(suppressError: Bool = true) -> Observable<JSON> {
+    class func req(method: Alamofire.Method, _ URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL, suppressError: Bool = true) -> Observable<JSON> {
         return create { observer in
-            self.responseJSON { response in
+            API.manager.request(
+                method,
+                "\(Config.API.ROOT)\(URLString)",
+                parameters: parameters,
+                encoding: encoding
+                ).responseJSON { response in
                 switch response.result {
                 case .Success(let value):
                     let json = JSON(value)
@@ -81,4 +64,15 @@ extension Request {
             return NopDisposable.instance
         }
     }
+}
+
+enum NetworkError: ErrorType {
+    case Timeout
+    case Unknown(Int)
+}
+
+enum APIError: ErrorType {
+    case Server(Int, String, JSON)
+    case Common(Int, String, JSON)
+    case Custom(Int, String, JSON)
 }

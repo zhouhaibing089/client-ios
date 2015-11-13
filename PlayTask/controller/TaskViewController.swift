@@ -94,7 +94,9 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     }
 
     func syncStatusChanged(notification: NSNotification) {
-        self.refresh()
+        if Util.appDelegate.syncStatus == SyncStatus.Synced {
+            self.refresh()
+        }
     }
 
     func didBecomeActive(notification: NSNotification) {

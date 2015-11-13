@@ -76,10 +76,7 @@ class Table: Object {
     }
     
     func delete() {
-        let realm = try! Realm()
-        try! realm.write {
-            self.deleted = true
-        }
+        self.update(["deleted": true])
     }
     
     class func getBySid(sid: Int) -> Self? {

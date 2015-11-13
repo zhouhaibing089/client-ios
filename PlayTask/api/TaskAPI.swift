@@ -23,7 +23,7 @@ extension API {
             "deleted": task.deleted ? "true" : "false",
             "modified_time": task.modifiedTime.timeIntervalSince1970 * 1000,
             "created_time": task.createdTime.timeIntervalSince1970 * 1000
-            ]).resp().map { json in
+            ]).map { json in
             task.update(json: json)
             return task
         }
@@ -36,7 +36,7 @@ extension API {
             
             "modified_time": task.modifiedTime.timeIntervalSince1970 * 1000,
             "deleted": task.deleted ? "true" : "false",
-            ]).resp().map { json in
+            ]).map { json in
                 task.update(json: json)
                 return task
         }
@@ -45,7 +45,7 @@ extension API {
     class func getTasks(user: User, after: NSDate) -> Observable<[Task]> {
         return API.req(.GET, "/users/\(user.sid.value!)/tasks", parameters: [
             "after": after.timeIntervalSince1970 * 1000
-            ]).resp().map { json in
+            ]).map { json in
             var tasks = [Task]()
             for (_, subJson) : (String, JSON) in json {
                 if let t = Task.getBySid(subJson["id"].intValue) { // update
@@ -80,7 +80,7 @@ extension API {
             "deleted": taskHistory.deleted ? "true" : "false",
             "modified_time": taskHistory.modifiedTime.timeIntervalSince1970 * 1000,
             "created_time": taskHistory.createdTime.timeIntervalSince1970 * 1000
-            ]).resp().map { json in
+            ]).map { json in
             taskHistory.update(json: json)
             return taskHistory
         }
@@ -93,7 +93,7 @@ extension API {
             
             "deleted": taskHistory.deleted ? "true" : "false",
             "modified_time": taskHistory.modifiedTime.timeIntervalSince1970 * 1000
-            ]).resp().map { json in
+            ]).map { json in
                 taskHistory.update(json: json)
                 return taskHistory
         }
@@ -102,7 +102,7 @@ extension API {
     class func getTaskHistories(user: User, after: NSDate) -> Observable<[TaskHistory]> {
         return API.req(.GET, "/users/\(user.sid.value!)/task_histories", parameters: [
             "after": after.timeIntervalSince1970 * 1000
-            ]).resp().map { json in
+            ]).map { json in
             var taskHistories = [TaskHistory]()
             for (_, subJson) : (String, JSON) in json {
                 if let th = TaskHistory.getBySid(subJson["id"].intValue) {

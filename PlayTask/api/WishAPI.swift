@@ -22,7 +22,7 @@ extension API {
             "deleted": wish.deleted ? "true" : "false",
             "modified_time": wish.modifiedTime.timeIntervalSince1970 * 1000,
             "created_time": wish.createdTime.timeIntervalSince1970 * 1000
-            ]).resp().map { json in
+            ]).map { json in
             wish.update(json: json)
             return wish
         }
@@ -35,7 +35,7 @@ extension API {
             
             "modified_time": wish.modifiedTime.timeIntervalSince1970 * 1000,
             "deleted": wish.deleted ? "true" : "false",
-            ]).resp().map { json in
+            ]).map { json in
             wish.update(json: json)
             return wish
         }
@@ -44,7 +44,7 @@ extension API {
     class func getWishes(user: User, after: NSDate) -> Observable<[Wish]> {
         return API.req(.GET, "/users/\(user.sid.value!)/wishes", parameters: [
             "after": after.timeIntervalSince1970 * 1000
-            ]).resp().map { json in
+            ]).map { json in
             var wishes = [Wish]()
             for (_, subJson): (String, JSON) in json {
                 if let w = Wish.getBySid(subJson["id"].intValue) {
@@ -78,7 +78,7 @@ extension API {
             "deleted": wishHistory.deleted ? "true" : "false",
             "modified_time": wishHistory.modifiedTime.timeIntervalSince1970 * 1000,
             "created_time": wishHistory.createdTime.timeIntervalSince1970 * 1000
-            ]).resp().map { json in
+            ]).map { json in
             wishHistory.update(json: json)
             return wishHistory
         }
@@ -91,7 +91,7 @@ extension API {
             
             "deleted": wishHistory.deleted ? "true" : "false",
             "modified_time": wishHistory.modifiedTime.timeIntervalSince1970 * 1000
-            ]).resp().map { json in
+            ]).map { json in
             wishHistory.update(json: json)
             return wishHistory
         }
@@ -100,7 +100,7 @@ extension API {
     class func getWishHistories(user: User, after: NSDate) -> Observable<[WishHistory]> {
         return API.req(.GET, "/users/\(user.sid.value!)/wish_histories", parameters: [
             "after": after.timeIntervalSince1970 * 1000
-            ]).resp().map { json in
+            ]).map { json in
             var wishHistories = [WishHistory]()
             for (_, subJson): (String, JSON) in json {
                 if let wh = WishHistory.getBySid(subJson["id"].intValue) {

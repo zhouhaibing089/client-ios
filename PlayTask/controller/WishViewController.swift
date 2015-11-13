@@ -24,7 +24,9 @@ class WishViewController: UITableViewController {
     }
     
     func syncStatusChanged(notification: NSNotification) {
-        self.refresh()
+        if Util.appDelegate.syncStatus == SyncStatus.Synced {
+            self.refresh()
+        }
     }
 
     
@@ -96,7 +98,7 @@ class WishViewController: UITableViewController {
                 self.scoreBarButton.title = "\(user.score)"
             }
             if wish.loop == 1 { // 单次欲望满足后删除该欲望
-                NSTimer.delay(1) {
+                NSTimer.delay(0.6) {
                     wish.delete()
                     self.wishes.removeAtIndex(indexPath.row)
                     self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
