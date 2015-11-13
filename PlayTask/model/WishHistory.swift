@@ -40,6 +40,9 @@ class WishHistory: Table, Bill {
             user = User.getBySid(userSid)!
         }
         user.update(["score": user.score + self.wish.score])
+        if self.wish.loop == 1 { // 单次欲望撤销后恢复欲望
+            self.wish.update(["deleted": false])
+        }
     }
     
     class func getWishHistories() -> [WishHistory] {

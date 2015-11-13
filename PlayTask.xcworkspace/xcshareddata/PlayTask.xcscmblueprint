@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F135D316FD79610F84C8169BACB8BB0807048BD7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F135D316FD79610F84C8169BACB8BB0807048BD7" : 0,
+    "27D749DA109C73B46985ADB1014826E6849613C4" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A261EF89-5E69-4196-BC4E-665BC8A200F6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F135D316FD79610F84C8169BACB8BB0807048BD7" : "PlayTask",
+    "27D749DA109C73B46985ADB1014826E6849613C4" : "YNSwift\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PlayTask",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PlayTask.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Yoncise\/YNSwift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "27D749DA109C73B46985ADB1014826E6849613C4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "bitbucket.org:Yoncise\/playtask.ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F135D316FD79610F84C8169BACB8BB0807048BD7"
+    }
+  ]
+}

@@ -39,7 +39,7 @@ class Wish: Table {
     
     func getSatisfiedTimes() -> Int {
         let realm = try! Realm()
-        return realm.objects(WishHistory).filter("wish == %@ AND deleted == false", self).count
+        return realm.objects(WishHistory).filter("wish == %@ AND canceled == False", self).count
     }
     
     override func push() -> Observable<Table> {

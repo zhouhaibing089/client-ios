@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YNSwift
 
 class WishViewController: UITableViewController {
 
@@ -88,6 +89,14 @@ class WishViewController: UITableViewController {
             UIView.performWithoutAnimation {
                 self.scoreBarButton.title = "\(user.score)"
             }
+            if wish.loop == 1 { // 单次欲望满足后删除该欲望
+                NSTimer.delay(1) {
+                    wish.delete()
+                    self.wishes.removeAtIndex(indexPath.row)
+                    self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                }
+            }
+            self.tableView.reloadData()
             self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         })
         alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
