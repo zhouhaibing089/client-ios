@@ -14,6 +14,11 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     @IBOutlet weak var scoreBarButton: UIBarButtonItem!
     @IBOutlet weak var taskTypeSegmentControl: UISegmentedControl!
     
+    @IBOutlet weak var showDoneButton: UIButton! {
+        didSet {
+            self.showDoneButton.tintColor = UIColor.grayColor()
+        }
+    }
     var hairline: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var toolbar: UIToolbar!
@@ -44,7 +49,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     @IBAction func showDone(sender: UIButton) {
         self.showDone = !self.showDone
         if self.showDone {
-            sender.tintColor = UIColor.blueColor()
+            sender.tintColor = self.view.tintColor
         } else {
             sender.tintColor = UIColor.grayColor()
         }

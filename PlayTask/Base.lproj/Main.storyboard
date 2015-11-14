@@ -163,7 +163,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUx-s0-ymt">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUx-s0-ymt">
                                 <rect key="frame" x="548" y="511" width="32" height="32"/>
                                 <state key="normal" image="recents"/>
                                 <connections>
@@ -224,6 +224,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="scoreBarButton" destination="p23-VE-NOh" id="o4z-dx-Nvb"/>
+                        <outlet property="showDoneButton" destination="sUx-s0-ymt" id="GF0-Pa-feg"/>
                         <outlet property="tableView" destination="nfR-b9-p1C" id="RCv-U8-SbB"/>
                         <outlet property="taskTypeSegmentControl" destination="Ij4-rj-mAn" id="lka-kY-2Ju"/>
                         <outlet property="tipsLabel" destination="nEs-Wo-EKD" id="R0S-G7-y9g"/>
@@ -1248,6 +1249,6 @@
         <image name="top_charts" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OBY-tC-yKa"/>
+        <segue reference="0lA-nr-mvG"/>
     </inferredMetricsTieBreakers>
 </document>
