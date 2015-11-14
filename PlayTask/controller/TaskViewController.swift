@@ -10,6 +10,7 @@ import UIKit
 
 class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var tipsLabel: UILabel!
     @IBOutlet weak var scoreBarButton: UIBarButtonItem!
     @IBOutlet weak var taskTypeSegmentControl: UISegmentedControl!
     
@@ -42,13 +43,10 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     }
     @IBAction func showDone(sender: UIButton) {
         self.showDone = !self.showDone
-        UIView.performWithoutAnimation {
-            if self.showDone {
-                sender.setTitle("显示未完成的任务", forState: UIControlState.Normal)
-            } else {
-                sender.setTitle("显示已完成的任务", forState: UIControlState.Normal)
-            }
-            sender.layoutIfNeeded()
+        if self.showDone {
+            sender.tintColor = UIColor.blueColor()
+        } else {
+            sender.tintColor = UIColor.grayColor()
         }
         self.refresh()
 
@@ -83,7 +81,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.contentInset = UIEdgeInsets(top: self.toolbar.frame.height, left: 0, bottom: 0, right: 0)
+        self.tableView.contentInset = UIEdgeInsets(top: self.toolbar.frame.height + self.toolbar.frame.origin.y, left: 0, bottom: 0, right: 0)
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
@@ -252,6 +250,16 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
                     }
                 }
             }
+        }
+        if self.currentTasks.count == 0 {
+            self.tableView.hidden = true
+            if self.showDone {
+                self.tipsLabel.text = MobClick.getConfigParams("taskDoneTips") ?? "已完成的任务"
+            } else {
+                self.tipsLabel.text = MobClick.getConfigParams("taskUndoneTips") ?? "没有未完成的任务"
+            }
+        } else {
+            self.tableView.hidden = false
         }
         self.tableView.reloadData()
     }
