@@ -94,7 +94,7 @@ class MoreViewController: UITableViewController {
             }
         } else if indexPath.section == 1 {
             switch indexPath.row {
-            case 1:
+            case 2:
                 let hud = MBProgressHUD.show()
                 API.logoutWithSessionId(Util.sessionId!).subscribe { event in
                     switch event {
@@ -129,6 +129,7 @@ class MoreViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.view.backgroundColor = UIColor.whiteColor();
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncStatusChanged:", name: Config.Notification.SYNC, object: nil)
     }
 

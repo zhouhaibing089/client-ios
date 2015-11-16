@@ -38,6 +38,9 @@ class API {
                         observer.onCompleted()
                     } else {
                         if status < 100 { // 服务器错误
+                            if !suppressError {
+                                CRToastManager.showNotificationWithMessage(json["info"].stringValue, completionBlock: nil)
+                            }
                             observer.onError(APIError.Server(status, json["info"].stringValue, json["data"]))
                         } else if status < 200 { // 通用接口错误
                             observer.onError(APIError.Common(status, json["info"].stringValue, json["data"]))

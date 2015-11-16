@@ -71,12 +71,14 @@ class BillViewController: UITableViewController {
                 self.billItems.removeAtIndex(indexPath.row)
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
             }))
-            actionSheet.addAction(UIAlertAction(title: "删除并恢复成就", style: UIAlertActionStyle.Default, handler: { _ in
-                billItem.cancel()
-                billItem.delete()
-                self.billItems.removeAtIndex(indexPath.row)
-                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-            }))
+            if billItem.getBronze() == 0 {
+                actionSheet.addAction(UIAlertAction(title: "删除并恢复成就", style: UIAlertActionStyle.Default, handler: { _ in
+                    billItem.cancel()
+                    billItem.delete()
+                    self.billItems.removeAtIndex(indexPath.row)
+                    self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                }))
+            }
             actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
             self.presentViewController(actionSheet, animated: true, completion: nil)
         }

@@ -50,7 +50,7 @@ extension API {
     }
     
     class func logoutWithSessionId(sessionId: String) -> Observable<Bool> {
-        return API.req(.DELETE, "/sessions/\(sessionId)").map { _ in
+        return API.req(.DELETE, "/sessions/\(sessionId)", suppressError: false).map { _ in
             Util.loggedUser = nil
             Util.sessionId = nil
             return true
@@ -63,6 +63,13 @@ extension API {
                 user.update(["score": json["score"].intValue, "bronze": json["bronze"].intValue])
             }
             return Util.currentUser
+        }
+    }
+    
+    class func changePassword(user: User, oldPassword: String, newPassword: String) -> Observable<Bool> {
+        return API.req(.PUT, "/users/\(user.sid.value!)", parameters: ["old_password": oldPassword,
+            "new_password": newPassword], suppressError: false).map  { json in
+                return true
         }
     }
 }

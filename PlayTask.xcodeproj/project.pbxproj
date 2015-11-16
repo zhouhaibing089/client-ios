@@ -31,6 +31,8 @@
 		499708EF1BCF63F500424F5E /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499708EE1BCF63F500424F5E /* NewTaskViewController.swift */; };
 		4998593D1BDB169C00C222E7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4998593C1BDB169C00C222E7 /* Task.swift */; };
 		49A976BB1BE73B02001300FB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A976BA1BE73B02001300FB /* LoginViewController.swift */; };
+		49BC5A1D1BF9B9CE00A0EC96 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC5A1C1BF9B9CE00A0EC96 /* PasswordViewController.swift */; };
+		49BC5A201BF9BB2900A0EC96 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC5A1F1BF9BB2900A0EC96 /* NSDate.swift */; };
 		49C8D3CC1BE88C4900E8EBF5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D3CB1BE88C4900E8EBF5 /* RegisterViewController.swift */; };
 		49C8D3D21BE8ACC400E8EBF5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D3D11BE8ACC400E8EBF5 /* API.swift */; };
 		49C8D3D41BE8BE1000E8EBF5 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D3D31BE8BE1000E8EBF5 /* Config.swift */; };
@@ -94,6 +96,8 @@
 		499708F51BCF68FD00424F5E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		4998593C1BDB169C00C222E7 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		49A976BA1BE73B02001300FB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		49BC5A1C1BF9B9CE00A0EC96 /* PasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
+		49BC5A1F1BF9BB2900A0EC96 /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
 		49C8D3CB1BE88C4900E8EBF5 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		49C8D3D11BE8ACC400E8EBF5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		49C8D3D31BE8BE1000E8EBF5 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 		49840DD21BCF9B69001F493D /* util */ = {
 			isa = PBXGroup;
 			children = (
+				49BC5A1E1BF9BB1400A0EC96 /* extension */,
 				49840DD01BCF9B61001F493D /* Util.swift */,
 			);
 			path = util;
@@ -148,6 +153,7 @@
 				498BAC9B1BD0EA5300ABB357 /* MoreViewController.swift */,
 				49A976BA1BE73B02001300FB /* LoginViewController.swift */,
 				49C8D3CB1BE88C4900E8EBF5 /* RegisterViewController.swift */,
+				49BC5A1C1BF9B9CE00A0EC96 /* PasswordViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -241,6 +247,14 @@
 				499708F31BCF68AC00424F5E /* BridgeHeader.h */,
 			);
 			name = lib;
+			sourceTree = "<group>";
+		};
+		49BC5A1E1BF9BB1400A0EC96 /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				49BC5A1F1BF9BB2900A0EC96 /* NSDate.swift */,
+			);
+			name = extension;
 			sourceTree = "<group>";
 		};
 		49C8D3D01BE8AC9F00E8EBF5 /* api */ = {
@@ -457,6 +471,7 @@
 				49840DD91BCFA997001F493D /* TaskTableViewCell.swift in Sources */,
 				495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */,
 				49C8D3D61BE8F0D800E8EBF5 /* UserAPI.swift in Sources */,
+				49BC5A201BF9BB2900A0EC96 /* NSDate.swift in Sources */,
 				498BAC921BD0CE7400ABB357 /* NewWishViewController.swift in Sources */,
 				49840DD11BCF9B61001F493D /* Util.swift in Sources */,
 				49953E021BDB316500B25EC8 /* WishHistory.swift in Sources */,
@@ -472,6 +487,7 @@
 				49953DFE1BDB2D6900B25EC8 /* Wish.swift in Sources */,
 				49D321331BF35DFA00A6E0A7 /* WishAPI.swift in Sources */,
 				49C8D3D41BE8BE1000E8EBF5 /* Config.swift in Sources */,
+				49BC5A1D1BF9B9CE00A0EC96 /* PasswordViewController.swift in Sources */,
 				4998593D1BDB169C00C222E7 /* Task.swift in Sources */,
 				49953DFC1BDB1F0400B25EC8 /* Table.swift in Sources */,
 				499708EF1BCF63F500424F5E /* NewTaskViewController.swift in Sources */,
