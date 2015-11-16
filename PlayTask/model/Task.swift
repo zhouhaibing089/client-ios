@@ -15,6 +15,7 @@ enum TaskType: Int {
     case Daily = 0
     case Weekly = 1
     case Normal = 2
+    case Hidden = 3
 }
 
 final class Task: Table {

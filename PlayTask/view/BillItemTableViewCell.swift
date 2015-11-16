@@ -11,6 +11,7 @@ import YNSwift
 
 class BillItemTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var badgeView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -20,6 +21,13 @@ class BillItemTableViewCell: UITableViewCell {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             self.titleLabel.text = self.billItem.getBillTitle()
+            if self.billItem.getBronze() > 0 {
+                self.badgeView.hidden = false
+                self.scoreLabel.hidden = true
+            } else {
+                self.scoreLabel.hidden = false
+                self.badgeView.hidden = true
+            }
             if self.billItem.getBillScore() >= 0 {
                 self.scoreLabel.textColor = self.contentView.tintColor
                 self.scoreLabel.text = "+\(self.billItem.getBillScore())"

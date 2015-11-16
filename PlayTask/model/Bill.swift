@@ -14,4 +14,5 @@ import Foundation
     func getBillTime() -> NSDate
     func delete()
     func cancel()
+    func getBronze() -> Int
 }

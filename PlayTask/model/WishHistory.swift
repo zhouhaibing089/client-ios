@@ -33,6 +33,10 @@ class WishHistory: Table, Bill {
         return self.satisfiedTime
     }
     
+    func getBronze() -> Int {
+        return 0
+    }
+    
     func cancel() {
         self.update(["canceled": true])
         var user = User.getInstance()

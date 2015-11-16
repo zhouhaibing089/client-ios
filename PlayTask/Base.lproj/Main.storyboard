@@ -483,6 +483,19 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" horizontalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="llw-ws-Zgm" userLabel="badge">
+                                            <rect key="frame" x="584" y="32" width="8" height="8"/>
+                                            <color key="backgroundColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="llw-ws-Zgm" secondAttribute="height" multiplier="1:1" id="Ckh-be-RJH"/>
+                                                <constraint firstAttribute="width" constant="8" id="Lyv-bX-Xfe"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="+3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftX-YI-4LR">
                                             <rect key="frame" x="571" y="25" width="21" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -491,17 +504,26 @@
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="llw-ws-Zgm" secondAttribute="trailing" id="2ch-H8-ij3"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="VWp-YD-jzP" secondAttribute="leading" id="BLS-QH-mHX"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="ftX-YI-4LR" secondAttribute="trailing" id="LxF-TF-KLb"/>
                                         <constraint firstItem="ftX-YI-4LR" firstAttribute="centerY" secondItem="ElT-PR-qnp" secondAttribute="centerY" id="PqW-QJ-7ga"/>
                                         <constraint firstItem="ftX-YI-4LR" firstAttribute="leading" secondItem="VWp-YD-jzP" secondAttribute="trailing" constant="8" symbolic="YES" id="buh-oH-129"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Fxc-WZ-ur4" secondAttribute="bottom" id="ddN-3o-dtx"/>
                                         <constraint firstItem="Fxc-WZ-ur4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VWp-YD-jzP" secondAttribute="bottom" constant="8" symbolic="YES" id="jDn-Ug-Blr"/>
+                                        <constraint firstItem="llw-ws-Zgm" firstAttribute="centerY" secondItem="ElT-PR-qnp" secondAttribute="centerY" id="l0T-tZ-fIP"/>
                                         <constraint firstAttribute="topMargin" secondItem="VWp-YD-jzP" secondAttribute="top" id="sFa-Jv-jvP"/>
+                                        <constraint firstItem="llw-ws-Zgm" firstAttribute="leading" secondItem="VWp-YD-jzP" secondAttribute="trailing" constant="8" symbolic="YES" id="yDg-Zs-Djy"/>
                                         <constraint firstItem="Fxc-WZ-ur4" firstAttribute="leading" secondItem="VWp-YD-jzP" secondAttribute="leading" id="ztH-cO-hDC"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="yDg-Zs-Djy"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="badgeView" destination="llw-ws-Zgm" id="z50-93-dPy"/>
                                     <outlet property="scoreLabel" destination="ftX-YI-4LR" id="mDW-XN-LS6"/>
                                     <outlet property="timeLabel" destination="Fxc-WZ-ur4" id="m3h-Ko-Ljg"/>
                                     <outlet property="titleLabel" destination="VWp-YD-jzP" id="48L-mK-LoL"/>
@@ -1367,6 +1389,6 @@
         <image name="top_charts" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KYa-2q-z03"/>
+        <segue reference="0lA-nr-mvG"/>
     </inferredMetricsTieBreakers>
 </document>

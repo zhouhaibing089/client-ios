@@ -33,6 +33,10 @@ final class TaskHistory: Table, Bill {
         return self.completionTime
     }
     
+    func getBronze() -> Int {
+        return self.task.bronze
+    }
+    
     func cancel() {
         self.update(["canceled": true])
         var user = User.getInstance()
