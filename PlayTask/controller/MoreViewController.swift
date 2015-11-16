@@ -118,6 +118,11 @@ class MoreViewController: UITableViewController {
                 let supportAlertMessage = MobClick.getConfigParams("supportAlertMessage") ?? "playtask@qq.com"
                 let alert = UIAlertController(title: supportAlertTitle, message: supportAlertMessage, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "好", style: UIAlertActionStyle.Cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "复制", style: UIAlertActionStyle.Default, handler: { _ in
+                    let pasteboard = UIPasteboard.generalPasteboard()
+                    pasteboard.string = supportAlertMessage
+                }))
+
                 self.presentViewController(alert, animated: true, completion: nil)
                 break
             default:
