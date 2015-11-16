@@ -10,8 +10,6 @@ import UIKit
 import YNSwift
 
 class WishViewController: UITableViewController {
-
-    @IBOutlet weak var scoreBarButton: UIBarButtonItem!
     
     var wishes: [Wish]!
     
@@ -49,10 +47,10 @@ class WishViewController: UITableViewController {
     }
     
     func refresh() {
-        let user = Util.currentUser
-        UIView.performWithoutAnimation {
-            self.scoreBarButton.title = "\(user.score)"
-        }
+//        let user = Util.currentUser
+//        UIView.performWithoutAnimation {
+//            self.scoreBarButton.title = "\(user.score)"
+//        }
         self.wishes = Wish.getWishes()
         self.tableView.reloadData()
     }

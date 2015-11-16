@@ -54,7 +54,7 @@ class TaskTableViewCell: UITableViewCell {
         }
     }
         
-    weak var scoreBarButton: UIBarButtonItem!
+    weak var userScoreLabel: UILabel!
     @IBOutlet weak var pinButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -125,9 +125,7 @@ class TaskTableViewCell: UITableViewCell {
             break
         }
     
-        UIView.performWithoutAnimation {
-            self.scoreBarButton.title = "\(user.score)"
-        }
+        self.userScoreLabel.text = "\(user.score)"
     }
 
 }

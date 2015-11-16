@@ -11,8 +11,8 @@ import UIKit
 class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tipsLabel: UILabel!
-    @IBOutlet weak var scoreBarButton: UIBarButtonItem!
     @IBOutlet weak var taskTypeSegmentControl: UISegmentedControl!
+    @IBOutlet weak var scoreLabel: UILabel!
     
     @IBOutlet weak var showDoneButton: UIButton! {
         didSet {
@@ -145,7 +145,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
             cell.mode = TaskTableViewCell.Mode.Normal
         }
         cell.task = self.currentTasks[indexPath.row]
-        cell.scoreBarButton = self.scoreBarButton
+        cell.userScoreLabel = self.scoreLabel
         cell.layoutIfNeeded() // for iOS 8 UILabel to be right
         return cell
     }
@@ -239,9 +239,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
 
     func refresh() {
         let user = Util.currentUser
-        UIView.performWithoutAnimation {
-            self.scoreBarButton.title = "\(user.score)"
-        }
+        self.scoreLabel.text = "\(user.score)"
         for (type, tasks) in Task.getTasks() {
             self.tasks[0][type] = [Task]()
             self.tasks[1][type] = [Task]()

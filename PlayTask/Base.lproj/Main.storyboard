@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -170,10 +171,36 @@
                                     <action selector="showDone:" destination="R3m-mU-SDD" eventType="touchUpInside" id="IY1-r2-2dS"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DnV-Ew-8lp">
+                                <rect key="frame" x="20" y="517" width="16" height="20"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                                <color key="textColor" red="0.26770797371864319" green="0.28172788023948669" blue="0.28889980912208557" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7x-WK-Y0Z">
+                                <rect key="frame" x="44" y="523" width="8" height="8"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="8" id="BI5-rM-12G"/>
+                                    <constraint firstAttribute="width" secondItem="t7x-WK-Y0Z" secondAttribute="height" multiplier="1:1" id="pRQ-c0-WRq"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4m-GK-5PT">
+                                <rect key="frame" x="60" y="517" width="8" height="20"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                                <color key="textColor" red="0.26770797371864319" green="0.28172788023948669" blue="0.28889980912208557" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="i4m-GK-5PT" firstAttribute="centerY" secondItem="t7x-WK-Y0Z" secondAttribute="centerY" id="4be-d4-G7R"/>
                             <constraint firstItem="9Nz-Mw-wUu" firstAttribute="top" secondItem="sVE-Oo-5pL" secondAttribute="bottom" constant="422" id="6LR-Mq-vRl"/>
                             <constraint firstItem="nfR-b9-p1C" firstAttribute="trailing" secondItem="sVE-Oo-5pL" secondAttribute="trailing" id="7Lk-hE-hDU"/>
                             <constraint firstAttribute="bottom" secondItem="nfR-b9-p1C" secondAttribute="bottom" id="7uW-gx-eY1"/>
@@ -184,17 +211,22 @@
                             <constraint firstItem="sVE-Oo-5pL" firstAttribute="height" secondItem="5Bg-FO-MdG" secondAttribute="height" id="Bf4-Oz-JeH"/>
                             <constraint firstItem="9Nz-Mw-wUu" firstAttribute="top" secondItem="sUx-s0-ymt" secondAttribute="bottom" constant="8" symbolic="YES" id="BgH-ZB-55k"/>
                             <constraint firstItem="sVE-Oo-5pL" firstAttribute="leading" secondItem="rFn-jz-a13" secondAttribute="leading" id="CfM-58-BWK"/>
+                            <constraint firstItem="DnV-Ew-8lp" firstAttribute="centerY" secondItem="sUx-s0-ymt" secondAttribute="centerY" id="F6R-xc-YaZ"/>
                             <constraint firstItem="nfR-b9-p1C" firstAttribute="top" secondItem="rFn-jz-a13" secondAttribute="top" id="JQy-ZS-gVQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="sUx-s0-ymt" secondAttribute="trailing" id="LF7-ez-oqL"/>
                             <constraint firstAttribute="trailing" secondItem="sVE-Oo-5pL" secondAttribute="trailing" id="LsB-Y6-uOi"/>
+                            <constraint firstItem="i4m-GK-5PT" firstAttribute="leading" secondItem="t7x-WK-Y0Z" secondAttribute="trailing" constant="8" symbolic="YES" id="Oge-1y-kNt"/>
                             <constraint firstItem="nEs-Wo-EKD" firstAttribute="top" secondItem="sVE-Oo-5pL" secondAttribute="bottom" constant="24" id="Ogj-sy-akx"/>
+                            <constraint firstItem="t7x-WK-Y0Z" firstAttribute="centerY" secondItem="DnV-Ew-8lp" secondAttribute="centerY" id="PYB-4b-6Dj"/>
                             <constraint firstItem="sUx-s0-ymt" firstAttribute="top" secondItem="nfR-b9-p1C" secondAttribute="bottom" constant="8" symbolic="YES" id="S2F-F4-iPl"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="DnV-Ew-8lp" secondAttribute="leading" id="TvE-U0-nX1"/>
                             <constraint firstItem="nEs-Wo-EKD" firstAttribute="centerY" secondItem="rFn-jz-a13" secondAttribute="centerY" id="VzO-zD-ocO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nEs-Wo-EKD" secondAttribute="trailing" id="brg-QB-cK6"/>
                             <constraint firstItem="nfR-b9-p1C" firstAttribute="leading" secondItem="rFn-jz-a13" secondAttribute="leading" id="fkF-Pn-t1M"/>
                             <constraint firstItem="5Bg-FO-MdG" firstAttribute="leading" secondItem="sVE-Oo-5pL" secondAttribute="leading" id="hYU-V6-0w7"/>
                             <constraint firstItem="sVE-Oo-5pL" firstAttribute="top" secondItem="NuF-PS-rr3" secondAttribute="bottom" id="jLW-af-8IF"/>
                             <constraint firstItem="5Bg-FO-MdG" firstAttribute="top" secondItem="NuF-PS-rr3" secondAttribute="bottom" id="kLy-zK-AVq"/>
+                            <constraint firstItem="t7x-WK-Y0Z" firstAttribute="leading" secondItem="DnV-Ew-8lp" secondAttribute="trailing" constant="8" symbolic="YES" id="ky8-AX-IZQ"/>
                             <constraint firstAttribute="trailing" secondItem="nfR-b9-p1C" secondAttribute="trailing" id="xT2-Zf-2BE"/>
                         </constraints>
                         <variation key="default">
@@ -211,7 +243,7 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="任务" id="8Rr-PK-TSO">
-                        <barButtonItem key="leftBarButtonItem" title="0" id="p23-VE-NOh">
+                        <barButtonItem key="leftBarButtonItem" title="账单" id="p23-VE-NOh">
                             <connections>
                                 <segue destination="Nah-Wp-egE" kind="show" id="0lA-nr-mvG"/>
                             </connections>
@@ -223,7 +255,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="scoreBarButton" destination="p23-VE-NOh" id="o4z-dx-Nvb"/>
+                        <outlet property="scoreLabel" destination="DnV-Ew-8lp" id="pM5-7A-ZMG"/>
                         <outlet property="showDoneButton" destination="sUx-s0-ymt" id="GF0-Pa-feg"/>
                         <outlet property="tableView" destination="nfR-b9-p1C" id="RCv-U8-SbB"/>
                         <outlet property="taskTypeSegmentControl" destination="Ij4-rj-mAn" id="lka-kY-2Ju"/>
@@ -497,7 +529,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="欲望" id="FeY-8f-Z0e">
-                        <barButtonItem key="leftBarButtonItem" title="24" id="Z8W-3h-Y1N">
+                        <barButtonItem key="leftBarButtonItem" title="账单" id="Z8W-3h-Y1N">
                             <connections>
                                 <segue destination="Nah-Wp-egE" kind="show" id="OBY-tC-yKa"/>
                             </connections>
@@ -509,7 +541,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="scoreBarButton" destination="Z8W-3h-Y1N" id="1Mf-cK-F56"/>
                         <segue destination="Jyq-UH-ZzK" kind="presentation" identifier="new" id="Vkn-I9-mrt"/>
                     </connections>
                 </tableViewController>
@@ -1249,6 +1280,6 @@
         <image name="top_charts" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0lA-nr-mvG"/>
+        <segue reference="OBY-tC-yKa"/>
     </inferredMetricsTieBreakers>
 </document>

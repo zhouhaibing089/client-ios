@@ -24,6 +24,7 @@ final class Task: Table {
     dynamic var loop = 1
     dynamic var rank = 0
     dynamic var pinned = false
+    dynamic var bronze = 0
     let userSid = RealmOptional<Int>()
     
     convenience init(title: String, score: Int, type: TaskType, loop: Int) {

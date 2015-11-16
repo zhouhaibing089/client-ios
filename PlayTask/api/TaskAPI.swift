@@ -18,6 +18,7 @@ extension API {
             "type": task.type,
             "loop": task.loop,
             "rank": task.rank,
+            "bronze": task.bronze,
             "pinned": task.pinned ? "true" : "false",
             
             "deleted": task.deleted ? "true" : "false",
@@ -51,8 +52,11 @@ extension API {
                 if let t = Task.getBySid(subJson["id"].intValue) { // update
                     let pinned = subJson["pinned"].boolValue
                     let rank = subJson["rank"].intValue
+                    let bronze = subJson["bronze"].intValue
+                    let title = subJson["title"].stringValue
                     
-                    t.update(json: subJson, value: ["pinned": pinned, "rank": rank])
+                    t.update(json: subJson, value: ["pinned": pinned, "title": title,
+                        "rank": rank, "bronze": bronze])
                     tasks.append(t)
                 } else { // new
                     let t = Task(json: subJson)
@@ -62,6 +66,7 @@ extension API {
                     t.score = subJson["score"].intValue
                     t.title = subJson["title"].stringValue
                     t.type = subJson["type"].intValue
+                    t.bronze = subJson["bronze"].intValue
                     t.userSid.value = subJson["user_id"].intValue
                     
                     t.save()
