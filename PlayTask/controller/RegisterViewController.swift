@@ -50,6 +50,7 @@ class RegisterViewController: UITableViewController {
         API.registerWithAccount(account, email: email, password: password).flatMap(login).subscribe { event in
             switch event {
             case .Next(_):
+                Util.appDelegate.synchronize()
                 hud.hide(true)
                 self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
                 break

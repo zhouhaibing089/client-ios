@@ -1240,6 +1240,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbB-ws-njD">
                                     <rect key="frame" x="512" y="50" width="68" height="30"/>
                                     <state key="normal" title="忘记密码?"/>
+                                    <connections>
+                                        <action selector="forgetPassword:" destination="E02-op-Bjo" eventType="touchUpInside" id="S8A-pQ-tgG"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <constraints>

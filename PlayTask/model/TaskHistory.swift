@@ -75,7 +75,8 @@ final class TaskHistory: Table, Bill {
         }
         let realm = try! Realm()
         var observable: Observable<Table> = empty()
-        realm.objects(TaskHistory).filter("task.userSid == %@ AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).map {
+        realm.objects(TaskHistory).filter("task.sid != nil AND task.userSid == %@ AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).map {
+            print($0.task)
             observable = observable.concat($0.push().retry(3))
         }
         return observable

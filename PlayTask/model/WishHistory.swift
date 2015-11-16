@@ -78,7 +78,7 @@ class WishHistory: Table, Bill {
         }
         let realm = try! Realm()
         var observable: Observable<Table> = empty()
-        realm.objects(WishHistory).filter("wish.userSid == %@ AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).map {
+        realm.objects(WishHistory).filter("wish.sid != nil AND wish.userSid == %@ AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).map {
             observable = observable.concat($0.push().retry(3))
         }
         return observable

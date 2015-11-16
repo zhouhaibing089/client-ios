@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Realm.Configuration.defaultConfiguration = Realm.Configuration(
             schemaVersion: 1,
             migrationBlock: { migration, oldSchemaVersion in
-                if (oldSchemaVersion < 1) {
+                if oldSchemaVersion < 1 {
                     migration.enumerate(WishHistory.className()) { oldObject, newObject in
                         let createdTime = oldObject!["createdTime"] as! NSDate
                         newObject!["satisfiedTime"] = createdTime
@@ -119,7 +119,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.syncStatus = SyncStatus.Syncing
         var pullUser: Observable<Table> = empty()
         if let loggedUser = Util.loggedUser {
-            pullUser = API.getUserWithUserSid(loggedUser.sid.value!).map { $0 as Table }
+            pullUser = API.getUserWithUserSid(loggedUser.sid.value!).map {
+                User.getInstance().update(["score": 0]) // 游客账户数据清零
+                return $0 as Table
+            }
         }
         self.syncDisposable = Task.push().concat(Task.pull()).concat(TaskHistory.push()).concat(TaskHistory.pull())
             .concat(Wish.push()).concat(Wish.pull()).concat(WishHistory.push()).concat(WishHistory.pull())
@@ -135,7 +138,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 default:
                     break
                 }
-                
         }
     }
 
