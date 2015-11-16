@@ -10,6 +10,7 @@ import UIKit
 
 class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var bronzeLabel: UILabel!
     @IBOutlet weak var tipsLabel: UILabel!
     @IBOutlet weak var taskTypeSegmentControl: UISegmentedControl!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -240,6 +241,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     func refresh() {
         let user = Util.currentUser
         self.scoreLabel.text = "\(user.score)"
+        self.bronzeLabel.text = "\(user.bronze)"
         for (type, tasks) in Task.getTasks() {
             self.tasks[0][type] = [Task]()
             self.tasks[1][type] = [Task]()

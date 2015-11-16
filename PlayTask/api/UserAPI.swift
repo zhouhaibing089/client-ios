@@ -60,7 +60,7 @@ extension API {
     class func getUserWithUserSid(userSid: Int) -> Observable<User> {
         return API.req(.GET, "/users/\(userSid)").map { json in
             if let user = User.getBySid(userSid) {
-                user.update(["score": json["score"].intValue])
+                user.update(["score": json["score"].intValue, "bronze": json["bronze"].intValue])
             }
             return Util.currentUser
         }

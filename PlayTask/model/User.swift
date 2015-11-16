@@ -13,6 +13,7 @@ class User: Table {
     dynamic var account = ""
     dynamic var email = ""
     dynamic var score = 0
+    dynamic var bronze = 0
     
     dynamic var taskPullTime: NSDate!
     dynamic var taskHistoryPullTime: NSDate!
