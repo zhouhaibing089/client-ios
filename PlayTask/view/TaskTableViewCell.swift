@@ -126,6 +126,11 @@ class TaskTableViewCell: UITableViewCell {
         }
     
         self.userScoreLabel.text = "\(user.score)"
+        if user.score >= 0 {
+            self.userScoreLabel.textColor = UIColor.blackColor()
+        } else {
+            self.userScoreLabel.textColor = UIColor.redColor()
+        }
     }
 
 }

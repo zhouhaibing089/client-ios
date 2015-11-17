@@ -99,6 +99,11 @@ class WishViewController: UIViewController, UITableViewDelegate, UITableViewData
             let user = Util.currentUser
             user.update(["score": user.score - wish.score])
             self.scoreLabel.text = "\(user.score)"
+            if user.score >= 0 {
+                self.scoreLabel.textColor = UIColor.blackColor()
+            } else {
+                self.scoreLabel.textColor = UIColor.redColor()
+            }
             if wish.loop == 1 { // 单次欲望满足后删除该欲望
                 NSTimer.delay(0.6) {
                     wish.delete()
@@ -182,8 +187,7 @@ class WishViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 } else {
                     nwvc.onWishAdded = { wish in
-                        self.wishes.insert(wish, atIndex: 0)
-                        self.tableView.reloadData()
+                        self.refresh()
                     }
                 }
                 
@@ -194,11 +198,18 @@ class WishViewController: UIViewController, UITableViewDelegate, UITableViewData
     func refresh() {
         let user = Util.currentUser
         self.scoreLabel.text = "\(user.score)"
+        if user.score >= 0 {
+            self.scoreLabel.textColor = UIColor.blackColor()
+        } else {
+            self.scoreLabel.textColor = UIColor.redColor()
+        }
         self.bronzeLabel.text = "\(user.bronze)"
         self.wishes = Wish.getWishes()
         if self.wishes.count == 0 {
             self.tableView.hidden = true
             self.tipsLabel.text = MobClick.getConfigParams("wishTips") ?? "弗洛伊德认为，人的潜意识中储存着很多原始的欲望与冲动"
+        } else {
+            self.tableView.hidden = false
         }
         self.tableView.reloadData()
     }
