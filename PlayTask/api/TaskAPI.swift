@@ -67,8 +67,9 @@ extension API {
                     t.title = subJson["title"].stringValue
                     t.type = subJson["type"].intValue
                     t.bronze = subJson["bronze"].intValue
-                    t.userSid.value = subJson["user_id"].intValue
-                    
+                    t.userSid.value = subJson["user_id"].int
+                    t.groupSid.value = subJson["group_id"].int
+
                     t.save()
                     tasks.append(t)
                 }

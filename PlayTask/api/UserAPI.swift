@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RealmSwift
 
 extension API {
     class func registerWithAccount(account: String, email: String, password: String) -> Observable<User> {
@@ -61,6 +62,20 @@ extension API {
         return API.req(.GET, "/users/\(userSid)").map { json in
             if let user = User.getBySid(userSid) {
                 user.update(["score": json["score"].intValue, "bronze": json["bronze"].intValue])
+                //  创建 Group
+                var groups = [Group]()
+                for (_, subJson) in json["groups"] {
+                    if let group = Group.getBySid(subJson["id"].intValue) {
+                        group.update(json: subJson, value: ["name": subJson["name"].stringValue])
+                        groups.append(group)
+                    } else {
+                        let g = Group(json: subJson)
+                        g.name = subJson["name"].stringValue
+                        g.save()
+                        groups.append(g)
+                    }
+                }
+                user.update(["groups": groups])
             }
             return Util.currentUser
         }

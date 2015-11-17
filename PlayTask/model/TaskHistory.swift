@@ -48,13 +48,10 @@ final class TaskHistory: Table, Bill {
     
     class func getTaskHistories() -> [TaskHistory] {
         let realm = try! Realm()
-        var query = "task.userSid == "
+        var query = NSPredicate(format: "task.userSid == nil AND deleted == false AND canceled == false")
         if let loggedUser = Util.loggedUser {
-            query += "\(loggedUser.sid.value!)"
-        } else {
-            query += "nil"
+            query = NSPredicate(format: "(task.userSid == \(loggedUser.sid.value!) OR task.groupSid IN %@) AND deleted == false AND canceled == false", loggedUser.getGroupIds())
         }
-        query += " AND deleted == false AND canceled == false"
         return realm.objects(TaskHistory).filter(query).map { $0 }
     }
     

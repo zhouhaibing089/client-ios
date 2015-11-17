@@ -15,6 +15,8 @@ class User: Table {
     dynamic var score = 0
     dynamic var bronze = 0
     
+    let groups = List<Group>()
+    
     dynamic var taskPullTime: NSDate!
     dynamic var taskHistoryPullTime: NSDate!
     dynamic var wishPullTime: NSDate!
@@ -41,4 +43,12 @@ class User: Table {
         }
         return User.instance!
     }
+    
+    func getGroupIds() -> [Int] {
+        return self.groups.map { $0.sid.value! }
+    }
+}
+
+class Group: Table {
+    dynamic var name = ""
 }

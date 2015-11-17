@@ -27,6 +27,7 @@ final class Task: Table {
     dynamic var pinned = false
     dynamic var bronze = 0
     let userSid = RealmOptional<Int>()
+    let groupSid = RealmOptional<Int>()
     
     convenience init(title: String, score: Int, type: TaskType, loop: Int) {
         self.init()
