@@ -1134,7 +1134,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection footerTitle="© 2015 PlayTask 1.3" id="4oX-4C-HCo">
+                            <tableViewSection footerTitle="© 2015 PlayTask 1.2" id="4oX-4C-HCo">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="e5R-p8-vdc" style="IBUITableViewCellStyleDefault" id="I7g-Og-Z7L">
                                         <rect key="frame" x="0.0" y="550" width="600" height="44"/>
