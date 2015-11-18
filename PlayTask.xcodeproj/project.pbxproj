@@ -39,7 +39,7 @@
 		49C8D3D61BE8F0D800E8EBF5 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D3D51BE8F0D800E8EBF5 /* UserAPI.swift */; };
 		49C8D3DA1BEF6DE700E8EBF5 /* TaskAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D3D91BEF6DE700E8EBF5 /* TaskAPI.swift */; };
 		49D321331BF35DFA00A6E0A7 /* WishAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D321321BF35DFA00A6E0A7 /* WishAPI.swift */; };
-		5177522D0A08272C32C53545 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FE39AB88BE9E71239939D4 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5177522D0A08272C32C53545 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FE39AB88BE9E71239939D4 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */

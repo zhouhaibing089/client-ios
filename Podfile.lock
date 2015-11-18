@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (3.1.1)
+  - Alamofire (3.1.2)
   - CRToast (0.0.9)
   - MBProgressHUD (0.9.1)
   - Realm (0.96.2):
@@ -7,11 +7,11 @@ PODS:
   - Realm/Headers (0.96.2)
   - RealmSwift (0.96.2):
     - Realm (= 0.96.2)
-  - RxBlocking (2.0.0-beta.2):
+  - RxBlocking (2.0.0-beta.3):
     - RxSwift (~> 2.0.0-beta)
-  - RxCocoa (2.0.0-beta.2):
+  - RxCocoa (2.0.0-beta.3):
     - RxSwift (~> 2.0.0-beta)
-  - RxSwift (2.0.0-beta.2)
+  - RxSwift (2.0.0-beta.3)
   - SQLite.swift (1.0.0)
   - SwiftyJSON (2.3.1)
   - UMengAnalytics-NO-IDFA (3.6.5)
@@ -42,17 +42,17 @@ CHECKOUT OPTIONS:
     :git: https://github.com/stephencelis/SQLite.swift.git
 
 SPEC CHECKSUMS:
-  Alamofire: 9b0a7188b961a03914a99304488bd226b0e46c0e
+  Alamofire: 7c16ca65f3c7e681fd925fd7f2dec7747ff96855
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   Realm: 3ce8448151c571e90b85002d984d7f93f54fc8a3
   RealmSwift: 485599fe54e35461c4a0daa7d01d8fbf11424873
-  RxBlocking: ffb518856fb7712dcef7e18406ccb8c2854b3104
-  RxCocoa: ee39aa3ab24a8dde3832669f8e1e2c7652925e0c
-  RxSwift: 795720c22352cf1f62669ef3695b5df7e195103b
+  RxBlocking: 331f8bdedf77198f8ff1a37f09c492f1f4f631e5
+  RxCocoa: 1472006304b296d03c847f78b21384523cc4902e
+  RxSwift: 19fbe885b404d1d36d42ac8535134739a9b42952
   SQLite.swift: 3bb75f5a650f08673276bc6d3fb1de1b542b8f4d
   SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
   UMengAnalytics-NO-IDFA: 279e28990a08efb56cff1821d2954bb00aa6975a
   YNSwift: 3f75cd6c816e1aa85085ff5443df97233fd7ca6d
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0
