@@ -92,7 +92,7 @@ final class Task: Table {
             end = now.endOfDay()
         } else if self.type == TaskType.Weekly.rawValue {
             begin = now.beginOfWeek()
-            end = now.endOfDay()
+            end = now.endOfWeek()
         }
         return realm.objects(TaskHistory).filter("task == %@ AND canceled == false AND completionTime >= %@ AND completionTime <= %@", self, begin, end).count
     }
@@ -107,7 +107,7 @@ final class Task: Table {
             end = now.endOfDay()
         } else if self.type == TaskType.Weekly.rawValue {
             begin = now.beginOfWeek()
-            end = now.endOfDay()
+            end = now.endOfWeek()
         }
 
         var query = "task == %@ AND completionTime >= %@ AND completionTime <= %@";

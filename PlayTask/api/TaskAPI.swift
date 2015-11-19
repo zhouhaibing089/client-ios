@@ -123,6 +123,7 @@ extension API {
                         th.completionTime = NSDate(timeIntervalSince1970: subJson["completion_time"].doubleValue / 1000)
                         th.canceled = subJson["canceled"].boolValue
                         th.task = t
+                        th.userSid.value = subJson["user_id"].int
                         
                         th.save()
                         taskHistories.append(th)

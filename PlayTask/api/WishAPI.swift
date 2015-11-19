@@ -115,6 +115,7 @@ extension API {
                         wh.canceled = subJson["canceled"].boolValue
 
                         wh.wish = w
+                        wh.userSid.value = subJson["user_id"].int
                         
                         wh.save()
                         wishHistories.append(wh)

@@ -15,6 +15,8 @@ final class TaskHistory: Table, Bill {
     dynamic var canceled = false
     dynamic var task: Task!
     
+    let userSid = RealmOptional<Int>()
+    
     convenience init(task: Task) {
         self.init()
         self.task = task
@@ -48,16 +50,23 @@ final class TaskHistory: Table, Bill {
     
     class func getTaskHistories() -> [TaskHistory] {
         let realm = try! Realm()
-        var query = NSPredicate(format: "task.userSid == nil AND deleted == false AND canceled == false")
+
+        var query = "userSid == "
         if let loggedUser = Util.loggedUser {
-            query = NSPredicate(format: "(task.userSid == \(loggedUser.sid.value!) OR task.groupSid IN %@) AND deleted == false AND canceled == false", loggedUser.getGroupIds())
+            query += "\(loggedUser.sid.value!)"
+        } else {
+            query += "nil"
         }
+        query += " AND deleted == false AND canceled == false"
         return realm.objects(TaskHistory).filter(query).map { $0 }
     }
     
     override func push() -> Observable<Table> {
-        if Util.loggedUser == nil {
+        guard let userSid = Util.loggedUser?.sid.value else {
             return empty()
+        }
+        if self.userSid.value == nil {
+            self.update(["userSid": userSid])
         }
         if self.sid.value == nil {
             return API.createTaskHistory(self).map { $0 as Table }
@@ -70,15 +79,18 @@ final class TaskHistory: Table, Bill {
         guard let userSid = Util.loggedUser?.sid.value else {
             return empty()
         }
-        let realm = try! Realm()
-        var observable: Observable<Table> = empty()
-        realm.objects(TaskHistory).filter("task.sid != nil AND task.userSid == %@ AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).map {
-            observable = observable.concat($0.push().retry(3))
+        return create { observer in
+            let realm = try! Realm()
+            var observable: Observable<Table> = empty()
+            realm.objects(TaskHistory).filter("task.sid != nil AND task.userSid == %@ AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).map {
+                observable = observable.concat($0.push().retry(3))
+            }
+            return observable.subscribe { event in
+                observer.on(event)
+            }
         }
-        return observable
-
     }
-    
+
     override class func pull() -> Observable<Table> {
         guard let loggedUser = Util.loggedUser else {
             return empty()

@@ -15,6 +15,8 @@ class WishHistory: Table, Bill {
     dynamic var satisfiedTime: NSDate!
     dynamic var canceled = false
     
+    let userSid = RealmOptional<Int>()
+    
     convenience init(wish: Wish) {
         self.init()
         self.wish = wish
@@ -51,7 +53,7 @@ class WishHistory: Table, Bill {
     
     class func getWishHistories() -> [WishHistory] {
         let realm = try! Realm()
-        var query = "wish.userSid == "
+        var query = "userSid == "
         if let loggedUser = Util.loggedUser {
             query += "\(loggedUser.sid.value!)"
         } else {
@@ -62,8 +64,11 @@ class WishHistory: Table, Bill {
     }
     
     override func push() -> Observable<Table> {
-        if Util.loggedUser == nil {
+        guard let userSid = Util.loggedUser?.sid.value else {
             return empty()
+        }
+        if self.userSid.value == nil {
+            self.update(["userSid": userSid])
         }
         if self.sid.value == nil {
             return API.createWishHistory(self).map { $0 as Table }
@@ -76,12 +81,16 @@ class WishHistory: Table, Bill {
         guard let userSid = Util.loggedUser?.sid.value else {
             return empty()
         }
-        let realm = try! Realm()
-        var observable: Observable<Table> = empty()
-        realm.objects(WishHistory).filter("wish.sid != nil AND wish.userSid == %@ AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).map {
-            observable = observable.concat($0.push().retry(3))
+        return create { observer in
+            let realm = try! Realm()
+            var observable: Observable<Table> = empty()
+            realm.objects(WishHistory).filter("wish.sid != nil AND wish.userSid == %@ AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).map {
+                observable = observable.concat($0.push().retry(3))
+            }
+            return observable.subscribe { event in
+                observer.on(event)
+            }
         }
-        return observable
         
     }
     

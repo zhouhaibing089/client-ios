@@ -16,40 +16,46 @@ public extension NSDate {
         let components = cal.components([NSCalendarUnit.Year, NSCalendarUnit.Month,
             NSCalendarUnit.Day, NSCalendarUnit.Hour,
             NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: self)
+        let subtract = NSDateComponents()
+        subtract.day = 0
+        if components.hour < 2 {
+            subtract.day = -1
+        }
         components.hour = 2
         components.minute = 0
         components.second = 0
-        return cal.dateFromComponents(components)!
+        let tmp = cal.dateFromComponents(components)!
+        return cal.dateByAddingComponents(subtract, toDate: tmp, options: [])!
     }
     
     public func endOfDay() -> NSDate {
         let cal = NSCalendar.currentCalendar()
-        let substract = NSDateComponents()
-        substract.day = 1
-        return cal.dateByAddingComponents(substract, toDate: self.beginOfDay(), options: [])!
+        let add = NSDateComponents()
+        add.day = 1
+        return cal.dateByAddingComponents(add, toDate: self.beginOfDay(), options: [])!
     }
     
     public func beginOfWeek() -> NSDate {
         let cal = NSCalendar.currentCalendar()
         let components = cal.components(NSCalendarUnit.Weekday, fromDate: self)
-        let substract = NSDateComponents()
+        let subtract = NSDateComponents()
         if components.weekday == 1 {
-            substract.day = -6
+            subtract.day = -6
         } else {
-            substract.day = 2 - components.weekday
+            subtract.day = 2 - components.weekday
         }
-        return cal.dateByAddingComponents(substract, toDate: self.beginOfDay(), options: [])!
+        return cal.dateByAddingComponents(subtract, toDate: self.beginOfDay(), options: [])!
     }
     
     public func endOfWeek() -> NSDate {
         let cal = NSCalendar.currentCalendar()
         let components = cal.components(NSCalendarUnit.Weekday, fromDate: self)
-        let substract = NSDateComponents()
+        let add = NSDateComponents()
         if components.weekday == 1 {
-            substract.day = 0
+            add.day = 0
         } else {
-            substract.day = 8 - components.weekday
+            add.day = 8 - components.weekday
         }
-        return cal.dateByAddingComponents(substract, toDate: self.endOfDay(), options: [])!
+        return cal.dateByAddingComponents(add, toDate: self.endOfDay(), options: [])!
     }
 }
