@@ -62,14 +62,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             schemaVersion: 1,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 1 {
+                    migration.enumerate(WishHistory.className()) { oldObject, newObject in
+                        let createdTime = oldObject!["createdTime"] as! NSDate
+                        newObject!["satisfiedTime"] = createdTime
+                    }
                 }
         })
-        let realm = try! Realm()
-        realm.objects(WishHistory).map { wh in
-            if wh.satisfiedTime == nil {
-                wh.update(["satisfiedTime": wh.createdTime])
-            }
-        }
         
         if let sessionId = Util.sessionId {
             API.loginWithSessionId(sessionId).subscribeError({ error in
