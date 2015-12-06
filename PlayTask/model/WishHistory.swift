@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 import RxSwift
+import YNSwift
 
 class WishHistory: Table, Bill {
     dynamic var wish: Wish!
@@ -81,16 +82,12 @@ class WishHistory: Table, Bill {
         guard let userSid = Util.loggedUser?.sid.value else {
             return empty()
         }
-        return create { observer in
+        return just(0).flatMap({ _ -> Observable<Table> in
             let realm = try! Realm()
-            var observable: Observable<Table> = empty()
-            realm.objects(WishHistory).filter("wish.sid != nil AND wish.userSid == %@ AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).map {
-                observable = observable.concat($0.push().retry(3))
-            }
-            return observable.subscribe { event in
-                observer.on(event)
-            }
-        }
+            return realm.objects(WishHistory).filter("wish.sid != nil AND wish.userSid == %@ AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).toObservable().map({ (t) -> Observable<Table> in
+                return t.push().retry(3)
+            }).concat()
+        })
         
     }
     
@@ -98,20 +95,15 @@ class WishHistory: Table, Bill {
         guard let loggedUser = Util.loggedUser else {
             return empty()
         }
-        return create { observer in
-            API.getWishHistories(loggedUser, after: loggedUser.wishHistoryPullTime ?? NSDate(timeIntervalSince1970: 0)).flatMap { wishHistories -> Observable<Table> in
-                if wishHistories.count == 0 {
-                    return empty()
-                }
-                wishHistories.map {
-                    observer.onNext($0)
-                }
-                loggedUser.update(["wishHistoryPullTime": wishHistories.last!.modifiedTime])
-                return WishHistory.pull()
-                }.subscribe {
-                    observer.on($0)
-            }
-            return NopDisposable.instance
-        }
+        return generate(0) { index -> Observable<[WishHistory]> in
+            API.getWishHistories(loggedUser, after: loggedUser.wishHistoryPullTime ?? NSDate(timeIntervalSince1970: 0))
+        }.takeWhile({ (wishHistories) -> Bool in
+            return wishHistories.count > 0
+        }).flatMap({ (wishHistories) -> Observable<WishHistory> in
+            loggedUser.update(["wishHistoryPullTime": wishHistories.last!.modifiedTime])
+            return wishHistories.toObservable()
+        }).map({ t -> Table in
+            return t
+        })
     }
 }

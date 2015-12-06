@@ -79,6 +79,9 @@ extension API {
     }
     
     class func createTaskHistory(taskHistory: TaskHistory) -> Observable<TaskHistory> {
+        if taskHistory.task.sid.value == nil {
+            return empty()
+        }
         return API.req(.POST, "/tasks/\(taskHistory.task.sid.value!)/task_histories", parameters: [
             "completion_time": taskHistory.completionTime.timeIntervalSince1970 * 1000,
             "canceled": taskHistory.canceled ? "true" : "false",

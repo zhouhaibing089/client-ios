@@ -184,31 +184,25 @@ final class Task: Table {
             return empty()
         }
         let realm = try! Realm()
-        var observable: Observable<Table> = empty()
-        realm.objects(Task).filter("(userSid == %@ OR userSid == nil) AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).map {
-            observable = observable.concat($0.push().retry(3))
-        }
-        return observable
+        return realm.objects(Task).filter("(userSid == %@ OR userSid == nil) AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).toObservable().map({ (t) -> Observable<Table> in
+            return t.push().retry(3)
+        }).concat()
+
     }
     
     override class func pull() -> Observable<Table> {
         guard let loggedUser = Util.loggedUser else {
             return empty()
         }
-        return create { observer in
-            API.getTasks(loggedUser, after: loggedUser.taskPullTime ?? NSDate(timeIntervalSince1970: 0)).flatMap { tasks -> Observable<Table> in
-                if tasks.count == 0 {
-                    return empty()
-                }
-                tasks.map {
-                    observer.onNext($0)
-                }
-                loggedUser.update(["taskPullTime": tasks.last!.modifiedTime])
-                return Task.pull()
-            }.subscribe {
-                observer.on($0)
-            }
-            return NopDisposable.instance
-        }
+        return generate(0) { index -> Observable<[Task]> in
+            API.getTasks(loggedUser, after: loggedUser.taskPullTime ?? NSDate(timeIntervalSince1970: 0))
+        }.takeWhile({ (tasks) -> Bool in
+            return tasks.count > 0
+        }).flatMap({ (tasks) -> Observable<Task> in
+            loggedUser.update(["taskPullTime": tasks.last!.modifiedTime])
+            return tasks.toObservable()
+        }).map({ (task) -> Table in
+            return task
+        })
     }
 }

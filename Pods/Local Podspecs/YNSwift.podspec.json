@@ -18,6 +18,15 @@
   "dependencies": {
     "MBProgressHUD": [
       "~> 0.9.1"
+    ],
+    "RxSwift": [
+      "~> 2.0.0-beta"
+    ],
+    "RxCocoa": [
+      "~> 2.0.0-beta"
+    ],
+    "RxBlocking": [
+      "~> 2.0.0-beta"
     ]
   }
 }

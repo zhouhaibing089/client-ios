@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 import RxSwift
+import YNSwift
 
 final class TaskHistory: Table, Bill {
     dynamic var completionTime: NSDate!
@@ -79,36 +80,28 @@ final class TaskHistory: Table, Bill {
         guard let userSid = Util.loggedUser?.sid.value else {
             return empty()
         }
-        return create { observer in
+        return just(0).flatMap({ _ -> Observable<Table> in
             let realm = try! Realm()
-            var observable: Observable<Table> = empty()
-            realm.objects(TaskHistory).filter("task.sid != nil AND task.userSid == %@ AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).map {
-                observable = observable.concat($0.push().retry(3))
-            }
-            return observable.subscribe { event in
-                observer.on(event)
-            }
-        }
+            return realm.objects(TaskHistory).filter("task.sid != nil AND task.userSid == %@ AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).toObservable().map({ (t) -> Observable<Table> in
+                return t.push().retry(3)
+            }).concat()
+        })
+
     }
 
     override class func pull() -> Observable<Table> {
         guard let loggedUser = Util.loggedUser else {
             return empty()
         }
-        return create { observer in
-            API.getTaskHistories(loggedUser, after: loggedUser.taskHistoryPullTime ?? NSDate(timeIntervalSince1970: 0)).flatMap { taskHistories -> Observable<Table> in
-                if taskHistories.count == 0 {
-                    return empty()
-                }
-                taskHistories.map {
-                    observer.onNext($0)
-                }
-                loggedUser.update(["taskHistoryPullTime": taskHistories.last!.modifiedTime])
-                return TaskHistory.pull()
-            }.subscribe {
-                observer.on($0)
-            }
-            return NopDisposable.instance
-        }
+        return generate(0) { index -> Observable<[TaskHistory]> in
+            API.getTaskHistories(loggedUser, after: loggedUser.taskHistoryPullTime ?? NSDate(timeIntervalSince1970: 0))
+        }.takeWhile({ (taskHistories) -> Bool in
+            return taskHistories.count > 0
+        }).flatMap({ (taskHistories) -> Observable<TaskHistory> in
+            loggedUser.update(["taskHistoryPullTime": taskHistories.last!.modifiedTime])
+            return taskHistories.toObservable()
+        }).map({ t -> Table in
+            return t
+        })
     }
 }

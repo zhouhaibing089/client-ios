@@ -17,6 +17,9 @@ PODS:
   - UMengAnalytics-NO-IDFA (3.6.5)
   - YNSwift (0.1):
     - MBProgressHUD (~> 0.9.1)
+    - RxBlocking (~> 2.0.0-beta)
+    - RxCocoa (~> 2.0.0-beta)
+    - RxSwift (~> 2.0.0-beta)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
@@ -29,7 +32,7 @@ DEPENDENCIES:
   - SQLite.swift (from `https://github.com/stephencelis/SQLite.swift.git`)
   - SwiftyJSON (~> 2.3.1)
   - UMengAnalytics-NO-IDFA (= 3.6.5)
-  - YNSwift (from `/Users/yoncise/Workspace/YNSwift`)
+  - YNSwift (from `https://github.com/Yoncise/YNSwift.git`)
 
 EXTERNAL SOURCES:
   Realm:
@@ -39,7 +42,7 @@ EXTERNAL SOURCES:
   SQLite.swift:
     :git: https://github.com/stephencelis/SQLite.swift.git
   YNSwift:
-    :path: /Users/yoncise/Workspace/YNSwift
+    :git: https://github.com/Yoncise/YNSwift.git
 
 CHECKOUT OPTIONS:
   Realm:
@@ -51,6 +54,9 @@ CHECKOUT OPTIONS:
   SQLite.swift:
     :commit: da2d43422a72ae0e91356fccfde1959d43b97385
     :git: https://github.com/stephencelis/SQLite.swift.git
+  YNSwift:
+    :commit: 5d1bddc5468e8fc324f5b0c7b1f78fbcf968d1d4
+    :git: https://github.com/Yoncise/YNSwift.git
 
 SPEC CHECKSUMS:
   Alamofire: 9f93b56389e48def9220dd57d1f44b1927229a5a
@@ -64,6 +70,6 @@ SPEC CHECKSUMS:
   SQLite.swift: 3bb75f5a650f08673276bc6d3fb1de1b542b8f4d
   SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
   UMengAnalytics-NO-IDFA: 279e28990a08efb56cff1821d2954bb00aa6975a
-  YNSwift: 3f75cd6c816e1aa85085ff5443df97233fd7ca6d
+  YNSwift: 7d500efade5882ffbd4d9f7ec37dc942bc7113b1
 
 COCOAPODS: 0.39.0
