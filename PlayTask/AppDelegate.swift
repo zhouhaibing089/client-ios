@@ -69,21 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
         })
         
-        if let sessionId = Util.sessionId {
-            API.loginWithSessionId(sessionId).subscribeError({ error in
-                if let e = error as? APIError {
-                    switch e {
-                    case.Custom(_, let info, _):
-                        Util.sessionId = nil
-                        Util.loggedUser = nil
-                        CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
-                    default:
-                        break
-                    }
-                }
-            })
-        }
-        
         return true
     }
 
@@ -107,14 +92,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        self.synchronize()
+        self.autoLogin()
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func synchronize() {
+    func autoLogin() {
+        if let sessionId = Util.sessionId {
+            API.loginWithSessionId(sessionId).subscribe { event in
+                switch event {
+                case .Next(_):
+                    break
+                case .Error(let error):
+                    if let e = error as? APIError {
+                        switch e {
+                        case.Custom(_, let info, _):
+                            Util.sessionId = nil
+                            Util.loggedUser = nil
+                            CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
+                        default:
+                            self.sync()
+                            break
+                        }
+                    }
+                    break
+                default:
+                    self.sync()
+                    break
+                }
+            }
+        }
+    }
+    
+    func sync() {
         self.syncDisposable?.dispose()
         self.syncStatus = SyncStatus.Syncing
         var pullUser: Observable<Table> = empty()

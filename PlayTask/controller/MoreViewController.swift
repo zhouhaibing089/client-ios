@@ -16,7 +16,7 @@ class MoreViewController: UITableViewController {
     
     @IBAction func sync(sender: UIButton) {
         if Util.appDelegate.syncStatus != SyncStatus.Syncing {
-            Util.appDelegate.synchronize()
+            Util.appDelegate.sync()
         }
     }
     
@@ -100,6 +100,7 @@ class MoreViewController: UITableViewController {
             switch indexPath.row {
             case 2:
                 let hud = MBProgressHUD.show()
+                Util.appDelegate.syncDisposable?.dispose()
                 API.logoutWithSessionId(Util.sessionId!).subscribe { event in
                     switch event {
                     case .Next(_):
