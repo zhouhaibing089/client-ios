@@ -82,9 +82,9 @@ class WishHistory: Table, Bill {
         guard let userSid = Util.loggedUser?.sid.value else {
             return empty()
         }
-        return just(0).flatMap({ _ -> Observable<Table> in
+        return deferred({ _ -> Observable<Table> in
             let realm = try! Realm()
-            return realm.objects(WishHistory).filter("wish.sid != nil AND wish.userSid == %@ AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).toObservable().map({ (t) -> Observable<Table> in
+            return realm.objects(WishHistory).filter("(userSid == nil OR userSid == %@) AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).toObservable().map({ (t) -> Observable<Table> in
                 return t.push().retry(3)
             }).concat()
         })

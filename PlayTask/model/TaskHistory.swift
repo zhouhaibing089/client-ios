@@ -80,9 +80,9 @@ final class TaskHistory: Table, Bill {
         guard let userSid = Util.loggedUser?.sid.value else {
             return empty()
         }
-        return just(0).flatMap({ _ -> Observable<Table> in
+        return deferred({ _ -> Observable<Table> in
             let realm = try! Realm()
-            return realm.objects(TaskHistory).filter("task.sid != nil AND task.userSid == %@ AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).toObservable().map({ (t) -> Observable<Table> in
+            return realm.objects(TaskHistory).filter("(userSid == nil OR userSid == %@) AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).toObservable().map({ (t) -> Observable<Table> in
                 return t.push().retry(3)
             }).concat()
         })
