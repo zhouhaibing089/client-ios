@@ -49,6 +49,10 @@ class MoreViewController: UITableViewController {
             if section == 0 {
                 return MobClick.getConfigParams("feedbackFooterTitle") ?? "关注微信公众号 PlayTask 进行反馈可及时收到回复"
             }
+            if section == 3 {
+                let version = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+                return super.tableView(tableView, titleForFooterInSection: section)! + " \(version)"
+            }
             return super.tableView(tableView, titleForFooterInSection: section)
         } else {
             return nil
