@@ -243,6 +243,10 @@ static id RLMValidatedObjectForProperty(id obj, RLMProperty *prop, RLMSchema *sc
     return self.class == _objectSchema.accessorClass && !_row.is_attached();
 }
 
+- (BOOL)isDeletedFromRealm {
+    return self.isInvalidated;
+}
+
 - (BOOL)isEqual:(id)object {
     if (RLMObjectBase *other = RLMDynamicCast<RLMObjectBase>(object)) {
         if (_objectSchema.primaryKeyProperty) {
@@ -331,7 +335,7 @@ NSArray *RLMObjectBaseLinkingObjectsOfClass(RLMObjectBase *object, NSString *cla
     if (!object->_realm) {
         @throw RLMException(@"Linking object only available for objects in a Realm.");
     }
-    [object->_realm verifyThread];
+    RLMCheckThread(object->_realm);
 
     if (!object->_row.is_attached()) {
         @throw RLMException(@"Object has been deleted or invalidated and is no longer valid.");
@@ -448,9 +452,6 @@ Class RLMObjectUtilClass(BOOL isSwift) {
 }
 
 + (void)initializeListProperty:(__unused RLMObjectBase *)object property:(__unused RLMProperty *)property array:(__unused RLMArray *)array {
-}
-
-+ (void)initializeOptionalProperty:(__unused RLMObjectBase *)object property:(__unused RLMProperty *)property {
 }
 
 + (NSDictionary *)getOptionalProperties:(__unused id)obj {

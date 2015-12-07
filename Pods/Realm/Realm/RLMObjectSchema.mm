@@ -28,11 +28,14 @@
 #import "RLMSwiftSupport.h"
 #import "RLMUtil.hpp"
 
+#import "object_store.hpp"
+#import <realm/group.hpp>
+
 using namespace realm;
 
 // private properties
 @interface RLMObjectSchema ()
-@property (nonatomic, readwrite) NSDictionary RLM_GENERIC(id, RLMProperty *) *propertiesByName;
+@property (nonatomic, readwrite) NSDictionary *propertiesByName;
 @property (nonatomic, readwrite, assign) NSString *className;
 @end
 
@@ -46,8 +49,6 @@ using namespace realm;
     self.className = objectClassName;
     self.properties = properties;
     self.objectClass = objectClass;
-    self.accessorClass = objectClass;
-    self.standaloneClass = objectClass;
     return self;
 }
 
@@ -199,7 +200,7 @@ using namespace realm;
         }
     }
 
-    if (auto optionalProperties = [objectUtil getOptionalProperties:swiftObjectInstance]) {
+    if (NSDictionary *optionalProperties = [objectUtil getOptionalProperties:swiftObjectInstance]) {
         for (RLMProperty *property in propArray) {
             property.optional = false;
         }
@@ -226,7 +227,7 @@ using namespace realm;
             }
         }];
     }
-    if (auto requiredProperties = [objectUtil requiredPropertiesForClass:objectClass]) {
+    if (NSArray *requiredProperties = [objectUtil requiredPropertiesForClass:objectClass]) {
         for (RLMProperty *property in propArray) {
             bool required = [requiredProperties containsObject:property.name];
             if (required && property.type == RLMPropertyTypeObject) {
@@ -371,13 +372,7 @@ using namespace realm;
     return schema;
 }
 
-- (void)sortPropertiesByColumn {
-    _properties = [_properties sortedArrayUsingComparator:^NSComparisonResult(RLMProperty *p1, RLMProperty *p2) {
-        if (p1.column < p2.column) return NSOrderedAscending;
-        if (p1.column > p2.column) return NSOrderedDescending;
-        return NSOrderedSame;
-    }];
-    // No need to update the dictionary
-}
 
 @end
+
+

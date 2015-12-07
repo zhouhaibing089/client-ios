@@ -20,7 +20,7 @@
 
 RLM_ASSUME_NONNULL_BEGIN
 
-@class RLMRealm, RLMResults, RLMObject, RLMSortDescriptor;
+@class RLMRealm, RLMResults, RLMObject;
 
 /**
  A homogenous collection of `RLMObject`s like `RLMArray` or `RLMResults`.
@@ -53,7 +53,7 @@ RLM_ASSUME_NONNULL_BEGIN
  
  @param index   The index to look up.
  
- @return An RLMObject of the type contained in this RLMCollection.
+ @return An RLMObject of the class contained by this RLMCollection.
  */
 - (id)objectAtIndex:(NSUInteger)index;
 
@@ -62,7 +62,7 @@ RLM_ASSUME_NONNULL_BEGIN
  
  Returns `nil` if called on an empty RLMCollection.
  
- @return An RLMObject of the type contained in this RLMCollection.
+ @return An RLMObject of the class contained by this RLMCollection.
  */
 - (nullable id)firstObject;
 
@@ -71,7 +71,7 @@ RLM_ASSUME_NONNULL_BEGIN
  
  Returns `nil` if called on an empty RLMCollection.
  
- @return An RLMObject of the type contained in this RLMCollection.
+ @return An RLMObject of the class contained by this RLMCollection.
  */
 - (nullable id)lastObject;
 
@@ -139,7 +139,7 @@ RLM_ASSUME_NONNULL_BEGIN
  
  @return    An RLMResults sorted by the specified properties.
  */
-- (RLMResults *)sortedResultsUsingDescriptors:(NSArray RLM_GENERIC(RLMSortDescriptor *) *)properties;
+- (RLMResults *)sortedResultsUsingDescriptors:(NSArray *)properties;
 
 /// :nodoc:
 - (id)objectAtIndexedSubscript:(NSUInteger)index;

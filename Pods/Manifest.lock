@@ -1,12 +1,13 @@
 PODS:
   - Alamofire (3.1.3)
+  - Charts (2.1.6)
   - CRToast (0.0.9)
   - MBProgressHUD (0.9.1)
-  - Realm (0.96.2):
-    - Realm/Headers (= 0.96.2)
-  - Realm/Headers (0.96.2)
-  - RealmSwift (0.96.2):
-    - Realm (= 0.96.2)
+  - Realm (0.96.3):
+    - Realm/Headers (= 0.96.3)
+  - Realm/Headers (0.96.3)
+  - RealmSwift (0.96.3):
+    - Realm (= 0.96.3)
   - RxBlocking (2.0.0-beta.3):
     - RxSwift (~> 2.0.0-beta)
   - RxCocoa (2.0.0-beta.3):
@@ -23,9 +24,9 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
+  - Charts
   - CRToast (~> 0.0.7)
-  - Realm (from `https://github.com/realm/realm-cocoa.git`)
-  - RealmSwift (from `https://github.com/realm/realm-cocoa.git`)
+  - RealmSwift
   - RxBlocking (~> 2.0.0-beta)
   - RxCocoa (~> 2.0.0-beta)
   - RxSwift (~> 2.0.0-beta)
@@ -35,22 +36,12 @@ DEPENDENCIES:
   - YNSwift (from `https://github.com/Yoncise/YNSwift.git`)
 
 EXTERNAL SOURCES:
-  Realm:
-    :git: https://github.com/realm/realm-cocoa.git
-  RealmSwift:
-    :git: https://github.com/realm/realm-cocoa.git
   SQLite.swift:
     :git: https://github.com/stephencelis/SQLite.swift.git
   YNSwift:
     :git: https://github.com/Yoncise/YNSwift.git
 
 CHECKOUT OPTIONS:
-  Realm:
-    :commit: bbdf891d367498c6c0349253af7d2eb79a7b6bf9
-    :git: https://github.com/realm/realm-cocoa.git
-  RealmSwift:
-    :commit: bbdf891d367498c6c0349253af7d2eb79a7b6bf9
-    :git: https://github.com/realm/realm-cocoa.git
   SQLite.swift:
     :commit: da2d43422a72ae0e91356fccfde1959d43b97385
     :git: https://github.com/stephencelis/SQLite.swift.git
@@ -60,10 +51,11 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 9f93b56389e48def9220dd57d1f44b1927229a5a
+  Charts: 5e1e5ac23898e5b09d226a2fc3e9d86bc281937e
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  Realm: 962a3daeb000dfd379e0a9ccb2a752a352a88205
-  RealmSwift: 485599fe54e35461c4a0daa7d01d8fbf11424873
+  Realm: 145d3cdf78a03aee71bde5381ad7e542bd541720
+  RealmSwift: aab84968aad662f61f36473d1aea019f63481505
   RxBlocking: 331f8bdedf77198f8ff1a37f09c492f1f4f631e5
   RxCocoa: 1472006304b296d03c847f78b21384523cc4902e
   RxSwift: 19fbe885b404d1d36d42ac8535134739a9b42952

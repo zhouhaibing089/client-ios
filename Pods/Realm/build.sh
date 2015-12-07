@@ -14,7 +14,7 @@ set -o pipefail
 set -e
 
 # You can override the version of the core library
-: ${REALM_CORE_VERSION:=0.95.0} # set to "current" to always use the current build
+: ${REALM_CORE_VERSION:=0.95.4} # set to "current" to always use the current build
 
 # You can override the xcmode used
 : ${XCMODE:=xcodebuild} # must be one of: xcodebuild (default), xcpretty, xctool
@@ -54,7 +54,7 @@ command:
   test-ios-devices-swift: tests Swift iOS framework on all attached iOS devices
   test-osx:             tests OS X framework
   test-osx-swift:       tests RealmSwift OS X framework
-  verify:               verifies docs, osx, osx-swift, ios-static, ios-dynamic, ios-swift, ios-device in both Debug and Release configurations, swiftlint
+  verify:               verifies docs, osx, osx-swift, ios-static, ios-dynamic, ios-swift, ios-device in both Debug and Release configurations
   docs:                 builds docs in docs/output
   examples:             builds all examples
   examples-ios:         builds all static iOS examples
@@ -107,6 +107,16 @@ copy_bcsymbolmap() {
     find "$1" -name '*.bcsymbolmap' -type f -exec cp {} "$2" \;
 }
 
+xcrealm() {
+    PROJECT=Realm.xcodeproj
+    xc "-project $PROJECT $@"
+}
+
+xcrealmswift() {
+    PROJECT=RealmSwift.xcodeproj
+    xc "-project $PROJECT $@"
+}
+
 build_ios_combined() {
     local scheme="$1"
     local module_name="$2"
@@ -115,7 +125,7 @@ build_ios_combined() {
     local config="$CONFIGURATION"
 
     # Derive build paths
-    local build_products_path="build/DerivedData/Realm/Build/Products"
+    local build_products_path="build/DerivedData/$module_name/Build/Products"
     local product_name="$module_name.framework"
     local binary_path="$module_name"
     local iphoneos_path="$build_products_path/$config-iphoneos$scope_suffix/$product_name"
@@ -123,8 +133,9 @@ build_ios_combined() {
     local out_path="build/ios$scope_suffix$version_suffix"
 
     # Build for each platform
-    xc "-scheme '$scheme' -configuration $config -sdk iphoneos"
-    xc "-scheme '$scheme' -configuration $config -sdk iphonesimulator -destination 'name=iPhone 6' ONLY_ACTIVE_ARCH=NO"
+    cmd=$(echo "xc$module_name" | tr '[:upper:]' '[:lower:]') # lowercase the module name to generate command (xcrealm or xcrealmswift)
+    $cmd "-scheme '$scheme' -configuration $config -sdk iphoneos"
+    $cmd "-scheme '$scheme' -configuration $config -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO"
 
     # Combine .swiftmodule
     if [ -d $iphonesimulator_path/Modules/$module_name.swiftmodule ]; then
@@ -148,7 +159,7 @@ build_watchos_combined() {
     local config="$CONFIGURATION"
 
     # Derive build paths
-    local build_products_path="build/DerivedData/Realm/Build/Products"
+    local build_products_path="build/DerivedData/$module_name/Build/Products"
     local product_name="$module_name.framework"
     local binary_path="$module_name"
     local watchos_path="$build_products_path/$config-watchos$scope_suffix/$product_name"
@@ -156,8 +167,9 @@ build_watchos_combined() {
     local out_path="build/watchos$scope_suffix"
 
     # Build for each platform
-    xc "-scheme '$scheme' -configuration $config -sdk watchos"
-    xc "-scheme '$scheme' -configuration $config -sdk watchsimulator -destination 'name=Apple Watch - 42mm' ONLY_ACTIVE_ARCH=NO"
+    cmd=$(echo "xc$module_name" | tr '[:upper:]' '[:lower:]') # lowercase the module name to generate command (xcrealm or xcrealmswift)
+    $cmd "-scheme '$scheme' -configuration $config -sdk watchos"
+    $cmd "-scheme '$scheme' -configuration $config -sdk watchsimulator ONLY_ACTIVE_ARCH=NO"
 
     # Combine .swiftmodule
     if [ -d $watchsimulator_path/Modules/$module_name.swiftmodule ]; then
@@ -172,14 +184,6 @@ build_watchos_combined() {
 
     # Combine ar archives
     xcrun lipo -create "$watchsimulator_path/$binary_path" "$watchos_path/$binary_path" -output "$out_path/$product_name/$module_name"
-}
-
-xc_work_around_rdar_23055637() {
-    # xcodebuild times out waiting for the iOS simulator to launch if it takes > 120 seconds for the tests to
-    # build (<http://openradar.appspot.com/23055637>). Work around this by having the test phases intentionally
-    # exit after they finish building the first time, then run the tests for real.
-    ( REALM_EXIT_AFTER_BUILDING_TESTS=YES xc "$1" ) || true
-    xc "$1"
 }
 
 clean_retrieve() {
@@ -223,11 +227,12 @@ test_ios_devices() {
         fi
         exit 1
     fi
-    scheme="$1"
-    configuration="$2"
+    cmd="$1"
+    scheme="$2"
+    configuration="$3"
     failed=0
     for device in "${serial_numbers[@]}"; do
-        xc "-scheme '$scheme' -configuration $configuration -destination 'id=$device' test" || failed=1
+        $cmd "-scheme '$2' -configuration $configuration -destination 'id=$device' test" || failed=1
     done
     return $failed
 }
@@ -246,8 +251,8 @@ build_docs() {
 
     if [[ "$language" == "swift" ]]; then
         : ${REALM_SWIFT_VERSION:=2.1}
-        sh build.sh set-swift-version
-        xcodebuild_arguments="-scheme,RealmSwift"
+        ./build.sh set-swift-version
+        xcodebuild_arguments="-project,RealmSwift.xcodeproj,-scheme,RealmSwift"
         module="RealmSwift"
         objc=""
     fi
@@ -274,7 +279,7 @@ build_docs() {
 # Input Validation
 ######################################
 
-if [ "$#" -eq 0 -o "$#" -gt 3 ]; then
+if [ "$#" -eq 0 -o "$#" -gt 2 ]; then
     usage
     exit 1
 fi
@@ -378,36 +383,6 @@ case "$COMMAND" in
         ;;
 
     ######################################
-    # Object Store
-    ######################################
-    "push-object-store-changes")
-        commit="$2"
-        path="$3"
-        if [ -z "$commit" -o -z "$path" ]; then
-            echo "usage: sh build.sh push-object-store-changes [base commit] [path to objectore repo]"
-            exit 1
-        fi
-
-        # List all commits since $commit which touched the objecstore, generate
-        # patches for each of them, and then apply those patches to the
-        # objectstore repo
-        git rev-list --reverse $commit..HEAD -- Realm/ObjectStore \
-            | xargs -I@ git format-patch --stdout @^! Realm/ObjectStore \
-            | git -C $path am -p 3
-        ;;
-
-    "pull-object-store-changes")
-        commit="$2"
-        path="$3"
-        if [ -z "$commit" -o -z "$path" ]; then
-            echo "usage: sh build.sh pull-object-store-changes [base commit] [path to objectore repo]"
-            exit 1
-        fi
-
-        git -C $path format-patch --stdout $commit..HEAD | git am --directory Realm/ObjectStore
-        ;;
-
-    ######################################
     # Swift versioning
     ######################################
     "set-swift-version")
@@ -449,35 +424,33 @@ case "$COMMAND" in
         ;;
 
     "ios-static")
-        build_ios_combined 'Realm iOS static' Realm "-static"
+        build_ios_combined iOS Realm
         exit 0
         ;;
 
     "ios-dynamic")
-        build_ios_combined "Realm" Realm
+        build_ios_combined "iOS Dynamic" Realm "-dynamic"
         exit 0
         ;;
 
     "ios-swift")
-        sh build.sh ios-dynamic
         build_ios_combined RealmSwift RealmSwift '' "/swift-$REALM_SWIFT_VERSION"
-        cp -R build/ios/Realm.framework build/ios/swift-$REALM_SWIFT_VERSION
+        cp -R build/ios-dynamic/Realm.framework build/ios/swift-$REALM_SWIFT_VERSION
         exit 0
         ;;
 
     "watchos")
-        build_watchos_combined Realm Realm
+        build_watchos_combined "watchOS" Realm
         exit 0
         ;;
 
     "watchos-swift")
-        sh build.sh watchos
         build_watchos_combined RealmSwift RealmSwift
         exit 0
         ;;
 
     "osx")
-        xc "-scheme Realm -configuration $CONFIGURATION"
+        xcrealm "-scheme OSX -configuration $CONFIGURATION"
         rm -rf build/osx
         mkdir build/osx
         cp -R build/DerivedData/Realm/Build/Products/$CONFIGURATION/Realm.framework build/osx
@@ -485,10 +458,9 @@ case "$COMMAND" in
         ;;
 
     "osx-swift")
-        sh build.sh osx
-        xc "-scheme 'RealmSwift' -configuration $CONFIGURATION build"
+        xcrealmswift "-scheme 'RealmSwift' -configuration $CONFIGURATION build"
         destination="build/osx/swift-$REALM_SWIFT_VERSION"
-        clean_retrieve "build/DerivedData/Realm/Build/Products/$CONFIGURATION/RealmSwift.framework" "$destination" "RealmSwift.framework"
+        clean_retrieve "build/DerivedData/RealmSwift/Build/Products/$CONFIGURATION/RealmSwift.framework" "$destination" "RealmSwift.framework"
         cp -R build/osx/Realm.framework "$destination"
         exit 0
         ;;
@@ -517,30 +489,30 @@ case "$COMMAND" in
         ;;
 
     "test-ios-static")
-        xc_work_around_rdar_23055637 "-scheme 'Realm iOS static' -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 6' test"
+        xcrealm "-scheme iOS -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 6' build test"
         shutdown_simulators
-        xc_work_around_rdar_23055637 "-scheme 'Realm iOS static' -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 4s' test"
+        xcrealm "-scheme iOS -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 4s' build test"
         exit 0
         ;;
 
     "test-ios7-static")
-        xc_work_around_rdar_23055637 "-scheme 'Realm iOS static' -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 5S,OS=7.1' test"
+        xcrealm "-scheme iOS -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 5S,OS=7.1' build test"
         shutdown_simulators
-        xc_work_around_rdar_23055637 "-scheme 'Realm iOS static' -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 4s,OS=7.1' test"
+        xcrealm "-scheme iOS -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 4s,OS=7.1' build test"
         exit 0
         ;;
 
     "test-ios-dynamic")
-        xc_work_around_rdar_23055637 "-scheme Realm -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 6' test"
+        xcrealm "-scheme 'iOS Dynamic' -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 6' build test"
         shutdown_simulators
-        xc_work_around_rdar_23055637 "-scheme Realm -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 4s' test"
+        xcrealm "-scheme 'iOS Dynamic' -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 4s' build test"
         exit 0
         ;;
 
     "test-ios-swift")
-        xc "-scheme RealmSwift -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 6' build test"
+        xcrealmswift "-scheme RealmSwift -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 6' build test"
         shutdown_simulators
-        xc "-scheme RealmSwift -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 4s' build test"
+        xcrealmswift "-scheme RealmSwift -configuration $CONFIGURATION -sdk iphonesimulator -destination 'name=iPhone 4s' build test"
         exit 0
         ;;
 
@@ -553,12 +525,12 @@ case "$COMMAND" in
         ;;
 
     "test-ios-devices-objc")
-        test_ios_devices "Realm iOS static" "$CONFIGURATION"
+        test_ios_devices xcrealm "iOS Device Tests" "$CONFIGURATION"
         exit $?
         ;;
 
     "test-ios-devices-swift")
-        test_ios_devices "RealmSwift" "$CONFIGURATION"
+        test_ios_devices xcrealmswift "RealmSwift" "$CONFIGURATION"
         exit $?
         ;;
 
@@ -567,12 +539,12 @@ case "$COMMAND" in
         if [[ "$CONFIGURATION" == "Debug" ]]; then
             COVERAGE_PARAMS="GCC_GENERATE_TEST_COVERAGE_FILES=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES"
         fi
-        xc "-scheme Realm -configuration $CONFIGURATION test $COVERAGE_PARAMS"
+        xcrealm "-scheme OSX -configuration $CONFIGURATION test $COVERAGE_PARAMS"
         exit 0
         ;;
 
     "test-osx-swift")
-        xc "-scheme RealmSwift -configuration $CONFIGURATION test"
+        xcrealmswift "-scheme RealmSwift -configuration $CONFIGURATION test"
         exit 0
         ;;
 
@@ -597,7 +569,6 @@ case "$COMMAND" in
         sh build.sh verify-ios-device-objc
         sh build.sh verify-ios-device-swift
         sh build.sh verify-watchos
-        sh build.sh verify-swiftlint
         ;;
 
     "verify-cocoapods")
@@ -672,7 +643,6 @@ case "$COMMAND" in
         ;;
 
     "verify-swiftlint")
-        swiftlint lint --strict
         exit 0
         ;;
 
@@ -796,8 +766,6 @@ case "$COMMAND" in
           mkdir -p include/Realm
           cp Realm/*.{h,hpp} include/Realm
           cp Realm/ObjectStore/*.hpp include/Realm
-          cp Realm/ObjectStore/impl/*.hpp include/Realm
-          cp Realm/ObjectStore/impl/apple/*.hpp include/Realm
           touch include/Realm/RLMPlatform.h
         fi
         ;;
@@ -878,29 +846,29 @@ case "$COMMAND" in
         REALM_SWIFT_VERSION=1.2 sh build.sh prelaunch-simulator
         REALM_SWIFT_VERSION=1.2 sh build.sh test-ios-static
         REALM_SWIFT_VERSION=1.2 sh build.sh ios-static
-        move_to_clean_dir build/ios-static/Realm.framework xcode-6
+        move_to_clean_dir build/ios/Realm.framework xcode-6
         rm -rf build
 
         REALM_SWIFT_VERSION=2.1 sh build.sh prelaunch-simulator
         REALM_SWIFT_VERSION=2.1 sh build.sh test-ios-static
         REALM_SWIFT_VERSION=2.1 sh build.sh ios-static
-        move_to_clean_dir build/ios-static/Realm.framework xcode-7
+        move_to_clean_dir build/ios/Realm.framework xcode-7
 
-        zip --symlinks -r build/ios-static/realm-framework-ios.zip xcode-6 xcode-7
+        zip --symlinks -r build/ios/realm-framework-ios.zip xcode-6 xcode-7
         ;;
 
     "package-ios-dynamic")
         cd tightdb_objc
         REALM_SWIFT_VERSION=1.2 sh build.sh prelaunch-simulator
         REALM_SWIFT_VERSION=1.2 sh build.sh ios-dynamic
-        move_to_clean_dir build/ios/Realm.framework xcode-6
+        move_to_clean_dir build/ios-dynamic/Realm.framework xcode-6
         rm -rf build
 
         REALM_SWIFT_VERSION=2.1 sh build.sh prelaunch-simulator
         REALM_SWIFT_VERSION=2.1 sh build.sh ios-dynamic
-        move_to_clean_dir build/ios/Realm.framework xcode-7
+        move_to_clean_dir build/ios-dynamic/Realm.framework xcode-7
 
-        zip --symlinks -r build/ios/realm-dynamic-framework-ios.zip xcode-6 xcode-7
+        zip --symlinks -r build/ios-dynamic/realm-dynamic-framework-ios.zip xcode-6 xcode-7
         ;;
 
     "package-osx")
@@ -914,7 +882,7 @@ case "$COMMAND" in
     "package-ios-swift")
         cd tightdb_objc
         for version in 1.2 2.1; do
-            rm -rf build/ios/Realm.framework
+            rm -rf build/ios-dynamic
             REALM_SWIFT_VERSION=$version sh build.sh prelaunch-simulator
             REALM_SWIFT_VERSION=$version sh build.sh ios-swift
         done
@@ -1060,11 +1028,11 @@ EOF
 
         echo 'Packaging iOS static'
         sh tightdb_objc/build.sh package-ios-static
-        cp tightdb_objc/build/ios-static/realm-framework-ios.zip .
+        cp tightdb_objc/build/ios/realm-framework-ios.zip .
 
         echo 'Packaging iOS dynamic'
         sh tightdb_objc/build.sh package-ios-dynamic
-        cp tightdb_objc/build/ios/realm-dynamic-framework-ios.zip .
+        cp tightdb_objc/build/ios-dynamic/realm-dynamic-framework-ios.zip .
 
         echo 'Packaging OS X'
         sh tightdb_objc/build.sh package-osx

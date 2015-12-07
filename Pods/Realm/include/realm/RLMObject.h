@@ -109,6 +109,9 @@ RLM_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithValue:(id)value NS_DESIGNATED_INITIALIZER;
 
+/// :nodoc:
+- (instancetype)initWithObject:(id)object DEPRECATED_MSG_ATTRIBUTE("use initWithValue:");
+
 
 /**
  Helper to return the class name for an RLMObject subclass.
@@ -140,6 +143,9 @@ RLM_ASSUME_NONNULL_BEGIN
  */
 + (instancetype)createInDefaultRealmWithValue:(id)value;
 
+/// :nodoc:
++ (instancetype)createInDefaultRealmWithObject:(id)object DEPRECATED_MSG_ATTRIBUTE("use createInDefaultRealmWithValue:");
+
 /**
  Create an RLMObject in a Realm with a given object.
  
@@ -160,6 +166,9 @@ RLM_ASSUME_NONNULL_BEGIN
  @see   defaultPropertyValues
  */
 + (instancetype)createInRealm:(RLMRealm *)realm withValue:(id)value;
+
+/// :nodoc:
++ (instancetype)createInRealm:(RLMRealm *)realm withObject:(id)object DEPRECATED_MSG_ATTRIBUTE("use createInRealm:withValue:");
 
 /**
  Create or update an RLMObject in the default Realm with a given object.
@@ -183,6 +192,9 @@ RLM_ASSUME_NONNULL_BEGIN
  @see   defaultPropertyValues, primaryKey
  */
 + (instancetype)createOrUpdateInDefaultRealmWithValue:(id)value;
+
+/// :nodoc:
++ (instancetype)createOrUpdateInDefaultRealmWithObject:(id)object DEPRECATED_MSG_ATTRIBUTE("use createOrUpdateInDefaultRealmWithValue:");
 
 /**
  Create or update an RLMObject with a given object.
@@ -208,6 +220,9 @@ RLM_ASSUME_NONNULL_BEGIN
  */
 + (instancetype)createOrUpdateInRealm:(RLMRealm *)realm withValue:(id)value;
 
+/// :nodoc:
++ (instancetype)createOrUpdateInRealm:(RLMRealm *)realm withObject:(id)object DEPRECATED_MSG_ATTRIBUTE("use createOrUpdateInRealm:withValue:");
+
 #pragma mark - Properties
 
 /**
@@ -228,6 +243,8 @@ RLM_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly, getter = isInvalidated) BOOL invalidated;
 
+/// :nodoc:
+@property (nonatomic, readonly, getter = isDeletedFromRealm) BOOL deletedFromRealm __attribute__((deprecated("Use `invalidated` instead.")));
 
 #pragma mark - Customizing your Objects
 
@@ -236,7 +253,7 @@ RLM_ASSUME_NONNULL_BEGIN
  for string and int properties.
  @return    NSArray of property names.
  */
-+ (NSArray RLM_GENERIC(NSString *) *)indexedProperties;
++ (NSArray *)indexedProperties;
 
 /**
  Implement to indicate the default values to be used for each property.
@@ -261,7 +278,7 @@ RLM_ASSUME_NONNULL_BEGIN
  
  @return    NSArray of property names to ignore.
  */
-+ (nullable NSArray RLM_GENERIC(NSString *) *)ignoredProperties;
++ (nullable NSArray *)ignoredProperties;
 
 /**
  Implement to return an array of property names that should not allow storing nil.
@@ -276,7 +293,7 @@ RLM_ASSUME_NONNULL_BEGIN
 
  @return    NSArray of property names that are required.
  */
-+ (NSArray RLM_GENERIC(NSString *) *)requiredProperties;
++ (NSArray *)requiredProperties;
 
 
 #pragma mark - Getting & Querying Objects from the Default Realm
@@ -371,12 +388,12 @@ RLM_ASSUME_NONNULL_BEGIN
 
 /**
  Get an `NSArray` of objects of type `className` which have this object as the given property value. This can
- be used to get the inverse relationship value for `RLMObject` and `RLMArray` properties.
+ be used to get the inverse relatshionship value for `RLMObject` and `RLMArray` properties.
 
  @param className   The type of object on which the relationship to query is defined.
  @param property    The name of the property which defines the relationship.
 
- @return    An NSArray of objects of type `className` which have this object as their value for the `property` property.
+ @return    An NSArray of objects of type `className` which have this object as thier value for the `property` property.
  */
 - (NSArray *)linkingObjectsOfClass:(NSString *)className forProperty:(NSString *)property;
 
@@ -406,7 +423,7 @@ RLM_ASSUME_NONNULL_BEGIN
 /**
  Properties on RLMObjects of type RLMArray must have an associated type. A type is associated
  with an RLMArray property by defining a protocol for the object type which the RLMArray will
- hold. To define the protocol for an object you can use the macro RLM_ARRAY_TYPE:
+ hold. To define an protocol for an object you can use the macro RLM_ARRAY_TYPE:
  
      RLM_ARRAY_TYPE(ObjectType)
      ...

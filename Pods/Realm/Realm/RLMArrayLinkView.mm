@@ -28,8 +28,6 @@
 #import "RLMSchema.h"
 #import "RLMUtil.hpp"
 
-#import "results.hpp"
-
 #import <realm/table_view.hpp>
 #import <objc/runtime.h>
 
@@ -86,13 +84,13 @@ static inline void RLMLinkViewArrayValidateAttached(__unsafe_unretained RLMArray
     if (!ar->_backingLinkView->is_attached()) {
         @throw RLMException(@"RLMArray is no longer valid");
     }
-    [ar->_realm verifyThread];
+    RLMCheckThread(ar->_realm);
 }
 static inline void RLMLinkViewArrayValidateInWriteTransaction(__unsafe_unretained RLMArrayLinkView *const ar) {
     // first verify attached
     RLMLinkViewArrayValidateAttached(ar);
 
-    if (!ar->_realm.inWriteTransaction) {
+    if (!ar->_realm->_inWriteTransaction) {
         @throw RLMException(@"Can't mutate a persisted array outside of a write transaction.");
     }
 }
@@ -212,9 +210,7 @@ static void RLMInsertObject(RLMArrayLinkView *ar, RLMObject *object, NSUInteger 
         [ar.realm addObject:object];
     }
     else if (object->_realm) {
-        if (!object->_row.is_attached()) {
-            @throw RLMException(@"Object has been deleted or invalidated.");
-        }
+        RLMVerifyAttached(object);
     }
 
     changeArray(ar, NSKeyValueChangeInsertion, index, ^{
@@ -242,10 +238,9 @@ static void RLMInsertObject(RLMArrayLinkView *ar, RLMObject *object, NSUInteger 
             if (obj->_realm != _realm) {
                 [_realm addObject:obj];
             }
-            else if (!obj->_row.is_attached()) {
-                @throw RLMException(@"Object has been deleted or invalidated.");
+            else {
+                RLMVerifyAttached(obj);
             }
-
             _backingLinkView->insert(index, obj->_row.get_index());
             index = [indexes indexGreaterThanIndex:index];
         }
@@ -393,11 +388,12 @@ static void RLMInsertObject(RLMArrayLinkView *ar, RLMObject *object, NSUInteger 
 - (RLMResults *)sortedResultsUsingDescriptors:(NSArray *)properties {
     RLMLinkViewArrayValidateAttached(self);
 
-    auto results = realm::Results(_realm->_realm,
-                                  _backingLinkView->get_target_table().where(_backingLinkView),
-                                  RLMSortOrderFromDescriptors(_realm.schema[_objectClassName], properties));
-    return [RLMResults resultsWithObjectSchema:_realm.schema[self.objectClassName]
-                                       results:std::move(results)];
+    auto query = std::make_unique<realm::Query>(_backingLinkView->get_target_table().where(_backingLinkView));
+    return [RLMResults resultsWithObjectClassName:self.objectClassName
+                                            query:move(query)
+                                             sort:RLMSortOrderFromDescriptors(_realm.schema[_objectClassName], properties)
+                                            realm:_realm];
+
 }
 
 - (RLMResults *)objectsWithPredicate:(NSPredicate *)predicate {
@@ -405,8 +401,9 @@ static void RLMInsertObject(RLMArrayLinkView *ar, RLMObject *object, NSUInteger 
 
     realm::Query query = _backingLinkView->get_target_table().where(_backingLinkView);
     RLMUpdateQueryWithPredicate(&query, predicate, _realm.schema, _realm.schema[self.objectClassName]);
-    return [RLMResults resultsWithObjectSchema:_realm.schema[self.objectClassName]
-                                       results:realm::Results(_realm->_realm, std::move(query))];
+    return [RLMResults resultsWithObjectClassName:self.objectClassName
+                                            query:std::make_unique<realm::Query>(query)
+                                            realm:_realm];
 }
 
 - (NSUInteger)indexOfObjectWithPredicate:(NSPredicate *)predicate {

@@ -26,13 +26,10 @@
 #import "RLMSwiftSupport.h"
 #import "RLMUtil.hpp"
 
-#import "object_store.hpp"
-#import "schema.hpp"
-
-#import <realm/group.hpp>
-
-#import <objc/runtime.h>
 #include <mutex>
+#import "object_store.hpp"
+#import <objc/runtime.h>
+#import <realm/group.hpp>
 
 using namespace realm;
 
@@ -200,17 +197,12 @@ static NSMutableDictionary *s_localNameToClass = [[NSMutableDictionary alloc] in
 // schema based on tables in a realm
 + (instancetype)dynamicSchemaFromRealm:(RLMRealm *)realm {
     // generate object schema and class mapping for all tables in the realm
-    Schema objectStoreSchema = ObjectStore::schema_from_group(realm.group);
-    return [self dynamicSchemaFromObjectStoreSchema:objectStoreSchema];
-}
+    ObjectStore::Schema objectStoreSchema = ObjectStore::schema_from_group(realm.group);
 
-// schema based on tables in a realm
-+ (instancetype)dynamicSchemaFromObjectStoreSchema:(Schema &)objectStoreSchema {
     // cache descriptors for all subclasses of RLMObject
     NSMutableArray *schemaArray = [NSMutableArray arrayWithCapacity:objectStoreSchema.size()];
-    for (auto &objectSchema : objectStoreSchema) {
-        RLMObjectSchema *schema = [RLMObjectSchema objectSchemaForObjectStoreSchema:objectSchema];
-        [schemaArray addObject:schema];
+    for (unsigned long i = 0; i < objectStoreSchema.size(); i++) {
+        [schemaArray addObject:[RLMObjectSchema objectSchemaForObjectStoreSchema:objectStoreSchema[i]]];
     }
 
     // set class array and mapping
@@ -260,15 +252,6 @@ static NSMutableDictionary *s_localNameToClass = [[NSMutableDictionary alloc] in
         [objectSchemaString appendFormat:@"\t%@\n", [objectSchema.description stringByReplacingOccurrencesOfString:@"\n" withString:@"\n\t"]];
     }
     return [NSString stringWithFormat:@"Schema {\n%@}", objectSchemaString];
-}
-
-- (std::unique_ptr<Schema>)objectStoreCopy {
-    std::vector<realm::ObjectSchema> schema;
-    schema.reserve(_objectSchema.count);
-    for (RLMObjectSchema *objectSchema in _objectSchema) {
-        schema.push_back(objectSchema.objectStoreCopy);
-    }
-    return std::make_unique<realm::Schema>(std::move(schema));
 }
 
 @end

@@ -30,7 +30,7 @@ namespace realm {
     typedef BasicTableRef<Table> TableRef;
 }
 
-class RLMObservationInfo;
+struct RLMObservationInfo;
 
 // RLMObjectSchema private
 @interface RLMObjectSchema () {

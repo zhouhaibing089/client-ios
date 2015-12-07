@@ -25,10 +25,7 @@
 #import "RLMSchema_Private.h"
 #import "RLMUtil.hpp"
 
-#import "results.hpp"
-
 #include <realm.hpp>
-
 using namespace realm;
 
 NSString * const RLMPropertiesComparisonTypeMismatchException = @"RLMPropertiesComparisonTypeMismatchException";
@@ -1094,8 +1091,8 @@ void RLMUpdateQueryWithPredicate(realm::Query *query, NSPredicate *predicate, RL
                     (int)validateMessage.size(), validateMessage.c_str());
 }
 
-realm::SortOrder RLMSortOrderFromDescriptors(RLMObjectSchema *objectSchema, NSArray *descriptors) {
-    realm::SortOrder sort;
+RLMSortOrder RLMSortOrderFromDescriptors(RLMObjectSchema *objectSchema, NSArray *descriptors) {
+    RLMSortOrder sort;
     sort.columnIndices.reserve(descriptors.count);
     sort.ascending.reserve(descriptors.count);
 

@@ -150,8 +150,7 @@ public protocol RealmCollectionType: CollectionType, CustomStringConvertible {
 
     - parameter property: The name of a property conforming to `MinMaxType` to look for a minimum on.
 
-    - returns: The minimum value for the property amongst objects in the collection, or `nil` if the
-               collection is empty.
+    - returns: The minimum value for the property amongst objects in the collection, or `nil` if the collection is empty.
     */
     func min<U: MinMaxType>(property: String) -> U?
 
@@ -162,8 +161,7 @@ public protocol RealmCollectionType: CollectionType, CustomStringConvertible {
 
     - parameter property: The name of a property conforming to `MinMaxType` to look for a maximum on.
 
-    - returns: The maximum value for the property amongst objects in the collection, or `nil` if the
-               collection is empty.
+    - returns: The maximum value for the property amongst objects in the collection, or `nil` if the collection is empty.
     */
     func max<U: MinMaxType>(property: String) -> U?
 
@@ -185,8 +183,7 @@ public protocol RealmCollectionType: CollectionType, CustomStringConvertible {
 
     - parameter property: The name of a property conforming to `AddableType` to calculate average on.
 
-    - returns: The average of the given property over all objects in the collection, or `nil` if the
-               collection is empty.
+    - returns: The average of the given property over all objects in the collection, or `nil` if the collection is empty.
     */
     func average<U: AddableType>(property: String) -> U?
 
@@ -224,9 +221,7 @@ private class _AnyRealmCollectionBase<T: Object>: RealmCollectionType {
     func filter(predicateFormat: String, _ args: AnyObject...) -> Results<Element> { fatalError() }
     func filter(predicate: NSPredicate) -> Results<Element> { fatalError() }
     func sorted(property: String, ascending: Bool) -> Results<Element> { fatalError() }
-    func sorted<S: SequenceType where S.Generator.Element == SortDescriptor>(sortDescriptors: S) -> Results<Element> {
-        fatalError()
-    }
+    func sorted<S: SequenceType where S.Generator.Element == SortDescriptor>(sortDescriptors: S) -> Results<Element> { fatalError() }
     func min<U: MinMaxType>(property: String) -> U? { fatalError() }
     func max<U: MinMaxType>(property: String) -> U? { fatalError() }
     func sum<U: AddableType>(property: String) -> U { fatalError() }
@@ -289,9 +284,7 @@ private final class _AnyRealmCollection<C: RealmCollectionType>: _AnyRealmCollec
 
     - returns: The index of the first matching object, or `nil` if no objects match.
     */
-    override func indexOf(predicateFormat: String, _ args: AnyObject...) -> Int? {
-        return base.indexOf(NSPredicate(format: predicateFormat, argumentArray: args))
-    }
+    override func indexOf(predicateFormat: String, _ args: AnyObject...) -> Int? { return base.indexOf(NSPredicate(format: predicateFormat, argumentArray: args)) }
 
     // MARK: Filtering
 
@@ -302,9 +295,7 @@ private final class _AnyRealmCollection<C: RealmCollectionType>: _AnyRealmCollec
 
     - returns: `Results` containing collection elements that match the given predicate.
     */
-    override func filter(predicateFormat: String, _ args: AnyObject...) -> Results<C.Element> {
-        return base.filter(NSPredicate(format: predicateFormat, argumentArray: args))
-    }
+    override func filter(predicateFormat: String, _ args: AnyObject...) -> Results<C.Element> { return base.filter(NSPredicate(format: predicateFormat, argumentArray: args)) }
 
     /**
     Returns `Results` containing collection elements that match the given predicate.
@@ -326,9 +317,7 @@ private final class _AnyRealmCollection<C: RealmCollectionType>: _AnyRealmCollec
 
     - returns: `Results` containing collection elements sorted by the given property.
     */
-    override func sorted(property: String, ascending: Bool) -> Results<C.Element> {
-        return base.sorted(property, ascending: ascending)
-    }
+    override func sorted(property: String, ascending: Bool) -> Results<C.Element> { return base.sorted(property, ascending: ascending) }
 
     /**
     Returns `Results` with elements sorted by the given sort descriptors.
@@ -337,10 +326,7 @@ private final class _AnyRealmCollection<C: RealmCollectionType>: _AnyRealmCollec
 
     - returns: `Results` with elements sorted by the given sort descriptors.
     */
-    override func sorted<S: SequenceType where S.Generator.Element == SortDescriptor>
-                        (sortDescriptors: S) -> Results<C.Element> {
-        return base.sorted(sortDescriptors)
-    }
+    override func sorted<S: SequenceType where S.Generator.Element == SortDescriptor>(sortDescriptors: S) -> Results<C.Element> { return base.sorted(sortDescriptors) }
 
 
     // MARK: Aggregate Operations
@@ -352,8 +338,7 @@ private final class _AnyRealmCollection<C: RealmCollectionType>: _AnyRealmCollec
 
     - parameter property: The name of a property conforming to `MinMaxType` to look for a minimum on.
 
-    - returns: The minimum value for the property amongst objects in the collection, or `nil` if the
-               collection is empty.
+    - returns: The minimum value for the property amongst objects in the collection, or `nil` if the collection is empty.
     */
     override func min<U: MinMaxType>(property: String) -> U? { return base.min(property) }
 
@@ -364,8 +349,7 @@ private final class _AnyRealmCollection<C: RealmCollectionType>: _AnyRealmCollec
 
     - parameter property: The name of a property conforming to `MinMaxType` to look for a maximum on.
 
-    - returns: The maximum value for the property amongst objects in the collection, or `nil` if the
-               collection is empty.
+    - returns: The maximum value for the property amongst objects in the collection, or `nil` if the collection is empty.
     */
     override func max<U: MinMaxType>(property: String) -> U? { return base.max(property) }
 
@@ -387,8 +371,7 @@ private final class _AnyRealmCollection<C: RealmCollectionType>: _AnyRealmCollec
 
     - parameter property: The name of a property conforming to `AddableType` to calculate average on.
 
-    - returns: The average of the given property over all objects in the collection, or `nil` if the
-               collection is empty.
+    - returns: The average of the given property over all objects in the collection, or `nil` if the collection is empty.
     */
     override func average<U: AddableType>(property: String) -> U? { return base.average(property) }
 
@@ -402,34 +385,21 @@ private final class _AnyRealmCollection<C: RealmCollectionType>: _AnyRealmCollec
 
     - returns: The object at the given `index`.
     */
-    override subscript(index: Int) -> C.Element {
-        // FIXME: it should be possible to avoid this force-casting
-        return unsafeBitCast(base[index as! C.Index], C.Element.self)
-    }
+    override subscript(index: Int) -> C.Element { return unsafeBitCast(base[index as! C.Index], C.Element.self) } // FIXME: it should be possible to avoid this force-casting
 
     /// Returns a `GeneratorOf<Element>` that yields successive elements in the collection.
-    override func generate() -> RLMGenerator<Element> {
-        // FIXME: it should be possible to avoid this force-casting
-        return base.generate() as! RLMGenerator<Element>
-    }
+    override func generate() -> RLMGenerator<Element> { return base.generate() as! RLMGenerator<Element> } // FIXME: it should be possible to avoid this force-casting
 
 
     // MARK: Collection Support
 
     /// The position of the first element in a non-empty collection.
     /// Identical to endIndex in an empty collection.
-    override var startIndex: Int {
-        // FIXME: it should be possible to avoid this force-casting
-        return base.startIndex as! Int
-    }
+    override var startIndex: Int { return base.startIndex as! Int } // FIXME: it should be possible to avoid this force-casting
 
     /// The collection's "past the end" position.
-    /// endIndex is not a valid argument to subscript, and is always reachable from startIndex by
-    /// zero or more applications of successor().
-    override var endIndex: Int {
-        // FIXME: it should be possible to avoid this force-casting
-        return base.endIndex as! Int
-    }
+    /// endIndex is not a valid argument to subscript, and is always reachable from startIndex by zero or more applications of successor().
+    override var endIndex: Int { return base.endIndex as! Int } // FIXME: it should be possible to avoid this force-casting
 
 
     // MARK: Key-Value Coding
@@ -515,9 +485,7 @@ public final class AnyRealmCollection<T: Object>: RealmCollectionType {
 
     - returns: The index of the first matching object, or `nil` if no objects match.
     */
-    public func indexOf(predicateFormat: String, _ args: AnyObject...) -> Int? {
-        return base.indexOf(NSPredicate(format: predicateFormat, argumentArray: args))
-    }
+    public func indexOf(predicateFormat: String, _ args: AnyObject...) -> Int? { return base.indexOf(NSPredicate(format: predicateFormat, argumentArray: args)) }
 
     // MARK: Filtering
 
@@ -528,9 +496,7 @@ public final class AnyRealmCollection<T: Object>: RealmCollectionType {
 
     - returns: `Results` containing collection elements that match the given predicate.
     */
-    public func filter(predicateFormat: String, _ args: AnyObject...) -> Results<Element> {
-        return base.filter(NSPredicate(format: predicateFormat, argumentArray: args))
-    }
+    public func filter(predicateFormat: String, _ args: AnyObject...) -> Results<Element> { return base.filter(NSPredicate(format: predicateFormat, argumentArray: args)) }
 
     /**
     Returns `Results` containing collection elements that match the given predicate.
@@ -552,9 +518,7 @@ public final class AnyRealmCollection<T: Object>: RealmCollectionType {
 
     - returns: `Results` containing collection elements sorted by the given property.
     */
-    public func sorted(property: String, ascending: Bool) -> Results<Element> {
-        return base.sorted(property, ascending: ascending)
-    }
+    public func sorted(property: String, ascending: Bool) -> Results<Element> { return base.sorted(property, ascending: ascending) }
 
     /**
     Returns `Results` with elements sorted by the given sort descriptors.
@@ -563,10 +527,7 @@ public final class AnyRealmCollection<T: Object>: RealmCollectionType {
 
     - returns: `Results` with elements sorted by the given sort descriptors.
     */
-    public func sorted<S: SequenceType where S.Generator.Element == SortDescriptor>
-                      (sortDescriptors: S) -> Results<Element> {
-        return base.sorted(sortDescriptors)
-    }
+    public func sorted<S: SequenceType where S.Generator.Element == SortDescriptor>(sortDescriptors: S) -> Results<Element> { return base.sorted(sortDescriptors) }
 
 
     // MARK: Aggregate Operations
@@ -578,8 +539,7 @@ public final class AnyRealmCollection<T: Object>: RealmCollectionType {
 
     - parameter property: The name of a property conforming to `MinMaxType` to look for a minimum on.
 
-    - returns: The minimum value for the property amongst objects in the collection, or `nil` if the
-               collection is empty.
+    - returns: The minimum value for the property amongst objects in the collection, or `nil` if the collection is empty.
     */
     public func min<U: MinMaxType>(property: String) -> U? { return base.min(property) }
 
@@ -590,8 +550,7 @@ public final class AnyRealmCollection<T: Object>: RealmCollectionType {
 
     - parameter property: The name of a property conforming to `MinMaxType` to look for a maximum on.
 
-    - returns: The maximum value for the property amongst objects in the collection, or `nil` if the
-               collection is empty.
+    - returns: The maximum value for the property amongst objects in the collection, or `nil` if the collection is empty.
     */
     public func max<U: MinMaxType>(property: String) -> U? { return base.max(property) }
 
@@ -613,8 +572,7 @@ public final class AnyRealmCollection<T: Object>: RealmCollectionType {
 
     - parameter property: The name of a property conforming to `AddableType` to calculate average on.
 
-    - returns: The average of the given property over all objects in the collection, or `nil` if the
-               collection is empty.
+    - returns: The average of the given property over all objects in the collection, or `nil` if the collection is empty.
     */
     public func average<U: AddableType>(property: String) -> U? { return base.average(property) }
 
@@ -641,8 +599,7 @@ public final class AnyRealmCollection<T: Object>: RealmCollectionType {
     public var startIndex: Int { return base.startIndex }
 
     /// The collection's "past the end" position.
-    /// endIndex is not a valid argument to subscript, and is always reachable from startIndex by
-    /// zero or more applications of successor().
+    /// endIndex is not a valid argument to subscript, and is always reachable from startIndex by zero or more applications of successor().
     public var endIndex: Int { return base.endIndex }
 
 
