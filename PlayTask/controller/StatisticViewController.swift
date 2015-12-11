@@ -65,7 +65,7 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
         
-        self.tableView.contentInset = UIEdgeInsets(top: self.toolbar.frame.height + self.toolbar.frame.origin.y, left: 0, bottom: 0, right: 0)
+        self.tableView.contentInset = UIEdgeInsets(top: self.toolbar.frame.height + self.toolbar.frame.origin.y + 4, left: 0, bottom: 0, right: 0)
 
 
     }
