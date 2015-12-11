@@ -39,6 +39,8 @@
 		49C8D3D61BE8F0D800E8EBF5 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D3D51BE8F0D800E8EBF5 /* UserAPI.swift */; };
 		49C8D3DA1BEF6DE700E8EBF5 /* TaskAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D3D91BEF6DE700E8EBF5 /* TaskAPI.swift */; };
 		49D321331BF35DFA00A6E0A7 /* WishAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D321321BF35DFA00A6E0A7 /* WishAPI.swift */; };
+		49F4A0211C169D4D002D21D6 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F4A0201C169D4D002D21D6 /* StatisticViewController.swift */; };
+		49F4A0231C16C574002D21D6 /* StatisticTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F4A0221C16C574002D21D6 /* StatisticTableViewCell.swift */; };
 		5177522D0A08272C32C53545 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FE39AB88BE9E71239939D4 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +106,8 @@
 		49C8D3D51BE8F0D800E8EBF5 /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		49C8D3D91BEF6DE700E8EBF5 /* TaskAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAPI.swift; sourceTree = "<group>"; };
 		49D321321BF35DFA00A6E0A7 /* WishAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishAPI.swift; sourceTree = "<group>"; };
+		49F4A0201C169D4D002D21D6 /* StatisticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
+		49F4A0221C16C574002D21D6 /* StatisticTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticTableViewCell.swift; sourceTree = "<group>"; };
 		5622A60872CC93EF0187300C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +158,7 @@
 				49A976BA1BE73B02001300FB /* LoginViewController.swift */,
 				49C8D3CB1BE88C4900E8EBF5 /* RegisterViewController.swift */,
 				49BC5A1C1BF9B9CE00A0EC96 /* PasswordViewController.swift */,
+				49F4A0201C169D4D002D21D6 /* StatisticViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -178,6 +183,7 @@
 				49840DD81BCFA997001F493D /* TaskTableViewCell.swift */,
 				495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */,
 				498BAC951BD0D49400ABB357 /* WishTableViewCell.swift */,
+				49F4A0221C16C574002D21D6 /* StatisticTableViewCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -482,6 +488,7 @@
 				49953E001BDB2F6500B25EC8 /* TaskHistory.swift in Sources */,
 				49C8D3CC1BE88C4900E8EBF5 /* RegisterViewController.swift in Sources */,
 				49C8D3DA1BEF6DE700E8EBF5 /* TaskAPI.swift in Sources */,
+				49F4A0211C169D4D002D21D6 /* StatisticViewController.swift in Sources */,
 				498BAC9C1BD0EA5300ABB357 /* MoreViewController.swift in Sources */,
 				49C8D3D21BE8ACC400E8EBF5 /* API.swift in Sources */,
 				49953DFE1BDB2D6900B25EC8 /* Wish.swift in Sources */,
@@ -490,6 +497,7 @@
 				49BC5A1D1BF9B9CE00A0EC96 /* PasswordViewController.swift in Sources */,
 				4998593D1BDB169C00C222E7 /* Task.swift in Sources */,
 				49953DFC1BDB1F0400B25EC8 /* Table.swift in Sources */,
+				49F4A0231C16C574002D21D6 /* StatisticTableViewCell.swift in Sources */,
 				499708EF1BCF63F500424F5E /* NewTaskViewController.swift in Sources */,
 				499708ED1BCF635A00424F5E /* TaskViewController.swift in Sources */,
 				498BAC901BD0CDE600ABB357 /* WishViewController.swift in Sources */,

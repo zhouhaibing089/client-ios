@@ -62,6 +62,18 @@ final class TaskHistory: Table, Bill {
         return realm.objects(TaskHistory).filter(query).map { $0 }
     }
     
+    class func getTaskHistoriesBetween(begin: NSDate, and end: NSDate) -> Results<TaskHistory> {
+        let realm = try! Realm()
+        var query = "userSid == "
+        if let loggedUser = Util.loggedUser {
+            query += "\(loggedUser.sid.value!)"
+        } else {
+            query += "nil"
+        }
+        query += " AND task.score > 0 AND deleted == false AND canceled == false AND completionTime BETWEEN {%@, %@}"
+        return realm.objects(TaskHistory).filter(query, begin, end).sorted("completionTime")
+    }
+    
     override func push() -> Observable<Table> {
         guard let userSid = Util.loggedUser?.sid.value else {
             return empty()

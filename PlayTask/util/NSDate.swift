@@ -10,8 +10,8 @@ import Foundation
 
 import Foundation
 
-public extension NSDate {
-    public func beginOfDay() -> NSDate {
+extension NSDate {
+    func beginOfDay() -> NSDate {
         let cal = NSCalendar.currentCalendar()
         let components = cal.components([NSCalendarUnit.Year, NSCalendarUnit.Month,
             NSCalendarUnit.Day, NSCalendarUnit.Hour,
@@ -28,14 +28,14 @@ public extension NSDate {
         return cal.dateByAddingComponents(subtract, toDate: tmp, options: [])!
     }
     
-    public func endOfDay() -> NSDate {
+    func endOfDay() -> NSDate {
         let cal = NSCalendar.currentCalendar()
         let add = NSDateComponents()
         add.day = 1
         return cal.dateByAddingComponents(add, toDate: self.beginOfDay(), options: [])!
     }
     
-    public func beginOfWeek() -> NSDate {
+    func beginOfWeek() -> NSDate {
         let cal = NSCalendar.currentCalendar()
         let components = cal.components(NSCalendarUnit.Weekday, fromDate: self)
         let subtract = NSDateComponents()
@@ -47,7 +47,7 @@ public extension NSDate {
         return cal.dateByAddingComponents(subtract, toDate: self.beginOfDay(), options: [])!
     }
     
-    public func endOfWeek() -> NSDate {
+    func endOfWeek() -> NSDate {
         let cal = NSCalendar.currentCalendar()
         let components = cal.components(NSCalendarUnit.Weekday, fromDate: self)
         let add = NSDateComponents()
@@ -58,4 +58,41 @@ public extension NSDate {
         }
         return cal.dateByAddingComponents(add, toDate: self.endOfDay(), options: [])!
     }
+    
+    func beginOfYear() -> NSDate {
+        let cal = NSCalendar.currentCalendar()
+        let components = cal.components([NSCalendarUnit.Year, NSCalendarUnit.Month,
+            NSCalendarUnit.Day, NSCalendarUnit.Hour,
+            NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: self.beginOfDay())
+        components.month = 1
+        components.day = 1
+        return cal.dateFromComponents(components)!
+    }
+    
+    func endOfYear() -> NSDate {
+        let cal = NSCalendar.currentCalendar()
+        let add = NSDateComponents()
+        add.year = 1
+        return cal.dateByAddingComponents(add, toDate: self.beginOfYear(), options: [])!
+    }
+    
+    func addDay(day: Int) -> NSDate {
+        let cal = NSCalendar.currentCalendar()
+        let add = NSDateComponents()
+        add.day = day
+        return cal.dateByAddingComponents(add, toDate: self, options: [])!
+    }
+    
+    func getComponents() -> NSDateComponents {
+        let cal = NSCalendar.currentCalendar()
+        return cal.components([NSCalendarUnit.Year, NSCalendarUnit.Month,
+            NSCalendarUnit.Day, NSCalendarUnit.Hour,
+            NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: self)
+    }
+    
+    func differenceFrom(fromDate: NSDate, unit: NSCalendarUnit = NSCalendarUnit.Day) -> NSDateComponents {
+        let cal = NSCalendar.currentCalendar()
+        return cal.components(unit, fromDate: fromDate, toDate: self, options: [])
+    }
+    
 }

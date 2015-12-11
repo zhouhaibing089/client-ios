@@ -20,12 +20,13 @@
                     <connections>
                         <segue destination="PT1-7b-p1b" kind="relationship" relationship="viewControllers" id="SnI-hQ-41p"/>
                         <segue destination="xqq-le-Rlh" kind="relationship" relationship="viewControllers" id="mkG-Tv-p9w"/>
+                        <segue destination="XID-b4-6kR" kind="relationship" relationship="viewControllers" id="gVv-G9-H3m"/>
                         <segue destination="heL-HC-BVo" kind="relationship" relationship="viewControllers" id="ZjT-8N-Mu1"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QDI-cL-Ygg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-252" y="309"/>
+            <point key="canvasLocation" x="-254" y="311"/>
         </scene>
         <!--欲望-->
         <scene sceneID="Whc-fp-4FL">
@@ -172,11 +173,6 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="欲望" id="MUf-Om-vpk">
-                        <barButtonItem key="leftBarButtonItem" title="账单" id="V6z-0S-dNB">
-                            <connections>
-                                <segue destination="Nah-Wp-egE" kind="show" id="KYa-2q-z03"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="plus" id="LXL-JY-qou">
                             <connections>
                                 <action selector="showMenu:" destination="QkY-Tj-BTz" id="s0q-eJ-co6"/>
@@ -425,11 +421,6 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="任务" id="8Rr-PK-TSO">
-                        <barButtonItem key="leftBarButtonItem" title="账单" id="p23-VE-NOh">
-                            <connections>
-                                <segue destination="Nah-Wp-egE" kind="show" id="0lA-nr-mvG"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="plus" id="VQK-28-epI">
                             <connections>
                                 <action selector="showMenu:" destination="R3m-mU-SDD" id="t5x-jY-jNf"/>
@@ -540,7 +531,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kQe-YR-PXw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1338" y="1252"/>
+            <point key="canvasLocation" x="1338" y="2228"/>
         </scene>
         <!--新建任务-->
         <scene sceneID="KTX-eB-Z2i">
@@ -956,6 +947,193 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P4a-Gk-dET" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="604" y="485"/>
+        </scene>
+        <!--统计-->
+        <scene sceneID="RT7-IO-Ydx">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="De7-3B-fg3" customClass="StatisticViewController" customModule="PlayTask" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GtC-GZ-DX5"/>
+                        <viewControllerLayoutGuide type="bottom" id="dgQ-xk-k1e"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rML-Xc-b0z">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="378" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="s6b-gh-qgG">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="ROF-32-pdW">
+                                    <rect key="frame" x="0.0" y="406" width="600" height="52"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="line_chart" rowHeight="378" id="qbt-gI-o7q" customClass="StatisticTableViewCell" customModule="PlayTask" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="378"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qbt-gI-o7q" id="Npk-rB-bSG">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="378"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjh-Lc-wAO">
+                                                    <rect key="frame" x="8" y="8" width="584" height="329"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收入" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OdT-hU-hij">
+                                                            <rect key="frame" x="8" y="8" width="34" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日平均：--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Kf-KI-eGH">
+                                                            <rect key="frame" x="8" y="37" width="60" height="15"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 成就" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5JW-sn-H9Q">
+                                                            <rect key="frame" x="519" y="8" width="57" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天 10:34" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u20-z3-F4o">
+                                                            <rect key="frame" x="516" y="37" width="60" height="15"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kj0-RZ-m0c" customClass="LineChartView" customModule="Charts">
+                                                            <rect key="frame" x="0.0" y="60" width="584" height="261"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="Kj0-RZ-m0c" secondAttribute="height" multiplier="584:329" id="A3k-Rl-Rn8"/>
+                                                                <constraint firstAttribute="width" secondItem="Kj0-RZ-m0c" secondAttribute="height" multiplier="16:9" id="f44-9D-3Pq"/>
+                                                            </constraints>
+                                                            <variation key="default">
+                                                                <mask key="constraints">
+                                                                    <exclude reference="A3k-Rl-Rn8"/>
+                                                                    <exclude reference="f44-9D-3Pq"/>
+                                                                </mask>
+                                                            </variation>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="Kj0-RZ-m0c" firstAttribute="leading" secondItem="sjh-Lc-wAO" secondAttribute="leading" id="0tg-T5-05v"/>
+                                                        <constraint firstItem="u20-z3-F4o" firstAttribute="top" secondItem="5JW-sn-H9Q" secondAttribute="bottom" constant="8" id="1TV-lG-RVP"/>
+                                                        <constraint firstItem="3Kf-KI-eGH" firstAttribute="top" secondItem="OdT-hU-hij" secondAttribute="bottom" constant="8" symbolic="YES" id="7VW-3w-UCd"/>
+                                                        <constraint firstItem="Kj0-RZ-m0c" firstAttribute="top" secondItem="u20-z3-F4o" secondAttribute="bottom" constant="8" symbolic="YES" id="9GZ-iz-jP5"/>
+                                                        <constraint firstItem="OdT-hU-hij" firstAttribute="leading" secondItem="3Kf-KI-eGH" secondAttribute="leading" id="B3q-f4-Edb"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="u20-z3-F4o" secondAttribute="trailing" id="GPb-8t-CoN"/>
+                                                        <constraint firstAttribute="width" secondItem="sjh-Lc-wAO" secondAttribute="height" multiplier="16:9" id="Ids-bv-J2N"/>
+                                                        <constraint firstItem="OdT-hU-hij" firstAttribute="top" secondItem="sjh-Lc-wAO" secondAttribute="topMargin" id="Mee-bh-avL"/>
+                                                        <constraint firstItem="Kj0-RZ-m0c" firstAttribute="top" secondItem="3Kf-KI-eGH" secondAttribute="bottom" constant="8" symbolic="YES" id="NCj-OF-nbE"/>
+                                                        <constraint firstItem="OdT-hU-hij" firstAttribute="leading" secondItem="sjh-Lc-wAO" secondAttribute="leadingMargin" id="NZL-JU-PJ3"/>
+                                                        <constraint firstItem="Kj0-RZ-m0c" firstAttribute="top" secondItem="sjh-Lc-wAO" secondAttribute="top" id="Uc0-fI-uAU"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="5JW-sn-H9Q" secondAttribute="trailing" id="g9T-L5-Jjx"/>
+                                                        <constraint firstAttribute="topMargin" secondItem="5JW-sn-H9Q" secondAttribute="top" id="hZO-i8-HhR"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Kj0-RZ-m0c" secondAttribute="trailing" id="jMv-Cw-hNq"/>
+                                                        <constraint firstAttribute="width" secondItem="sjh-Lc-wAO" secondAttribute="height" multiplier="584:361" constant="16" id="kFK-e2-7W0"/>
+                                                        <constraint firstItem="OdT-hU-hij" firstAttribute="baseline" secondItem="5JW-sn-H9Q" secondAttribute="baseline" id="kdF-gh-tJa"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="Kj0-RZ-m0c" secondAttribute="bottom" id="sZB-g1-iJ4"/>
+                                                        <constraint firstItem="3Kf-KI-eGH" firstAttribute="leading" secondItem="sjh-Lc-wAO" secondAttribute="leadingMargin" id="xGB-Gb-3nt"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="kFK-e2-7W0"/>
+                                                            <exclude reference="B3q-f4-Edb"/>
+                                                            <exclude reference="kdF-gh-tJa"/>
+                                                            <exclude reference="Uc0-fI-uAU"/>
+                                                        </mask>
+                                                    </variation>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="sjh-Lc-wAO" secondAttribute="bottom" id="M1b-tF-y7V"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="sjh-Lc-wAO" secondAttribute="trailing" id="YbE-fJ-ma7"/>
+                                                <constraint firstItem="sjh-Lc-wAO" firstAttribute="top" secondItem="Npk-rB-bSG" secondAttribute="topMargin" id="alv-sW-Dda"/>
+                                                <constraint firstItem="sjh-Lc-wAO" firstAttribute="leading" secondItem="Npk-rB-bSG" secondAttribute="leadingMargin" id="bLD-hc-Ikc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="averageLabel" destination="3Kf-KI-eGH" id="LLG-5w-qZT"/>
+                                            <outlet property="gradientView" destination="sjh-Lc-wAO" id="WYL-FB-fWe"/>
+                                            <outlet property="lineChartView" destination="Kj0-RZ-m0c" id="Fzr-88-m5D"/>
+                                            <outlet property="sumLabel" destination="5JW-sn-H9Q" id="nQM-8M-r93"/>
+                                            <outlet property="timeLabel" destination="u20-z3-F4o" id="N0h-c8-a69"/>
+                                            <outlet property="titleLabel" destination="OdT-hU-hij" id="8H9-ub-Zwh"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Te-4b-rch">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <items/>
+                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i79-E0-Ozn">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JEG-ye-jM5">
+                                        <rect key="frame" x="8" y="8" width="584" height="29"/>
+                                        <segments>
+                                            <segment title="日"/>
+                                            <segment title="周"/>
+                                            <segment title="月"/>
+                                            <segment title="年"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="changePeriod:" destination="De7-3B-fg3" eventType="valueChanged" id="BEs-tw-rZt"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailingMargin" secondItem="JEG-ye-jM5" secondAttribute="trailing" id="2x0-bv-cdw"/>
+                                    <constraint firstItem="JEG-ye-jM5" firstAttribute="leading" secondItem="i79-E0-Ozn" secondAttribute="leadingMargin" id="6yj-LE-1xi"/>
+                                    <constraint firstAttribute="bottom" secondItem="JEG-ye-jM5" secondAttribute="bottom" constant="20" symbolic="YES" id="LVJ-MA-olC"/>
+                                    <constraint firstItem="JEG-ye-jM5" firstAttribute="centerY" secondItem="i79-E0-Ozn" secondAttribute="centerY" id="anq-WS-gvl"/>
+                                    <constraint firstItem="JEG-ye-jM5" firstAttribute="top" secondItem="i79-E0-Ozn" secondAttribute="top" constant="20" symbolic="YES" id="iiD-ud-xYO"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="LVJ-MA-olC"/>
+                                        <exclude reference="iiD-ud-xYO"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="s6b-gh-qgG" secondAttribute="bottom" id="9v9-gs-A1y"/>
+                            <constraint firstItem="9Te-4b-rch" firstAttribute="leading" secondItem="rML-Xc-b0z" secondAttribute="leading" id="H3A-9b-F5V"/>
+                            <constraint firstItem="9Te-4b-rch" firstAttribute="top" secondItem="GtC-GZ-DX5" secondAttribute="bottom" id="Ul0-iX-dg4"/>
+                            <constraint firstItem="i79-E0-Ozn" firstAttribute="leading" secondItem="rML-Xc-b0z" secondAttribute="leading" id="WNw-qt-IcS"/>
+                            <constraint firstItem="i79-E0-Ozn" firstAttribute="height" secondItem="9Te-4b-rch" secondAttribute="height" id="aVV-se-LVL"/>
+                            <constraint firstAttribute="trailing" secondItem="9Te-4b-rch" secondAttribute="trailing" id="cTF-Ht-skn"/>
+                            <constraint firstItem="s6b-gh-qgG" firstAttribute="top" secondItem="rML-Xc-b0z" secondAttribute="topMargin" id="fZ3-X0-LQm"/>
+                            <constraint firstAttribute="trailing" secondItem="i79-E0-Ozn" secondAttribute="trailing" id="gIl-44-xCw"/>
+                            <constraint firstItem="s6b-gh-qgG" firstAttribute="leading" secondItem="rML-Xc-b0z" secondAttribute="leading" id="mY7-Q1-8mk"/>
+                            <constraint firstItem="i79-E0-Ozn" firstAttribute="top" secondItem="GtC-GZ-DX5" secondAttribute="bottom" id="vaE-cF-XA3"/>
+                            <constraint firstAttribute="trailing" secondItem="s6b-gh-qgG" secondAttribute="trailing" id="zbd-ly-QTz"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="统计" id="0dU-Bd-Omf">
+                        <barButtonItem key="leftBarButtonItem" title="账单" id="SMc-bh-uxY">
+                            <connections>
+                                <segue destination="Nah-Wp-egE" kind="show" id="EeB-2t-fMK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="periodSegmentControl" destination="JEG-ye-jM5" id="LGk-bl-3aj"/>
+                        <outlet property="tableView" destination="s6b-gh-qgG" id="Khb-px-fNO"/>
+                        <outlet property="toolbar" destination="9Te-4b-rch" id="5HJ-f0-pvC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ylv-EM-ePh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1338" y="1356"/>
         </scene>
         <!--更多-->
         <scene sceneID="cTn-mq-7EJ">
@@ -1537,9 +1715,29 @@
             </objects>
             <point key="canvasLocation" x="2133" y="-1088"/>
         </scene>
+        <!--统计-->
+        <scene sceneID="RxT-Ve-XRj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XID-b4-6kR" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="统计" image="line_chart" id="oHd-jV-wuz"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kbu-2i-wPR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="De7-3B-fg3" kind="relationship" relationship="rootViewController" id="Tvq-5R-urB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sAK-gT-5Bo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="604" y="1356"/>
+        </scene>
     </scenes>
     <resources>
         <image name="gift" width="32" height="32"/>
+        <image name="line_chart" width="32" height="32"/>
         <image name="more" width="32" height="32"/>
         <image name="off" width="32" height="32"/>
         <image name="pin_unchecked" width="32" height="32"/>
@@ -1547,7 +1745,4 @@
         <image name="recents" width="32" height="32"/>
         <image name="top_charts" width="32" height="32"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="KYa-2q-z03"/>
-    </inferredMetricsTieBreakers>
 </document>

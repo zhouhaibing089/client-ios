@@ -64,6 +64,18 @@ class WishHistory: Table, Bill {
         return realm.objects(WishHistory).filter(query).map { $0 }
     }
     
+    class func getWishHistoriesBetween(begin: NSDate, and end: NSDate) -> Results<WishHistory> {
+        let realm = try! Realm()
+        var query = "userSid == "
+        if let loggedUser = Util.loggedUser {
+            query += "\(loggedUser.sid.value!)"
+        } else {
+            query += "nil"
+        }
+        query += " AND deleted == false AND canceled == false AND satisfiedTime BETWEEN {%@, %@}"
+        return realm.objects(WishHistory).filter(query, begin, end).sorted("satisfiedTime")
+    }
+    
     override func push() -> Observable<Table> {
         guard let userSid = Util.loggedUser?.sid.value else {
             return empty()
