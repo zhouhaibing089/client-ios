@@ -12,20 +12,6 @@ import RealmSwift
 
 class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    enum Period: Int {
-        case Day
-        case Week
-        case Month
-        case Year
-    }
-    
-    enum StatisticType: Int {
-        case Income
-        case Outcome
-        case Balance
-    }
-    
-
     var hairline: UIImageView!
     @IBOutlet weak var toolbar: UIToolbar!
 

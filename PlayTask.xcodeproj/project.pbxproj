@@ -41,6 +41,8 @@
 		49D321331BF35DFA00A6E0A7 /* WishAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D321321BF35DFA00A6E0A7 /* WishAPI.swift */; };
 		49F4A0211C169D4D002D21D6 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F4A0201C169D4D002D21D6 /* StatisticViewController.swift */; };
 		49F4A0231C16C574002D21D6 /* StatisticTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F4A0221C16C574002D21D6 /* StatisticTableViewCell.swift */; };
+		49F8092B1C1B10C7006A5DF5 /* StatisticDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8092A1C1B10C7006A5DF5 /* StatisticDetailViewController.swift */; };
+		49F8092D1C1B198B006A5DF5 /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8092C1C1B198B006A5DF5 /* Statistic.swift */; };
 		5177522D0A08272C32C53545 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FE39AB88BE9E71239939D4 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +110,8 @@
 		49D321321BF35DFA00A6E0A7 /* WishAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishAPI.swift; sourceTree = "<group>"; };
 		49F4A0201C169D4D002D21D6 /* StatisticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		49F4A0221C16C574002D21D6 /* StatisticTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticTableViewCell.swift; sourceTree = "<group>"; };
+		49F8092A1C1B10C7006A5DF5 /* StatisticDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticDetailViewController.swift; sourceTree = "<group>"; };
+		49F8092C1C1B198B006A5DF5 /* Statistic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
 		5622A60872CC93EF0187300C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,6 +163,7 @@
 				49C8D3CB1BE88C4900E8EBF5 /* RegisterViewController.swift */,
 				49BC5A1C1BF9B9CE00A0EC96 /* PasswordViewController.swift */,
 				49F4A0201C169D4D002D21D6 /* StatisticViewController.swift */,
+				49F8092A1C1B10C7006A5DF5 /* StatisticDetailViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -173,6 +178,7 @@
 				49953E011BDB316500B25EC8 /* WishHistory.swift */,
 				49953E031BDB371400B25EC8 /* Bill.swift */,
 				49953E051BDC67D900B25EC8 /* User.swift */,
+				49F8092C1C1B198B006A5DF5 /* Statistic.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -476,6 +482,7 @@
 				498BAC961BD0D49400ABB357 /* WishTableViewCell.swift in Sources */,
 				49840DD91BCFA997001F493D /* TaskTableViewCell.swift in Sources */,
 				495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */,
+				49F8092D1C1B198B006A5DF5 /* Statistic.swift in Sources */,
 				49C8D3D61BE8F0D800E8EBF5 /* UserAPI.swift in Sources */,
 				49BC5A201BF9BB2900A0EC96 /* NSDate.swift in Sources */,
 				498BAC921BD0CE7400ABB357 /* NewWishViewController.swift in Sources */,
@@ -495,6 +502,7 @@
 				49D321331BF35DFA00A6E0A7 /* WishAPI.swift in Sources */,
 				49C8D3D41BE8BE1000E8EBF5 /* Config.swift in Sources */,
 				49BC5A1D1BF9B9CE00A0EC96 /* PasswordViewController.swift in Sources */,
+				49F8092B1C1B10C7006A5DF5 /* StatisticDetailViewController.swift in Sources */,
 				4998593D1BDB169C00C222E7 /* Task.swift in Sources */,
 				49953DFC1BDB1F0400B25EC8 /* Table.swift in Sources */,
 				49F4A0231C16C574002D21D6 /* StatisticTableViewCell.swift in Sources */,
