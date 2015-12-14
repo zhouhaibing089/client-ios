@@ -1162,29 +1162,36 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="跑步 完成 5 次 收入 10 成就" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGH-FX-Qbe">
-                                <rect key="frame" x="196" y="468" width="208" height="21"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XQh-Yj-HDS" customClass="BubbleView" customModule="PlayTask" customModuleProvider="target">
+                                <rect key="frame" x="140" y="468" width="320" height="75"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="iTC-cD-VCi"/>
+                                    <constraint firstAttribute="height" constant="50" id="dCJ-Kg-LKk"/>
+                                    <constraint firstAttribute="height" constant="45" id="l1Z-L7-e7P"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="dCJ-Kg-LKk"/>
+                                        <exclude reference="l1Z-L7-e7P"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="XQh-Yj-HDS" firstAttribute="width" secondItem="JqF-Qe-SaO" secondAttribute="width" id="2gc-O0-i2Y"/>
                             <constraint firstItem="JqF-Qe-SaO" firstAttribute="centerY" secondItem="Y5R-tJ-Y59" secondAttribute="centerY" id="7OQ-a2-3Bh"/>
                             <constraint firstItem="JqF-Qe-SaO" firstAttribute="centerY" secondItem="Y5R-tJ-Y59" secondAttribute="centerY" id="7yu-Ux-MQh"/>
                             <constraint firstItem="JqF-Qe-SaO" firstAttribute="top" secondItem="iUV-c4-rMs" secondAttribute="bottom" constant="121" id="EZB-Py-Uc2"/>
-                            <constraint firstItem="pGH-FX-Qbe" firstAttribute="centerX" secondItem="Y5R-tJ-Y59" secondAttribute="centerX" id="LN3-he-5Jx"/>
                             <constraint firstItem="JqF-Qe-SaO" firstAttribute="trailing" secondItem="Y5R-tJ-Y59" secondAttribute="trailingMargin" id="WXa-dw-BVn"/>
                             <constraint firstItem="tqe-BM-lHR" firstAttribute="top" secondItem="JqF-Qe-SaO" secondAttribute="bottom" constant="187" id="XKW-gm-elt"/>
                             <constraint firstItem="JqF-Qe-SaO" firstAttribute="centerX" secondItem="Y5R-tJ-Y59" secondAttribute="centerX" id="abB-0D-hYR"/>
                             <constraint firstItem="JqF-Qe-SaO" firstAttribute="centerX" secondItem="Y5R-tJ-Y59" secondAttribute="centerX" id="bmM-Va-AYh"/>
-                            <constraint firstItem="pGH-FX-Qbe" firstAttribute="width" secondItem="JqF-Qe-SaO" secondAttribute="width" id="d2T-iR-rgF"/>
-                            <constraint firstItem="pGH-FX-Qbe" firstAttribute="top" secondItem="JqF-Qe-SaO" secondAttribute="bottom" constant="8" symbolic="YES" id="ghD-Ei-pXf"/>
+                            <constraint firstItem="tqe-BM-lHR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="XQh-Yj-HDS" secondAttribute="bottom" constant="8" symbolic="YES" id="goV-Dh-Mb7"/>
                             <constraint firstItem="JqF-Qe-SaO" firstAttribute="leading" secondItem="Y5R-tJ-Y59" secondAttribute="leadingMargin" priority="999" constant="1000" id="hCh-6Q-nvc"/>
+                            <constraint firstItem="XQh-Yj-HDS" firstAttribute="top" secondItem="JqF-Qe-SaO" secondAttribute="bottom" constant="8" symbolic="YES" id="oIZ-nS-Jop"/>
+                            <constraint firstItem="XQh-Yj-HDS" firstAttribute="centerX" secondItem="Y5R-tJ-Y59" secondAttribute="centerX" id="xIP-dJ-KJ2"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -1193,7 +1200,6 @@
                                 <exclude reference="WXa-dw-BVn"/>
                                 <exclude reference="bmM-Va-AYh"/>
                                 <exclude reference="hCh-6Q-nvc"/>
-                                <exclude reference="d2T-iR-rgF"/>
                                 <exclude reference="XKW-gm-elt"/>
                             </mask>
                         </variation>

@@ -1,31 +1,30 @@
 //
-//  UILabel+Rx.swift
-//  RxCocoa
+//  UIView+Rx.swift
+//  Rx
 //
-//  Created by Krunoslav Zaher on 4/1/15.
-//  Copyright (c) 2015 Krunoslav Zaher. All rights reserved.
+//  Created by Krunoslav Zaher on 12/6/15.
+//  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
 #if os(iOS) || os(tvOS)
 
 import Foundation
+import UIKit
 #if !RX_NO_MODULE
 import RxSwift
 #endif
-import UIKit
 
-extension UILabel {
-    
+extension UIView {
     /**
-    Bindable sink for `text` property.
-    */
-    public var rx_text: AnyObserver<String> {
+     Bindable sink for `hidden` property.
+     */
+    public var rx_hidden: AnyObserver<Bool> {
         return AnyObserver { [weak self] event in
             MainScheduler.ensureExecutingOnScheduler()
-            
+
             switch event {
             case .Next(let value):
-                self?.text = value
+                self?.hidden = value
             case .Error(let error):
                 bindingErrorToInterface(error)
                 break
@@ -36,15 +35,15 @@ extension UILabel {
     }
 
     /**
-    Bindable sink for `attributedText` property.
-    */
-    public var rx_attributedText: AnyObserver<NSAttributedString?> {
+     Bindable sink for `alpha` property.
+     */
+    public var rx_alpha: AnyObserver<CGFloat> {
         return AnyObserver { [weak self] event in
             MainScheduler.ensureExecutingOnScheduler()
 
             switch event {
             case .Next(let value):
-                self?.attributedText = value
+                self?.alpha = value
             case .Error(let error):
                 bindingErrorToInterface(error)
                 break
@@ -53,7 +52,6 @@ extension UILabel {
             }
         }
     }
-    
 }
 
 #endif
