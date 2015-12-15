@@ -1063,7 +1063,6 @@
                                             <outlet property="sumLabel" destination="5JW-sn-H9Q" id="nQM-8M-r93"/>
                                             <outlet property="timeLabel" destination="u20-z3-F4o" id="N0h-c8-a69"/>
                                             <outlet property="titleLabel" destination="OdT-hU-hij" id="8H9-ub-Zwh"/>
-                                            <segue destination="2Xj-uW-9n8" kind="show" id="n5B-nq-0De"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1130,6 +1129,7 @@
                         <outlet property="periodSegmentControl" destination="JEG-ye-jM5" id="LGk-bl-3aj"/>
                         <outlet property="tableView" destination="s6b-gh-qgG" id="Khb-px-fNO"/>
                         <outlet property="toolbar" destination="9Te-4b-rch" id="5HJ-f0-pvC"/>
+                        <segue destination="2Xj-uW-9n8" kind="show" identifier="detail" id="Tu2-G8-DbS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ylv-EM-ePh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1208,7 +1208,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="占比" id="qWH-1a-xdx"/>
                     <connections>
+                        <outlet property="bubbleView" destination="XQh-Yj-HDS" id="N8T-Vi-zoL"/>
                         <outlet property="pieChartView" destination="JqF-Qe-SaO" id="uEH-4U-bJh"/>
+                        <outlet property="pieWidthConstraint" destination="BFX-ea-RdP" id="0cN-wK-k9B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1rx-ai-BBA" userLabel="First Responder" sceneMemberID="firstResponder"/>

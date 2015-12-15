@@ -350,5 +350,22 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
             }
         }
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! StatisticTableViewCell
+        if cell.data != nil && cell.data.yValCount > 0 {
+            self.performSegueWithIdentifier("detail", sender: indexPath.row)
+        }
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "detail" {
+            if let sdvc = segue.destinationViewController as? StatisticDetailViewController {
+                sdvc.type = StatisticType(rawValue: sender as! Int)!
+                sdvc.period = self.period
+            }
+        }
+    }
 
 }
