@@ -43,7 +43,7 @@
 		49F4A0231C16C574002D21D6 /* StatisticTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F4A0221C16C574002D21D6 /* StatisticTableViewCell.swift */; };
 		49F8092B1C1B10C7006A5DF5 /* StatisticDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8092A1C1B10C7006A5DF5 /* StatisticDetailViewController.swift */; };
 		49F8092D1C1B198B006A5DF5 /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8092C1C1B198B006A5DF5 /* Statistic.swift */; };
-		49F8093C1C1E7224006A5DF5 /* BubbleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F8093B1C1E7224006A5DF5 /* BubbleView.xib */; };
+		49F8093C1C1E7224006A5DF5 /* Bubble.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F8093B1C1E7224006A5DF5 /* Bubble.xib */; };
 		49F8093E1C1E7239006A5DF5 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8093D1C1E7239006A5DF5 /* BubbleView.swift */; };
 		5177522D0A08272C32C53545 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FE39AB88BE9E71239939D4 /* Pods.framework */; };
 /* End PBXBuildFile section */
@@ -114,7 +114,7 @@
 		49F4A0221C16C574002D21D6 /* StatisticTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticTableViewCell.swift; sourceTree = "<group>"; };
 		49F8092A1C1B10C7006A5DF5 /* StatisticDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticDetailViewController.swift; sourceTree = "<group>"; };
 		49F8092C1C1B198B006A5DF5 /* Statistic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
-		49F8093B1C1E7224006A5DF5 /* BubbleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BubbleView.xib; sourceTree = "<group>"; };
+		49F8093B1C1E7224006A5DF5 /* Bubble.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Bubble.xib; sourceTree = "<group>"; };
 		49F8093D1C1E7239006A5DF5 /* BubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
 		5622A60872CC93EF0187300C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -194,7 +194,7 @@
 				495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */,
 				498BAC951BD0D49400ABB357 /* WishTableViewCell.swift */,
 				49F4A0221C16C574002D21D6 /* StatisticTableViewCell.swift */,
-				49F8093B1C1E7224006A5DF5 /* BubbleView.xib */,
+				49F8093B1C1E7224006A5DF5 /* Bubble.xib */,
 				49F8093D1C1E7239006A5DF5 /* BubbleView.swift */,
 			);
 			path = view;
@@ -413,7 +413,7 @@
 				499708C91BCF506E00424F5E /* LaunchScreen.storyboard in Resources */,
 				499708C61BCF506E00424F5E /* Assets.xcassets in Resources */,
 				499708C41BCF506E00424F5E /* Main.storyboard in Resources */,
-				49F8093C1C1E7224006A5DF5 /* BubbleView.xib in Resources */,
+				49F8093C1C1E7224006A5DF5 /* Bubble.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

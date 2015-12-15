@@ -16,10 +16,15 @@ class BubbleView: XibView {
     
     var triangleLength: CGFloat = 12
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.backgroundColor = UIColor.clearColor()
+    override var xibName: String {
+        return "Bubble"
+    }
+    
+    override func setup() {
+        super.setup()
         self.contentView.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clearColor()
+        self.triangleLength = 12
     }
     
     // Only override drawRect: if you perform custom drawing.
