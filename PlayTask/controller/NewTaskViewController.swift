@@ -37,8 +37,8 @@ class NewTaskViewController: UITableViewController {
     }
     
     @IBAction func addTask(sender: UIBarButtonItem) {
-        let taskTitle = taskTitleTextField.text
-        let taskScore = taskScoreTextField.text
+        let taskTitle = taskTitleTextField.text!
+        let taskScore = taskScoreTextField.text!
         var taskLoop = Int(taskLoopTextField.text!) ?? 1
         let taskType = TaskType(rawValue: taskTypeSegmentControl.selectedSegmentIndex)!
         if taskTitle == "" {
@@ -49,6 +49,10 @@ class NewTaskViewController: UITableViewController {
             CRToastManager.showNotificationWithMessage("请输入成就点数", completionBlock: nil)
             return
         }
+        if Int(taskScore) == nil {
+            CRToastManager.showNotificationWithMessage("请输入合理的成就点数（不支持小数）", completionBlock: nil)
+            return
+        }
         switch taskType {
         case .Daily, .Weekly:
             taskLoop = taskLoop == 0 ? 1 : taskLoop
@@ -57,7 +61,7 @@ class NewTaskViewController: UITableViewController {
             break
         }
         
-        let task = Task(title: taskTitle!, score: Int(taskScore!)!, type: taskType, loop: taskLoop)
+        let task = Task(title: taskTitle, score: Int(taskScore)!, type: taskType, loop: taskLoop)
         
         task.save()
         self.onTaskAdded?(task)

@@ -447,7 +447,7 @@
             </objects>
             <point key="canvasLocation" x="1338" y="485"/>
         </scene>
-        <!--Bill View Controller-->
+        <!--账单-->
         <scene sceneID="DNa-mR-5Pb">
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="j00-WZ-vGA" customClass="BillViewController" customModule="PlayTask" customModuleProvider="target" sceneMemberID="viewController">
@@ -592,6 +592,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="账单" id="uj7-4M-zoC"/>
                     <connections>
                         <outlet property="monthLabel" destination="0GK-qR-QI3" id="2kg-t8-AEu"/>
                         <outlet property="monthSelector" destination="0jE-bz-bxy" id="PGW-3W-I0G"/>

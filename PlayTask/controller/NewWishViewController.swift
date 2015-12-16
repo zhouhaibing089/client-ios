@@ -34,8 +34,8 @@ class NewWishViewController: UITableViewController {
     }
     
     @IBAction func addWish(sender: UIBarButtonItem) {
-        let title = self.titleTextField.text
-        let score = self.scoreTextField.text
+        let title = self.titleTextField.text!
+        let score = self.scoreTextField.text!
         if title == "" {
             CRToastManager.showNotificationWithMessage("请输入标题", completionBlock: nil)
             return
@@ -44,8 +44,12 @@ class NewWishViewController: UITableViewController {
             CRToastManager.showNotificationWithMessage("请输入消耗的成就点数", completionBlock: nil)
             return
         }
+        if Int(score) == nil {
+            CRToastManager.showNotificationWithMessage("请输入合理的成就点数（不支持小数）", completionBlock: nil)
+            return
+        }
         let loop = self.loopSegmentControl.selectedSegmentIndex == 0 ? 1 : 0
-        let wish = Wish(title: title!, score: Int(score!)!, loop: loop)
+        let wish = Wish(title: title, score: Int(score)!, loop: loop)
         wish.save()
         self.onWishAdded?(wish)
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
