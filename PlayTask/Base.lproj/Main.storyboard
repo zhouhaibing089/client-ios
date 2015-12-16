@@ -1005,7 +1005,7 @@
         <scene sceneID="wmf-6c-A8B">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PT1-7b-p1b" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="任务" image="top_charts" id="ZqT-wP-1du"/>
+                    <tabBarItem key="tabBarItem" title="任务" image="list" selectedImage="list_filled" id="ZqT-wP-1du"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gng-wJ-vYU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1507,7 +1507,7 @@
         <scene sceneID="gS6-dx-qt2">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xqq-le-Rlh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="欲望" image="gift" id="d9L-C0-TE2"/>
+                    <tabBarItem key="tabBarItem" title="欲望" image="gift" selectedImage="gift_filled" id="d9L-C0-TE2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k4c-vW-63w">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1701,7 +1701,7 @@
         <scene sceneID="j7n-NH-amL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="heL-HC-BVo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="更多" image="more" id="K18-Sp-10J"/>
+                    <tabBarItem key="tabBarItem" title="更多" image="more" selectedImage="more_filled" id="K18-Sp-10J"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4rV-6l-zUl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1873,7 +1873,7 @@
         <scene sceneID="RxT-Ve-XRj">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XID-b4-6kR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="统计" image="line_chart" id="oHd-jV-wuz"/>
+                    <tabBarItem key="tabBarItem" title="统计" image="line_chart" selectedImage="line_chart_filled" id="oHd-jV-wuz"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kbu-2i-wPR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1891,12 +1891,16 @@
     </scenes>
     <resources>
         <image name="gift" width="32" height="32"/>
+        <image name="gift_filled" width="32" height="32"/>
         <image name="line_chart" width="32" height="32"/>
+        <image name="line_chart_filled" width="32" height="32"/>
+        <image name="list" width="32" height="32"/>
+        <image name="list_filled" width="32" height="32"/>
         <image name="more" width="32" height="32"/>
+        <image name="more_filled" width="32" height="32"/>
         <image name="off" width="32" height="32"/>
         <image name="pin_unchecked" width="32" height="32"/>
         <image name="plus" width="22" height="22"/>
         <image name="recents" width="32" height="32"/>
-        <image name="top_charts" width="32" height="32"/>
     </resources>
 </document>
