@@ -289,7 +289,8 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
             sum = " 花费\(desc.2)成就"
             break
         case .Balance:
-            sum = "\(desc.0)\(desc.2)成就"
+            title = desc.0
+            sum = " \(desc.2)成就"
             self.bubbleView.contentLabel.text = "\(desc.0)\(desc.2)成就"
             break
         }
