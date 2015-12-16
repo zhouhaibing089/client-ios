@@ -361,8 +361,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUx-s0-ymt">
-                                        <rect key="frame" x="548" y="8" width="32" height="32"/>
-                                        <state key="normal" image="recents"/>
+                                        <rect key="frame" x="555" y="12" width="25" height="25"/>
+                                        <state key="normal" image="ok"/>
                                         <connections>
                                             <action selector="showDone:" destination="R3m-mU-SDD" eventType="touchUpInside" id="IY1-r2-2dS"/>
                                         </connections>
@@ -1890,17 +1890,17 @@
         </scene>
     </scenes>
     <resources>
-        <image name="gift" width="32" height="32"/>
-        <image name="gift_filled" width="32" height="32"/>
-        <image name="line_chart" width="32" height="32"/>
-        <image name="line_chart_filled" width="32" height="32"/>
-        <image name="list" width="32" height="32"/>
-        <image name="list_filled" width="32" height="32"/>
-        <image name="more" width="32" height="32"/>
-        <image name="more_filled" width="32" height="32"/>
+        <image name="gift" width="25" height="25"/>
+        <image name="gift_filled" width="25" height="25"/>
+        <image name="line_chart" width="25" height="25"/>
+        <image name="line_chart_filled" width="25" height="25"/>
+        <image name="list" width="25" height="25"/>
+        <image name="list_filled" width="25" height="25"/>
+        <image name="more" width="25" height="25"/>
+        <image name="more_filled" width="25" height="25"/>
         <image name="off" width="32" height="32"/>
+        <image name="ok" width="25" height="25"/>
         <image name="pin_unchecked" width="32" height="32"/>
         <image name="plus" width="22" height="22"/>
-        <image name="recents" width="32" height="32"/>
     </resources>
 </document>

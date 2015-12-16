@@ -50,8 +50,10 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     @IBAction func showDone(sender: UIButton) {
         self.showDone = !self.showDone
         if self.showDone {
+            sender.setImage(UIImage(named: "ok_filled"), forState: UIControlState.Normal)
             sender.tintColor = self.view.tintColor
         } else {
+            sender.setImage(UIImage(named: "ok"), forState: UIControlState.Normal)
             sender.tintColor = UIColor.grayColor()
         }
         self.refresh()
