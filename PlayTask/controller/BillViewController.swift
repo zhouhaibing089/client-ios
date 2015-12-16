@@ -135,6 +135,15 @@ class BillViewController: UIViewController, UITableViewDelegate, UITableViewData
         return "\(component!.day)日 - 星期\(self.weekday[component!.weekday]!)"
     }
     
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        let header:UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+        
+        header.textLabel?.textColor = UIColor.grayColor()
+        header.textLabel?.font = UIFont.systemFontOfSize(15)
+        header.textLabel?.frame = header.frame
+    }
+    
     func refresh() {
         self.billItems = [[Bill]]()
         var bills = [Bill]()
