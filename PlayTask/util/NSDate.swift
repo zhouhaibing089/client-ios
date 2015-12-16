@@ -59,11 +59,11 @@ extension NSDate {
         return cal.dateByAddingComponents(add, toDate: self.endOfDay(), options: [])!
     }
     
+    // real begin without offset
     func beginOfMonth() -> NSDate {
         let cal = NSCalendar.currentCalendar()
         let components = cal.components([NSCalendarUnit.Year, NSCalendarUnit.Month,
-            NSCalendarUnit.Day, NSCalendarUnit.Hour,
-            NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: self.beginOfDay())
+            NSCalendarUnit.Day], fromDate: self)
         components.day = 1
         return cal.dateFromComponents(components)!
     }
@@ -108,7 +108,7 @@ extension NSDate {
     
     func getComponents() -> NSDateComponents {
         let cal = NSCalendar.currentCalendar()
-        return cal.components([NSCalendarUnit.Year, NSCalendarUnit.Month,
+        return cal.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Weekday,
             NSCalendarUnit.Day, NSCalendarUnit.Hour,
             NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: self)
     }

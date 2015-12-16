@@ -30,7 +30,7 @@ class BillViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     @IBOutlet weak var tableView: UITableView!
-    var billItems: [Bill]!
+    var billItems: [[Bill]]!
     
     let monthMap = [
         1: "一", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六",
@@ -82,26 +82,25 @@ class BillViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return self.billItems.count
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return self.billItems.count
+        return self.billItems[section].count
     }
 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("bill_item", forIndexPath: indexPath) as! BillItemTableViewCell
         
-        cell.billItem = self.billItems[indexPath.row]
+        cell.billItem = self.billItems[indexPath.section][indexPath.row]
         cell.layoutIfNeeded()
         return cell
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            let billItem = self.billItems[indexPath.row]
+            let billItem = self.billItems[indexPath.section][indexPath.row]
 
             let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
             actionSheet.addAction(UIAlertAction(title: "仅删除", style: UIAlertActionStyle.Destructive, handler: { _ in
@@ -122,15 +121,42 @@ class BillViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    let weekday = [
+        1: "日",
+        2: "一",
+        3: "二",
+        4: "三",
+        5: "四",
+        6: "五",
+        7: "六"
+    ]
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let component = self.billItems[section].first?.getBillTime().getComponents()
+        return "\(component!.day)日 - 星期\(self.weekday[component!.weekday]!)"
+    }
+    
     func refresh() {
-        self.billItems = [Bill]()
+        self.billItems = [[Bill]]()
+        var bills = [Bill]()
         let th: [Bill] = TaskHistory.getTaskHistoriesBetween(self.selectedMonth, and: self.selectedMonth.endOfMonth()).map({ $0 })
         let wh: [Bill] = WishHistory.getWishHistoriesBetween(self.selectedMonth, and: self.selectedMonth.endOfMonth()).map({ $0 })
-        self.billItems.appendContentsOf(th)
-        self.billItems.appendContentsOf(wh)
+        bills.appendContentsOf(th)
+        bills.appendContentsOf(wh)
         
-        self.billItems = self.billItems.sort {
+        bills = bills.sort {
             return $0.getBillTime().compare($1.getBillTime()) == NSComparisonResult.OrderedDescending
+        }
+        var currentDay = 0
+        bills.map { bill in
+            let day = bill.getBillTime().getComponents().day
+            if day != currentDay {
+                let count = self.billItems.count
+                self.billItems.append([Bill]())
+                self.billItems[count].append(bill)
+                currentDay = day
+            } else {
+                self.billItems[self.billItems.count - 1].append(bill)
+            }
         }
         self.tableView.reloadData()
     }

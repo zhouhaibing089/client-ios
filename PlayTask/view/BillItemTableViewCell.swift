@@ -19,7 +19,7 @@ class BillItemTableViewCell: UITableViewCell {
     var billItem: Bill! {
         didSet {
             let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            dateFormatter.dateFormat = "HH:mm:ss"
             self.titleLabel.text = self.billItem.getBillTitle()
             if self.billItem.getBronze() > 0 {
                 self.badgeView.hidden = false
