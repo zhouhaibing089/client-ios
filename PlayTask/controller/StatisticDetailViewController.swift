@@ -40,6 +40,7 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
     }
     
     @IBOutlet weak var pieWidthConstraint: NSLayoutConstraint!
+    var panTimer: NSTimer?
     
     @IBOutlet weak var pieChartView: PieChartView! {
         didSet {
@@ -60,8 +61,9 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
     }
     
     func pan(gesture: UIGestureRecognizer) {
+        self.panTimer?.invalidate()
         if gesture.state == UIGestureRecognizerState.Ended {
-            NSTimer.delay(0.6) {
+            self.panTimer = NSTimer.delay(0.6) {
                 self.spintToIndex(self.pieChartView.indexForAngle(90))
             }
         } else if gesture.state == UIGestureRecognizerState.Began {
@@ -170,7 +172,7 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
                     self.descriptions[entry.xIndex] = desc
                 } else {
                     self.descriptions[xVals.count] = (bill.getBillTitle(), 1, -bill.getBillScore())
-                    entries[bill.getBillTitle()] = ChartDataEntry(value: Double(bill.getBillScore()), xIndex: xVals.count)
+                    entries[bill.getBillTitle()] = ChartDataEntry(value: Double(abs(bill.getBillScore())), xIndex: xVals.count)
                     xVals.append(bill.getBillTitle())
                 }
             })
