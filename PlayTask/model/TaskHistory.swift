@@ -70,7 +70,7 @@ final class TaskHistory: Table, Bill {
         } else {
             query += "nil"
         }
-        query += " AND task.score > 0 AND deleted == false AND canceled == false AND completionTime BETWEEN {%@, %@}"
+        query += " AND deleted == false AND canceled == false AND completionTime BETWEEN {%@, %@}"
         return realm.objects(TaskHistory).filter(query, begin, end).sorted("completionTime")
     }
     

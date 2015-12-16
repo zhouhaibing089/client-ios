@@ -8,22 +8,60 @@
 
 import UIKit
 
-class BillViewController: UITableViewController {
+class BillViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var monthSelector: UIView! {
+        didSet {
+            let hairLine = CALayer()
+            hairLine.frame = CGRect(x: self.monthSelector.bounds.origin.x, y: self.monthSelector.bounds.origin.y + self.monthSelector.bounds.height - 1, width: self.monthSelector.bounds.width, height: 1)
+            hairLine.backgroundColor = UIColor.lightGrayColor().CGColor
+            self.monthSelector.layer.addSublayer(hairLine)
+        }
+    }
+    @IBOutlet weak var nextMonthButton: UIButton!
+    @IBOutlet weak var prevMonthButton: UIButton!
+    @IBOutlet weak var monthLabel: UILabel!
+    
+    @IBAction func prevMonth(sender: UIButton) {
+        self.selectedMonth = self.selectedMonth.addMonth(-1)
+    }
+    @IBAction func nextMonth(sender: UIButton) {
+        self.selectedMonth = self.selectedMonth.addMonth(1)
+    }
+
+    @IBOutlet weak var tableView: UITableView!
     var billItems: [Bill]!
+    
+    let monthMap = [
+        1: "一", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六",
+        7: "七", 8: "八", 9: "九", 10: "十", 11: "十一", 12: "十二"
+        
+    ]
+    var selectedMonth: NSDate! {
+        didSet {
+            let month = self.selectedMonth.getComponents().month
+            let year = self.selectedMonth.getComponents().year
+            let currentYear = NSDate().getComponents().year
+            let currentMonth = NSDate().getComponents().month
+            self.nextMonthButton.enabled = !(year == currentYear && month == currentMonth)
+            if year == currentYear {
+                self.monthLabel.text = "\(self.monthMap[month]!)月"
+            } else {
+                let formatter = NSDateFormatter()
+                formatter.dateFormat = "yyyy年M月"
+                self.monthLabel.text = formatter.stringFromDate(self.selectedMonth)
+            }
+            self.refresh()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.billItems = [Bill]()
-        let th: [Bill] = TaskHistory.getTaskHistories()
-        let wh: [Bill] = WishHistory.getWishHistories()
-        self.billItems.appendContentsOf(th)
-        self.billItems.appendContentsOf(wh)
+        self.selectedMonth = NSDate().beginOfMonth()
         
-        self.billItems = self.billItems.sort {
-            return $0.getBillTime().compare($1.getBillTime()) == NSComparisonResult.OrderedDescending
-        }
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 72
@@ -42,18 +80,18 @@ class BillViewController: UITableViewController {
     
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return self.billItems.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("bill_item", forIndexPath: indexPath) as! BillItemTableViewCell
         
         cell.billItem = self.billItems[indexPath.row]
@@ -61,7 +99,7 @@ class BillViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let billItem = self.billItems[indexPath.row]
 
@@ -82,6 +120,19 @@ class BillViewController: UITableViewController {
             actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
             self.presentViewController(actionSheet, animated: true, completion: nil)
         }
+    }
+    
+    func refresh() {
+        self.billItems = [Bill]()
+        let th: [Bill] = TaskHistory.getTaskHistoriesBetween(self.selectedMonth, and: self.selectedMonth.endOfMonth()).map({ $0 })
+        let wh: [Bill] = WishHistory.getWishHistoriesBetween(self.selectedMonth, and: self.selectedMonth.endOfMonth()).map({ $0 })
+        self.billItems.appendContentsOf(th)
+        self.billItems.appendContentsOf(wh)
+        
+        self.billItems = self.billItems.sort {
+            return $0.getBillTime().compare($1.getBillTime()) == NSComparisonResult.OrderedDescending
+        }
+        self.tableView.reloadData()
     }
 
 }

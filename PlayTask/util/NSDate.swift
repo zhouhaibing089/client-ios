@@ -59,6 +59,22 @@ extension NSDate {
         return cal.dateByAddingComponents(add, toDate: self.endOfDay(), options: [])!
     }
     
+    func beginOfMonth() -> NSDate {
+        let cal = NSCalendar.currentCalendar()
+        let components = cal.components([NSCalendarUnit.Year, NSCalendarUnit.Month,
+            NSCalendarUnit.Day, NSCalendarUnit.Hour,
+            NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: self.beginOfDay())
+        components.day = 1
+        return cal.dateFromComponents(components)!
+    }
+    
+    func endOfMonth() -> NSDate {
+        let cal = NSCalendar.currentCalendar()
+        let add = NSDateComponents()
+        add.month = 1
+        return cal.dateByAddingComponents(add, toDate: self.beginOfMonth(), options: [])!
+    }
+    
     func beginOfYear() -> NSDate {
         let cal = NSCalendar.currentCalendar()
         let components = cal.components([NSCalendarUnit.Year, NSCalendarUnit.Month,
@@ -80,6 +96,13 @@ extension NSDate {
         let cal = NSCalendar.currentCalendar()
         let add = NSDateComponents()
         add.day = day
+        return cal.dateByAddingComponents(add, toDate: self, options: [])!
+    }
+    
+    func addMonth(month: Int) -> NSDate {
+        let cal = NSCalendar.currentCalendar()
+        let add = NSDateComponents()
+        add.month = month
         return cal.dateByAddingComponents(add, toDate: self, options: [])!
     }
     

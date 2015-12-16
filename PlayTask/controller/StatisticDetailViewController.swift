@@ -136,7 +136,7 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
             centerText += "收入\n"
             var entries = [String: ChartDataEntry]()
             var xVals = [String]()
-            let bills = TaskHistory.getTaskHistoriesBetween(begin, and: end)
+            let bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).filter("task.score > 0")
             bills.map({ bill in
                 self.sum += bill.getBillScore()
                 if let entry = entries[bill.getBillTitle()] {
@@ -189,7 +189,7 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
             self.descriptions[0] = ("收入", 0, 0)
             self.descriptions[1] = ("支出", 0, 0)
             
-            var bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).map({ $0 as Bill })
+            var bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).filter("task.score > 0").map({ $0 as Bill })
             bills.appendContentsOf(WishHistory.getWishHistoriesBetween(begin, and: end).map({ $0 }))
             bills.map({ bill in
                 self.sum += bill.getBillScore()

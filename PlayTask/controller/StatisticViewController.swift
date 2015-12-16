@@ -138,13 +138,13 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
         var bills: [Bill]
         switch statisticType {
         case .Income:
-            bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).map { $0 as Bill }
+            bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).filter("task.score > 0").map { $0 as Bill }
             break
         case .Outcome:
             bills = WishHistory.getWishHistoriesBetween(begin, and: end).map({ $0 })
             break
         case .Balance:
-            bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).map({ $0 })
+            bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).filter("task.score > 0").map({ $0 })
             bills.appendContentsOf(WishHistory.getWishHistoriesBetween(begin, and: end).map({ $0 }))
             break
         }
@@ -271,7 +271,7 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
         var bills: [Bill]
         switch statisticType {
         case .Income:
-            bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).map({ $0 })
+            bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).filter("task.score > 0").map({ $0 })
             bills.map({ sum += Double($0.getBillScore()) })
             break
         case .Outcome:
@@ -279,7 +279,7 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
             bills.map({ sum += Double(abs($0.getBillScore())) })
             break
         case .Balance:
-            bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).map({ $0 })
+            bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).filter("task.score > 0").map({ $0 })
             bills.appendContentsOf(WishHistory.getWishHistoriesBetween(begin, and: end).map({ $0 }))
             bills.map({ sum += Double($0.getBillScore()) })
             break
@@ -299,7 +299,7 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
         var sum = 0
         switch statisticType {
         case .Income:
-            let bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).map({ $0 })
+            let bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).filter("task.score > 0").map({ $0 })
             if bills.count == 0 {
                 return nil
             }
@@ -313,7 +313,7 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
             bills.map({ sum += abs($0.getBillScore()) })
             break
         default:
-            var bills: [Bill] = TaskHistory.getTaskHistoriesBetween(begin, and: end).map({ $0 })
+            var bills: [Bill] = TaskHistory.getTaskHistoriesBetween(begin, and: end).filter("task.score > 0").map({ $0 })
             bills.appendContentsOf(WishHistory.getWishHistoriesBetween(begin, and: end).map({ $0 }))
             if bills.count == 0 {
                 return nil
@@ -332,11 +332,11 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
         let end = NSDate().endOfDay()
         switch statisticType {
         case .Income:
-            return TaskHistory.getTaskHistoriesBetween(begin, and: end).last?.getBillTime()
+            return TaskHistory.getTaskHistoriesBetween(begin, and: end).filter("task.score > 0").last?.getBillTime()
         case .Outcome:
             return WishHistory.getWishHistoriesBetween(begin, and: end).last?.getBillTime()
         default:
-            let th = TaskHistory.getTaskHistoriesBetween(begin, and: end).last?.getBillTime()
+            let th = TaskHistory.getTaskHistoriesBetween(begin, and: end).filter("task.score > 0").last?.getBillTime()
             let wh = WishHistory.getWishHistoriesBetween(begin, and: end).last?.getBillTime()
             if let th = th, wh = wh {
                 switch th.compare(wh) {
