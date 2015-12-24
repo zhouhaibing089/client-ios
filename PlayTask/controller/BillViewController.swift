@@ -105,14 +105,14 @@ class BillViewController: UIViewController, UITableViewDelegate, UITableViewData
             let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
             actionSheet.addAction(UIAlertAction(title: "仅删除", style: UIAlertActionStyle.Destructive, handler: { _ in
                 billItem.delete()
-                self.billItems.removeAtIndex(indexPath.row)
+                self.billItems[indexPath.section].removeAtIndex(indexPath.row)
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
             }))
             if billItem.getBronze() == 0 {
                 actionSheet.addAction(UIAlertAction(title: "删除并恢复成就", style: UIAlertActionStyle.Default, handler: { _ in
                     billItem.cancel()
                     billItem.delete()
-                    self.billItems.removeAtIndex(indexPath.row)
+                    self.billItems[indexPath.section].removeAtIndex(indexPath.row)
                     self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
                 }))
             }
