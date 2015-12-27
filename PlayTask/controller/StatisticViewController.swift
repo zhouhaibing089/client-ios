@@ -264,7 +264,7 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
             break
         case .Year:
             begin = now.beginOfYear()
-            end = now.endOfYear().addDay(-1)
+            end = now.endOfDay().addDay(-1)
             break
         }
         var sum: Double = 0
