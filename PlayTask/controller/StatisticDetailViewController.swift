@@ -109,7 +109,7 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
 
 
         self.dataSet.drawValuesEnabled = false
-        self.dataSet.sliceSpace = 2
+        self.dataSet.sliceSpace = 1
         
         let now = NSDate()
         var begin: NSDate, end: NSDate
