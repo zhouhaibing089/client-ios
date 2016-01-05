@@ -361,7 +361,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUx-s0-ymt">
-                                        <rect key="frame" x="539" y="4" width="41" height="41"/>
+                                        <rect key="frame" x="551" y="4" width="41" height="41"/>
                                         <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                                         <state key="normal" image="ok"/>
                                         <connections>
@@ -377,7 +377,7 @@
                                     <constraint firstItem="DnV-Ew-8lp" firstAttribute="centerY" secondItem="G1q-EG-V6O" secondAttribute="centerY" id="YUT-FB-ScR"/>
                                     <constraint firstItem="t7x-WK-Y0Z" firstAttribute="leading" secondItem="DnV-Ew-8lp" secondAttribute="trailing" constant="8" symbolic="YES" id="lT5-3U-tPq"/>
                                     <constraint firstItem="DnV-Ew-8lp" firstAttribute="leading" secondItem="G1q-EG-V6O" secondAttribute="leading" constant="20" symbolic="YES" id="lhE-uF-TNd"/>
-                                    <constraint firstAttribute="trailing" secondItem="sUx-s0-ymt" secondAttribute="trailing" constant="20" symbolic="YES" id="o6M-Kb-pVZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="sUx-s0-ymt" secondAttribute="trailing" constant="8" id="o6M-Kb-pVZ"/>
                                     <constraint firstItem="i4m-GK-5PT" firstAttribute="leading" secondItem="t7x-WK-Y0Z" secondAttribute="trailing" constant="8" symbolic="YES" id="oBE-1D-z0V"/>
                                     <constraint firstAttribute="height" constant="48" id="pGP-Z7-Nfg"/>
                                 </constraints>
@@ -1235,7 +1235,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XQh-Yj-HDS" customClass="BubbleView" customModule="PlayTask" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XQh-Yj-HDS" customClass="BubbleView" customModule="PlayTask" customModuleProvider="target">
                                 <rect key="frame" x="140" y="468" width="320" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
