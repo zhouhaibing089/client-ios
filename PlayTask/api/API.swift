@@ -21,7 +21,7 @@ class API {
     }()
     
     class func req(method: Alamofire.Method, _ URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL, suppressError: Bool = true) -> Observable<JSON> {
-        return create { observer in
+        return Observable.create { observer in
             API.manager.request(
                 method,
                 "\(Config.API.ROOT)\(URLString)",

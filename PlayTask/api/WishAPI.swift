@@ -72,7 +72,7 @@ extension API {
     // MARK: WishHistory
     class func createWishHistory(wishHistory: WishHistory) -> Observable<WishHistory> {
         if wishHistory.wish.sid.value == nil {
-            return empty()
+            return Observable.empty()
         }
         return API.req(.POST, "/wishes/\(wishHistory.wish.sid.value!)/wish_histories", parameters: [
             "satisfied_time": wishHistory.satisfiedTime.timeIntervalSince1970 * 1000,

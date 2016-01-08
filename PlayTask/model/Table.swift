@@ -88,14 +88,14 @@ class Table: Object {
     }
     
     func push() -> Observable<Table> {
-        return empty()
+        return Observable.empty()
     }
     
     class func push() -> Observable<Table> {
-        return empty()
+        return Observable.empty()
     }
     
     class func pull() -> Observable<Table> {
-        return empty()
+        return Observable.empty()
     }
 }

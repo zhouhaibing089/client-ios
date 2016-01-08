@@ -45,7 +45,7 @@ class Wish: Table {
     
     override func push() -> Observable<Table> {
         guard let userSid = Util.loggedUser?.sid.value else {
-            return empty()
+            return Observable.empty()
         }
         if self.userSid.value == nil {
             self.update(["userSid": userSid])
@@ -59,7 +59,7 @@ class Wish: Table {
     
     override class func push() -> Observable<Table> {
         guard let userSid = Util.loggedUser?.sid.value else {
-            return empty()
+            return Observable.empty()
         }
         let realm = try! Realm()
         return realm.objects(Wish).filter("(userSid == %@ OR userSid == nil) AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).toObservable().map({ (t) -> Observable<Table> in
@@ -69,7 +69,7 @@ class Wish: Table {
     
     override class func pull() -> Observable<Table> {
         guard let loggedUser = Util.loggedUser else {
-            return empty()
+            return Observable.empty()
         }
         return generate(0) { index -> Observable<[Wish]> in
             API.getWishes(loggedUser, after: loggedUser.wishPullTime ?? NSDate(timeIntervalSince1970: 0))

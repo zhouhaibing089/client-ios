@@ -76,7 +76,7 @@ final class TaskHistory: Table, Bill {
     
     override func push() -> Observable<Table> {
         guard let userSid = Util.loggedUser?.sid.value else {
-            return empty()
+            return Observable.empty()
         }
         if self.userSid.value == nil {
             self.update(["userSid": userSid])
@@ -90,9 +90,9 @@ final class TaskHistory: Table, Bill {
     
     override class func push() -> Observable<Table> {
         guard let userSid = Util.loggedUser?.sid.value else {
-            return empty()
+            return Observable.empty()
         }
-        return deferred({ _ -> Observable<Table> in
+        return Observable.deferred({ _ -> Observable<Table> in
             let realm = try! Realm()
             return realm.objects(TaskHistory).filter("(userSid == nil OR userSid == %@) AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).toObservable().map({ (t) -> Observable<Table> in
                 return t.push().retry(3)
@@ -103,7 +103,7 @@ final class TaskHistory: Table, Bill {
 
     override class func pull() -> Observable<Table> {
         guard let loggedUser = Util.loggedUser else {
-            return empty()
+            return Observable.empty()
         }
         return generate(0) { index -> Observable<[TaskHistory]> in
             API.getTaskHistories(loggedUser, after: loggedUser.taskHistoryPullTime ?? NSDate(timeIntervalSince1970: 0))

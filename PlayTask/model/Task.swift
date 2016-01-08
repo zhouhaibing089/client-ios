@@ -167,7 +167,7 @@ final class Task: Table {
     
     override func push() -> Observable<Table> {
         guard let userSid = Util.loggedUser?.sid.value else {
-            return empty()
+            return Observable.empty()
         }
         if self.userSid.value == nil {
             self.update(["userSid": userSid])
@@ -181,7 +181,7 @@ final class Task: Table {
     
     override class func push() -> Observable<Table> {
         guard let userSid = Util.loggedUser?.sid.value else {
-            return empty()
+            return Observable.empty()
         }
         let realm = try! Realm()
         return realm.objects(Task).filter("(userSid == %@ OR userSid == nil) AND (synchronizedTime < modifiedTime OR synchronizedTime == nil)", userSid).toObservable().map({ (t) -> Observable<Table> in
@@ -192,7 +192,7 @@ final class Task: Table {
     
     override class func pull() -> Observable<Table> {
         guard let loggedUser = Util.loggedUser else {
-            return empty()
+            return Observable.empty()
         }
         return generate(0) { index -> Observable<[Task]> in
             API.getTasks(loggedUser, after: loggedUser.taskPullTime ?? NSDate(timeIntervalSince1970: 0))

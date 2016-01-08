@@ -35,7 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        self.sqlite2Realm()
         // 配置 CRToast
         let defaultOptions: [NSObject: AnyObject] = [
             kCRToastNotificationTypeKey: CRToastType.NavigationBar.rawValue,
@@ -129,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func sync() {
         self.syncDisposable?.dispose()
         self.syncStatus = SyncStatus.Syncing
-        var pullUser: Observable<Table> = empty()
+        var pullUser: Observable<Table> = Observable.empty()
         if let loggedUser = Util.loggedUser {
             pullUser = API.getUserWithUserSid(loggedUser.sid.value!).map {
                 User.getInstance().update(["score": 0]) // 游客账户数据清零
@@ -151,126 +150,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     break
                 }
         }
-    }
-
-
-    func sqlite2Realm() {
-        // 创建 sqlite
-        let path = NSSearchPathForDirectoriesInDomains(
-            .DocumentDirectory, .UserDomainMask, true
-            ).first!
-        let dbPath = "\(path)/db.sqlite3"
-        let fileManager = NSFileManager.defaultManager()
-        if !fileManager.fileExistsAtPath(dbPath) {
-            return
-        }
-        
-        self.db = try! Connection(dbPath)
-        
-        struct SQL {
-            static let deleted = Expression<Bool>("deleted")
-            static let createdTime = Expression<Int64>("createdTime")
-            static let modifiedTime = Expression<Int64>("modifiedTime")
-        }
-        
-        struct TaskSQLite {
-            static let tasks = SQLite.Table("tasks")
-            static let id = Expression<Int64>("id")
-            static let title = Expression<String>("title")
-            static let score = Expression<Int64>("score")
-            static let type = Expression<Int64>("type")
-
-        }
-        
-        struct TaskHistorySQLite {
-            static let histories = SQLite.Table("task_histories")
-            static let id = Expression<Int64>("id")
-            static let taskId = Expression<Int64>("task_id")
-            static let completionTime = Expression<Int64>("completion_time")
-        }
-        
-        struct WishSQLite {
-            static let wishes = SQLite.Table("wishes")
-            static let id = Expression<Int64>("id")
-            static let title = Expression<String>("title")
-            static let score = Expression<Int64>("score")
-        }
-        
-        struct WishHistorySQLite {
-            static let histories = SQLite.Table("wish_histories")
-            static let id = Expression<Int64>("id")
-            static let wishId = Expression<Int64>("wish_id")
-            static let createdTime = Expression<Int64>("created_time")
-        }
-        
-        let realm = try! Realm()
-        
-        try! realm.write {
-            realm.deleteAll()
-        }
-        
-        // 迁移任务数据表
-        for task in db.prepare(TaskSQLite.tasks) {
-            let t = Task()
-            t.title = task[TaskSQLite.title]
-            t.score = Int(task[TaskSQLite.score])
-            t.type = Int(task[TaskSQLite.type])
-            t.deleted = task[SQL.deleted]
-            t.createdTime = NSDate(timeIntervalSince1970: Double(task[SQL.createdTime]))
-            t.modifiedTime = NSDate(timeIntervalSince1970: Double(task[SQL.modifiedTime]))
-            t.loop = 1
-            t.id = NSUUID().UUIDString
-            try! realm.write {
-                realm.add(t)
-            }
-            for history in db.prepare(TaskHistorySQLite.histories.filter(TaskHistorySQLite.taskId == task[TaskSQLite.id])) {
-                let h = TaskHistory()
-                h.task = t
-                h.completionTime = NSDate(timeIntervalSince1970: Double(history[TaskHistorySQLite.completionTime]))
-                h.deleted = history[SQL.deleted]
-                h.createdTime = NSDate(timeIntervalSince1970: Double(history[SQL.createdTime]))
-                h.modifiedTime = NSDate(timeIntervalSince1970: Double(history[SQL.modifiedTime]))
-                h.canceled = h.deleted
-                h.id = NSUUID().UUIDString
-                try! realm.write {
-                    realm.add(h)
-                }
-            }
-        }
-        
-        // 迁移欲望数据表
-        for wish in db.prepare(WishSQLite.wishes) {
-            let w = Wish()
-            w.title = wish[WishSQLite.title]
-            w.score = Int(wish[WishSQLite.score])
-            w.deleted = wish[SQL.deleted]
-            w.createdTime = NSDate(timeIntervalSince1970: Double(wish[SQL.createdTime]))
-            w.modifiedTime = NSDate(timeIntervalSince1970: Double(wish[SQL.modifiedTime]))
-            w.id = NSUUID().UUIDString
-            try! realm.write {
-                realm.add(w)
-            }
-            for history in db.prepare(WishHistorySQLite.histories.filter(WishHistorySQLite.wishId == wish[WishSQLite.id])) {
-                let h = WishHistory()
-                h.wish = w
-                h.deleted = history[SQL.deleted]
-                h.createdTime = NSDate(timeIntervalSince1970: Double(history[WishHistorySQLite.createdTime]))
-                h.modifiedTime = NSDate(timeIntervalSince1970: Double(history[SQL.modifiedTime]))
-                h.satisfiedTime = NSDate(timeIntervalSince1970: Double(history[WishHistorySQLite.createdTime]))
-                h.canceled = false
-                h.id = NSUUID().UUIDString
-                try! realm.write {
-                    realm.add(h)
-                }
-            }
-        }
-        
-        let standardUserDefaults = NSUserDefaults.standardUserDefaults()
-        let score = standardUserDefaults.integerForKey("score")
-        
-        Util.currentUser.update(["score": score])
-        
-        try! fileManager.moveItemAtPath(dbPath, toPath: "\(path)/db_backup.sqlite3")
     }
 }
 
