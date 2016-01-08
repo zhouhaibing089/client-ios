@@ -14,7 +14,7 @@ PODS:
     - RxSwift (~> 2.0)
   - RxSwift (2.0.0)
   - SwiftyJSON (2.3.2)
-  - UMengAnalytics-NO-IDFA (3.6.5)
+  - UMengAnalytics-NO-IDFA (3.6.7)
   - YNSwift (0.1):
     - MBProgressHUD (~> 0.9.1)
     - RxBlocking (~> 2.0.0-beta)
@@ -30,7 +30,7 @@ DEPENDENCIES:
   - RxCocoa (~> 2.0)
   - RxSwift (~> 2.0)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
-  - UMengAnalytics-NO-IDFA (= 3.6.5)
+  - UMengAnalytics-NO-IDFA (= 3.6.7)
   - YNSwift (from `/Users/yoncise/Workspace/YNSwift`)
 
 EXTERNAL SOURCES:
@@ -55,7 +55,7 @@ SPEC CHECKSUMS:
   RxCocoa: b0ebd70b4f7450bdb3c8987b122f8fd568dc1e2f
   RxSwift: d83246efa6f16c50c143bec134649d045498f601
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
-  UMengAnalytics-NO-IDFA: 279e28990a08efb56cff1821d2954bb00aa6975a
+  UMengAnalytics-NO-IDFA: 6d02561a00579b2e37718f204eb81347df5d7b8b
   YNSwift: 7d500efade5882ffbd4d9f7ec37dc942bc7113b1
 
 COCOAPODS: 0.39.0

@@ -83,6 +83,6 @@ class NewTaskViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return MobClick.getConfigParams("newTaskGuide")
+        return UMOnlineConfig.getConfigParams("newTaskGuide")
     }
 }

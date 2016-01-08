@@ -741,7 +741,6 @@
 		00A0B2FDD18006CE1317802405398A86 /* Driver+Operators+arity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Driver+Operators+arity.swift"; path = "RxCocoa/Common/CocoaUnits/Driver/Driver+Operators+arity.swift"; sourceTree = "<group>"; };
 		00F3EDFC11E1D1D12A1547A5F7EF2C63 /* table_macros.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; name = table_macros.hpp; path = include/realm/table_macros.hpp; sourceTree = "<group>"; };
 		00F50F0EF3060B614724082E057CD09B /* BubbleChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleChartDataSet.swift; path = Charts/Classes/Data/BubbleChartDataSet.swift; sourceTree = "<group>"; };
-		0134939AA60BA7A66317CC41FB7598A2 /* MobClick.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MobClick.h; path = "umsdk_IOS_analytics_no-idfa_v3.6.5/UMAnalytics_Sdk_3.6.5/MobClick.h"; sourceTree = "<group>"; };
 		01547DD2F29D05EC53EDED178F67C983 /* DelaySubscription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DelaySubscription.swift; path = RxSwift/Observables/Implementations/DelaySubscription.swift; sourceTree = "<group>"; };
 		017B27FCFC9FC21008E85FD1E09B412B /* VirtualTimeScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VirtualTimeScheduler.swift; path = RxSwift/Schedulers/VirtualTimeScheduler.swift; sourceTree = "<group>"; };
 		01FCEF7EFE8BE8D994D3D8CE44A36C76 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1311,6 +1310,7 @@
 		E4BEB18ADE1B5AA4B80F612A63765D91 /* index_set.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; name = index_set.hpp; path = include/realm/index_set.hpp; sourceTree = "<group>"; };
 		E4DBB8D0D41CF670ACB45BC2895D58AA /* ScatterChartView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScatterChartView.swift; path = Charts/Classes/Charts/ScatterChartView.swift; sourceTree = "<group>"; };
 		E53FD9395AC0746557235B9E95C63185 /* CombineLatest+CollectionType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CombineLatest+CollectionType.swift"; path = "RxSwift/Observables/Implementations/CombineLatest+CollectionType.swift"; sourceTree = "<group>"; };
+		E5BE0DF64D8E2A7A27CDD8EAACEE9742 /* MobClick.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MobClick.h; path = "umsdk_IOS_analytics_no-idfa_v3.6.7/UMAnalytics_Sdk_3.6.7/MobClick.h"; sourceTree = "<group>"; };
 		E5D0A5E3AD37C0623BCC09F2FFC02F3B /* array_integer.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; name = array_integer.hpp; path = include/realm/array_integer.hpp; sourceTree = "<group>"; };
 		E6DADEF24406BF95E0CDDE9DBBF4829B /* utilities.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; name = utilities.hpp; path = include/realm/utilities.hpp; sourceTree = "<group>"; };
 		E6EE11CA314E81140F1DC2B3A3D971B5 /* column.hpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.h; name = column.hpp; path = include/realm/column.hpp; sourceTree = "<group>"; };
@@ -1707,14 +1707,6 @@
 			path = YNSwift;
 			sourceTree = "<group>";
 		};
-		48DECD5ADB72F36A6C56B924812209B6 /* UMengAnalytics-NO-IDFA */ = {
-			isa = PBXGroup;
-			children = (
-				0134939AA60BA7A66317CC41FB7598A2 /* MobClick.h */,
-			);
-			path = "UMengAnalytics-NO-IDFA";
-			sourceTree = "<group>";
-		};
 		5F5367037FBE3741B8A8CA3D64EB4B2D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1728,7 +1720,7 @@
 				D70598298B3281270FEFD39FA75F6BAF /* RxCocoa */,
 				0E869D460EF7C35E8F137007E6C2BDF5 /* RxSwift */,
 				8DFF3B35343387A33092A28F299C1537 /* SwiftyJSON */,
-				48DECD5ADB72F36A6C56B924812209B6 /* UMengAnalytics-NO-IDFA */,
+				EE2F5AA6E409F3EE90293B7AAE851FA8 /* UMengAnalytics-NO-IDFA */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2427,6 +2419,14 @@
 				639FDBA3E9A30A8350F0EF60CD51F83B /* Support Files */,
 			);
 			path = Alamofire;
+			sourceTree = "<group>";
+		};
+		EE2F5AA6E409F3EE90293B7AAE851FA8 /* UMengAnalytics-NO-IDFA */ = {
+			isa = PBXGroup;
+			children = (
+				E5BE0DF64D8E2A7A27CDD8EAACEE9742 /* MobClick.h */,
+			);
+			path = "UMengAnalytics-NO-IDFA";
 			sourceTree = "<group>";
 		};
 		EE6F976A6981DDA4809BCDF725DC46F8 /* Support Files */ = {

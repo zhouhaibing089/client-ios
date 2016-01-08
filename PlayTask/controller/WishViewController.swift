@@ -207,7 +207,7 @@ class WishViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.wishes = Wish.getWishes()
         if self.wishes.count == 0 {
             self.tableView.hidden = true
-            self.tipsLabel.text = MobClick.getConfigParams("wishTips") ?? "弗洛伊德认为，人的潜意识中储存着很多原始的欲望与冲动"
+            self.tipsLabel.text = UMOnlineConfig.getConfigParams("wishTips") ?? "弗洛伊德认为，人的潜意识中储存着很多原始的欲望与冲动"
         } else {
             self.tableView.hidden = false
         }

@@ -47,7 +47,7 @@ class MoreViewController: UITableViewController {
     override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if self.showSection(section) {
             if section == 0 {
-                return MobClick.getConfigParams("feedbackFooterTitle") ?? "关注微信公众号 PlayTask 进行反馈可及时收到回复"
+                return UMOnlineConfig.getConfigParams("feedbackFooterTitle") ?? "关注微信公众号 PlayTask 进行反馈可及时收到回复"
             }
             if section == 3 {
                 let version = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
@@ -66,7 +66,7 @@ class MoreViewController: UITableViewController {
         case 2:
             return Util.loggedUser == nil
         case 3:
-            let showSupport = MobClick.getConfigParams("showSupport") ?? "false"
+            let showSupport = UMOnlineConfig.getConfigParams("showSupport") ?? "false"
             return showSupport == "true"
         default:
             return true
@@ -76,7 +76,7 @@ class MoreViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         if indexPath.section == 3 {
-            cell.textLabel?.text = MobClick.getConfigParams("supportText") ?? "请作者喝养乐多"
+            cell.textLabel?.text = UMOnlineConfig.getConfigParams("supportText") ?? "请作者喝养乐多"
         }
         return cell
     }
@@ -119,8 +119,8 @@ class MoreViewController: UITableViewController {
         } else if indexPath.section == 3 {
             switch indexPath.row {
             case 0:
-                let supportAlertTitle = MobClick.getConfigParams("supportAlertTitle") ?? "支付宝帐号"
-                let supportAlertMessage = MobClick.getConfigParams("supportAlertMessage") ?? "playtask@qq.com"
+                let supportAlertTitle = UMOnlineConfig.getConfigParams("supportAlertTitle") ?? "支付宝帐号"
+                let supportAlertMessage = UMOnlineConfig.getConfigParams("supportAlertMessage") ?? "playtask@qq.com"
                 let alert = UIAlertController(title: supportAlertTitle, message: supportAlertMessage, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "好", style: UIAlertActionStyle.Cancel, handler: nil))
                 alert.addAction(UIAlertAction(title: "复制", style: UIAlertActionStyle.Default, handler: { _ in

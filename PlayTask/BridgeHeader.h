@@ -10,5 +10,6 @@
 #define BridgeHeader_h
 
 #import <MobClick.h>
+#import "UMOnlineConfig.h"
 
 #endif /* BridgeHeader_h */

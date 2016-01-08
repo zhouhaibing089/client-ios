@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		491B6FD61C3FC469000FD353 /* libUMOnlineConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 491B6FD41C3FC469000FD353 /* libUMOnlineConfig.a */; };
 		495EB5C71BD0A80800E0E829 /* BillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C61BD0A80800E0E829 /* BillViewController.swift */; };
 		495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */; };
 		49840DD11BCF9B61001F493D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD01BCF9B61001F493D /* Util.swift */; };
@@ -68,6 +69,8 @@
 /* Begin PBXFileReference section */
 		116641E9AD5D4333FD531049 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		27FE39AB88BE9E71239939D4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		491B6FD41C3FC469000FD353 /* libUMOnlineConfig.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMOnlineConfig.a; sourceTree = "<group>"; };
+		491B6FD51C3FC469000FD353 /* UMOnlineConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMOnlineConfig.h; sourceTree = "<group>"; };
 		495EB5C61BD0A80800E0E829 /* BillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillViewController.swift; sourceTree = "<group>"; };
 		495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillItemTableViewCell.swift; sourceTree = "<group>"; };
 		49840DD01BCF9B61001F493D /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -124,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				491B6FD61C3FC469000FD353 /* libUMOnlineConfig.a in Frameworks */,
 				5177522D0A08272C32C53545 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +266,8 @@
 		499708F21BCF688000424F5E /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				491B6FD41C3FC469000FD353 /* libUMOnlineConfig.a */,
+				491B6FD51C3FC469000FD353 /* UMOnlineConfig.h */,
 				499708F31BCF68AC00424F5E /* BridgeHeader.h */,
 			);
 			name = lib;

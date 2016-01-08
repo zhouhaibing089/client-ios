@@ -266,9 +266,9 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         if self.currentTasks.count == 0 {
             self.tableView.hidden = true
             if self.showDone {
-                self.tipsLabel.text = MobClick.getConfigParams("taskDoneTips") ?? "已完成的任务"
+                self.tipsLabel.text = UMOnlineConfig.getConfigParams("taskDoneTips") ?? "已完成的任务"
             } else {
-                self.tipsLabel.text = MobClick.getConfigParams("taskUndoneTips") ?? "没有未完成的任务"
+                self.tipsLabel.text = UMOnlineConfig.getConfigParams("taskUndoneTips") ?? "没有未完成的任务"
             }
         } else {
             self.tableView.hidden = false

@@ -21,7 +21,7 @@ class LoginViewController: UITableViewController {
     }
     
     @IBAction func forgetPassword(sender: UIButton) {
-        let alert = UIAlertController(title: "忘记密码？", message: MobClick.getConfigParams("forgetPassword") ?? "暂时还没有实现该功能, 麻烦您关注微信公众号 PlayTask 并联系客服来找回密码, 抱歉!", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "忘记密码？", message: UMOnlineConfig.getConfigParams("forgetPassword") ?? "暂时还没有实现该功能, 麻烦您关注微信公众号 PlayTask 并联系客服来找回密码, 抱歉!", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "好", style: UIAlertActionStyle.Cancel, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }

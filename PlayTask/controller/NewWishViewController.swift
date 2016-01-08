@@ -66,7 +66,7 @@ class NewWishViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return MobClick.getConfigParams("newWishGuide")
+        return UMOnlineConfig.getConfigParams("newWishGuide")
     }
     
 }
