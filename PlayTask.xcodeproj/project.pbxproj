@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		491B6FD61C3FC469000FD353 /* libUMOnlineConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 491B6FD41C3FC469000FD353 /* libUMOnlineConfig.a */; };
+		491B6FDA1C40F599000FD353 /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491B6FD91C40F598000FD353 /* Task.storyboard */; };
+		491B6FDE1C40FE01000FD353 /* Wish.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491B6FDD1C40FE01000FD353 /* Wish.storyboard */; };
+		491B6FE01C40FF19000FD353 /* Statistic.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491B6FDF1C40FF19000FD353 /* Statistic.storyboard */; };
 		495EB5C71BD0A80800E0E829 /* BillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C61BD0A80800E0E829 /* BillViewController.swift */; };
 		495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */; };
 		49840DD11BCF9B61001F493D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD01BCF9B61001F493D /* Util.swift */; };
@@ -71,6 +74,9 @@
 		27FE39AB88BE9E71239939D4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		491B6FD41C3FC469000FD353 /* libUMOnlineConfig.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMOnlineConfig.a; sourceTree = "<group>"; };
 		491B6FD51C3FC469000FD353 /* UMOnlineConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMOnlineConfig.h; sourceTree = "<group>"; };
+		491B6FD91C40F598000FD353 /* Task.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Task.storyboard; sourceTree = "<group>"; };
+		491B6FDD1C40FE01000FD353 /* Wish.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Wish.storyboard; sourceTree = "<group>"; };
+		491B6FDF1C40FF19000FD353 /* Statistic.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Statistic.storyboard; sourceTree = "<group>"; };
 		495EB5C61BD0A80800E0E829 /* BillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillViewController.swift; sourceTree = "<group>"; };
 		495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillItemTableViewCell.swift; sourceTree = "<group>"; };
 		49840DD01BCF9B61001F493D /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -241,6 +247,9 @@
 				499708C51BCF506E00424F5E /* Assets.xcassets */,
 				499708C71BCF506E00424F5E /* LaunchScreen.storyboard */,
 				499708CA1BCF506E00424F5E /* Info.plist */,
+				491B6FD91C40F598000FD353 /* Task.storyboard */,
+				491B6FDD1C40FE01000FD353 /* Wish.storyboard */,
+				491B6FDF1C40FF19000FD353 /* Statistic.storyboard */,
 			);
 			path = PlayTask;
 			sourceTree = "<group>";
@@ -416,10 +425,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				491B6FDA1C40F599000FD353 /* Task.storyboard in Resources */,
+				491B6FDE1C40FE01000FD353 /* Wish.storyboard in Resources */,
 				499708C91BCF506E00424F5E /* LaunchScreen.storyboard in Resources */,
 				499708C61BCF506E00424F5E /* Assets.xcassets in Resources */,
 				499708C41BCF506E00424F5E /* Main.storyboard in Resources */,
 				49F8093C1C1E7224006A5DF5 /* Bubble.xib in Resources */,
+				491B6FE01C40FF19000FD353 /* Statistic.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
