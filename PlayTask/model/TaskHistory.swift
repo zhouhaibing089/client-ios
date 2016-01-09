@@ -105,7 +105,7 @@ final class TaskHistory: Table, Bill {
         guard let loggedUser = Util.loggedUser else {
             return Observable.empty()
         }
-        return generate(0) { index -> Observable<[TaskHistory]> in
+        return Observable.generate(0) { index -> Observable<[TaskHistory]> in
             API.getTaskHistories(loggedUser, after: loggedUser.taskHistoryPullTime ?? NSDate(timeIntervalSince1970: 0))
         }.takeWhile({ (taskHistories) -> Bool in
             return taskHistories.count > 0

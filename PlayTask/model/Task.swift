@@ -194,7 +194,7 @@ final class Task: Table {
         guard let loggedUser = Util.loggedUser else {
             return Observable.empty()
         }
-        return generate(0) { index -> Observable<[Task]> in
+        return Observable.generate(0) { index -> Observable<[Task]> in
             API.getTasks(loggedUser, after: loggedUser.taskPullTime ?? NSDate(timeIntervalSince1970: 0))
         }.takeWhile({ (tasks) -> Bool in
             return tasks.count > 0

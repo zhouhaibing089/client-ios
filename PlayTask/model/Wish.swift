@@ -71,7 +71,7 @@ class Wish: Table {
         guard let loggedUser = Util.loggedUser else {
             return Observable.empty()
         }
-        return generate(0) { index -> Observable<[Wish]> in
+        return Observable.generate(0) { index -> Observable<[Wish]> in
             API.getWishes(loggedUser, after: loggedUser.wishPullTime ?? NSDate(timeIntervalSince1970: 0))
         }.takeWhile({ (wishes) -> Bool in
             return wishes.count > 0
