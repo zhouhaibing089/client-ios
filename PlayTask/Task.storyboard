@@ -93,11 +93,11 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="jhJ-xS-oRR"/>
                                                     <exclude reference="H1a-U5-Rxb"/>
                                                     <exclude reference="Mxu-gR-jO8"/>
-                                                    <exclude reference="iYE-NQ-j8G"/>
+                                                    <exclude reference="jhJ-xS-oRR"/>
                                                     <exclude reference="6hp-ef-EOx"/>
+                                                    <exclude reference="iYE-NQ-j8G"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -222,8 +222,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="lSS-Px-ETA"/>
                                 <exclude reference="Tj2-8t-wUg"/>
+                                <exclude reference="lSS-Px-ETA"/>
                                 <exclude reference="QYf-KC-3C7"/>
                                 <exclude reference="uu2-dK-KwL"/>
                             </mask>
