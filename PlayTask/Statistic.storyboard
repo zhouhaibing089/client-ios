@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eRB-Ve-ymm">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eRB-Ve-ymm">
                                 <rect key="frame" x="0.0" y="64" width="600" height="36"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="十二月" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXF-nM-Qc9">
@@ -59,7 +59,7 @@
                                     <constraint firstItem="HSa-dV-aoG" firstAttribute="centerY" secondItem="eRB-Ve-ymm" secondAttribute="centerY" id="u3F-qg-nPH"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wrt-Uz-ryP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wrt-Uz-ryP">
                                 <rect key="frame" x="0.0" y="100" width="600" height="500"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -146,8 +146,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="gI1-UQ-3tr"/>
                                 <exclude reference="L52-94-JGM"/>
+                                <exclude reference="gI1-UQ-3tr"/>
                                 <exclude reference="J4C-wM-6ef"/>
                             </mask>
                         </variation>
@@ -314,8 +314,8 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="fSK-tz-0fI"/>
                                         <exclude reference="UTW-9a-5fn"/>
+                                        <exclude reference="fSK-tz-0fI"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -383,7 +383,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NL4-SY-nCE" customClass="BubbleView" customModule="PlayTask" customModuleProvider="target">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NL4-SY-nCE" customClass="BubbleView" customModule="PlayTask" customModuleProvider="target">
                                 <rect key="frame" x="140" y="468" width="320" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -393,8 +393,8 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="Kqq-eY-MjU"/>
                                         <exclude reference="6hK-rq-DnO"/>
+                                        <exclude reference="Kqq-eY-MjU"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -417,11 +417,11 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="yze-zm-7Vh"/>
-                                <exclude reference="I6r-Hc-iwR"/>
-                                <exclude reference="9fL-8h-1nd"/>
                                 <exclude reference="2q4-cR-ijk"/>
+                                <exclude reference="9fL-8h-1nd"/>
+                                <exclude reference="I6r-Hc-iwR"/>
                                 <exclude reference="aIz-yX-nRa"/>
+                                <exclude reference="yze-zm-7Vh"/>
                                 <exclude reference="boL-UQ-ggB"/>
                                 <exclude reference="PzS-3S-d8s"/>
                             </mask>

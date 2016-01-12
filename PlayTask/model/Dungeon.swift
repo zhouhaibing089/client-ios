@@ -21,6 +21,7 @@ class Dungeon {
     var cashPledge: Double?
     var bronzePledge: Double?
     var status: Int
+    var cover: String
     
     init(json: JSON) {
         self.title = json["title"].stringValue
@@ -33,5 +34,6 @@ class Dungeon {
         self.cashPledge = json["cash_pledge"].double
         self.bronzePledge = json["bronze_pledge"].double
         self.status = json["status"].intValue
+        self.cover = json["cover"].stringValue
     }
 }

@@ -111,9 +111,9 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="p5d-ww-oYd"/>
-                                                    <exclude reference="ooO-so-bFs"/>
                                                     <exclude reference="1JM-pC-fRZ"/>
+                                                    <exclude reference="ooO-so-bFs"/>
+                                                    <exclude reference="p5d-ww-oYd"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

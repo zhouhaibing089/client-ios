@@ -31,6 +31,7 @@ class API {
                 switch response.result {
                 case .Success(let value):
                     let json = JSON(value)
+                    print(json)
                     let status = json["status"].intValue
                     if status < 10 { // 成功
                         observer.onNext(json["data"])

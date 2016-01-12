@@ -8,11 +8,20 @@
 
 import UIKit
 
-class DungeonListViewController: UIViewController {
+class DungeonListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    @IBOutlet weak var tableView: UITableView!
+
+    var dungeons = [Dungeon]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44
+        self.refresh()
         // Do any additional setup after loading the view.
     }
 
@@ -21,15 +30,32 @@ class DungeonListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.dungeons.count
     }
-    */
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("dungeon", forIndexPath: indexPath) as! DungeonTableViewCell
+        cell.dungeon = self.dungeons[indexPath.row]
+        return cell
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func refresh() {
+        API.getDungeons().subscribe { event in
+            switch event {
+            case .Completed:
+                self.tableView.reloadData()
+                break
+            case .Error(_):
+                break
+            case .Next(let dungeons):
+                self.dungeons = dungeons
+            }
+        }
+    }
 
 }
