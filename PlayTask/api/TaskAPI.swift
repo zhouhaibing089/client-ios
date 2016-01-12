@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import SwiftyJSON
+import YNSwift
 
 extension API {
     class func createTask(task: Task) -> Observable<Task> {
@@ -22,8 +23,8 @@ extension API {
             "pinned": task.pinned ? "true" : "false",
             
             "deleted": task.deleted ? "true" : "false",
-            "modified_time": task.modifiedTime.timeIntervalSince1970 * 1000,
-            "created_time": task.createdTime.timeIntervalSince1970 * 1000
+            "modified_time": task.modifiedTime.millisecondsSince1970,
+            "created_time": task.createdTime.millisecondsSince1970
             ]).map { json in
             task.update(json: json)
             return task
@@ -35,7 +36,7 @@ extension API {
             "rank": task.rank,
             "pinned": task.pinned ? "true" : "false",
             
-            "modified_time": task.modifiedTime.timeIntervalSince1970 * 1000,
+            "modified_time": task.modifiedTime.millisecondsSince1970,
             "deleted": task.deleted ? "true" : "false",
             ]).map { json in
                 task.update(json: json)
@@ -45,7 +46,7 @@ extension API {
     
     class func getTasks(user: User, after: NSDate) -> Observable<[Task]> {
         return API.req(.GET, "/users/\(user.sid.value!)/tasks", parameters: [
-            "after": after.timeIntervalSince1970 * 1000
+            "after": after.millisecondsSince1970
             ]).map { json in
             var tasks = [Task]()
             for (_, subJson) : (String, JSON) in json {
@@ -83,12 +84,12 @@ extension API {
             return Observable.empty()
         }
         return API.req(.POST, "/tasks/\(taskHistory.task.sid.value!)/task_histories", parameters: [
-            "completion_time": taskHistory.completionTime.timeIntervalSince1970 * 1000,
+            "completion_time": taskHistory.completionTime.millisecondsSince1970,
             "canceled": taskHistory.canceled ? "true" : "false",
             
             "deleted": taskHistory.deleted ? "true" : "false",
-            "modified_time": taskHistory.modifiedTime.timeIntervalSince1970 * 1000,
-            "created_time": taskHistory.createdTime.timeIntervalSince1970 * 1000
+            "modified_time": taskHistory.modifiedTime.millisecondsSince1970,
+            "created_time": taskHistory.createdTime.millisecondsSince1970
             ]).map { json in
             taskHistory.update(json: json)
             return taskHistory
@@ -97,11 +98,11 @@ extension API {
     
     class func updateTaskHistory(taskHistory: TaskHistory) -> Observable<TaskHistory> {
         return API.req(.PUT, "/task_histories/\(taskHistory.sid.value!)", parameters: [
-            "completion_time": taskHistory.completionTime.timeIntervalSince1970 * 1000,
+            "completion_time": taskHistory.completionTime.millisecondsSince1970,
             "canceled": taskHistory.canceled ? "true" : "false",
             
             "deleted": taskHistory.deleted ? "true" : "false",
-            "modified_time": taskHistory.modifiedTime.timeIntervalSince1970 * 1000
+            "modified_time": taskHistory.modifiedTime.millisecondsSince1970
             ]).map { json in
                 taskHistory.update(json: json)
                 return taskHistory
@@ -110,12 +111,12 @@ extension API {
     
     class func getTaskHistories(user: User, after: NSDate) -> Observable<[TaskHistory]> {
         return API.req(.GET, "/users/\(user.sid.value!)/task_histories", parameters: [
-            "after": after.timeIntervalSince1970 * 1000
+            "after": after.millisecondsSince1970
             ]).map { json in
             var taskHistories = [TaskHistory]()
             for (_, subJson) : (String, JSON) in json {
                 if let th = TaskHistory.getBySid(subJson["id"].intValue) {
-                    let completionTime = NSDate(timeIntervalSince1970: subJson["completion_time"].doubleValue / 1000)
+                    let completionTime = NSDate(millisecondsSince1970: subJson["completion_time"].doubleValue)
                     let canceled = subJson["canceled"].boolValue
                     
                     th.update(json: subJson, value: ["completionTime": completionTime, "canceled": canceled])
@@ -123,7 +124,7 @@ extension API {
                 } else {
                     if let t = Task.getBySid(subJson["task_id"].intValue) {
                         let th = TaskHistory(json: subJson)
-                        th.completionTime = NSDate(timeIntervalSince1970: subJson["completion_time"].doubleValue / 1000)
+                        th.completionTime = NSDate(millisecondsSince1970: subJson["completion_time"].doubleValue)
                         th.canceled = subJson["canceled"].boolValue
                         th.task = t
                         th.userSid.value = subJson["user_id"].int

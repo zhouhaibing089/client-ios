@@ -11,6 +11,9 @@
 		491B6FDA1C40F599000FD353 /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491B6FD91C40F598000FD353 /* Task.storyboard */; };
 		491B6FDE1C40FE01000FD353 /* Wish.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491B6FDD1C40FE01000FD353 /* Wish.storyboard */; };
 		491B6FE01C40FF19000FD353 /* Statistic.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491B6FDF1C40FF19000FD353 /* Statistic.storyboard */; };
+		491B6FE41C43E65A000FD353 /* Dungeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491B6FE31C43E65A000FD353 /* Dungeon.swift */; };
+		491B6FE81C44A69D000FD353 /* DungeonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491B6FE71C44A69D000FD353 /* DungeonListViewController.swift */; };
+		491B6FEA1C44AEB7000FD353 /* DungeonAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491B6FE91C44AEB7000FD353 /* DungeonAPI.swift */; };
 		495EB5C71BD0A80800E0E829 /* BillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C61BD0A80800E0E829 /* BillViewController.swift */; };
 		495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */; };
 		49840DD11BCF9B61001F493D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD01BCF9B61001F493D /* Util.swift */; };
@@ -77,6 +80,9 @@
 		491B6FD91C40F598000FD353 /* Task.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Task.storyboard; sourceTree = "<group>"; };
 		491B6FDD1C40FE01000FD353 /* Wish.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Wish.storyboard; sourceTree = "<group>"; };
 		491B6FDF1C40FF19000FD353 /* Statistic.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Statistic.storyboard; sourceTree = "<group>"; };
+		491B6FE31C43E65A000FD353 /* Dungeon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dungeon.swift; sourceTree = "<group>"; };
+		491B6FE71C44A69D000FD353 /* DungeonListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DungeonListViewController.swift; sourceTree = "<group>"; };
+		491B6FE91C44AEB7000FD353 /* DungeonAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DungeonAPI.swift; sourceTree = "<group>"; };
 		495EB5C61BD0A80800E0E829 /* BillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillViewController.swift; sourceTree = "<group>"; };
 		495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillItemTableViewCell.swift; sourceTree = "<group>"; };
 		49840DD01BCF9B61001F493D /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -178,6 +184,7 @@
 				49BC5A1C1BF9B9CE00A0EC96 /* PasswordViewController.swift */,
 				49F4A0201C169D4D002D21D6 /* StatisticViewController.swift */,
 				49F8092A1C1B10C7006A5DF5 /* StatisticDetailViewController.swift */,
+				491B6FE71C44A69D000FD353 /* DungeonListViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -193,6 +200,7 @@
 				49953E031BDB371400B25EC8 /* Bill.swift */,
 				49953E051BDC67D900B25EC8 /* User.swift */,
 				49F8092C1C1B198B006A5DF5 /* Statistic.swift */,
+				491B6FE31C43E65A000FD353 /* Dungeon.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -297,6 +305,7 @@
 				49C8D3D51BE8F0D800E8EBF5 /* UserAPI.swift */,
 				49C8D3D91BEF6DE700E8EBF5 /* TaskAPI.swift */,
 				49D321321BF35DFA00A6E0A7 /* WishAPI.swift */,
+				491B6FE91C44AEB7000FD353 /* DungeonAPI.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -505,6 +514,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				498BAC961BD0D49400ABB357 /* WishTableViewCell.swift in Sources */,
+				491B6FE41C43E65A000FD353 /* Dungeon.swift in Sources */,
 				49840DD91BCFA997001F493D /* TaskTableViewCell.swift in Sources */,
 				495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */,
 				49F8092D1C1B198B006A5DF5 /* Statistic.swift in Sources */,
@@ -520,6 +530,7 @@
 				49953E001BDB2F6500B25EC8 /* TaskHistory.swift in Sources */,
 				49C8D3CC1BE88C4900E8EBF5 /* RegisterViewController.swift in Sources */,
 				49C8D3DA1BEF6DE700E8EBF5 /* TaskAPI.swift in Sources */,
+				491B6FE81C44A69D000FD353 /* DungeonListViewController.swift in Sources */,
 				49F4A0211C169D4D002D21D6 /* StatisticViewController.swift in Sources */,
 				498BAC9C1BD0EA5300ABB357 /* MoreViewController.swift in Sources */,
 				49C8D3D21BE8ACC400E8EBF5 /* API.swift in Sources */,
@@ -534,6 +545,7 @@
 				49F8093E1C1E7239006A5DF5 /* BubbleView.swift in Sources */,
 				499708EF1BCF63F500424F5E /* NewTaskViewController.swift in Sources */,
 				499708ED1BCF635A00424F5E /* TaskViewController.swift in Sources */,
+				491B6FEA1C44AEB7000FD353 /* DungeonAPI.swift in Sources */,
 				498BAC901BD0CDE600ABB357 /* WishViewController.swift in Sources */,
 				49953E061BDC67D900B25EC8 /* User.swift in Sources */,
 			);

@@ -7,6 +7,37 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--副本列表-->
+        <scene sceneID="pxV-la-YRJ">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="soh-SB-n6n" customClass="DungeonListViewController" customModule="PlayTask" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XU0-eh-w9m"/>
+                        <viewControllerLayoutGuide type="bottom" id="BMo-TR-X8N"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6A9-Op-Gtv">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iBb-6M-2Gy">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iBb-6M-2Gy" firstAttribute="leading" secondItem="6A9-Op-Gtv" secondAttribute="leading" id="3Q9-N7-nC1"/>
+                            <constraint firstItem="iBb-6M-2Gy" firstAttribute="top" secondItem="6A9-Op-Gtv" secondAttribute="top" id="BsI-vC-5zd"/>
+                            <constraint firstAttribute="bottom" secondItem="iBb-6M-2Gy" secondAttribute="bottom" id="tgC-BI-NWf"/>
+                            <constraint firstAttribute="trailing" secondItem="iBb-6M-2Gy" secondAttribute="trailing" id="yAe-FR-L9k"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="副本列表" id="9Ks-mF-Ri7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UVh-5g-97O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2962" y="-242"/>
+        </scene>
         <!--任务-->
         <scene sceneID="ipA-uu-EwK">
             <objects>
@@ -248,6 +279,7 @@
                         <outlet property="tipsLabel" destination="0BF-cC-5TB" id="Poc-2O-45M"/>
                         <outlet property="toolbar" destination="NtI-JK-ArL" id="6k5-Te-iCA"/>
                         <segue destination="KPF-wW-3Xl" kind="presentation" identifier="new" id="IAA-Eh-SmA"/>
+                        <segue destination="soh-SB-n6n" kind="show" identifier="dungeon" id="HwV-JN-4Xf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r94-Mp-o4X" userLabel="First Responder" sceneMemberID="firstResponder"/>

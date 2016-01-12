@@ -232,6 +232,9 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         actionSheet.addAction(UIAlertAction(title: "新建任务", style: UIAlertActionStyle.Default, handler: { _ in
             self.performSegueWithIdentifier("new", sender: nil)
         }))
+        actionSheet.addAction(UIAlertAction(title: "加入副本", style: UIAlertActionStyle.Default, handler: { _ in
+            self.performSegueWithIdentifier("dungeon", sender: nil)
+        }))
         actionSheet.addAction(UIAlertAction(title: "排序", style: UIAlertActionStyle.Default, handler: { _ in
             self.tableView.setEditing(false, animated: true)
             self.tableView.setEditing(true, animated: true)

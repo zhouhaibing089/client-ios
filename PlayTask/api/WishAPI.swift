@@ -20,8 +20,8 @@ extension API {
             "loop": wish.loop,
             
             "deleted": wish.deleted ? "true" : "false",
-            "modified_time": wish.modifiedTime.timeIntervalSince1970 * 1000,
-            "created_time": wish.createdTime.timeIntervalSince1970 * 1000
+            "modified_time": wish.modifiedTime.millisecondsSince1970,
+            "created_time": wish.createdTime.millisecondsSince1970
             ]).map { json in
             wish.update(json: json)
             return wish
@@ -33,7 +33,7 @@ extension API {
             "rank": wish.rank,
             "loop": wish.loop,
             
-            "modified_time": wish.modifiedTime.timeIntervalSince1970 * 1000,
+            "modified_time": wish.modifiedTime.millisecondsSince1970,
             "deleted": wish.deleted ? "true" : "false",
             ]).map { json in
             wish.update(json: json)
@@ -43,7 +43,7 @@ extension API {
     
     class func getWishes(user: User, after: NSDate) -> Observable<[Wish]> {
         return API.req(.GET, "/users/\(user.sid.value!)/wishes", parameters: [
-            "after": after.timeIntervalSince1970 * 1000
+            "after": after.millisecondsSince1970
             ]).map { json in
             var wishes = [Wish]()
             for (_, subJson): (String, JSON) in json {
@@ -75,12 +75,12 @@ extension API {
             return Observable.empty()
         }
         return API.req(.POST, "/wishes/\(wishHistory.wish.sid.value!)/wish_histories", parameters: [
-            "satisfied_time": wishHistory.satisfiedTime.timeIntervalSince1970 * 1000,
+            "satisfied_time": wishHistory.satisfiedTime.millisecondsSince1970,
             "canceled": wishHistory.canceled ? "true" : "false",
             
             "deleted": wishHistory.deleted ? "true" : "false",
-            "modified_time": wishHistory.modifiedTime.timeIntervalSince1970 * 1000,
-            "created_time": wishHistory.createdTime.timeIntervalSince1970 * 1000
+            "modified_time": wishHistory.modifiedTime.millisecondsSince1970,
+            "created_time": wishHistory.createdTime.millisecondsSince1970
             ]).map { json in
             wishHistory.update(json: json)
             return wishHistory
@@ -89,11 +89,11 @@ extension API {
     
     class func updateWishHistory(wishHistory: WishHistory) -> Observable<WishHistory> {
         return API.req(.PUT, "/wish_histories/\(wishHistory.sid.value!)", parameters: [
-            "satisfied_time": wishHistory.satisfiedTime.timeIntervalSince1970 * 1000,
+            "satisfied_time": wishHistory.satisfiedTime.millisecondsSince1970,
             "canceled": wishHistory.canceled ? "true" : "false",
             
             "deleted": wishHistory.deleted ? "true" : "false",
-            "modified_time": wishHistory.modifiedTime.timeIntervalSince1970 * 1000
+            "modified_time": wishHistory.modifiedTime.millisecondsSince1970
             ]).map { json in
             wishHistory.update(json: json)
             return wishHistory
@@ -102,19 +102,19 @@ extension API {
     
     class func getWishHistories(user: User, after: NSDate) -> Observable<[WishHistory]> {
         return API.req(.GET, "/users/\(user.sid.value!)/wish_histories", parameters: [
-            "after": after.timeIntervalSince1970 * 1000
+            "after": after.millisecondsSince1970
             ]).map { json in
             var wishHistories = [WishHistory]()
             for (_, subJson): (String, JSON) in json {
                 if let wh = WishHistory.getBySid(subJson["id"].intValue) {
-                    let satisfiedTime = NSDate(timeIntervalSince1970: subJson["satisfied_time"].doubleValue / 1000)
+                    let satisfiedTime = NSDate(millisecondsSince1970: subJson["satisfied_time"].doubleValue)
                     let canceled = subJson["canceled"].boolValue
                     wh.update(json: subJson, value: ["satisfiedTime": satisfiedTime, "canceled": canceled])
                     wishHistories.append(wh)
                 } else {
                     if let w = Wish.getBySid(subJson["wish_id"].intValue) {
                         let wh = WishHistory(json: subJson)
-                        wh.satisfiedTime = NSDate(timeIntervalSince1970: subJson["satisfied_time"].doubleValue / 1000)
+                        wh.satisfiedTime = NSDate(millisecondsSince1970: subJson["satisfied_time"].doubleValue)
                         wh.canceled = subJson["canceled"].boolValue
 
                         wh.wish = w

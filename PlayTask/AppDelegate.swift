@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SQLite
 import CRToast
 import RealmSwift
 import RxSwift
@@ -23,7 +22,6 @@ enum SyncStatus {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var db: Connection!
 
     var syncStatus = SyncStatus.Unsynced {
         didSet {

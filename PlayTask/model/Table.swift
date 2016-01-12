@@ -26,8 +26,8 @@ class Table: Object {
     convenience init(json: JSON) {
         self.init()
         self.sid.value = json["id"].intValue
-        self.createdTime = NSDate(timeIntervalSince1970: json["created_time"].doubleValue / 1000)
-        self.modifiedTime = NSDate(timeIntervalSince1970: json["modified_time"].doubleValue / 1000)
+        self.createdTime = NSDate(millisecondsSince1970: json["created_time"].doubleValue)
+        self.modifiedTime = NSDate(millisecondsSince1970: json["modified_time"].doubleValue)
         self.deleted = json["deleted"].boolValue
         self.synchronizedTime = NSDate()
     }
@@ -57,7 +57,7 @@ class Table: Object {
     
     func update(json json: JSON, var value: [String: AnyObject] = [String: AnyObject]()) {
         value["sid"] = json["id"].intValue
-        value["modifiedTime"] = NSDate(timeIntervalSince1970: json["modified_time"].doubleValue / 1000)
+        value["modifiedTime"] = NSDate(millisecondsSince1970: json["modified_time"].doubleValue)
         value["deleted"] = json["deleted"].boolValue
         value["synchronizedTime"] = NSDate()
         self.update(value)
