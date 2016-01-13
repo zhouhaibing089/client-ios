@@ -11,5 +11,6 @@
 
 #import <MobClick.h>
 #import "UMOnlineConfig.h"
+#import "MBProgressHUD/MBProgressHUD.h"
 
 #endif /* BridgeHeader_h */

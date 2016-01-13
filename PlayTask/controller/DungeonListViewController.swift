@@ -43,6 +43,12 @@ class DungeonListViewController: UIViewController, UITableViewDelegate, UITableV
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let dungeon = self.dungeons[indexPath.row]
+        self.performSegueWithIdentifier("detail", sender: dungeon)
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
 
     func refresh() {
         API.getDungeons().subscribe { event in
@@ -54,6 +60,14 @@ class DungeonListViewController: UIViewController, UITableViewDelegate, UITableV
                 break
             case .Next(let dungeons):
                 self.dungeons = dungeons
+            }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "detail" {
+            if let ddvc = segue.destinationViewController as? DungeonDetailViewController {
+                ddvc.dungeon = sender as! Dungeon
             }
         }
     }

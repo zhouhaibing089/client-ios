@@ -17,7 +17,7 @@ class DungeonTableViewCell: UITableViewCell {
     var dungeon: Dungeon! {
         didSet {
             self.titleLabel.text = self.dungeon.title
-            self.coverImageView.af_setImageWithURL(NSURL(string: self.dungeon.cover)!, placeholderImage: UIImage(named: "line_chart"))
+            self.coverImageView.af_setImageWithURL(NSURL(string: self.dungeon.cover)!)
         }
     }
     

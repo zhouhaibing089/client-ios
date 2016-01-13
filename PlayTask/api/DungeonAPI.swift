@@ -15,6 +15,6 @@ extension API {
 //        return API.req(.GET, "/dungeons").map { json in
 //            return [Dungeon(json: json)]
 //        }
-        return [[Dungeon(json: JSON(["title": "早起副本", "cover": "http://img.xiami.net/images/collect/116/16/102950116_1436407566_V48i.png"]))]].toObservable()
+        return [[Dungeon(json: JSON(["title": "早起副本", "cover": "http://img.xiami.net/images/collect/116/16/102950116_1436407566_V48i.png", "detail": "<h1>Header</h1><h2>Subheader</h2><p>Some <em>text</em></p>"]))]].toObservable()
     }
 }

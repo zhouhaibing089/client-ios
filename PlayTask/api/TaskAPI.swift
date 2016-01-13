@@ -35,7 +35,7 @@ extension API {
         return API.req(.PUT, "/tasks/\(task.sid.value!)", parameters: [
             "rank": task.rank,
             "pinned": task.pinned ? "true" : "false",
-            
+
             "modified_time": task.modifiedTime.millisecondsSince1970,
             "deleted": task.deleted ? "true" : "false",
             ]).map { json in
