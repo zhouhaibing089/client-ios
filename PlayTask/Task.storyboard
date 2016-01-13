@@ -162,39 +162,34 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="aem-SA-JSa">
-                            <rect key="frame" x="0.0" y="264" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="346" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <sections>
                             <tableViewSection id="6Z3-eF-uec">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="59" id="ymp-Yh-RT7">
-                                        <rect key="frame" x="0.0" y="205" width="375" height="59"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="141" id="ymp-Yh-RT7">
+                                        <rect key="frame" x="0.0" y="205" width="375" height="141"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ymp-Yh-RT7" id="WBd-oc-Heb">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lth-E2-Uql">
-                                                    <rect key="frame" x="8" y="8" width="359" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CLi-3D-7vL">
+                                                    <rect key="frame" x="0.0" y="8" width="375" height="132"/>
+                                                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="132" id="f4o-CF-K9L"/>
+                                                    </constraints>
+                                                </webView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="lth-E2-Uql" firstAttribute="centerY" secondItem="WBd-oc-Heb" secondAttribute="centerY" id="701-aS-N69"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="lth-E2-Uql" secondAttribute="bottom" id="95T-RP-Ns2"/>
-                                                <constraint firstItem="lth-E2-Uql" firstAttribute="top" secondItem="WBd-oc-Heb" secondAttribute="topMargin" id="VSV-VS-zAE"/>
-                                                <constraint firstAttribute="trailing" secondItem="lth-E2-Uql" secondAttribute="trailing" constant="8" id="kYn-8f-usa"/>
-                                                <constraint firstItem="lth-E2-Uql" firstAttribute="leading" secondItem="WBd-oc-Heb" secondAttribute="leading" constant="8" id="oJk-bE-2fc"/>
+                                                <constraint firstItem="CLi-3D-7vL" firstAttribute="leading" secondItem="WBd-oc-Heb" secondAttribute="leading" id="8B0-UN-GS4"/>
+                                                <constraint firstAttribute="bottom" secondItem="CLi-3D-7vL" secondAttribute="bottom" id="a5C-s2-9x9"/>
+                                                <constraint firstItem="CLi-3D-7vL" firstAttribute="top" secondItem="WBd-oc-Heb" secondAttribute="topMargin" id="isU-Oz-WaL"/>
+                                                <constraint firstAttribute="trailing" secondItem="CLi-3D-7vL" secondAttribute="trailing" id="nbj-hY-kPV"/>
                                             </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="701-aS-N69"/>
-                                                </mask>
-                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -207,8 +202,9 @@
                     </tableView>
                     <connections>
                         <outlet property="coverImageView" destination="NC7-gp-JqW" id="xbQ-0E-aP0"/>
-                        <outlet property="detailLabel" destination="lth-E2-Uql" id="0de-1P-UkU"/>
+                        <outlet property="detailWebView" destination="CLi-3D-7vL" id="cML-Vo-qtR"/>
                         <outlet property="titleLabel" destination="Cmh-Lj-z6V" id="bet-5H-X4s"/>
+                        <outlet property="webViewHeightConstraint" destination="f4o-CF-K9L" id="DCP-MO-3Rn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8q-0M-OLX" userLabel="First Responder" sceneMemberID="firstResponder"/>

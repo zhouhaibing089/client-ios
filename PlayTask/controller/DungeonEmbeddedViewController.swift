@@ -9,17 +9,19 @@
 import UIKit
 import YNSwift
 
-class DungeonEmbeddedViewController: UITableViewController {
+class DungeonEmbeddedViewController: UITableViewController, UIWebViewDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var detailWebView: UIWebView!
     @IBOutlet weak var coverImageView: UIImageView!
     var dungeon: Dungeon!
     var topInset: CGFloat = 0
+    @IBOutlet weak var webViewHeightConstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.detailWebView.delegate = self
+        self.detailWebView.scrollView.bounces = false
         self.tableView.contentInset = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right: 0)
         
         self.update()
@@ -33,9 +35,14 @@ class DungeonEmbeddedViewController: UITableViewController {
         return 44
     }
     
+    func webViewDidFinishLoad(webView: UIWebView) {
+        self.webViewHeightConstraint.constant = self.detailWebView.scrollView.contentSize.height
+        self.tableView.reloadData()
+    }
+    
     func update() {
         self.coverImageView.af_setImageWithURL(NSURL(string: self.dungeon.cover)!)
-        self.detailLabel.attributedText = NSAttributedString(html: self.dungeon.detail)
+        self.detailWebView.loadHTMLString(self.dungeon.detail, baseURL: nil)
     }
 
 }
