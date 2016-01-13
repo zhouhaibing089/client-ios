@@ -41,6 +41,7 @@ class DungeonEmbeddedViewController: UITableViewController, UIWebViewDelegate {
     }
     
     func update() {
+        self.titleLabel.text = self.dungeon.title
         self.coverImageView.af_setImageWithURL(NSURL(string: self.dungeon.cover)!)
         self.detailWebView.loadHTMLString(self.dungeon.detail, baseURL: nil)
     }

@@ -12,10 +12,12 @@ class DungeonDetailViewController: UIViewController {
     
     var dungeon: Dungeon!
 
+    @IBOutlet weak var playerLabel: UILabel!
+    @IBOutlet weak var pledgeLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.update()
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,6 +35,16 @@ class DungeonDetailViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func update() {
+        self.playerLabel.text = String(format: self.playerLabel.text!, self.dungeon.currentPlayer, self.dungeon.maxPlayer)
+        let pledge: Int = Int(self.dungeon.cashPledge ?? self.dungeon.bronzePledge ?? 0)
+        var unit = "元"
+        if self.dungeon.cashPledge == nil {
+            unit = "铜币"
+        }
+        self.pledgeLabel.text = String(format: self.pledgeLabel.text!, pledge, unit)
     }
 
 }

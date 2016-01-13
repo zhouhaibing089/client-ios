@@ -98,6 +98,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="qp6-Al-P8W"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="加入">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -108,6 +109,18 @@
                                     <segue destination="Teo-nE-mKX" kind="embed" identifier="embedded" id="Tme-B3-VF6"/>
                                 </connections>
                             </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="人数：%d/%d" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdc-PQ-Maz">
+                                <rect key="frame" x="16" y="591" width="86" height="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="押金：%d%@" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fc5-ae-ADo">
+                                <rect key="frame" x="274" y="591" width="85" height="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -115,12 +128,26 @@
                             <constraint firstItem="iZ9-LK-VcA" firstAttribute="leading" secondItem="s3S-hu-rKR" secondAttribute="leading" id="Cr4-Ol-XNa"/>
                             <constraint firstAttribute="trailing" secondItem="s3S-hu-rKR" secondAttribute="trailing" id="DTU-fe-47k"/>
                             <constraint firstItem="s3S-hu-rKR" firstAttribute="leading" secondItem="wc8-fg-NPB" secondAttribute="leading" id="E8B-hc-YrN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Fc5-ae-ADo" secondAttribute="trailing" id="JLV-Fz-2lC"/>
+                            <constraint firstItem="Fc5-ae-ADo" firstAttribute="baseline" secondItem="s3S-hu-rKR" secondAttribute="baseline" id="PqG-yG-VMO"/>
+                            <constraint firstItem="s3S-hu-rKR" firstAttribute="leading" secondItem="bdc-PQ-Maz" secondAttribute="trailing" constant="-62" id="SGf-Dz-HYq"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="bdc-PQ-Maz" secondAttribute="leading" id="W8g-Rv-SeT"/>
                             <constraint firstItem="iZ9-LK-VcA" firstAttribute="top" secondItem="wc8-fg-NPB" secondAttribute="top" id="amM-nE-Ioh"/>
                             <constraint firstItem="s3S-hu-rKR" firstAttribute="top" secondItem="iZ9-LK-VcA" secondAttribute="bottom" id="eJq-jM-yHz"/>
+                            <constraint firstItem="bdc-PQ-Maz" firstAttribute="baseline" secondItem="s3S-hu-rKR" secondAttribute="baseline" id="j7O-yc-gck"/>
                             <constraint firstItem="s3S-hu-rKR" firstAttribute="bottom" secondItem="n60-ce-9vw" secondAttribute="top" id="zP2-Ty-8mf"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="SGf-Dz-HYq"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="playerLabel" destination="bdc-PQ-Maz" id="y32-8P-6B9"/>
+                        <outlet property="pledgeLabel" destination="Fc5-ae-ADo" id="glz-AL-eQ8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="neO-Mr-Jda" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -144,8 +171,8 @@
                                         <constraint firstAttribute="width" secondItem="NC7-gp-JqW" secondAttribute="height" multiplier="16:9" id="5qr-Nb-YgJ"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cmh-Lj-z6V">
-                                    <rect key="frame" x="24" y="152" width="59" height="29"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cmh-Lj-z6V">
+                                    <rect key="frame" x="24" y="152" width="46" height="29"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>

@@ -15,6 +15,11 @@ extension API {
 //        return API.req(.GET, "/dungeons").map { json in
 //            return [Dungeon(json: json)]
 //        }
-        return [[Dungeon(json: JSON(["title": "早起副本", "cover": "http://img.xiami.net/images/collect/116/16/102950116_1436407566_V48i.png", "detail": "<h1>Header</h1><h2>Subheader</h2><p>Some <em>text</em></p><img src='http://img.xiami.net/images/collect/116/16/102950116_1436407566_V48i.png' width=70 height=100 />"]))]].toObservable()
+        return [[Dungeon(json: JSON(["title": "早起副本",
+            "cover": "http://img.xiami.net/images/collect/116/16/102950116_1436407566_V48i.png",
+            "detail": "<h1>Header</h1><h2>Subheader</h2><p>Some <em>text</em></p><img src='http://img.xiami.net/images/collect/116/16/102950116_1436407566_V48i.png' width=70 height=100 />",
+            "max_player": 30,
+            "cash_pledge": 30,
+            "current_player": 7]))]].toObservable()
     }
 }
