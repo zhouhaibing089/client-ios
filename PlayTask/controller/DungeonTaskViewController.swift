@@ -50,6 +50,20 @@ class DungeonTaskViewController: TaskViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        if self.mode == Mode.Task {
+            return super.tableView(tableView, editActionsForRowAtIndexPath: indexPath)
+        }
+        return nil
+    }
+    
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if self.mode == Mode.Task {
+            return super.tableView(tableView, editingStyleForRowAtIndexPath: indexPath)
+        }
+        return UITableViewCellEditingStyle.None
+    }
+    
     override func showMenu(sender: UIBarButtonItem) {
         if self.mode == Mode.Task {
             return super.showMenu(sender)
