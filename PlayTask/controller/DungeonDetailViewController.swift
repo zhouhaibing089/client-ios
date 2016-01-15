@@ -14,6 +14,7 @@ class DungeonDetailViewController: UIViewController {
 
     @IBOutlet weak var playerLabel: UILabel!
     @IBOutlet weak var pledgeLabel: UILabel!
+    @IBOutlet weak var joinButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,16 @@ class DungeonDetailViewController: UIViewController {
             unit = "铜币"
         }
         self.pledgeLabel.text = String(format: self.pledgeLabel.text!, pledge, unit)
+        switch self.dungeon.status {
+        case .Joined:
+            self.joinButton.enabled = false
+            self.joinButton.alpha = 0.5
+            break
+        default:
+            self.joinButton.enabled = true
+            self.joinButton.alpha = 1
+            break
+        }
     }
 
 }

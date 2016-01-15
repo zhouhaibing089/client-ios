@@ -10,6 +10,16 @@ import Foundation
 import SwiftyJSON
 import YNSwift
 
+enum DungeonStatus: Int {
+    case Unknown = -1
+    case Open = 0
+    case Joined = 1
+    case Failed = 2
+    case Appealing = 3
+    case Settling = 4
+    case Success = 5
+}
+
 class Dungeon {
     var title: String
     var maxPlayer: Int
@@ -20,7 +30,7 @@ class Dungeon {
     var volume: Int?
     var cashPledge: Double?
     var bronzePledge: Double?
-    var status: Int
+    var status: DungeonStatus
     var cover: String
     
     init(json: JSON) {
@@ -33,7 +43,7 @@ class Dungeon {
         self.volume = json["volume"].int
         self.cashPledge = json["cash_pledge"].double
         self.bronzePledge = json["bronze_pledge"].double
-        self.status = json["status"].intValue
+        self.status = DungeonStatus(rawValue: json["status"].intValue) ?? DungeonStatus.Unknown
         self.cover = json["cover"].stringValue
     }
 }

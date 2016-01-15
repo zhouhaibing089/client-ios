@@ -47,6 +47,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
     @IBAction func changeTaskType(sender: UISegmentedControl) {
         self.refresh()
     }
+    
     @IBAction func showDone(sender: UIButton) {
         self.showDone = !self.showDone
         if self.showDone {
@@ -57,7 +58,6 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
             sender.tintColor = UIColor.grayColor()
         }
         self.refresh()
-
     }
     
     @IBAction func endResort(sender: UITapGestureRecognizer) {

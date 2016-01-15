@@ -58,8 +58,8 @@ class DungeonListViewController: UIViewController, UITableViewDelegate, UITableV
                 break
             case .Error(_):
                 break
-            case .Next(let dungeons):
-                self.dungeons = dungeons
+            case .Next(let d):
+                self.dungeons.append(d)
             }
         }
     }
