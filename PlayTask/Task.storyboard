@@ -366,23 +366,29 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="重置时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEy-iB-jPt">
-                                                    <rect key="frame" x="524" y="13" width="68" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3:00:12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHb-J7-Pk0">
-                                                    <rect key="frame" x="543" y="39" width="49" height="17"/>
+                                                    <rect key="frame" x="536" y="17" width="56" height="17"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s7v-RH-K5o">
-                                                    <rect key="frame" x="8" y="15" width="8" height="8"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3:00:12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHb-J7-Pk0">
+                                                    <rect key="frame" x="552" y="39" width="40" height="14"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="早起副本" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyo-mb-la3">
+                                                    <rect key="frame" x="8" y="8" width="68" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wPz-Uy-KoI">
+                                                    <rect key="frame" x="80" y="15" width="8" height="7"/>
                                                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="s7v-RH-K5o" secondAttribute="height" multiplier="1:1" id="0ma-yD-7bo"/>
-                                                        <constraint firstAttribute="width" constant="8" id="8ak-B0-PCY"/>
+                                                        <constraint firstAttribute="width" secondItem="wPz-Uy-KoI" secondAttribute="height" multiplier="1:1" constant="1" id="Gmb-ew-SgA"/>
+                                                        <constraint firstAttribute="width" constant="8" id="XMH-aB-bMg"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -390,31 +396,33 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="早起副本" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyo-mb-la3">
-                                                    <rect key="frame" x="24" y="8" width="492" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Tr0-yT-Kfu" secondAttribute="trailing" id="2Zx-fp-QXS"/>
+                                                <constraint firstItem="tyo-mb-la3" firstAttribute="leading" secondItem="dIW-PL-e36" secondAttribute="leadingMargin" id="3F1-PF-487"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="UHb-J7-Pk0" secondAttribute="trailing" id="4MQ-4s-InO"/>
+                                                <constraint firstItem="wPz-Uy-KoI" firstAttribute="top" secondItem="dIW-PL-e36" secondAttribute="topMargin" constant="-2" id="6SF-x5-Zsi"/>
                                                 <constraint firstItem="HEy-iB-jPt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dIW-PL-e36" secondAttribute="topMargin" id="7Xc-qB-PV9"/>
                                                 <constraint firstItem="Tr0-yT-Kfu" firstAttribute="top" secondItem="HEy-iB-jPt" secondAttribute="bottom" constant="2" id="DnT-Td-Fzh"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="yjh-xd-z7M" secondAttribute="leading" id="Gyo-Yv-beL"/>
                                                 <constraint firstAttribute="topMargin" secondItem="tyo-mb-la3" secondAttribute="top" id="MJ4-8R-uLR"/>
                                                 <constraint firstItem="yjh-xd-z7M" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tyo-mb-la3" secondAttribute="bottom" constant="8" symbolic="YES" id="NyJ-IG-5g5"/>
+                                                <constraint firstItem="wPz-Uy-KoI" firstAttribute="leading" secondItem="tyo-mb-la3" secondAttribute="trailing" constant="4" id="T64-i5-JTo"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="UHb-J7-Pk0" secondAttribute="bottom" id="Txg-p9-rTN"/>
+                                                <constraint firstItem="wPz-Uy-KoI" firstAttribute="centerY" secondItem="tyo-mb-la3" secondAttribute="centerY" id="Xct-LN-HaT"/>
                                                 <constraint firstItem="Tr0-yT-Kfu" firstAttribute="centerY" secondItem="dIW-PL-e36" secondAttribute="centerY" id="b3T-b9-Gi8"/>
-                                                <constraint firstItem="s7v-RH-K5o" firstAttribute="centerY" secondItem="tyo-mb-la3" secondAttribute="centerY" id="gkd-yF-ubY"/>
+                                                <constraint firstItem="wPz-Uy-KoI" firstAttribute="leading" secondItem="tyo-mb-la3" secondAttribute="trailing" id="eaL-aS-u3c"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="HEy-iB-jPt" secondAttribute="trailing" id="hFE-sP-fha"/>
-                                                <constraint firstAttribute="leadingMargin" secondItem="s7v-RH-K5o" secondAttribute="leading" id="jf7-fj-OVY"/>
-                                                <constraint firstItem="tyo-mb-la3" firstAttribute="leading" secondItem="s7v-RH-K5o" secondAttribute="trailing" constant="8" symbolic="YES" id="lzo-5h-8ip"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="yjh-xd-z7M" secondAttribute="bottom" id="naB-XT-7k0"/>
-                                                <constraint firstItem="HEy-iB-jPt" firstAttribute="leading" secondItem="tyo-mb-la3" secondAttribute="trailing" constant="8" symbolic="YES" id="q0H-Hp-1PT"/>
+                                                <constraint firstItem="HEy-iB-jPt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tyo-mb-la3" secondAttribute="trailing" constant="16" id="q0H-Hp-1PT"/>
                                                 <constraint firstItem="UHb-J7-Pk0" firstAttribute="top" secondItem="Tr0-yT-Kfu" secondAttribute="bottom" constant="2" id="rtE-qx-E9I"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="6SF-x5-Zsi"/>
+                                                    <exclude reference="eaL-aS-u3c"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="mainStatusLabel" destination="HEy-iB-jPt" id="S1y-Rf-eFL"/>

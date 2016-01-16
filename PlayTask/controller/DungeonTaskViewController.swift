@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class DungeonTaskViewController: TaskViewController {
     enum Mode {

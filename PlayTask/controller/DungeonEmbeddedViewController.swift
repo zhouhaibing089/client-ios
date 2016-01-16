@@ -28,6 +28,8 @@ class DungeonEmbeddedViewController: UITableViewController, UIWebViewDelegate {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        // static table view need override this method if your
+        // want to calculate cell height automaticly
         return UITableViewAutomaticDimension
     }
     
