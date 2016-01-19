@@ -22,7 +22,9 @@ class DungeonTaskViewController: TaskViewController {
     override func changeTaskType(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 3 {
             self.mode = Mode.Dungeon
+            self.tableView.allowsSelection = true
         } else {
+            self.tableView.allowsSelection = false
             self.mode = Mode.Task
         }
         super.changeTaskType(sender)
@@ -84,6 +86,7 @@ class DungeonTaskViewController: TaskViewController {
         if self.mode == Mode.Task {
             return super.refresh()
         }
+        self.dungeons.removeAll()
         API.getJoinedDungeons(Util.loggedUser!).subscribe { event in
             switch event {
             case .Completed:

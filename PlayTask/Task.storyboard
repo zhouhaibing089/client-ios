@@ -371,12 +371,6 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3:00:12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHb-J7-Pk0">
-                                                    <rect key="frame" x="552" y="39" width="40" height="14"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="早起副本" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyo-mb-la3">
                                                     <rect key="frame" x="8" y="8" width="68" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -396,26 +390,31 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oeS-qQ-CJe">
+                                                    <rect key="frame" x="542" y="36" width="45" height="27"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                    <state key="normal" title="2:00:00"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Tr0-yT-Kfu" secondAttribute="trailing" id="2Zx-fp-QXS"/>
                                                 <constraint firstItem="tyo-mb-la3" firstAttribute="leading" secondItem="dIW-PL-e36" secondAttribute="leadingMargin" id="3F1-PF-487"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="UHb-J7-Pk0" secondAttribute="trailing" id="4MQ-4s-InO"/>
                                                 <constraint firstItem="wPz-Uy-KoI" firstAttribute="top" secondItem="dIW-PL-e36" secondAttribute="topMargin" constant="-2" id="6SF-x5-Zsi"/>
                                                 <constraint firstItem="HEy-iB-jPt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dIW-PL-e36" secondAttribute="topMargin" id="7Xc-qB-PV9"/>
+                                                <constraint firstItem="oeS-qQ-CJe" firstAttribute="top" secondItem="Tr0-yT-Kfu" secondAttribute="top" id="9P3-2E-T6r"/>
                                                 <constraint firstItem="Tr0-yT-Kfu" firstAttribute="top" secondItem="HEy-iB-jPt" secondAttribute="bottom" constant="2" id="DnT-Td-Fzh"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="yjh-xd-z7M" secondAttribute="leading" id="Gyo-Yv-beL"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="oeS-qQ-CJe" secondAttribute="bottom" id="Kyz-A1-GNs"/>
                                                 <constraint firstAttribute="topMargin" secondItem="tyo-mb-la3" secondAttribute="top" id="MJ4-8R-uLR"/>
                                                 <constraint firstItem="yjh-xd-z7M" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tyo-mb-la3" secondAttribute="bottom" constant="8" symbolic="YES" id="NyJ-IG-5g5"/>
                                                 <constraint firstItem="wPz-Uy-KoI" firstAttribute="leading" secondItem="tyo-mb-la3" secondAttribute="trailing" constant="4" id="T64-i5-JTo"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="UHb-J7-Pk0" secondAttribute="bottom" id="Txg-p9-rTN"/>
                                                 <constraint firstItem="wPz-Uy-KoI" firstAttribute="centerY" secondItem="tyo-mb-la3" secondAttribute="centerY" id="Xct-LN-HaT"/>
                                                 <constraint firstItem="Tr0-yT-Kfu" firstAttribute="centerY" secondItem="dIW-PL-e36" secondAttribute="centerY" id="b3T-b9-Gi8"/>
+                                                <constraint firstItem="oeS-qQ-CJe" firstAttribute="centerX" secondItem="HEy-iB-jPt" secondAttribute="centerX" id="c77-qQ-Ec8"/>
                                                 <constraint firstItem="wPz-Uy-KoI" firstAttribute="leading" secondItem="tyo-mb-la3" secondAttribute="trailing" id="eaL-aS-u3c"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="HEy-iB-jPt" secondAttribute="trailing" id="hFE-sP-fha"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="yjh-xd-z7M" secondAttribute="bottom" id="naB-XT-7k0"/>
                                                 <constraint firstItem="HEy-iB-jPt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tyo-mb-la3" secondAttribute="trailing" constant="16" id="q0H-Hp-1PT"/>
-                                                <constraint firstItem="UHb-J7-Pk0" firstAttribute="top" secondItem="Tr0-yT-Kfu" secondAttribute="bottom" constant="2" id="rtE-qx-E9I"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -426,7 +425,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="mainStatusLabel" destination="HEy-iB-jPt" id="S1y-Rf-eFL"/>
-                                            <outlet property="subStatusLabel" destination="UHb-J7-Pk0" id="JQk-RQ-dXJ"/>
+                                            <outlet property="subStatusButton" destination="oeS-qQ-CJe" id="w9z-b0-7kC"/>
                                             <outlet property="titleLabel" destination="tyo-mb-la3" id="3ST-yQ-1tu"/>
                                         </connections>
                                     </tableViewCell>
