@@ -22,7 +22,13 @@ class DungeonListViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
         self.refresh()
-        // Do any additional setup after loading the view.
+        
+        // pull to refresh
+        let tableViewController = UITableViewController()
+        tableViewController.tableView = self.tableView
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        tableViewController.refreshControl = refreshControl
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,16 +56,20 @@ class DungeonListViewController: UIViewController, UITableViewDelegate, UITableV
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
-    func refresh() {
+    func refresh(sender: UIRefreshControl? = nil) {
+        var tmp = [Dungeon]()
         API.getDungeons().subscribe { event in
             switch event {
             case .Completed:
+                self.dungeons = tmp
+                sender?.endRefreshing()
                 self.tableView.reloadData()
                 break
             case .Error(_):
+                sender?.endRefreshing()
                 break
             case .Next(let d):
-                self.dungeons.append(d)
+                tmp.append(d)
             }
         }
     }
