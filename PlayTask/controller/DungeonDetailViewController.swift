@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CRToast
 
 class DungeonDetailViewController: UIViewController {
     
@@ -40,12 +41,13 @@ class DungeonDetailViewController: UIViewController {
     
     func update() {
         self.playerLabel.text = String(format: self.playerLabel.text!, self.dungeon.currentPlayer, self.dungeon.maxPlayer)
-        let pledge: Int = Int(self.dungeon.cashPledge ?? self.dungeon.bronzePledge ?? 0)
-        var unit = "元"
-        if self.dungeon.cashPledge == nil {
-            unit = "铜币"
+        let pledge: Int = Int(max(self.dungeon.cashPledge, self.dungeon.bronzePledge))
+        var unit = "铜币"
+        if self.dungeon.cashPledge > 0 {
+            unit = "元"
         }
         self.pledgeLabel.text = String(format: self.pledgeLabel.text!, pledge, unit)
+        self.playerLabel.text = String(format: self.playerLabel.text!, self.dungeon.currentPlayer, self.dungeon.maxPlayer)
         switch self.dungeon.status {
         case .Joined:
             self.joinButton.enabled = false
@@ -58,4 +60,42 @@ class DungeonDetailViewController: UIViewController {
         }
     }
 
+    @IBAction func join(sender: UIButton) {
+        if self.dungeon.bronzePledge > 0 {
+            let alert = UIAlertController(title: "支付押金", message: "支付铜币的说明", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "支付", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                API.joinDungeon(Util.loggedUser!, dungeon: self.dungeon).subscribe({ (event) -> Void in
+                    switch event {
+                    case .Next(let dungeon):
+                        self.dungeon = dungeon
+                        break
+                    case .Completed:
+                        self.update()
+                        break
+                    case .Error(let error):
+                        if let error = error as? APIError {
+                            switch error {
+                            case .Custom(_, let info, _):
+                                CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
+                                break
+                            default:
+                                break
+                            }
+                        }
+                        break
+                    }
+                })
+                return
+            }))
+            alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        let actionSheet = UIAlertController(title: "支付押金", message: "押金为。。。说明", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        actionSheet.addAction(UIAlertAction(title: "支付宝", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            return
+        }))
+        actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
+        self.presentViewController(actionSheet, animated: true, completion: nil)
+    }
 }

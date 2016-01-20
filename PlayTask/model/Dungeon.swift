@@ -21,6 +21,7 @@ enum DungeonStatus: Int {
 }
 
 class Dungeon {
+    var id: Int
     var title: String
     var maxPlayer: Int
     var currentPlayer: Int
@@ -28,12 +29,15 @@ class Dungeon {
     var endTime: NSDate
     var detail: String
     var volume: Int?
-    var cashPledge: Double?
-    var bronzePledge: Double?
+    var cashPledge: Double
+    var bronzePledge: Double
     var status: DungeonStatus
     var cover: String
+    var target: Int
+    var progress: Int
     
     init(json: JSON) {
+        self.id = json["id"].intValue
         self.title = json["title"].stringValue
         self.maxPlayer = json["max_player"].intValue
         self.currentPlayer = json["current_player"].intValue
@@ -41,9 +45,11 @@ class Dungeon {
         self.endTime = NSDate(millisecondsSince1970: json["end_time"].doubleValue)
         self.detail = json["detail"].stringValue
         self.volume = json["volume"].int
-        self.cashPledge = json["cash_pledge"].double
-        self.bronzePledge = json["bronze_pledge"].double
+        self.cashPledge = json["cash_pledge"].doubleValue
+        self.bronzePledge = json["bronze_pledge"].doubleValue
         self.status = DungeonStatus(rawValue: json["status"].intValue) ?? DungeonStatus.Unknown
         self.cover = json["cover"].stringValue
+        self.target = json["target"].intValue
+        self.progress = json["progress"].intValue
     }
 }

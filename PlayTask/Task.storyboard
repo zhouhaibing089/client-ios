@@ -105,6 +105,9 @@
                                 <state key="disabled" title="已加入">
                                     <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="join:" destination="96g-is-Vfh" eventType="touchUpInside" id="fYf-uZ-nuJ"/>
+                                </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iZ9-LK-VcA">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="576"/>

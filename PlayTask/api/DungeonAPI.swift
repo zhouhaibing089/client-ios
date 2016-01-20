@@ -33,4 +33,10 @@ extension API {
             "current_player": 7]))].toObservable()
     }
     
+    class func joinDungeon(user: User, dungeon: Dungeon) -> Observable<Dungeon> {
+        return API.req(.PUT, "/users/\(user.sid.value!)/dungeons/\(dungeon.id)", suppressError: false).map({ (json) -> Dungeon in
+            return Dungeon(json: json)
+        })
+    }
+    
 }
