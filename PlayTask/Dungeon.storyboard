@@ -87,7 +87,7 @@
                     <navigationItem key="navigationItem" id="3Ls-Ay-pbO">
                         <barButtonItem key="rightBarButtonItem" title="Click" id="bHB-4Z-y1Y">
                             <connections>
-                                <segue destination="dLW-MK-uv1" kind="presentation" id="9si-AY-ZRK"/>
+                                <segue destination="dLW-MK-uv1" kind="presentation" identifier="new" id="9si-AY-ZRK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -150,12 +150,20 @@
                                 <action selector="cancel:" destination="dFt-3O-EG2" id="8I1-5N-fLO"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="完成" id="sRd-dC-0xK"/>
+                        <barButtonItem key="rightBarButtonItem" title="完成" id="sRd-dC-0xK">
+                            <connections>
+                                <action selector="send:" destination="dFt-3O-EG2" id="UEg-7C-ZxD"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="contentTextView" destination="A2E-p6-kIj" id="85Z-WO-JCJ"/>
+                        <outlet property="sendButton" destination="sRd-dC-0xK" id="kma-gX-bwr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kNt-hH-ibe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3255.5" y="-72.5"/>
+            <point key="canvasLocation" x="2981.5" y="-72.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qM9-iS-KL8">
@@ -191,7 +199,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4On-Hb-VgY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2487" y="148"/>
+            <point key="canvasLocation" x="2396.5" y="-72.5"/>
         </scene>
     </scenes>
 </document>

@@ -54,5 +54,14 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "new" {
+            let nvc = segue.destinationViewController as! UINavigationController
+            if let nmvc = nvc.viewControllers.first as? NewMemorialViewController {
+                nmvc.dungeon = self.dungeon
+            }
+        }
+    }
 
 }

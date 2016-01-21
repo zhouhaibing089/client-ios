@@ -7,9 +7,22 @@
 //
 
 import UIKit
+import YNSwift
+import CRToast
 
 class NewMemorialViewController: UIViewController {
 
+    @IBOutlet weak var sendButton: UIBarButtonItem!
+    @IBOutlet weak var contentTextView: YNTextView! {
+        didSet {
+            self.contentTextView.onDidEndEditing = { tv in
+                self.sendButton.enabled = tv.text != ""
+            }
+        }
+    }
+    
+    var dungeon: Dungeon!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,6 +38,19 @@ class NewMemorialViewController: UIViewController {
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    @IBAction func send(sender: UIBarButtonItem) {
+        let content = self.contentTextView.text
+        API.sendMemorial(Util.loggedUser!, dungeon: self.dungeon, content: content, imageIds: []).subscribe { (event) -> Void in
+            switch event {
+            case .Completed:
+                break
+            case .Error(let error):
+                break
+            case .Next(let memorial):
+                break
+            }
+        }
+    }
     /*
     // MARK: - Navigation
 

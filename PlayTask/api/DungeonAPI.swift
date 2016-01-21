@@ -37,4 +37,13 @@ extension API {
         })
     }
     
+    class func sendMemorial(user: User, dungeon: Dungeon, content: String, imageIds: [Int]) -> Observable<Memorial> {
+        return API.req(.POST, "/dungeons/\(dungeon.id)/users/\(user.sid.value!)/memorials", parameters: [
+            "content": content,
+            "image_ids": String(JSON(imageIds))
+            ]).map({ (json) -> Memorial in
+            return Memorial(json: json)
+        })
+    }
+    
 }
