@@ -14,7 +14,7 @@ extension API {
     class func registerWithAccount(account: String, email: String, password: String) -> Observable<User> {
         return API.req(.POST, "/users", parameters: ["account" : account,
             "email": email, "password": password], suppressError: false).map { json in
-            let user = User(account: account, email: email, sid: json["sid"].intValue)
+            let user = User(json: json)
             user.save()
             return user
         }
@@ -26,7 +26,7 @@ extension API {
             if let user = User.getBySid(sid) {
                 Util.loggedUser = user
             } else {
-                let user = User(account: json["user"]["account"].stringValue, email: json["user"]["email"].stringValue, sid: sid)
+                let user = User(json: json["user"])
                 user.save()
                 Util.loggedUser = user
             }
@@ -41,7 +41,7 @@ extension API {
             if let user = User.getBySid(sid) {
                 Util.loggedUser = user
             } else {
-                let user = User(account: json["account"].stringValue, email: json["email"].stringValue, sid: sid)
+                let user = User(json: json["user"])
                 user.save()
                 Util.loggedUser = user
             }
@@ -61,7 +61,11 @@ extension API {
     class func getUserWithUserSid(userSid: Int) -> Observable<User> {
         return API.req(.GET, "/users/\(userSid)").map { json in
             if let user = User.getBySid(userSid) {
-                user.update(["score": json["score"].intValue, "bronze": json["bronze"].intValue])
+                user.update([
+                    "score": json["score"].intValue,
+                    "bronze": json["bronze"].intValue,
+                    "avatarUrl": json["avatar_url"].stringValue
+                    ])
                 //  创建 Group
                 var groups = [Group]()
                 for (_, subJson) in json["groups"] {

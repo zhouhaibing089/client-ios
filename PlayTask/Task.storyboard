@@ -32,7 +32,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jaI-zQ-IWG">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="jaI-zQ-IWG" secondAttribute="height" multiplier="16:9" id="Wbz-Fx-TDW"/>
                                                     </constraints>
@@ -103,7 +103,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="disabled" title="已加入">
-                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="join:" destination="96g-is-Vfh" eventType="touchUpInside" id="fYf-uZ-nuJ"/>
@@ -362,7 +362,7 @@
                                                 </label>
                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tr0-yT-Kfu" userLabel="center anchor">
                                                     <rect key="frame" x="492" y="36" width="100" height="1"/>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="ax3-n2-Mhq"/>
                                                         <constraint firstAttribute="width" constant="100" id="uTF-Wo-QqI"/>
@@ -371,13 +371,13 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="重置时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEy-iB-jPt">
                                                     <rect key="frame" x="536" y="17" width="56" height="17"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="早起副本" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyo-mb-la3">
                                                     <rect key="frame" x="8" y="8" width="68" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wPz-Uy-KoI">
@@ -573,6 +573,7 @@
                         <outlet property="toolbar" destination="NtI-JK-ArL" id="6k5-Te-iCA"/>
                         <segue destination="KPF-wW-3Xl" kind="presentation" identifier="new" id="IAA-Eh-SmA"/>
                         <segue destination="soh-SB-n6n" kind="show" identifier="dungeon" id="HwV-JN-4Xf"/>
+                        <segue destination="Sda-MC-jXA" kind="custom" identifier="index@Dungeon" customClass="YNShowSegue" customModule="YNSwift" id="sAs-bY-hBQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r94-Mp-o4X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -583,6 +584,24 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2962" y="485"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="tLQ-Yj-tv9">
+            <objects>
+                <viewController id="Sda-MC-jXA" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s8x-Z6-c76"/>
+                        <viewControllerLayoutGuide type="bottom" id="VF8-Eh-4VG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="a0a-UK-un5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4sv-3R-Mv7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2962" y="1213"/>
         </scene>
         <!--新建任务-->
         <scene sceneID="IpZ-50-aBi">

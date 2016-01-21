@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import SwiftyJSON
 
 class User: Table {
     dynamic var account = ""
@@ -21,15 +22,18 @@ class User: Table {
     dynamic var taskHistoryPullTime: NSDate!
     dynamic var wishPullTime: NSDate!
     dynamic var wishHistoryPullTime: NSDate!
-
+    
+    dynamic var avatarUrl = ""
     
     static var instance: User?
     
-    convenience init(account: String, email: String, sid: Int) {
+    convenience init(json: JSON) {
         self.init()
-        self.account = account
-        self.email = email
-        self.sid.value = sid
+        self.account = json["account"].stringValue
+        self.email = json["email"].stringValue
+        self.sid.value = json["id"].intValue
+        self.avatarUrl = json["avatar_url"].stringValue
+
     }
     
     class func getInstance() -> User {

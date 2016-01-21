@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import YNSwift
 
 class DungeonTaskViewController: TaskViewController {
     enum Mode {
@@ -67,6 +68,10 @@ class DungeonTaskViewController: TaskViewController {
         return UITableViewCellEditingStyle.None
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("index@Dungeon", sender: self.dungeons[indexPath.row])
+    }
+    
     override func showMenu(sender: UIBarButtonItem) {
         if self.mode == Mode.Task {
             return super.showMenu(sender)
@@ -86,17 +91,36 @@ class DungeonTaskViewController: TaskViewController {
         if self.mode == Mode.Task {
             return super.refresh()
         }
-        self.dungeons.removeAll()
+        var tmp = [Dungeon]()
         API.getJoinedDungeons(Util.loggedUser!).subscribe { event in
             switch event {
             case .Completed:
+                self.dungeons = tmp
+                if tmp.count == 0 {
+                    self.tableView.hidden = true
+                } else {
+                    self.tableView.hidden = false
+                }
                 self.tableView.reloadData()
                 break
             case .Error(let e):
                 break
             case .Next(let d):
-                self.dungeons.append(d)
+                tmp.append(d)
                 break
+            }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if self.mode == Mode.Task {
+            return super.prepareForSegue(segue, sender: sender)
+        }
+        if segue.identifier == "index@Dungeon" {
+            if let segue = segue as? YNSegue {
+                if let dvc = segue.instantiated as? DungeonViewController {
+                    dvc.dungeon = sender as! Dungeon
+                }
             }
         }
     }
