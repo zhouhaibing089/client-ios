@@ -24,6 +24,7 @@
 		495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */; };
 		496486AB1C50C9B7008C9A2C /* NewMemorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496486AA1C50C9B7008C9A2C /* NewMemorialViewController.swift */; };
 		496486AD1C5116E1008C9A2C /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496486AC1C5116E1008C9A2C /* Image.swift */; };
+		496486AF1C51DB22008C9A2C /* MemorialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496486AE1C51DB22008C9A2C /* MemorialTableViewCell.swift */; };
 		49840DD11BCF9B61001F493D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD01BCF9B61001F493D /* Util.swift */; };
 		49840DD91BCFA997001F493D /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD81BCFA997001F493D /* TaskTableViewCell.swift */; };
 		498BAC901BD0CDE600ABB357 /* WishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */; };
@@ -103,6 +104,7 @@
 		495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillItemTableViewCell.swift; sourceTree = "<group>"; };
 		496486AA1C50C9B7008C9A2C /* NewMemorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMemorialViewController.swift; sourceTree = "<group>"; };
 		496486AC1C5116E1008C9A2C /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		496486AE1C51DB22008C9A2C /* MemorialTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorialTableViewCell.swift; sourceTree = "<group>"; };
 		49840DD01BCF9B61001F493D /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		49840DD81BCFA997001F493D /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishViewController.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				49F8093D1C1E7239006A5DF5 /* BubbleView.swift */,
 				491B6FED1C44E20A000FD353 /* DungeonTableViewCell.swift */,
 				49422DF41C48E83600C316B3 /* DungeonTaskTableViewCell.swift */,
+				496486AE1C51DB22008C9A2C /* MemorialTableViewCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 				498BAC901BD0CDE600ABB357 /* WishViewController.swift in Sources */,
 				49953E061BDC67D900B25EC8 /* User.swift in Sources */,
 				496486AB1C50C9B7008C9A2C /* NewMemorialViewController.swift in Sources */,
+				496486AF1C51DB22008C9A2C /* MemorialTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

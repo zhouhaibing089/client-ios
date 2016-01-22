@@ -15,6 +15,7 @@ class User: Table {
     dynamic var email = ""
     dynamic var score = 0
     dynamic var bronze = 0
+    dynamic var nickname = ""
     
     let groups = List<Group>()
     
