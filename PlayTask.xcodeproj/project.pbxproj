@@ -57,6 +57,8 @@
 		49C8D3D61BE8F0D800E8EBF5 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D3D51BE8F0D800E8EBF5 /* UserAPI.swift */; };
 		49C8D3DA1BEF6DE700E8EBF5 /* TaskAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D3D91BEF6DE700E8EBF5 /* TaskAPI.swift */; };
 		49D321331BF35DFA00A6E0A7 /* WishAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D321321BF35DFA00A6E0A7 /* WishAPI.swift */; };
+		49F02DDD1C52204300E9BA7A /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F02DDC1C52204300E9BA7A /* PreviewViewController.swift */; };
+		49F02DDF1C5260F700E9BA7A /* ImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F02DDE1C5260F700E9BA7A /* ImageAPI.swift */; };
 		49F4A0211C169D4D002D21D6 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F4A0201C169D4D002D21D6 /* StatisticViewController.swift */; };
 		49F4A0231C16C574002D21D6 /* StatisticTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F4A0221C16C574002D21D6 /* StatisticTableViewCell.swift */; };
 		49F8092B1C1B10C7006A5DF5 /* StatisticDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F8092A1C1B10C7006A5DF5 /* StatisticDetailViewController.swift */; };
@@ -147,6 +149,8 @@
 		49C8D3D51BE8F0D800E8EBF5 /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		49C8D3D91BEF6DE700E8EBF5 /* TaskAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAPI.swift; sourceTree = "<group>"; };
 		49D321321BF35DFA00A6E0A7 /* WishAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishAPI.swift; sourceTree = "<group>"; };
+		49F02DDC1C52204300E9BA7A /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		49F02DDE1C5260F700E9BA7A /* ImageAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAPI.swift; sourceTree = "<group>"; };
 		49F4A0201C169D4D002D21D6 /* StatisticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		49F4A0221C16C574002D21D6 /* StatisticTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticTableViewCell.swift; sourceTree = "<group>"; };
 		49F8092A1C1B10C7006A5DF5 /* StatisticDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticDetailViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 				498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */,
 				498BAC911BD0CE7400ABB357 /* NewWishViewController.swift */,
 				498BAC9B1BD0EA5300ABB357 /* MoreViewController.swift */,
+				49F02DDC1C52204300E9BA7A /* PreviewViewController.swift */,
 				49A976BA1BE73B02001300FB /* LoginViewController.swift */,
 				49C8D3CB1BE88C4900E8EBF5 /* RegisterViewController.swift */,
 				49BC5A1C1BF9B9CE00A0EC96 /* PasswordViewController.swift */,
@@ -347,6 +352,7 @@
 				49C8D3D91BEF6DE700E8EBF5 /* TaskAPI.swift */,
 				49D321321BF35DFA00A6E0A7 /* WishAPI.swift */,
 				491B6FE91C44AEB7000FD353 /* DungeonAPI.swift */,
+				49F02DDE1C5260F700E9BA7A /* ImageAPI.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -577,6 +583,7 @@
 				49C8D3CC1BE88C4900E8EBF5 /* RegisterViewController.swift in Sources */,
 				49422DFB1C4F74CC00C316B3 /* DungeonViewController.swift in Sources */,
 				49C8D3DA1BEF6DE700E8EBF5 /* TaskAPI.swift in Sources */,
+				49F02DDF1C5260F700E9BA7A /* ImageAPI.swift in Sources */,
 				491B6FE81C44A69D000FD353 /* DungeonListViewController.swift in Sources */,
 				49F4A0211C169D4D002D21D6 /* StatisticViewController.swift in Sources */,
 				498BAC9C1BD0EA5300ABB357 /* MoreViewController.swift in Sources */,
@@ -590,6 +597,7 @@
 				4998593D1BDB169C00C222E7 /* Task.swift in Sources */,
 				49953DFC1BDB1F0400B25EC8 /* Table.swift in Sources */,
 				491B6FEE1C44E20A000FD353 /* DungeonTableViewCell.swift in Sources */,
+				49F02DDD1C52204300E9BA7A /* PreviewViewController.swift in Sources */,
 				49F4A0231C16C574002D21D6 /* StatisticTableViewCell.swift in Sources */,
 				49F8093E1C1E7239006A5DF5 /* BubbleView.swift in Sources */,
 				499708EF1BCF63F500424F5E /* NewTaskViewController.swift in Sources */,

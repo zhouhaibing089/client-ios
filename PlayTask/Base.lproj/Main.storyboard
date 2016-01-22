@@ -777,6 +777,104 @@
             </objects>
             <point key="canvasLocation" x="604" y="-312"/>
         </scene>
+        <!--Preview View Controller-->
+        <scene sceneID="Uj8-Ba-Mv4">
+            <objects>
+                <viewController storyboardIdentifier="preview" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9uk-EX-3Wa" customClass="PreviewViewController" customModule="yon" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wOC-Vx-hur"/>
+                        <viewControllerLayoutGuide type="bottom" id="59E-Xv-mUu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ect-km-laU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1b-pn-GgQ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="XRj-N8-t9v" appends="YES" id="nn1-vp-lfQ"/>
+                                    <outletCollection property="gestureRecognizers" destination="cbU-b5-Vsn" appends="YES" id="v4P-fv-ijz"/>
+                                </connections>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pxu-h9-E2I" userLabel="left buttn">
+                                <rect key="frame" x="16" y="542" width="78" height="34"/>
+                                <color key="backgroundColor" red="0.26770797369999999" green="0.2817278802" blue="0.28889980910000002" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="12" minY="6" maxX="12" maxY="6"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="leftButtonClicked:" destination="9uk-EX-3Wa" eventType="touchUpInside" id="que-Bx-R5j"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FLS-zN-2QM" userLabel="right buttn">
+                                <rect key="frame" x="506" y="542" width="78" height="34"/>
+                                <color key="backgroundColor" red="0.26770797369999999" green="0.2817278802" blue="0.28889980910000002" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="12" minY="6" maxX="12" maxY="6"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="rightButtonClicked:" destination="9uk-EX-3Wa" eventType="touchUpInside" id="aJm-4X-SNy"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="59E-Xv-mUu" firstAttribute="top" secondItem="FLS-zN-2QM" secondAttribute="bottom" constant="24" id="3pJ-ns-1fw"/>
+                            <constraint firstAttribute="trailing" secondItem="FLS-zN-2QM" secondAttribute="trailing" constant="16" id="BuI-lw-aYW"/>
+                            <constraint firstAttribute="trailing" secondItem="H1b-pn-GgQ" secondAttribute="trailing" id="TAW-Dx-6vs"/>
+                            <constraint firstItem="H1b-pn-GgQ" firstAttribute="top" secondItem="ect-km-laU" secondAttribute="topMargin" id="TBM-CD-eQo"/>
+                            <constraint firstItem="H1b-pn-GgQ" firstAttribute="bottom" secondItem="59E-Xv-mUu" secondAttribute="top" id="gil-2n-ZV2"/>
+                            <constraint firstItem="H1b-pn-GgQ" firstAttribute="leading" secondItem="ect-km-laU" secondAttribute="leading" id="jo4-Pa-WlJ"/>
+                            <constraint firstItem="H1b-pn-GgQ" firstAttribute="top" secondItem="wOC-Vx-hur" secondAttribute="bottom" id="sbI-UZ-JSY"/>
+                            <constraint firstItem="59E-Xv-mUu" firstAttribute="top" secondItem="Pxu-h9-E2I" secondAttribute="bottom" constant="24" id="t37-w8-Sex"/>
+                            <constraint firstItem="Pxu-h9-E2I" firstAttribute="leading" secondItem="ect-km-laU" secondAttribute="leading" constant="16" id="twh-OO-8cb"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="TBM-CD-eQo"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="dVy-hp-UU7"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="backRecognizer" destination="XRj-N8-t9v" id="XKy-C2-Khx"/>
+                        <outlet property="leftButton" destination="Pxu-h9-E2I" id="b23-Gb-Rbz"/>
+                        <outlet property="rightButton" destination="FLS-zN-2QM" id="Gbh-MS-CdY"/>
+                        <outlet property="scrollView" destination="H1b-pn-GgQ" id="r0T-2b-onf"/>
+                        <outlet property="zoomRecognizer" destination="cbU-b5-Vsn" id="94m-JY-C38"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Gr-D9-sdi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="XRj-N8-t9v" userLabel="back">
+                    <connections>
+                        <action selector="back:" destination="9uk-EX-3Wa" id="TEd-jd-kyS"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="cbU-b5-Vsn" userLabel="zoom">
+                    <connections>
+                        <action selector="zoom:" destination="9uk-EX-3Wa" id="ZjJ-Aa-RtQ"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="604" y="-1836"/>
+        </scene>
     </scenes>
     <resources>
         <image name="gift" width="25" height="25"/>

@@ -9,8 +9,9 @@
 #ifndef BridgeHeader_h
 #define BridgeHeader_h
 
-#import <MobClick.h>
+#import "MobClick.h"
 #import "UMOnlineConfig.h"
 #import "MBProgressHUD/MBProgressHUD.h"
+#import "Qiniu/QiniuSDK.h"
 
 #endif /* BridgeHeader_h */

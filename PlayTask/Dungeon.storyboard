@@ -180,7 +180,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3Ls-Ay-pbO">
-                        <barButtonItem key="rightBarButtonItem" title="Click" id="bHB-4Z-y1Y">
+                        <barButtonItem key="rightBarButtonItem" image="create_new" id="bHB-4Z-y1Y">
                             <connections>
                                 <segue destination="dLW-MK-uv1" kind="presentation" identifier="new" id="9si-AY-ZRK"/>
                             </connections>
@@ -219,9 +219,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jA1-R6-RiD">
-                                <rect key="frame" x="16" y="208" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jA1-R6-RiD">
+                                <rect key="frame" x="16" y="208" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="jA1-R6-RiD" secondAttribute="height" multiplier="1:1" id="0bn-UM-B6O"/>
+                                    <constraint firstAttribute="width" constant="64" id="3Zo-Q6-Nwz"/>
+                                </constraints>
+                                <state key="normal" image="select_image_button">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectImage:" destination="dFt-3O-EG2" eventType="touchUpInside" id="FkZ-zp-RRl"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -229,12 +238,14 @@
                             <constraint firstItem="A2E-p6-kIj" firstAttribute="leading" secondItem="PYW-b4-APE" secondAttribute="leadingMargin" id="2Fe-Ek-eIr"/>
                             <constraint firstItem="jA1-R6-RiD" firstAttribute="leading" secondItem="A2E-p6-kIj" secondAttribute="leading" id="Kxg-UH-0To"/>
                             <constraint firstItem="nKT-Ue-Rc6" firstAttribute="top" secondItem="A2E-p6-kIj" secondAttribute="bottom" constant="400" id="V4t-ec-0Mh"/>
+                            <constraint firstItem="jA1-R6-RiD" firstAttribute="width" secondItem="PYW-b4-APE" secondAttribute="height" multiplier="1:1" id="W6z-Mc-h1L"/>
                             <constraint firstItem="jA1-R6-RiD" firstAttribute="top" secondItem="A2E-p6-kIj" secondAttribute="bottom" constant="8" symbolic="YES" id="elx-13-LzF"/>
                             <constraint firstItem="A2E-p6-kIj" firstAttribute="top" secondItem="w6t-jY-55a" secondAttribute="bottom" constant="8" symbolic="YES" id="wav-Ca-q09"/>
                             <constraint firstItem="A2E-p6-kIj" firstAttribute="trailing" secondItem="PYW-b4-APE" secondAttribute="trailingMargin" id="zV9-96-jLe"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="W6z-Mc-h1L"/>
                                 <exclude reference="V4t-ec-0Mh"/>
                             </mask>
                         </variation>
@@ -253,12 +264,32 @@
                     </navigationItem>
                     <connections>
                         <outlet property="contentTextView" destination="A2E-p6-kIj" id="85Z-WO-JCJ"/>
+                        <outlet property="selectImageButton" destination="jA1-R6-RiD" id="lg0-yE-gf5"/>
                         <outlet property="sendButton" destination="sRd-dC-0xK" id="kma-gX-bwr"/>
+                        <segue destination="yGh-n2-JB7" kind="custom" identifier="preview@Main" customClass="YNModalSegue" customModule="YNSwift" id="SdN-Fr-twN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kNt-hH-ibe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2981.5" y="-72.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="5qu-X6-lCL">
+            <objects>
+                <viewController id="yGh-n2-JB7" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ukW-62-0Rd"/>
+                        <viewControllerLayoutGuide type="bottom" id="WqO-C2-iAU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="go8-TV-lCq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8RW-ot-eOH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3596.5" y="-72.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qM9-iS-KL8">
@@ -297,4 +328,8 @@
             <point key="canvasLocation" x="2396.5" y="-72.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="create_new" width="22" height="22"/>
+        <image name="select_image_button" width="64" height="64"/>
+    </resources>
 </document>

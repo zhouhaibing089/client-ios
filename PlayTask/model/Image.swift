@@ -11,8 +11,16 @@ import SwiftyJSON
 
 class Image {
     
+    var id: Int
+    var url: String
+    var width: Double
+    var height: Double
+    
     init(json: JSON) {
-        
+        self.id = json["id"].intValue
+        self.url = json["url"].stringValue
+        self.width = json["width"].doubleValue
+        self.height = json["height"].doubleValue
     }
     
 }
