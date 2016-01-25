@@ -12,8 +12,11 @@ class DungeonTaskTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var mainStatusLabel: UILabel!
     @IBOutlet weak var subStatusButton: UIButton!
+    @IBOutlet weak var badgeView: UIView!
     var dungeon: Dungeon! {
         didSet {
+            self.badgeView.hidden = Util.currentUser.badge.getCountByDungeonId(self.dungeon.id) == 0
+            
             self.titleLabel.text = self.dungeon.title
             self.subStatusButton.enabled = false
             switch self.dungeon.status {

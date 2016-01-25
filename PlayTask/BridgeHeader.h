@@ -13,5 +13,6 @@
 #import "UMOnlineConfig.h"
 #import "MBProgressHUD/MBProgressHUD.h"
 #import "Qiniu/QiniuSDK.h"
+#import "JSBadgeView/JSBadgeView.h"
 
 #endif /* BridgeHeader_h */

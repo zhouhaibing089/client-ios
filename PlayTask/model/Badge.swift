@@ -27,4 +27,8 @@ class Badge {
         }
         return count
     }
+    
+    func getCountByDungeonId(dungeonId: Int) -> Int {
+        return self.dungeons[String(dungeonId)]?.intValue ?? 0
+    }
 }

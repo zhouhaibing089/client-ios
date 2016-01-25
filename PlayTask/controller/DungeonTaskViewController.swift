@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import YNSwift
+import JSBadgeView
 
 class DungeonTaskViewController: TaskViewController {
     enum Mode {
@@ -19,9 +20,12 @@ class DungeonTaskViewController: TaskViewController {
     var mode = Mode.Task
     
     var dungeons = [Dungeon]()
+    var badgeView: JSBadgeView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.badgeView = JSBadgeView(parentView: self.taskTypeSegmentControl.superview!, alignment: JSBadgeViewAlignment.TopRight)
+        self.badgeView.badgePositionAdjustment = CGPoint(x: -12, y: 8)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBadge:", name: Config.Notification.BADGE, object: nil)
     }
     
@@ -29,8 +33,10 @@ class DungeonTaskViewController: TaskViewController {
         let count = Util.loggedUser?.badge.getDungeonsCount() ?? 0
         if count > 0 {
             self.navigationController?.tabBarItem.badgeValue = String(count)
+            self.badgeView.badgeText = String(count)
         } else {
             self.navigationController?.tabBarItem.badgeValue = nil
+            self.badgeView.badgeText = nil
         }
     }
     
