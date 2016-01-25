@@ -63,11 +63,23 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("memorial", forIndexPath: indexPath) as! MemorialTableViewCell
         cell.memorial = self.memorials[indexPath.section][indexPath.row]
-        cell.commentAction = { [unowned self] (memorialId, toUserId) in
+        cell.commentAction = { [unowned self] (memorialId, toUserId, toNickname) in
             self.commentView.hidden = false
             self.commentTextView.becomeFirstResponder()
             self.commentMemorialId = memorialId
             self.commentToUserId = toUserId
+            if toUserId != nil {
+                self.commentTextView.hint = String(format: "回复%@：", toNickname!)
+            }
+        }
+        cell.deleteAction = { [unowned self] (commentId) in
+            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            actionSheet.addAction(UIAlertAction(title: "删除", style: UIAlertActionStyle.Destructive, handler: { (action) -> Void in
+                // TODO delete
+            }))
+            actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
+            self.presentViewController(actionSheet, animated: true, completion: nil)
+            
         }
         return cell
     }

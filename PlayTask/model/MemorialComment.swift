@@ -10,6 +10,7 @@ import Foundation
 import SwiftyJSON
 
 class MemorialComment {
+    var id: Int
     var fromUserId: Int
     var fromNickname: String
     var toUserId: Int?
@@ -18,6 +19,7 @@ class MemorialComment {
     var memorialId: Int
     
     init(json: JSON) {
+        self.id = json["id"].intValue
         self.fromUserId = json["from_user_id"].intValue
         self.toUserId = json["to_user_id"].int
         self.content = json["content"].stringValue

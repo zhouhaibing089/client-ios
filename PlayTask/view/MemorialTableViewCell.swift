@@ -27,8 +27,10 @@ class MemorialTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDa
         }
     }
     
-    // memorial id, to user id
-    var commentAction: ((Int, Int?) -> Void)!
+    // memorial id, to user id, to nickname
+    var commentAction: ((Int, Int?, String?) -> Void)!
+    // comment id
+    var deleteAction: ((Int) -> Void)!
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -44,8 +46,19 @@ class MemorialTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDa
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let comment = self.memorial.comments[indexPath.row]
+        let myUserId = Util.loggedUser!.sid.value
+        if comment.fromUserId == myUserId {
+            self.deleteAction(comment.id)
+        } else {
+            self.commentAction(self.memorial.id, comment.fromUserId, comment.fromNickname)
+        }
+        
+    }
+    
     @IBAction func comment(sender: UIButton) {
-        self.commentAction(self.memorial.id, nil)
+        self.commentAction(self.memorial.id, nil, nil)
     }
     
     var memorial: Memorial! {
