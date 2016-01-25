@@ -56,4 +56,17 @@ extension API {
         })
     }
     
+    class func commentMemorial(user: User, memorialId: Int, toUserId: Int?, content: String) -> Observable<MemorialComment> {
+        var parameters: [String: AnyObject] = [
+            "from_user_id": user.sid.value!,
+            "content": content
+        ]
+        if let toUserId = toUserId {
+            parameters["to_user_id"] = toUserId
+        }
+        return API.req(.POST, "/memorials/\(memorialId)/comments", parameters: parameters).map({ (json) -> MemorialComment in
+            return MemorialComment(json: json)
+        })
+    }
+    
 }

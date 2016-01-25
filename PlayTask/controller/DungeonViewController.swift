@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import YNSwift
+import RxSwift
 
 class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var coverImageView: UIImageView!
@@ -15,9 +17,19 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var avatarImageView: UIImageView!
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var commentView: UIView! {
+        didSet {
+            self.commentView.hidden = true
+        }
+    }
+    @IBOutlet weak var commentTextView: YNTextView!
     
     var memorials = [[Memorial]]()
     var dungeon: Dungeon!
+    
+    // 当前发送的评论的元信息
+    var commentMemorialId: Int!
+    var commentToUserId: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +63,12 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("memorial", forIndexPath: indexPath) as! MemorialTableViewCell
         cell.memorial = self.memorials[indexPath.section][indexPath.row]
+        cell.commentAction = { [unowned self] (memorialId, toUserId) in
+            self.commentView.hidden = false
+            self.commentTextView.becomeFirstResponder()
+            self.commentMemorialId = memorialId
+            self.commentToUserId = toUserId
+        }
         return cell
     }
     
@@ -81,6 +99,20 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
                 break
             }
         }
+    }
+    
+    @IBAction func sendComment(sender: UIButton) {
+        API.commentMemorial(Util.loggedUser!, memorialId: self.commentMemorialId,
+            toUserId: self.commentToUserId, content: self.commentTextView.text).subscribe({ event in
+                switch event {
+                case .Next(let c):
+                    break
+                case .Completed:
+                    break
+                case .Error(let e):
+                    break
+                }
+            })
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

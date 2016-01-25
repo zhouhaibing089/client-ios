@@ -77,7 +77,7 @@ class NewMemorialViewController: UIViewController, UIImagePickerControllerDelega
         
         let content = self.contentTextView.text
         uploadImageObservable.flatMap { (image) -> Observable<Memorial> in
-            API.sendMemorial(Util.loggedUser!, dungeon: self.dungeon, content: content, imageIds: [])
+            API.sendMemorial(Util.loggedUser!, dungeon: self.dungeon, content: content, imageIds: [image.id])
         }.subscribe { (event) -> Void in
             switch event {
             case .Completed:
