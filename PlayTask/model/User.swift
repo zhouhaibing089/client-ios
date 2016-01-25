@@ -28,6 +28,13 @@ class User: Table {
     
     static var instance: User?
     
+    var badge: Badge = Badge() {
+        didSet {
+            let notificationCenter = NSNotificationCenter.defaultCenter()
+            notificationCenter.postNotificationName(Config.Notification.BADGE, object: nil)
+        }
+    }
+    
     convenience init(json: JSON) {
         self.init()
         self.account = json["account"].stringValue
@@ -35,6 +42,10 @@ class User: Table {
         self.sid.value = json["id"].intValue
         self.avatarUrl = json["avatar_url"].stringValue
 
+    }
+    
+    override static func ignoredProperties() -> [String] {
+        return ["badge"]
     }
     
     class func getInstance() -> User {

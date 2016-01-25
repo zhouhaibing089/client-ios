@@ -20,6 +20,20 @@ class DungeonTaskViewController: TaskViewController {
     
     var dungeons = [Dungeon]()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBadge:", name: Config.Notification.BADGE, object: nil)
+    }
+    
+    func updateBadge(notification: NSNotification) {
+        let count = Util.loggedUser?.badge.getDungeonsCount() ?? 0
+        if count > 0 {
+            self.navigationController?.tabBarItem.badgeValue = String(count)
+        } else {
+            self.navigationController?.tabBarItem.badgeValue = nil
+        }
+    }
+    
     override func changeTaskType(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 3 {
             self.mode = Mode.Dungeon

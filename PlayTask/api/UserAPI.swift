@@ -66,6 +66,7 @@ extension API {
                     "bronze": json["bronze"].intValue,
                     "avatarUrl": json["avatar_url"].stringValue
                     ])
+                Util.currentUser.badge = Badge(json: json["badge"])
                 //  创建 Group
                 var groups = [Group]()
                 for (_, subJson) in json["groups"] {

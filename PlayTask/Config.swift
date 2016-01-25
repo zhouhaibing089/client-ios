@@ -14,5 +14,6 @@ class Config {
     }
     class Notification {
         static let SYNC = "sync"
+        static let BADGE = "badge"
     }
 }
