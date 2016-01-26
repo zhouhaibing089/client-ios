@@ -27,11 +27,6 @@ class DungeonNotificationViewController: UIViewController, UITableViewDelegate, 
         self.refresh()
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.notifications.count
@@ -46,6 +41,11 @@ class DungeonNotificationViewController: UIViewController, UITableViewDelegate, 
         let cell = tableView.dequeueReusableCellWithIdentifier("notification", forIndexPath: indexPath) as! DungeonNotificationTableViewCell
         cell.notification = dn
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let dn = self.notifications[indexPath.section][indexPath.row]
+        self.performSegueWithIdentifier("memorial", sender: dn)
     }
     
     func refresh() {
@@ -65,4 +65,11 @@ class DungeonNotificationViewController: UIViewController, UITableViewDelegate, 
         })
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "memorial" {
+            if let mvc = segue.destinationViewController as? MemorialViewController {
+                mvc.memorial = (sender as! DungeonNotification).memorial
+            }
+        }
+    }
 }

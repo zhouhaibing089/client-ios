@@ -17,6 +17,7 @@ class MemorialComment {
     var toNickname: String?
     var content: String
     var memorialId: Int
+    var fromAvatarUrl: String
     
     init(json: JSON) {
         self.id = json["id"].intValue
@@ -26,5 +27,6 @@ class MemorialComment {
         self.fromNickname = json["from_nickname"].stringValue
         self.toNickname = json["to_nickname"].string
         self.memorialId = json["memorial_id"].intValue
+        self.fromAvatarUrl = json["from_avatar_url"].stringValue
     }
 }

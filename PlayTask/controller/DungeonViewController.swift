@@ -30,7 +30,7 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // 当前发送的评论的元信息
     var commentMemorialId: Int!
-    var commentToUserId: Int!
+    var commentToUserId: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
