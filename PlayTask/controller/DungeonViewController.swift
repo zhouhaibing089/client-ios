@@ -15,6 +15,7 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var messageAlertButton: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var commentView: UIView! {
@@ -91,6 +92,13 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.avatarImageView.af_setImageWithURL(avatarUrl)
             }
         }
+        let messageCount = Util.currentUser.badge.getCountByDungeonId(self.dungeon.id)
+        if messageCount > 0 {
+            self.messageAlertButton.setTitle(String(format: "您有%d条新消息", messageCount), forState: UIControlState.Normal)
+            self.messageAlertButton.hidden = false
+        } else {
+            self.messageAlertButton.hidden = true
+        }
         self.tableView.reloadData()
     }
     
@@ -132,6 +140,10 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
             let nvc = segue.destinationViewController as! UINavigationController
             if let nmvc = nvc.viewControllers.first as? NewMemorialViewController {
                 nmvc.dungeon = self.dungeon
+            }
+        } else if segue.identifier == "notification" {
+            if let dnvc = segue.destinationViewController as? DungeonNotificationViewController {
+                dnvc.dungeon = self.dungeon
             }
         }
     }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		490BEA9B1C5735DF005CAF3C /* DungeonNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BEA9A1C5735DF005CAF3C /* DungeonNotificationViewController.swift */; };
+		490BEA9D1C5737DD005CAF3C /* DungeonNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BEA9C1C5737DD005CAF3C /* DungeonNotification.swift */; };
+		490BEA9F1C5742A3005CAF3C /* DungeonNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BEA9E1C5742A3005CAF3C /* DungeonNotificationTableViewCell.swift */; };
 		491B6FD61C3FC469000FD353 /* libUMOnlineConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 491B6FD41C3FC469000FD353 /* libUMOnlineConfig.a */; };
 		491B6FDA1C40F599000FD353 /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491B6FD91C40F598000FD353 /* Task.storyboard */; };
 		491B6FDE1C40FE01000FD353 /* Wish.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491B6FDD1C40FE01000FD353 /* Wish.storyboard */; };
@@ -91,6 +94,9 @@
 /* Begin PBXFileReference section */
 		116641E9AD5D4333FD531049 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		27FE39AB88BE9E71239939D4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		490BEA9A1C5735DF005CAF3C /* DungeonNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DungeonNotificationViewController.swift; sourceTree = "<group>"; };
+		490BEA9C1C5737DD005CAF3C /* DungeonNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DungeonNotification.swift; sourceTree = "<group>"; };
+		490BEA9E1C5742A3005CAF3C /* DungeonNotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DungeonNotificationTableViewCell.swift; sourceTree = "<group>"; };
 		491B6FD41C3FC469000FD353 /* libUMOnlineConfig.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMOnlineConfig.a; sourceTree = "<group>"; };
 		491B6FD51C3FC469000FD353 /* UMOnlineConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMOnlineConfig.h; sourceTree = "<group>"; };
 		491B6FD91C40F598000FD353 /* Task.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Task.storyboard; sourceTree = "<group>"; };
@@ -238,6 +244,7 @@
 				496486AC1C5116E1008C9A2C /* Image.swift */,
 				49B4F3201C5488290094A438 /* MemorialComment.swift */,
 				49B4F3291C56489F0094A438 /* Badge.swift */,
+				490BEA9C1C5737DD005CAF3C /* DungeonNotification.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -255,6 +262,7 @@
 				49422DF41C48E83600C316B3 /* DungeonTaskTableViewCell.swift */,
 				496486AE1C51DB22008C9A2C /* MemorialTableViewCell.swift */,
 				49B4F31E1C5486D70094A438 /* MemorialCommentTableViewCell.swift */,
+				490BEA9E1C5742A3005CAF3C /* DungeonNotificationTableViewCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -341,6 +349,7 @@
 				49422DF21C48D73000C316B3 /* DungeonTaskViewController.swift */,
 				49422DFA1C4F74CC00C316B3 /* DungeonViewController.swift */,
 				496486AA1C50C9B7008C9A2C /* NewMemorialViewController.swift */,
+				490BEA9A1C5735DF005CAF3C /* DungeonNotificationViewController.swift */,
 			);
 			name = dungeon;
 			sourceTree = "<group>";
@@ -577,6 +586,7 @@
 				495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */,
 				49F8092D1C1B198B006A5DF5 /* Statistic.swift in Sources */,
 				49C8D3D61BE8F0D800E8EBF5 /* UserAPI.swift in Sources */,
+				490BEA9D1C5737DD005CAF3C /* DungeonNotification.swift in Sources */,
 				49BC5A201BF9BB2900A0EC96 /* NSDate.swift in Sources */,
 				498BAC921BD0CE7400ABB357 /* NewWishViewController.swift in Sources */,
 				49840DD11BCF9B61001F493D /* Util.swift in Sources */,
@@ -586,6 +596,7 @@
 				49422DFD1C4F75E900C316B3 /* Memorial.swift in Sources */,
 				49953E041BDB371400B25EC8 /* Bill.swift in Sources */,
 				49B860261C461ECC004641DF /* DungeonDetailViewController.swift in Sources */,
+				490BEA9B1C5735DF005CAF3C /* DungeonNotificationViewController.swift in Sources */,
 				49A976BB1BE73B02001300FB /* LoginViewController.swift in Sources */,
 				495EB5C71BD0A80800E0E829 /* BillViewController.swift in Sources */,
 				49422DF51C48E83600C316B3 /* DungeonTaskTableViewCell.swift in Sources */,
@@ -596,6 +607,7 @@
 				49C8D3DA1BEF6DE700E8EBF5 /* TaskAPI.swift in Sources */,
 				49F02DDF1C5260F700E9BA7A /* ImageAPI.swift in Sources */,
 				491B6FE81C44A69D000FD353 /* DungeonListViewController.swift in Sources */,
+				490BEA9F1C5742A3005CAF3C /* DungeonNotificationTableViewCell.swift in Sources */,
 				49F4A0211C169D4D002D21D6 /* StatisticViewController.swift in Sources */,
 				498BAC9C1BD0EA5300ABB357 /* MoreViewController.swift in Sources */,
 				49C8D3D21BE8ACC400E8EBF5 /* API.swift in Sources */,

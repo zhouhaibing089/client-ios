@@ -90,6 +90,7 @@ class DungeonTaskViewController: TaskViewController {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("index@Dungeon", sender: self.dungeons[indexPath.row])
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     override func showMenu(sender: UIBarButtonItem) {

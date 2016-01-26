@@ -69,4 +69,14 @@ extension API {
         })
     }
     
+    class func getDungeonNotifications(user: User, dungeonId: Int) -> Observable<DungeonNotification> {
+        return API.req(.GET, "/dungeons/\(dungeonId)/users/\(user.sid.value!)/notifications").flatMap({ (json) -> Observable<DungeonNotification> in
+            var dns = [DungeonNotification]()
+            for (_, subJson) in json {
+                dns.append(DungeonNotification(json: subJson))
+            }
+            return dns.toObservable()
+        })
+    }
+    
 }
