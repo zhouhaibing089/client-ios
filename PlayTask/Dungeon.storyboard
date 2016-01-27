@@ -437,27 +437,28 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krH-6b-3WX">
-                                                    <rect key="frame" x="72" y="8" width="54" height="40"/>
+                                                    <rect key="frame" x="72" y="8" width="54" height="30"/>
                                                     <state key="normal" title="Yoncise"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lksdjflskdjflsjdlf" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FKz-BT-Afq">
-                                                    <rect key="frame" x="72" y="48" width="295" height="21"/>
+                                                    <rect key="frame" x="72" y="38" width="295" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="刚刚" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0w-F1-TZY">
-                                                    <rect key="frame" x="72" y="188" width="34" height="21"/>
+                                                    <rect key="frame" x="72" y="178" width="34" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="43" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XxK-yb-DfW">
-                                                    <rect key="frame" x="72" y="217" width="295" height="123"/>
+                                                    <rect key="frame" x="72" y="207" width="295" height="133"/>
                                                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="133" id="693-yn-mX8"/>
                                                         <constraint firstAttribute="height" constant="188" id="KVZ-mB-uV7"/>
+                                                        <constraint firstAttribute="height" constant="133" id="ZKO-Rc-Gfb"/>
                                                         <constraint firstAttribute="height" constant="123" id="cdl-xy-JwR"/>
                                                     </constraints>
                                                     <view key="tableHeaderView" contentMode="scaleToFill" id="WBa-Ms-Dzg">
@@ -508,25 +509,26 @@
                                                         <mask key="constraints">
                                                             <exclude reference="693-yn-mX8"/>
                                                             <exclude reference="KVZ-mB-uV7"/>
+                                                            <exclude reference="cdl-xy-JwR"/>
                                                         </mask>
                                                     </variation>
                                                 </tableView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="URP-K0-sbi">
-                                                    <rect key="frame" x="72" y="77" width="110" height="103"/>
+                                                    <rect key="frame" x="72" y="67" width="110" height="103"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="103" id="HPn-ns-hL8"/>
                                                         <constraint firstAttribute="width" constant="110" id="Mxb-BK-DoA"/>
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Df4-FW-IMa">
-                                                    <rect key="frame" x="337" y="184" width="30" height="30"/>
+                                                    <rect key="frame" x="337" y="174" width="30" height="30"/>
                                                     <state key="normal" title="评论"/>
                                                     <connections>
                                                         <action selector="comment:" destination="6td-ze-lJ0" eventType="touchUpInside" id="c8o-kh-iMB"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyS-14-YCO">
-                                                    <rect key="frame" x="114" y="184" width="30" height="30"/>
+                                                    <rect key="frame" x="114" y="174" width="30" height="30"/>
                                                     <state key="normal" title="删除"/>
                                                 </button>
                                             </subviews>
@@ -564,6 +566,7 @@
                                         <connections>
                                             <outlet property="avatarImageView" destination="wz2-io-zvX" id="El8-5m-NbN"/>
                                             <outlet property="commentTableView" destination="XxK-yb-DfW" id="4lN-sR-5M1"/>
+                                            <outlet property="commentTableViewHeightConstraint" destination="ZKO-Rc-Gfb" id="DaP-U4-Ywo"/>
                                             <outlet property="contentLabel" destination="FKz-BT-Afq" id="AhK-Lo-eYB"/>
                                             <outlet property="memorialImageView" destination="URP-K0-sbi" id="8Eq-Gz-Qvm"/>
                                             <outlet property="nicknameButton" destination="krH-6b-3WX" id="0kR-hf-vf8"/>
@@ -641,7 +644,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RAO-w1-m7m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1778.5" y="-72.5"/>
+            <point key="canvasLocation" x="1777.5" y="-39.5"/>
         </scene>
         <!--New Memorial View Controller-->
         <scene sceneID="fYb-7v-uhN">

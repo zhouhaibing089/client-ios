@@ -9,10 +9,12 @@
 import UIKit
 import MBProgressHUD
 import YNSwift
+import AlamofireImage
 
 class MoreViewController: UITableViewController {
-    @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var syncStatusLabel: UILabel!
+    @IBOutlet weak var nicknameLabel: UILabel!
+    @IBOutlet weak var avatarImageView: UIImageView!
     
     @IBAction func sync(sender: UIButton) {
         if Util.appDelegate.syncStatus != SyncStatus.Syncing {
@@ -140,7 +142,13 @@ class MoreViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.view.backgroundColor = UIColor.whiteColor();
+        // estimatedRowHeight is REQUIRED, otherwise cell will get shrinked when clicked
+        self.tableView.estimatedRowHeight = 44
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncStatusChanged:", name: Config.Notification.SYNC, object: nil)
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
 
     func syncStatusChanged(notification: NSNotification!) {
@@ -160,7 +168,8 @@ class MoreViewController: UITableViewController {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         MobClick.beginLogPageView("more")
-        self.accountLabel.text = Util.currentUser.account
+        self.nicknameLabel.text = Util.currentUser.nickname
+        self.avatarImageView.af_setImageWithURL(NSURL(string: Util.currentUser.avatarUrl)!)
         self.syncStatusChanged(nil)
     }
     

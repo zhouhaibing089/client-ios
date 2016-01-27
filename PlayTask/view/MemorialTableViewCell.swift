@@ -18,12 +18,14 @@ class MemorialTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var memorialImageView: UIImageView!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var reviewStatusLabel: UILabel!
+    @IBOutlet weak var commentTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var commentTableView: UITableView! {
         didSet {
             self.commentTableView.delegate = self
             self.commentTableView.dataSource = self
             self.commentTableView.rowHeight = UITableViewAutomaticDimension
             self.commentTableView.estimatedRowHeight = 44
+            self.commentTableView.scrollEnabled = false
         }
     }
     
@@ -77,10 +79,11 @@ class MemorialTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDa
                 self.reviewStatusLabel.text = "审核未通过：\(self.memorial.reason ?? "")"
                 break
             }
-            self.commentTableView.reloadData()
             if let image = self.memorial.image {
                 self.memorialImageView.af_setImageWithURL(NSURL(string: image.url)!)
             }
+            self.commentTableViewHeightConstraint.constant = self.commentTableView.contentSize.height
+            self.commentTableView.reloadData()
         }
     }
 

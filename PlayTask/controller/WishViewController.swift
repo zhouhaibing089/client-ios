@@ -92,6 +92,7 @@ class WishViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let wish = self.wishes[indexPath.row]
         let alert = UIAlertController(title: "满足欲望", message: "确定花费 \(wish.score) 点成就来满足你的欲望?", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default) { _ in
             let wishHistory = WishHistory(wish: wish)
             wishHistory.save()
@@ -114,7 +115,6 @@ class WishViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.tableView.reloadData()
             self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         })
-        alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         self.presentViewController(alert, animated: true, completion: nil)
     }

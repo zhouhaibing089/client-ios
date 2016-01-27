@@ -41,6 +41,7 @@ class User: Table {
         self.email = json["email"].stringValue
         self.sid.value = json["id"].intValue
         self.avatarUrl = json["avatar_url"].stringValue
+        self.nickname = json["nickname"].stringValue
 
     }
     

@@ -64,7 +64,8 @@ extension API {
                 user.update([
                     "score": json["score"].intValue,
                     "bronze": json["bronze"].intValue,
-                    "avatarUrl": json["avatar_url"].stringValue
+                    "avatarUrl": json["avatar_url"].stringValue,
+                    "nickname": json["nickname"].stringValue
                     ])
                 Util.currentUser.badge = Badge(json: json["badge"])
                 //  创建 Group

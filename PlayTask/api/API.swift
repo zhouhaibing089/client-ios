@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 import CRToast
 import RxSwift
+import AlamofireImage
 
 class API {
     static let manager: Manager = {
