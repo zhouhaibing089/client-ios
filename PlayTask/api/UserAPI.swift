@@ -61,27 +61,7 @@ extension API {
     class func getUserWithUserSid(userSid: Int) -> Observable<User> {
         return API.req(.GET, "/users/\(userSid)").map { json in
             if let user = User.getBySid(userSid) {
-                user.update([
-                    "score": json["score"].intValue,
-                    "bronze": json["bronze"].intValue,
-                    "avatarUrl": json["avatar_url"].stringValue,
-                    "nickname": json["nickname"].stringValue
-                    ])
-                Util.currentUser.badge = Badge(json: json["badge"])
-                //  创建 Group
-                var groups = [Group]()
-                for (_, subJson) in json["groups"] {
-                    if let group = Group.getBySid(subJson["id"].intValue) {
-                        group.update(json: subJson, value: ["name": subJson["name"].stringValue])
-                        groups.append(group)
-                    } else {
-                        let g = Group(json: subJson)
-                        g.name = subJson["name"].stringValue
-                        g.save()
-                        groups.append(g)
-                    }
-                }
-                user.update(["groups": groups])
+                user.update(json: json)
             }
             return Util.currentUser
         }
@@ -90,6 +70,13 @@ extension API {
     class func changePassword(user: User, oldPassword: String, newPassword: String) -> Observable<Bool> {
         return API.req(.PUT, "/users/\(user.sid.value!)", parameters: ["old_password": oldPassword,
             "new_password": newPassword], suppressError: false).map  { json in
+                return true
+        }
+    }
+    
+    class func changeAvatar(user: User, avatar: Int) -> Observable<Bool> {
+        return API.req(.PUT, "/users/\(user.sid.value!)", parameters: ["avatar": avatar],
+            suppressError: false).map  { json in
                 return true
         }
     }

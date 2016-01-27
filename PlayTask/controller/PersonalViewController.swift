@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import RxSwift
+import MBProgressHUD
+import Qiniu
+import SwiftyJSON
 
 class PersonalViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var avatarImageView: UIImageView!
+    var cancelUploadAvatar = false
+    var cancelUploadDisposable: Disposable?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.estimatedRowHeight = 44
@@ -76,7 +83,56 @@ class PersonalViewController: UITableViewController, UIImagePickerControllerDele
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         self.avatarImageView.image = image
+        let hud = MBProgressHUD.show()
+        hud.mode = MBProgressHUDMode.Determinate
+        hud.labelText = "上传头像中"
+        hud.detailsLabelText = "轻触取消"
+        self.cancelUploadDisposable = API.getQiniuToken().flatMap({ (token) -> Observable<JSON> in
+            let upManager = QNUploadManager()
+            return Observable.create({ (observer) -> Disposable in
+                let option = QNUploadOption(mime: nil, progressHandler: { (key, progress) -> Void in
+                    hud.progress = progress
+                    }, params: nil, checkCrc: true, cancellationSignal: { () -> Bool in
+                        return self.cancelUploadAvatar
+                })
+                self.cancelUploadAvatar = false
+                upManager.putData(UIImageJPEGRepresentation(image, 0.6), key: nil, token: token, complete: { (info, key, resp) -> Void in
+                    if resp == nil {
+                        observer.onError(NetworkError.Unknown(Int(info.statusCode)))
+                    } else {
+                        observer.onNext(JSON(resp))
+                        observer.onCompleted()
+                    }
+                    }, option: option)
+                return AnonymousDisposable {
+                    self.cancelUploadAvatar = true
+                }
+            })
+        }).flatMap({ (json) -> Observable<Image> in
+            return API.createImage(url: json["url"].stringValue, orientation: json["orientation"].stringValue,
+                width: json["width"].doubleValue, height: json["height"].doubleValue)
+        }).flatMap({ (image) -> Observable<Image> in
+            return API.changeAvatar(Util.currentUser, avatar: image.id).map({ (bool) -> Image in
+                return image
+            })
+        }).subscribe({ (event) -> Void in
+            switch event {
+            case .Completed:
+                hud.switchToSuccess(duration: 1, labelText: "头像设置成功", completionBlock: nil)
+                break
+            case .Next(let e):
+                Util.currentUser.update(["avatarUrl": e.url])
+                break
+            case .Error(let e):
+                hud.hide(true)
+                break
+            }
+        })
+
         picker.dismissViewControllerAnimated(true, completion: nil)
-        // TODO upload image
+    }
+    
+    @IBAction func tap(sender: UITapGestureRecognizer) {
+        self.cancelUploadDisposable?.dispose()
     }
 }

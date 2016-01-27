@@ -341,6 +341,11 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2UB-kP-bK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="Flh-dz-eib">
+                    <connections>
+                        <action selector="tap:" destination="8LM-SE-DNG" id="Y3A-0S-dTH"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1338" y="-1861"/>
         </scene>

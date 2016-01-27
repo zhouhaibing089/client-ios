@@ -25,6 +25,8 @@ class DungeonTaskTableViewCell: UITableViewCell {
                 switch now.compare(self.dungeon.startTime) {
                 case .OrderedAscending:
                     self.mainStatusLabel.text = "副本重置"
+                    
+                    // TODO: view controll 消失的时候需要 invalidate
                     NSTimer.loop(1, handler: { (timer) -> Void in
                         let countDown = self.dungeon.startTime.differenceFrom(NSDate(), unit: [NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second])
                         if countDown.second < 0 {

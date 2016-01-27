@@ -42,7 +42,30 @@ class User: Table {
         self.sid.value = json["id"].intValue
         self.avatarUrl = json["avatar_url"].stringValue
         self.nickname = json["nickname"].stringValue
-
+    }
+    
+    override func update(json json: JSON, var value: [String : AnyObject]=[String: AnyObject]()) {
+        Util.currentUser.badge = Badge(json: json["badge"])
+        //  创建 Group
+        var groups = [Group]()
+        for (_, subJson) in json["groups"] {
+            if let group = Group.getBySid(subJson["id"].intValue) {
+                group.update(json: subJson, value: ["name": subJson["name"].stringValue])
+                groups.append(group)
+            } else {
+                let g = Group(json: subJson)
+                g.name = subJson["name"].stringValue
+                g.save()
+                groups.append(g)
+            }
+        }
+        value["groups"] = groups
+        value["score"] = json["score"].intValue
+        value["bronze"] = json["bronze"].intValue
+        value["avatarUrl"] = json["avatar_url"].stringValue
+        value["nickname"] = json["nickname"].stringValue
+        
+        super.update(json: json, value: value)
     }
     
     override static func ignoredProperties() -> [String] {
