@@ -31,8 +31,8 @@ extension API {
         })
     }
     
-    class func joinDungeon(user: User, dungeon: Dungeon) -> Observable<Dungeon> {
-        return API.req(.PUT, "/users/\(user.sid.value!)/dungeons/\(dungeon.id)", suppressError: false).map({ (json) -> Dungeon in
+    class func joinDungeon(user: User, dungeon: Dungeon, zone: String) -> Observable<Dungeon> {
+        return API.req(.PUT, "/users/\(user.sid.value!)/dungeons/\(dungeon.id)", parameters: ["zone": zone],suppressError: false).map({ (json) -> Dungeon in
             return Dungeon(json: json)
         })
     }

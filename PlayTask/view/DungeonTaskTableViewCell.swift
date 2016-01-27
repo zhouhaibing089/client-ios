@@ -81,6 +81,7 @@ class DungeonTaskTableViewCell: UITableViewCell {
             default:
                 break
             }
+            
         }
     }
 

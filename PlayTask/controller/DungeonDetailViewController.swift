@@ -65,7 +65,8 @@ class DungeonDetailViewController: UIViewController {
             let alert = UIAlertController(title: "支付押金", message: "支付铜币的说明", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "支付", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-                API.joinDungeon(Util.loggedUser!, dungeon: self.dungeon).subscribe({ (event) -> Void in
+                API.joinDungeon(Util.loggedUser!, dungeon: self.dungeon,
+                    zone: NSTimeZone.localTimeZone().name).subscribe({ (event) -> Void in
                     switch event {
                     case .Next(let dungeon):
                         self.dungeon = dungeon

@@ -35,14 +35,13 @@ class Dungeon {
     var cover: String
     var target: Int
     var progress: Int
+    var utc: Bool // start_time, finish_time, 是 utc 还是 local
     
     init(json: JSON) {
         self.id = json["id"].intValue
         self.title = json["title"].stringValue
         self.maxPlayer = json["max_player"].intValue
         self.currentPlayer = json["current_player"].intValue
-        self.startTime = NSDate(millisecondsSince1970: json["start_time"].doubleValue)
-        self.finishTime = NSDate(millisecondsSince1970: json["finish_time"].doubleValue)
         self.detail = json["detail"].stringValue
         self.volume = json["volume"].int
         self.cashPledge = json["cash_pledge"].doubleValue
@@ -51,5 +50,15 @@ class Dungeon {
         self.cover = json["cover"].stringValue
         self.target = json["target"].intValue
         self.progress = json["progress"].intValue
+        self.utc = json["utc"].boolValue
+        if utc {
+            self.startTime = NSDate(millisecondsSince1970: json["start_time"].doubleValue)
+            self.finishTime = NSDate(millisecondsSince1970: json["finish_time"].doubleValue)
+        } else {
+            let offset = Double(NSTimeZone.localTimeZone().secondsFromGMT * 1000)
+            self.startTime = NSDate(millisecondsSince1970: json["start_time"].doubleValue - offset)
+            self.finishTime = NSDate(millisecondsSince1970: json["finish_time"].doubleValue - offset)
+        }
+
     }
 }
