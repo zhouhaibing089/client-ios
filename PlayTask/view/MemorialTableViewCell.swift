@@ -9,6 +9,7 @@
 import UIKit
 import YNSwift
 import AlamofireImage
+import OAStackView
 
 class MemorialTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource {
 
@@ -17,17 +18,7 @@ class MemorialTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var memorialImageView: UIImageView!
     @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var reviewStatusLabel: UILabel!
-    @IBOutlet weak var commentTableViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var commentTableView: UITableView! {
-        didSet {
-            self.commentTableView.delegate = self
-            self.commentTableView.dataSource = self
-            self.commentTableView.rowHeight = UITableViewAutomaticDimension
-            self.commentTableView.estimatedRowHeight = 44
-            self.commentTableView.scrollEnabled = false
-        }
-    }
+    @IBOutlet weak var commentView: OAStackView!
     
     // memorial id, to user id, to nickname
     var commentAction: ((Int, Int?, String?) -> Void)!
@@ -68,23 +59,27 @@ class MemorialTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDa
             self.contentLabel.text = self.memorial.content
             self.nicknameButton.setTitle(self.memorial.nickname, forState: UIControlState.Normal)
             self.avatarImageView.af_setImageWithURL(NSURL(string: self.memorial.avatarUrl)!)
-            switch self.memorial.status {
-            case .Waiting:
-                self.reviewStatusLabel.text = "待审核"
-                break
-            case .Approved:
-                self.reviewStatusLabel.text = "审核通过"
-                break
-            case .Rejected:
-                self.reviewStatusLabel.text = "审核未通过：\(self.memorial.reason ?? "")"
-                break
-            }
+//            switch self.memorial.status {
+//            case .Waiting:
+//                self.reviewStatusLabel.text = "待审核"
+//                break
+//            case .Approved:
+//                self.reviewStatusLabel.text = "审核通过"
+//                break
+//            case .Rejected:
+//                self.reviewStatusLabel.text = "审核未通过：\(self.memorial.reason ?? "")"
+//                break
+//            }
             if let image = self.memorial.image {
                 self.memorialImageView.af_setImageWithURL(NSURL(string: image.url)!)
             }
-            self.commentTableViewHeightConstraint.constant = self.commentTableView.contentSize.height
-            self.commentTableView.reloadData()
+            
+            for m in self.memorial.comments {
+                var v = MemorialCommentView()
+                v.setup()
+                v.contentLabel.text = "\(m.content) \(m.content)\(m.content)\(m.content)"
+                self.commentView.addArrangedSubview(v)
+            }
         }
     }
-
 }

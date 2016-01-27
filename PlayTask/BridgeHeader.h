@@ -14,5 +14,6 @@
 #import "MBProgressHUD/MBProgressHUD.h"
 #import "Qiniu/QiniuSDK.h"
 #import "JSBadgeView/JSBadgeView.h"
+#import "OAStackView/OAStackView.h"
 
 #endif /* BridgeHeader_h */

@@ -22,11 +22,11 @@ class DungeonTaskTableViewCell: UITableViewCell {
             switch self.dungeon.status {
             case .Joined:
                 let now = NSDate()
-                switch now.compare(self.dungeon.beginTime) {
+                switch now.compare(self.dungeon.startTime) {
                 case .OrderedAscending:
                     self.mainStatusLabel.text = "副本重置"
                     NSTimer.loop(1, handler: { (timer) -> Void in
-                        let countDown = self.dungeon.beginTime.differenceFrom(NSDate(), unit: [NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second])
+                        let countDown = self.dungeon.startTime.differenceFrom(NSDate(), unit: [NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second])
                         if countDown.second < 0 {
                             timer.invalidate()
                             // TODO: update
@@ -38,11 +38,11 @@ class DungeonTaskTableViewCell: UITableViewCell {
                         })
                     })
                 case .OrderedDescending:
-                    switch now.compare(self.dungeon.endTime) {
+                    switch now.compare(self.dungeon.finishTime) {
                     case .OrderedAscending:
                         self.mainStatusLabel.text = "副本开启"
                         NSTimer.loop(1, handler: { (timer) -> Void in
-                            let countDown = self.dungeon.endTime.differenceFrom(NSDate(), unit: [NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second])
+                            let countDown = self.dungeon.finishTime.differenceFrom(NSDate(), unit: [NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second])
                             if countDown.second < 0 {
                                 timer.invalidate()
                                 // TODO: refresh
