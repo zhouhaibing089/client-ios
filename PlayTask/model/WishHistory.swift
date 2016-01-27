@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 import RxSwift
 import YNSwift
+import SwiftyJSON
 
 class WishHistory: Table, Bill {
     dynamic var wish: Wish!
@@ -22,6 +23,15 @@ class WishHistory: Table, Bill {
         self.init()
         self.wish = wish
         self.satisfiedTime = NSDate()
+    }
+    
+    override func update(json json: JSON) {
+        super.update(json: json)
+        
+        let satisfiedTime = NSDate(millisecondsSince1970: json["satisfied_time"].doubleValue)
+        let canceled = json["canceled"].boolValue
+        
+        self.update(["satisfiedTime": satisfiedTime, "canceled": canceled])
     }
     
     func getBillTitle() -> String {
@@ -118,4 +128,5 @@ class WishHistory: Table, Bill {
             return t
         })
     }
+
 }

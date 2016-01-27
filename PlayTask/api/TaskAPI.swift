@@ -51,13 +51,7 @@ extension API {
             var tasks = [Task]()
             for (_, subJson) : (String, JSON) in json {
                 if let t = Task.getBySid(subJson["id"].intValue) { // update
-                    let pinned = subJson["pinned"].boolValue
-                    let rank = subJson["rank"].intValue
-                    let bronze = subJson["bronze"].intValue
-                    let title = subJson["title"].stringValue
-                    
-                    t.update(json: subJson, value: ["pinned": pinned, "title": title,
-                        "rank": rank, "bronze": bronze])
+                    t.update(json: subJson)
                     tasks.append(t)
                 } else { // new
                     let t = Task(json: subJson)
@@ -116,10 +110,7 @@ extension API {
             var taskHistories = [TaskHistory]()
             for (_, subJson) : (String, JSON) in json {
                 if let th = TaskHistory.getBySid(subJson["id"].intValue) {
-                    let completionTime = NSDate(millisecondsSince1970: subJson["completion_time"].doubleValue)
-                    let canceled = subJson["canceled"].boolValue
-                    
-                    th.update(json: subJson, value: ["completionTime": completionTime, "canceled": canceled])
+                    th.update(json: subJson)
                     taskHistories.append(th)
                 } else {
                     if let t = Task.getBySid(subJson["task_id"].intValue) {

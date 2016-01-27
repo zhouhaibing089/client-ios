@@ -55,7 +55,8 @@ class Table: Object {
         }
     }
     
-    func update(json json: JSON, var value: [String: AnyObject] = [String: AnyObject]()) {
+    func update(json json: JSON) {
+        var value = [String: AnyObject]()
         value["sid"] = json["id"].intValue
         value["modifiedTime"] = NSDate(millisecondsSince1970: json["modified_time"].doubleValue)
         value["deleted"] = json["deleted"].boolValue

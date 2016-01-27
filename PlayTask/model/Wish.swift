@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 import RxSwift
 import YNSwift
+import SwiftyJSON
 
 class Wish: Table {
     dynamic var title = ""
@@ -24,6 +25,15 @@ class Wish: Table {
         self.title = title
         self.score = score
         self.loop = loop
+    }
+    
+    override func update(json json: JSON) {
+        super.update(json: json)
+        
+        let rank = json["rank"].intValue
+        let loop = json["loop"].intValue
+        
+        self.update(["rank": rank, "loop": loop])
     }
     
     class func getWishes() -> [Wish] {

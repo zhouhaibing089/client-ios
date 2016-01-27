@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 import YNSwift
 import RxSwift
+import SwiftyJSON
 
 enum TaskType: Int {
     case Daily = 0
@@ -35,6 +36,18 @@ final class Task: Table {
         self.score = score
         self.type = type.rawValue
         self.loop = loop
+    }
+    
+    override func update(json json: JSON) {
+        super.update(json: json)
+        
+        let pinned = json["pinned"].boolValue
+        let rank = json["rank"].intValue
+        let bronze = json["bronze"].intValue
+        let title = json["title"].stringValue
+        
+        self.update(["pinned": pinned, "title": title,
+            "rank": rank, "bronze": bronze])
     }
     
     class func getTasks() -> [Int: [Task]] {

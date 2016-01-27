@@ -48,10 +48,7 @@ extension API {
             var wishes = [Wish]()
             for (_, subJson): (String, JSON) in json {
                 if let w = Wish.getBySid(subJson["id"].intValue) {
-                    let rank = subJson["rank"].intValue
-                    let loop = subJson["loop"].intValue
-                    
-                    w.update(json: subJson, value: ["rank": rank, "loop": loop])
+                    w.update(json: subJson)
                     wishes.append(w)
                 } else {
                     let w = Wish(json: subJson)
@@ -107,9 +104,7 @@ extension API {
             var wishHistories = [WishHistory]()
             for (_, subJson): (String, JSON) in json {
                 if let wh = WishHistory.getBySid(subJson["id"].intValue) {
-                    let satisfiedTime = NSDate(millisecondsSince1970: subJson["satisfied_time"].doubleValue)
-                    let canceled = subJson["canceled"].boolValue
-                    wh.update(json: subJson, value: ["satisfiedTime": satisfiedTime, "canceled": canceled])
+                    wh.update(json: subJson)
                     wishHistories.append(wh)
                 } else {
                     if let w = Wish.getBySid(subJson["wish_id"].intValue) {

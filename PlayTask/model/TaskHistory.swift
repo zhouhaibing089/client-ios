@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 import RxSwift
 import YNSwift
+import SwiftyJSON
 
 final class TaskHistory: Table, Bill {
     dynamic var completionTime: NSDate!
@@ -22,6 +23,15 @@ final class TaskHistory: Table, Bill {
         self.init()
         self.task = task
         self.completionTime = NSDate()
+    }
+    
+    override func update(json json: JSON) {
+        super.update(json: json)
+        
+        let completionTime = NSDate(millisecondsSince1970: json["completion_time"].doubleValue)
+        let canceled = json["canceled"].boolValue
+        
+        self.update(["completionTime": completionTime, "canceled": canceled])
     }
     
     func getBillTitle() -> String {
