@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import OAStackView
 
 class DungeonTaskTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var mainStatusLabel: UILabel!
     @IBOutlet weak var subStatusButton: UIButton!
     @IBOutlet weak var badgeView: UIView!
+    @IBOutlet weak var statusStackView: OAStackView! {
+        didSet {
+            statusStackView.axis = UILayoutConstraintAxis.Vertical
+            statusStackView.alignment = OAStackViewAlignment.Trailing
+        }
+    }
     var dungeon: Dungeon! {
         didSet {
             self.update()
@@ -27,6 +34,7 @@ class DungeonTaskTableViewCell: UITableViewCell {
         self.titleLabel.text = self.dungeon.title
         self.subStatusButton.enabled = false
         self.subStatusButton.hidden = false
+        timer?.invalidate()
         switch self.dungeon.status {
         case .Joined:
             let now = NSDate()
@@ -34,7 +42,6 @@ class DungeonTaskTableViewCell: UITableViewCell {
             case .OrderedAscending:
                 self.mainStatusLabel.text = "副本重置"
                 
-                timer?.invalidate()
                 timer = NSTimer.loop(1, handler: { (timer) -> Void in
                     let countDown = self.dungeon.startTime.differenceFrom(NSDate(), unit: [NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second])
                     if countDown.second < 0 {
@@ -51,7 +58,6 @@ class DungeonTaskTableViewCell: UITableViewCell {
                 switch now.compare(self.dungeon.finishTime) {
                 case .OrderedAscending:
                     self.mainStatusLabel.text = "副本开启"
-                    timer?.invalidate()
                     timer = NSTimer.loop(1, handler: { (timer) -> Void in
                         let countDown = self.dungeon.finishTime.differenceFrom(NSDate(), unit: [NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second])
                         if countDown.second < 0 {
@@ -66,7 +72,7 @@ class DungeonTaskTableViewCell: UITableViewCell {
                     })
                     
                 default:
-                    self.mainStatusLabel.text = "待审核"
+                    self.mainStatusLabel.text = "审核中"
                     self.subStatusButton.hidden = true
                     break
                 }
@@ -80,12 +86,12 @@ class DungeonTaskTableViewCell: UITableViewCell {
             self.subStatusButton.setTitle("申诉", forState: UIControlState.Normal)
             break
         case .SettlingPledge:
-            self.mainStatusLabel.text = "副本成功"
-            self.subStatusButton.setTitle("押金返还中", forState: UIControlState.Disabled)
+            self.mainStatusLabel.text = "押金返还中"
+            self.subStatusButton.hidden = true
             break
         case .SettlingReward:
-            self.mainStatusLabel.text = "结算中"
-            self.subStatusButton.setTitle("奖励发放中", forState: UIControlState.Disabled)
+            self.mainStatusLabel.text = "奖励发放中"
+            self.subStatusButton.setTitle("押金已返还", forState: UIControlState.Disabled)
         case .Success:
             self.mainStatusLabel.text = "副本成功"
             self.subStatusButton.enabled = true
