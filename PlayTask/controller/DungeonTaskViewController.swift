@@ -82,6 +82,7 @@ class DungeonTaskViewController: TaskViewController {
         }
         let cell = tableView.dequeueReusableCellWithIdentifier("dungeon") as! DungeonTaskTableViewCell
         cell.dungeon = self.dungeons[indexPath.row]
+        cell.layoutIfNeeded() // for iOS 8 UILabel to be right
         return cell
     }
     

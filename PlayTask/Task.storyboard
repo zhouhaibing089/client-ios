@@ -411,13 +411,13 @@
                                                 <constraint firstAttribute="topMargin" secondItem="tyo-mb-la3" secondAttribute="top" id="MJ4-8R-uLR"/>
                                                 <constraint firstItem="yjh-xd-z7M" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tyo-mb-la3" secondAttribute="bottom" constant="8" symbolic="YES" id="NyJ-IG-5g5"/>
                                                 <constraint firstItem="wPz-Uy-KoI" firstAttribute="leading" secondItem="tyo-mb-la3" secondAttribute="trailing" constant="4" id="T64-i5-JTo"/>
+                                                <constraint firstItem="HEy-iB-jPt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wPz-Uy-KoI" secondAttribute="trailing" constant="8" symbolic="YES" id="VBL-wL-4fB"/>
                                                 <constraint firstItem="wPz-Uy-KoI" firstAttribute="centerY" secondItem="tyo-mb-la3" secondAttribute="centerY" id="Xct-LN-HaT"/>
                                                 <constraint firstItem="Tr0-yT-Kfu" firstAttribute="centerY" secondItem="dIW-PL-e36" secondAttribute="centerY" id="b3T-b9-Gi8"/>
                                                 <constraint firstItem="oeS-qQ-CJe" firstAttribute="centerX" secondItem="HEy-iB-jPt" secondAttribute="centerX" id="c77-qQ-Ec8"/>
                                                 <constraint firstItem="wPz-Uy-KoI" firstAttribute="leading" secondItem="tyo-mb-la3" secondAttribute="trailing" id="eaL-aS-u3c"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="HEy-iB-jPt" secondAttribute="trailing" id="hFE-sP-fha"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="yjh-xd-z7M" secondAttribute="bottom" id="naB-XT-7k0"/>
-                                                <constraint firstItem="HEy-iB-jPt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tyo-mb-la3" secondAttribute="trailing" constant="16" id="q0H-Hp-1PT"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
