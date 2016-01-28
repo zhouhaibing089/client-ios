@@ -22,6 +22,9 @@ class DungeonTaskViewController: TaskViewController {
     var dungeons = [Dungeon]()
     var badgeView: JSBadgeView!
     
+    var previousSelectedSegment = -1
+    var currentSelectedSegment = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.badgeView = JSBadgeView(parentView: self.taskTypeSegmentControl.superview!, alignment: JSBadgeViewAlignment.TopRight)
@@ -41,9 +44,17 @@ class DungeonTaskViewController: TaskViewController {
     }
     
     override func changeTaskType(sender: UISegmentedControl) {
+        // record previour select segment index
+        self.previousSelectedSegment = self.currentSelectedSegment
+        self.currentSelectedSegment = sender.selectedSegmentIndex
         if sender.selectedSegmentIndex == 3 {
             self.mode = Mode.Dungeon
             self.tableView.allowsSelection = true
+            if Util.loggedUser == nil {
+                // not loged in
+                self.performSegueWithIdentifier("login@Main", sender: nil)
+                return
+            }
         } else {
             self.tableView.allowsSelection = false
             self.mode = Mode.Task
@@ -112,8 +123,14 @@ class DungeonTaskViewController: TaskViewController {
         if self.mode == Mode.Task {
             return super.refresh()
         }
+        if Util.loggedUser == nil {
+            // not logged in, switch to first segment
+            self.taskTypeSegmentControl.selectedSegmentIndex = 0
+            self.changeTaskType(self.taskTypeSegmentControl)
+            return
+        }
         var tmp = [Dungeon]()
-        API.getJoinedDungeons(Util.loggedUser!).subscribe { event in
+        API.getJoinedDungeons(Util.currentUser).subscribe { event in
             switch event {
             case .Completed:
                 self.dungeons = tmp
@@ -137,10 +154,21 @@ class DungeonTaskViewController: TaskViewController {
         if self.mode == Mode.Task {
             return super.prepareForSegue(segue, sender: sender)
         }
-        if segue.identifier == "index@Dungeon" {
-            if let segue = segue as? YNSegue {
+        if let segue = segue as? YNSegue {
+            if segue.identifier == "index@Dungeon" {
                 if let dvc = segue.instantiated as? DungeonViewController {
                     dvc.dungeon = sender as! Dungeon
+                }
+            } else if segue.identifier == "login@Main" {
+                let navigationController = segue.instantiated as! UINavigationController
+                if let lvc = navigationController.viewControllers.first as? LoginViewController {
+                    lvc.onResult = { logged in
+                        if !logged {
+                            // canceled log in, swith to previous segment
+                            self.taskTypeSegmentControl.selectedSegmentIndex = self.previousSelectedSegment
+                            self.changeTaskType(self.taskTypeSegmentControl)
+                        }
+                    }
                 }
             }
         }

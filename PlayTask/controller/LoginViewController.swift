@@ -12,11 +12,15 @@ import YNSwift
 import MBProgressHUD
 
 class LoginViewController: UITableViewController {
+    
+    // true logged in, false in otherwise
+    var onResult: ((Bool) -> Void)?
 
     @IBOutlet weak var accountTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBAction func cancel(sender: UIBarButtonItem) {
+        self.onResult?(false)
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -44,6 +48,7 @@ class LoginViewController: UITableViewController {
             case .Next(_):
                 Util.appDelegate.sync()
                 hud.switchToSuccess(duration: 1, labelText: "登录成功") {
+                    self.onResult?(true)
                     self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
                 }
                 break

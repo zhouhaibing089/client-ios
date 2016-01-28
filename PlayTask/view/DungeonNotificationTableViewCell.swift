@@ -20,7 +20,7 @@ class DungeonNotificationTableViewCell: UITableViewCell {
         didSet {
             self.avatarImageView.af_setImageWithURL(NSURL(string: self.notification.avatarUrl)!)
             self.nicknameLabel.text = self.notification.nickname
-            self.contentLabel.text = self.notification.content
+            self.contentLabel.text = self.notification.message
             if let image = self.notification.memorial.image {
                 self.briefImageView.hidden = false
                 self.briefLabel.hidden = true

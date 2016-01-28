@@ -575,6 +575,7 @@
                         <segue destination="KPF-wW-3Xl" kind="presentation" identifier="new" id="IAA-Eh-SmA"/>
                         <segue destination="soh-SB-n6n" kind="show" identifier="dungeon" id="HwV-JN-4Xf"/>
                         <segue destination="Sda-MC-jXA" kind="custom" identifier="index@Dungeon" customClass="YNShowSegue" customModule="YNSwift" id="sAs-bY-hBQ"/>
+                        <segue destination="ghg-QM-27W" kind="custom" identifier="login@Main" customClass="YNModalSegue" customModule="YNSwift" id="fz8-VQ-du0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r94-Mp-o4X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -742,6 +743,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KWp-DE-rzg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3757" y="485"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="76s-6g-pD1">
+            <objects>
+                <viewController id="ghg-QM-27W" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pOi-Zb-jIB"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zkr-iN-m0H"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7bk-aK-aso">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uGy-En-6Kg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2260" y="-287"/>
         </scene>
         <!--任务-->
         <scene sceneID="739-qO-FOS">

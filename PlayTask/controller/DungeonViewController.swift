@@ -13,9 +13,21 @@ import RxSwift
 class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var coverImageView: UIImageView!
 
-    @IBOutlet weak var nicknameLabel: UILabel!
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var dungeonTitleLabel: UILabel!
+    @IBOutlet weak var avatarImageView: UIImageView! {
+        didSet {
+            self.avatarImageView.layer.borderWidth = 2
+            self.avatarImageView.layer.borderColor = UIColor.whiteColor().CGColor
+            let outerBorder = CALayer()
+            let outerBorderWidth = 1 / UIScreen.screenScale
+            outerBorder.frame = CGRectMake(-outerBorderWidth, -outerBorderWidth, self.avatarImageView.frame.width + 2 * outerBorderWidth, self.avatarImageView.frame.height + 2 * outerBorderWidth)
+            outerBorder.borderColor = UIColor.grayColor().CGColor
+            outerBorder.borderWidth = outerBorderWidth
+            self.avatarImageView.layer.addSublayer(outerBorder)
+        }
+    }
     @IBOutlet weak var messageAlertButton: UIButton!
+    @IBOutlet weak var coverWidthConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var commentView: UIView! {
@@ -46,6 +58,8 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         tableViewController.refreshControl = refreshControl
+        refreshControl.beginRefreshing()
+        self.refresh(refreshControl)
     }
 
     override func didReceiveMemoryWarning() {
@@ -86,12 +100,15 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func update() {
+        // cover image
         self.coverImageView.af_setImageWithURL(NSURL(string: self.dungeon.cover)!)
         if let loggedUser = Util.loggedUser {
             if let avatarUrl = NSURL(string: loggedUser.avatarUrl) {
                 self.avatarImageView.af_setImageWithURL(avatarUrl)
             }
         }
+        
+        // message alert
         let messageCount = Util.currentUser.badge.getCountByDungeonId(self.dungeon.id)
         if messageCount > 0 {
             self.messageAlertButton.setTitle(String(format: "您有%d条新消息", messageCount), forState: UIControlState.Normal)
@@ -99,6 +116,27 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
         } else {
             self.messageAlertButton.hidden = true
         }
+        
+        // dungeon title
+        self.dungeonTitleLabel.text = self.dungeon.title
+        
+        // table header view header
+        let tableHeaderView = self.tableView.tableHeaderView!
+        tableHeaderView.bounds.size.width = self.view.bounds.width
+        
+        // cover has a relative constraint, which will cause systemLayoutSizeFittingSize get wrong size
+        // because table header view doesn't have width constraint
+        // see: http://stackoverflow.com/questions/27064070/auto-layout-with-relative-constraints-not-affecting-systemlayoutsizefittingsize
+        // in a world, cover depends on table header view's width, however (image view dones't have instinct size neither),
+        // table header view doesn's have a width constraint, so systemLayoutSizeFittingSize is confused.
+        self.coverWidthConstraint.constant = self.view.bounds.width
+        
+        //self.tableView.tableHeaderView = nil
+        tableHeaderView.layoutIfNeeded()
+        let size = tableHeaderView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+        tableHeaderView.frame.size.height = size.height
+        self.tableView.tableHeaderView = tableHeaderView
+        
         self.tableView.reloadData()
     }
     

@@ -69,10 +69,6 @@ class DungeonTaskTableViewCell: UITableViewCell {
                 self.subStatusButton.enabled = true
                 self.subStatusButton.setTitle("申诉", forState: UIControlState.Normal)
                 break
-            case .Appealing:
-                self.mainStatusLabel.text = "副本失败"
-                self.subStatusButton.setTitle("申诉中", forState: UIControlState.Normal)
-                break
             case .Settling:
                 self.mainStatusLabel.text = "押金返还中"
                 self.subStatusButton.hidden = true

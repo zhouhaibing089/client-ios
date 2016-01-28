@@ -14,8 +14,8 @@ enum DungeonStatus: Int {
     case Unknown = -1
     case Open = 0
     case Joined = 1
-    case Failed = 2
-    case Appealing = 3
+    case Review = 2
+    case Failed = 3
     case Settling = 4
     case Success = 5
 }
@@ -24,6 +24,7 @@ class Dungeon {
     var id: Int
     var title: String
     var maxPlayer: Int
+    var className: String
     var currentPlayer: Int
     var startTime: NSDate
     var finishTime: NSDate
@@ -51,6 +52,7 @@ class Dungeon {
         self.target = json["target"].intValue
         self.progress = json["progress"].intValue
         self.utc = json["utc"].boolValue
+        self.className = json["class_name"].stringValue
         if utc {
             self.startTime = NSDate(millisecondsSince1970: json["start_time"].doubleValue)
             self.finishTime = NSDate(millisecondsSince1970: json["finish_time"].doubleValue)

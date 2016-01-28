@@ -364,10 +364,11 @@
                                     <rect key="frame" x="0.0" y="64" width="375" height="255"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ehc-CL-c4G" userLabel="Cover">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ehc-CL-c4G" userLabel="Cover">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Ehc-CL-c4G" secondAttribute="height" multiplier="16:9" id="N5M-td-dLW"/>
+                                                <constraint firstAttribute="width" constant="375" id="wdE-65-hFK"/>
                                             </constraints>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oy9-Pu-Hi6" userLabel="Avatar">
@@ -377,8 +378,8 @@
                                                 <constraint firstAttribute="width" secondItem="Oy9-Pu-Hi6" secondAttribute="height" multiplier="1:1" id="CKM-CA-QtN"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJv-Wd-CI5">
-                                            <rect key="frame" x="206" y="182" width="77" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dungeon Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJv-Wd-CI5">
+                                            <rect key="frame" x="164" y="182" width="119" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -400,24 +401,24 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="eJv-Wd-CI5" firstAttribute="centerY" secondItem="Oy9-Pu-Hi6" secondAttribute="centerY" id="2xh-I2-Cw4"/>
                                         <constraint firstItem="RaU-on-qZM" firstAttribute="centerX" secondItem="kOx-ek-m6L" secondAttribute="centerX" id="AYl-w8-yEg"/>
                                         <constraint firstAttribute="trailing" secondItem="Ehc-CL-c4G" secondAttribute="trailing" id="AjA-sn-gvB"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Oy9-Pu-Hi6" secondAttribute="bottom" constant="24" id="CMH-8z-SUr"/>
                                         <constraint firstItem="RaU-on-qZM" firstAttribute="top" secondItem="Ehc-CL-c4G" secondAttribute="bottom" constant="8" symbolic="YES" id="Dbk-r7-agm"/>
+                                        <constraint firstItem="Ehc-CL-c4G" firstAttribute="width" secondItem="kOx-ek-m6L" secondAttribute="width" id="IT8-ys-6jC"/>
                                         <constraint firstItem="eJv-Wd-CI5" firstAttribute="bottom" secondItem="Ehc-CL-c4G" secondAttribute="bottom" constant="-8" id="SAc-gg-nSd"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="RaU-on-qZM" secondAttribute="bottom" id="YsI-fH-SfB"/>
                                         <constraint firstItem="Ehc-CL-c4G" firstAttribute="leading" secondItem="kOx-ek-m6L" secondAttribute="leading" id="Z2G-Gf-yKi"/>
                                         <constraint firstItem="Ehc-CL-c4G" firstAttribute="top" secondItem="kOx-ek-m6L" secondAttribute="top" id="idu-SF-w32"/>
                                         <constraint firstAttribute="trailing" secondItem="Oy9-Pu-Hi6" secondAttribute="trailing" constant="20" symbolic="YES" id="oWU-bs-EFD"/>
                                         <constraint firstItem="Oy9-Pu-Hi6" firstAttribute="leading" secondItem="eJv-Wd-CI5" secondAttribute="trailing" constant="8" symbolic="YES" id="pC2-Ic-aen"/>
-                                        <constraint firstItem="Oy9-Pu-Hi6" firstAttribute="bottom" secondItem="Ehc-CL-c4G" secondAttribute="bottom" constant="20" id="vW3-Zx-e9a"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="vW3-Zx-e9a"/>
+                                            <exclude reference="IT8-ys-6jC"/>
                                         </mask>
                                     </variation>
                                 </view>
@@ -581,8 +582,9 @@
                         <outlet property="commentTextView" destination="TVp-C3-q0z" id="9J5-p8-aAK"/>
                         <outlet property="commentView" destination="3ZA-KL-6ip" id="axV-8O-qE6"/>
                         <outlet property="coverImageView" destination="Ehc-CL-c4G" id="PI2-rk-ilx"/>
+                        <outlet property="coverWidthConstraint" destination="wdE-65-hFK" id="d1a-36-Or7"/>
+                        <outlet property="dungeonTitleLabel" destination="eJv-Wd-CI5" id="Dkz-Yv-c1s"/>
                         <outlet property="messageAlertButton" destination="RaU-on-qZM" id="wM3-U0-FeM"/>
-                        <outlet property="nicknameLabel" destination="eJv-Wd-CI5" id="vOe-dB-97F"/>
                         <outlet property="tableView" destination="IUU-pn-mWh" id="YmM-RC-7MN"/>
                     </connections>
                 </viewController>
