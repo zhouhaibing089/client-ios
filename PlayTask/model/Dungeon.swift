@@ -14,9 +14,9 @@ enum DungeonStatus: Int {
     case Unknown = -1
     case Open = 0
     case Joined = 1
-    case Review = 2
-    case Failed = 3
-    case Settling = 4
+    case Failed = 2
+    case SettlingPledge = 3
+    case SettlingReward = 4
     case Success = 5
 }
 
