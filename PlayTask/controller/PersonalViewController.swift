@@ -108,11 +108,11 @@ class PersonalViewController: UITableViewController, UIImagePickerControllerDele
                     self.cancelUploadAvatar = true
                 }
             })
-        }).flatMap({ (json) -> Observable<Image> in
+        }).flatMap({ (json) -> Observable<QiniuImage> in
             return API.createImage(url: json["url"].stringValue, orientation: json["orientation"].stringValue,
                 width: json["width"].doubleValue, height: json["height"].doubleValue)
-        }).flatMap({ (image) -> Observable<Image> in
-            return API.changeAvatar(Util.currentUser, avatar: image.id).map({ (bool) -> Image in
+        }).flatMap({ (image) -> Observable<QiniuImage> in
+            return API.changeAvatar(Util.currentUser, avatar: image.id).map({ (bool) -> QiniuImage in
                 return image
             })
         }).subscribe({ (event) -> Void in

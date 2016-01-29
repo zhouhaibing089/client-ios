@@ -17,14 +17,14 @@ extension API {
     }
     
     class func createImage(url url: String, orientation: String,
-        width: Double, height: Double) -> Observable<Image> {
+        width: Double, height: Double) -> Observable<QiniuImage> {
         return API.req(.POST, "/images", parameters: [
             "url": url,
             "orientation": orientation,
             "width": width,
             "height": height
-            ]).map({ (json) -> Image in
-                return Image(json: json)
+            ]).map({ (json) -> QiniuImage in
+                return QiniuImage(json: json)
             })
     }
 }

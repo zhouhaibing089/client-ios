@@ -96,6 +96,9 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.presentViewController(actionSheet, animated: true, completion: nil)
             
         }
+        cell.onImageClicked = { [unowned self] qiniuImageButton in
+            self.performSegueWithIdentifier("preview@Main", sender: qiniuImageButton)
+        }
         cell.layoutIfNeeded()
         return cell
     }
@@ -183,6 +186,13 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
         } else if segue.identifier == "notification" {
             if let dnvc = segue.destinationViewController as? DungeonNotificationViewController {
                 dnvc.dungeon = self.dungeon
+            }
+        } else if segue.identifier == "preview@Main" {
+            let s = segue as! YNSegue
+            if let pvc = s.instantiated as? PreviewViewController {
+                let qiniuImageButton = sender as! QiniuImageButton
+                pvc.rawImage = qiniuImageButton.imageForState(UIControlState.Normal)
+                pvc.imageUrl = qiniuImageButton.metaImage.url
             }
         }
     }

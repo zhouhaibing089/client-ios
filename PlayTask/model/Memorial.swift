@@ -20,7 +20,7 @@ class Memorial {
     var content: String
     var avatarUrl: String
     var createdTime: NSDate
-    var image: Image?
+    var image: QiniuImage?
     var nickname: String
     var status: MemorialStatus
     var reason: String?
@@ -32,7 +32,7 @@ class Memorial {
         self.avatarUrl = json["avatar_url"].stringValue
         self.createdTime = NSDate(millisecondsSince1970: json["created_time"].doubleValue)
         if (json["images"].count > 0) {
-            self.image = Image(json: json["images"][0])
+            self.image = QiniuImage(json: json["images"][0])
         }
         self.nickname = json["nickname"].stringValue
         self.status = MemorialStatus(rawValue: json["status"].intValue) ?? MemorialStatus.Waiting

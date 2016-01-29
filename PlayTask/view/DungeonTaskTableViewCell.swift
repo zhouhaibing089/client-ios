@@ -17,7 +17,7 @@ class DungeonTaskTableViewCell: UITableViewCell {
     @IBOutlet weak var statusStackView: OAStackView! {
         didSet {
             statusStackView.axis = UILayoutConstraintAxis.Vertical
-            statusStackView.alignment = OAStackViewAlignment.Trailing
+            statusStackView.alignment = OAStackViewAlignment.Center
             statusStackView.distribution = OAStackViewDistribution.FillEqually
         }
     }

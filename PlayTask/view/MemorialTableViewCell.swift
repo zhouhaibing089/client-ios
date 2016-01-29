@@ -16,9 +16,11 @@ class MemorialTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var nicknameButton: UIButton!
     
-    @IBOutlet weak var memorialImageView: UIImageView!
+    @IBOutlet weak var memorialImageButton: QiniuImageButton!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var commentView: OAStackView!
+    
+    var onImageClicked: ((QiniuImageButton) -> Void)?
     
     // memorial id, to user id, to nickname
     var commentAction: ((Int, Int?, String?) -> Void)!
@@ -70,9 +72,8 @@ class MemorialTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDa
 //                self.reviewStatusLabel.text = "审核未通过：\(self.memorial.reason ?? "")"
 //                break
 //            }
-            if let image = self.memorial.image {
-                self.memorialImageView.af_setImageWithURL(NSURL(string: image.url)!)
-            }
+            
+            self.memorialImageButton.metaImage = self.memorial.image
             
             for m in self.memorial.comments {
                 var v = MemorialCommentView()
@@ -81,5 +82,8 @@ class MemorialTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDa
                 self.commentView.addArrangedSubview(v)
             }
         }
+    }
+    @IBAction func preview(sender: QiniuImageButton) {
+        self.onImageClicked?(sender)
     }
 }

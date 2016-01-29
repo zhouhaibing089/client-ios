@@ -70,7 +70,7 @@ class NewMemorialViewController: UIViewController, UIImagePickerControllerDelega
                         // TODO cancel upload
                     }
                 })
-            }).flatMap({ (json) -> Observable<Image> in
+            }).flatMap({ (json) -> Observable<QiniuImage> in
                 return API.createImage(url: json["url"].stringValue, orientation: json["orientation"].stringValue,
                     width: json["width"].doubleValue, height: json["height"].doubleValue)
             })
