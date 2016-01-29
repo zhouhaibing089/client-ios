@@ -11,6 +11,7 @@ import RxSwift
 import MBProgressHUD
 import Qiniu
 import SwiftyJSON
+import YNSwift
 
 class PersonalViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 

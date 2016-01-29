@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import YNSwift
 
 extension API {
     class func getQiniuToken() -> Observable<String> {

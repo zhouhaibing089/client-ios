@@ -23,7 +23,6 @@
 		491B6FEE1C44E20A000FD353 /* DungeonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491B6FED1C44E20A000FD353 /* DungeonTableViewCell.swift */; };
 		4938E43C1C587A7B00FC977C /* MemorialComment.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938E43B1C587A7B00FC977C /* MemorialComment.xib */; };
 		4938E43E1C587A9800FC977C /* MemorialCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938E43D1C587A9800FC977C /* MemorialCommentView.swift */; };
-		4938E4421C5B5B0D00FC977C /* QiniuImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938E4411C5B5B0D00FC977C /* QiniuImageButton.swift */; };
 		49422DF31C48D73000C316B3 /* DungeonTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49422DF21C48D73000C316B3 /* DungeonTaskViewController.swift */; };
 		49422DF51C48E83600C316B3 /* DungeonTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49422DF41C48E83600C316B3 /* DungeonTaskTableViewCell.swift */; };
 		49422DF91C4F68A400C316B3 /* Dungeon.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49422DF81C4F68A300C316B3 /* Dungeon.storyboard */; };
@@ -32,7 +31,6 @@
 		495EB5C71BD0A80800E0E829 /* BillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C61BD0A80800E0E829 /* BillViewController.swift */; };
 		495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */; };
 		496486AB1C50C9B7008C9A2C /* NewMemorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496486AA1C50C9B7008C9A2C /* NewMemorialViewController.swift */; };
-		496486AD1C5116E1008C9A2C /* QiniuImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496486AC1C5116E1008C9A2C /* QiniuImage.swift */; };
 		496486AF1C51DB22008C9A2C /* MemorialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496486AE1C51DB22008C9A2C /* MemorialTableViewCell.swift */; };
 		49840DD11BCF9B61001F493D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD01BCF9B61001F493D /* Util.swift */; };
 		49840DD91BCFA997001F493D /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD81BCFA997001F493D /* TaskTableViewCell.swift */; };
@@ -117,7 +115,6 @@
 		491B6FED1C44E20A000FD353 /* DungeonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DungeonTableViewCell.swift; sourceTree = "<group>"; };
 		4938E43B1C587A7B00FC977C /* MemorialComment.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemorialComment.xib; sourceTree = "<group>"; };
 		4938E43D1C587A9800FC977C /* MemorialCommentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorialCommentView.swift; sourceTree = "<group>"; };
-		4938E4411C5B5B0D00FC977C /* QiniuImageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiniuImageButton.swift; sourceTree = "<group>"; };
 		49422DF21C48D73000C316B3 /* DungeonTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DungeonTaskViewController.swift; sourceTree = "<group>"; };
 		49422DF41C48E83600C316B3 /* DungeonTaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DungeonTaskTableViewCell.swift; sourceTree = "<group>"; };
 		49422DF81C4F68A300C316B3 /* Dungeon.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dungeon.storyboard; sourceTree = "<group>"; };
@@ -126,7 +123,6 @@
 		495EB5C61BD0A80800E0E829 /* BillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillViewController.swift; sourceTree = "<group>"; };
 		495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillItemTableViewCell.swift; sourceTree = "<group>"; };
 		496486AA1C50C9B7008C9A2C /* NewMemorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMemorialViewController.swift; sourceTree = "<group>"; };
-		496486AC1C5116E1008C9A2C /* QiniuImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiniuImage.swift; sourceTree = "<group>"; };
 		496486AE1C51DB22008C9A2C /* MemorialTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorialTableViewCell.swift; sourceTree = "<group>"; };
 		49840DD01BCF9B61001F493D /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		49840DD81BCFA997001F493D /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
@@ -254,7 +250,6 @@
 				49F8092C1C1B198B006A5DF5 /* Statistic.swift */,
 				491B6FE31C43E65A000FD353 /* Dungeon.swift */,
 				49422DFC1C4F75E900C316B3 /* Memorial.swift */,
-				496486AC1C5116E1008C9A2C /* QiniuImage.swift */,
 				49B4F3201C5488290094A438 /* MemorialComment.swift */,
 				49B4F3291C56489F0094A438 /* Badge.swift */,
 				490BEA9C1C5737DD005CAF3C /* DungeonNotification.swift */,
@@ -265,7 +260,6 @@
 		49840DD71BCFA977001F493D /* view */ = {
 			isa = PBXGroup;
 			children = (
-				4938E4411C5B5B0D00FC977C /* QiniuImageButton.swift */,
 				49840DD81BCFA997001F493D /* TaskTableViewCell.swift */,
 				495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */,
 				498BAC951BD0D49400ABB357 /* WishTableViewCell.swift */,
@@ -609,7 +603,6 @@
 				49BC5A201BF9BB2900A0EC96 /* NSDate.swift in Sources */,
 				498BAC921BD0CE7400ABB357 /* NewWishViewController.swift in Sources */,
 				49840DD11BCF9B61001F493D /* Util.swift in Sources */,
-				496486AD1C5116E1008C9A2C /* QiniuImage.swift in Sources */,
 				49953E021BDB316500B25EC8 /* WishHistory.swift in Sources */,
 				499708BF1BCF506E00424F5E /* AppDelegate.swift in Sources */,
 				4938E43E1C587A9800FC977C /* MemorialCommentView.swift in Sources */,
@@ -621,7 +614,6 @@
 				495EB5C71BD0A80800E0E829 /* BillViewController.swift in Sources */,
 				49422DF51C48E83600C316B3 /* DungeonTaskTableViewCell.swift in Sources */,
 				49953E001BDB2F6500B25EC8 /* TaskHistory.swift in Sources */,
-				4938E4421C5B5B0D00FC977C /* QiniuImageButton.swift in Sources */,
 				49C8D3CC1BE88C4900E8EBF5 /* RegisterViewController.swift in Sources */,
 				49B4F32A1C56489F0094A438 /* Badge.swift in Sources */,
 				49422DFB1C4F74CC00C316B3 /* DungeonViewController.swift in Sources */,

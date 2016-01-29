@@ -27,6 +27,15 @@
     ],
     "RxBlocking": [
       "~> 2.0.0"
+    ],
+    "AlamofireImage": [
+      "~> 2.0"
+    ],
+    "SwiftyJSON": [
+      "~> 2.0"
+    ],
+    "Alamofire": [
+      "~> 3.0"
     ]
   }
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import YNSwift
 
 enum MemorialStatus: Int {
     case Waiting = 0
