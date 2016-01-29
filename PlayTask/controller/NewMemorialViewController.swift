@@ -51,9 +51,10 @@ class NewMemorialViewController: UIViewController, UIImagePickerControllerDelega
     }
 
     @IBAction func send(sender: UIBarButtonItem) {
-        var uploadImageObservable: Observable<Image> = Observable.empty()
+        var sendObservable: Observable<Memorial>
+        let content = self.contentTextView.text
         if self.selectedImage != nil {
-            uploadImageObservable = API.getQiniuToken().flatMap({ (token) -> Observable<JSON> in
+            let uploadImageObservable = API.getQiniuToken().flatMap({ (token) -> Observable<JSON> in
                 let upManager = QNUploadManager()
                 
                 return Observable.create({ (observer) -> Disposable in
@@ -73,12 +74,14 @@ class NewMemorialViewController: UIViewController, UIImagePickerControllerDelega
                 return API.createImage(url: json["url"].stringValue, orientation: json["orientation"].stringValue,
                     width: json["width"].doubleValue, height: json["height"].doubleValue)
             })
+            sendObservable = uploadImageObservable.flatMap { (image) -> Observable<Memorial> in
+                API.sendMemorial(Util.loggedUser!, dungeon: self.dungeon, content: content, imageIds: [image.id])
+            }
+        } else {
+            sendObservable = API.sendMemorial(Util.loggedUser!, dungeon: self.dungeon, content: content, imageIds: [])
         }
         
-        let content = self.contentTextView.text
-        uploadImageObservable.flatMap { (image) -> Observable<Memorial> in
-            API.sendMemorial(Util.loggedUser!, dungeon: self.dungeon, content: content, imageIds: [image.id])
-        }.subscribe { (event) -> Void in
+        sendObservable.subscribe { (event) -> Void in
             switch event {
             case .Completed:
                 break
