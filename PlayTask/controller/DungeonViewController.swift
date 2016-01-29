@@ -96,6 +96,7 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.presentViewController(actionSheet, animated: true, completion: nil)
             
         }
+        cell.layoutIfNeeded()
         return cell
     }
     
