@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class PreviewViewController: UIViewController, UIScrollViewDelegate {
 
@@ -31,20 +32,8 @@ class PreviewViewController: UIViewController, UIScrollViewDelegate {
     }
     
     var rawImage: UIImage?
-    var imageView: UIImageView? {
-        didSet {
-            oldValue?.removeFromSuperview()
-            if let imageView = self.imageView {
-                if let image = imageView.image {
-                    imageView.bounds.size.height = image.size.height
-                    imageView.bounds.size.width = image.size.width
-                    self.scrollView.contentSize = imageView.bounds.size
-                    self.scrollView.addSubview(imageView)
-                    self.zoomCenter()
-                }
-            }
-        }
-    }
+    var imageView = UIImageView()
+
     var imageUrl: String?
     
     @IBOutlet weak var leftButton: UIButton! {
@@ -84,14 +73,33 @@ class PreviewViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         // iOS 8 在 viewDidLoad 时只有 self.view 的 bounds 是正确的
         self.scrollView.bounds = self.view.bounds
+        self.scrollView.addSubview(self.imageView)
         self.backRecognizer.requireGestureRecognizerToFail(self.zoomRecognizer)
         
         if self.rawImage != nil {
-            self.imageView = UIImageView(image: self.rawImage)
+            self.imageView.image = self.rawImage
+            self.update()
+        }
+        if let imageUrl = self.imageUrl {
+            let hud = MBProgressHUD.showHUDAddedTo(self.scrollView, animated: true)
+            self.imageView.af_setImageWithURL(NSURL(string: imageUrl)!, placeholderImage: nil,
+                filter: nil, imageTransition: .None, completion: { response in
+                    if let image = response.result.value {
+                        self.imageView.image = image
+                        self.update()
+                    }
+                    hud.hide(true)
+            })
         }
         
-        if let imageUrl = self.imageUrl {
-            // TODO download Image
+    }
+    
+    func update() {
+        if let image = imageView.image {
+            imageView.bounds.size.height = image.size.height
+            imageView.bounds.size.width = image.size.width
+            self.scrollView.contentSize = imageView.bounds.size
+            self.zoomCenter()
         }
     }
     
@@ -106,15 +114,15 @@ class PreviewViewController: UIViewController, UIScrollViewDelegate {
     func scrollViewDidZoom(scrollView: UIScrollView) {
         let offsetX = max((self.scrollView.bounds.width - self.scrollView.contentSize.width) * 0.5, 0)
         let offsetY = max((self.scrollView.bounds.height - self.scrollView.contentSize.height) * 0.5, 0)
-        self.imageView?.center = CGPoint(x: self.scrollView.contentSize.width * 0.5 + offsetX, y: self.scrollView.contentSize.height * 0.5 + offsetY)
+        self.imageView.center = CGPoint(x: self.scrollView.contentSize.width * 0.5 + offsetX, y: self.scrollView.contentSize.height * 0.5 + offsetY)
     }
     
     func zoomCenter() {
-        let widthRatio = self.scrollView.bounds.width / self.imageView!.bounds.width
-        let heightRatio = self.scrollView.bounds.height / self.imageView!.bounds.height
+        let widthRatio = self.scrollView.bounds.width / self.imageView.bounds.width
+        let heightRatio = self.scrollView.bounds.height / self.imageView.bounds.height
         self.scrollView.minimumZoomScale = min(widthRatio, heightRatio)
         self.scrollView.maximumZoomScale = max(1, self.scrollView.minimumZoomScale)
-        self.scrollView.zoomToRect(self.imageView!.bounds, animated: false)
+        self.scrollView.zoomToRect(self.imageView.frame, animated: false)
         self.scrollView.bounds.origin = CGPoint(x: 0, y: 0)
         self.scrollViewDidZoom(self.scrollView)
     }
