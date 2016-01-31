@@ -118,4 +118,31 @@ extension NSDate {
         return cal.components(unit, fromDate: fromDate, toDate: self, options: [])
     }
     
+    func toReadable() -> String {
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components(
+            [NSCalendarUnit.Year, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute],
+            fromDate: self,
+            toDate: NSDate(),
+            options: []
+        )
+        let year = components.year
+        let day = components.day
+        let hour = components.hour
+        let minute = components.minute
+        if year > 0 {
+            return "\(year)年前"
+        }
+        if day > 0 {
+            return "\(day)天前"
+        }
+        if hour > 0 {
+            return "\(hour)小时前"
+        }
+        if minute > 0 {
+            return "\(minute)分钟前"
+        }
+        return "刚刚"
+    }
+    
 }

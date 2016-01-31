@@ -19,6 +19,7 @@ class MemorialTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var memorialImageButton: QiniuImageButton!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var commentView: OAStackView!
+    @IBOutlet weak var timeLabel: UILabel!
     
     var onImageClicked: ((QiniuImageButton) -> Void)?
     
@@ -59,6 +60,7 @@ class MemorialTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDa
     var memorial: Memorial! {
         didSet {
             self.contentLabel.text = self.memorial.content
+            self.timeLabel.text = self.memorial.createdTime.toReadable()
             self.nicknameButton.setTitle(self.memorial.nickname, forState: UIControlState.Normal)
             self.avatarImageView.af_setImageWithURL(NSURL(string: self.memorial.avatarUrl)!)
 //            switch self.memorial.status {

@@ -522,6 +522,7 @@
                                             <outlet property="contentLabel" destination="FKz-BT-Afq" id="AhK-Lo-eYB"/>
                                             <outlet property="memorialImageButton" destination="wJF-fX-yWD" id="dBN-C6-cbs"/>
                                             <outlet property="nicknameButton" destination="krH-6b-3WX" id="0kR-hf-vf8"/>
+                                            <outlet property="timeLabel" destination="e0w-F1-TZY" id="Whv-iu-I6h"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
