@@ -23,7 +23,6 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="lz6-sn-wRg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="1wC-Es-MHA"/>

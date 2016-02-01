@@ -193,9 +193,10 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
                     self.commentMemorial.comments.append(c)
                     break
                 case .Completed:
+                    self.tableView.reloadRowsAtIndexPaths([self.commentIndexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                     self.commentIndicator.stopAnimating()
                     sender.hidden = false
-                    self.tableView.reloadRowsAtIndexPaths([self.commentIndexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                    self.commentTextView.text = ""
                     self.closeCommentView()
                     break
                 case .Error(let e):

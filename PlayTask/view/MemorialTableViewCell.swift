@@ -20,6 +20,7 @@ class MemorialTableViewCell: UITableViewCell {
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var commentView: OAStackView!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
     
     var onImageClicked: ((QiniuImageButton) -> Void)?
     
@@ -38,17 +39,17 @@ class MemorialTableViewCell: UITableViewCell {
             self.timeLabel.text = self.memorial.createdTime.toReadable()
             self.nicknameButton.setTitle(self.memorial.nickname, forState: UIControlState.Normal)
             self.avatarImageView.af_setImageWithURL(NSURL(string: self.memorial.avatarUrl)!)
-//            switch self.memorial.status {
-//            case .Waiting:
-//                self.reviewStatusLabel.text = "待审核"
-//                break
-//            case .Approved:
-//                self.reviewStatusLabel.text = "审核通过"
-//                break
-//            case .Rejected:
-//                self.reviewStatusLabel.text = "审核未通过：\(self.memorial.reason ?? "")"
-//                break
-//            }
+            switch self.memorial.status {
+            case .Waiting:
+                self.statusLabel.text = "待审核"
+                break
+            case .Approved:
+                self.statusLabel.text = "审核通过"
+                break
+            case .Rejected:
+                self.statusLabel.text = "审核未通过：\(self.memorial.reason ?? "")"
+                break
+            }
             
             self.memorialImageButton.metaImage = self.memorial.image
             
