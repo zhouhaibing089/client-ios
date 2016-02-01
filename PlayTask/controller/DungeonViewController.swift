@@ -33,16 +33,28 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var commentView: UIView! {
         didSet {
             self.commentView.hidden = true
+            let topBorder = CALayer()
+            topBorder.backgroundColor = UIColor.lightGrayColor().CGColor
+            topBorder.frame = CGRectMake(0, 0, CGRectGetWidth(self.commentView.frame), 1 / UIScreen.screenScale)
+            self.commentView.layer.addSublayer(topBorder)
         }
     }
-    @IBOutlet weak var commentTextView: YNTextView!
+    @IBOutlet weak var commentIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var commentTextView: YNTextView! {
+        didSet {
+            self.commentTextView.layer.borderColor = UIColor.lightGrayColor().CGColor
+            self.commentTextView.layer.borderWidth = 1 / UIScreen.screenScale
+            self.commentTextView.maxHeight = 33 * 4
+        }
+    }
     
     var memorials = [[Memorial]]()
     var dungeon: Dungeon!
     
     // 当前发送的评论的元信息
-    var commentMemorialId: Int!
+    var commentMemorial: Memorial!
     var commentToUserId: Int?
+    var commentIndexPath: NSIndexPath!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,11 +73,6 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
         refreshControl.beginRefreshing()
         self.refresh(refreshControl)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return memorials.count
@@ -78,14 +85,20 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("memorial", forIndexPath: indexPath) as! MemorialTableViewCell
         cell.memorial = self.memorials[indexPath.section][indexPath.row]
-        cell.commentAction = { [unowned self] (memorialId, toUserId, toNickname) in
+        cell.commentAction = { [unowned self] (memorial, toUserId, toNickname) in
             self.commentView.hidden = false
             self.commentTextView.becomeFirstResponder()
-            self.commentMemorialId = memorialId
+            if self.commentMemorial?.id != memorial.id || self.commentToUserId != toUserId {
+                // 这次评论和上次评论的对象不一样时, 清空已输入的内容
+                self.commentTextView.text = ""
+            }
+            self.commentMemorial = memorial
             self.commentToUserId = toUserId
+            self.commentIndexPath = indexPath
             if toUserId != nil {
                 self.commentTextView.hint = String(format: "回复%@：", toNickname!)
             }
+            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
         }
         cell.deleteAction = { [unowned self] (commentId) in
             let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
@@ -144,6 +157,13 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.reloadData()
     }
     
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        if !self.commentIndicator.isAnimating() {
+            self.closeCommentView()
+        }
+        
+    }
+    
     func refresh(sender: UIRefreshControl? = nil) {
         var tmp = [Memorial]()
         API.getMemorials(self.dungeon).subscribe { (event) -> Void in
@@ -164,17 +184,31 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBAction func sendComment(sender: UIButton) {
-        API.commentMemorial(Util.loggedUser!, memorialId: self.commentMemorialId,
+        sender.hidden = true
+        self.commentIndicator.startAnimating()
+        API.commentMemorial(Util.loggedUser!, memorialId: self.commentMemorial.id,
             toUserId: self.commentToUserId, content: self.commentTextView.text).subscribe({ event in
                 switch event {
                 case .Next(let c):
+                    self.commentMemorial.comments.append(c)
                     break
                 case .Completed:
+                    self.commentIndicator.stopAnimating()
+                    sender.hidden = false
+                    self.tableView.reloadRowsAtIndexPaths([self.commentIndexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                    self.closeCommentView()
                     break
                 case .Error(let e):
+                    self.commentIndicator.stopAnimating()
+                    sender.hidden = false
                     break
                 }
             })
+    }
+    
+    func closeCommentView() {
+        self.view.endEditing(true)
+        self.commentView.hidden = true
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

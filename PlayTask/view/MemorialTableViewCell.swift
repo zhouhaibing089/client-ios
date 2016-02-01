@@ -11,7 +11,7 @@ import YNSwift
 import AlamofireImage
 import OAStackView
 
-class MemorialTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDataSource {
+class MemorialTableViewCell: UITableViewCell {
 
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var nicknameButton: UIButton!
@@ -24,37 +24,12 @@ class MemorialTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDa
     var onImageClicked: ((QiniuImageButton) -> Void)?
     
     // memorial id, to user id, to nickname
-    var commentAction: ((Int, Int?, String?) -> Void)!
+    var commentAction: ((Memorial, Int?, String?) -> Void)!
     // comment id
     var deleteAction: ((Int) -> Void)!
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.memorial.comments.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("comment", forIndexPath: indexPath) as! MemorialCommentTableViewCell
-        cell.memorialComment = self.memorial.comments[indexPath.row]
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let comment = self.memorial.comments[indexPath.row]
-        let myUserId = Util.loggedUser!.sid.value
-        if comment.fromUserId == myUserId {
-            self.deleteAction(comment.id)
-        } else {
-            self.commentAction(self.memorial.id, comment.fromUserId, comment.fromNickname)
-        }
-        
-    }
-    
+
     @IBAction func comment(sender: UIButton) {
-        self.commentAction(self.memorial.id, nil, nil)
+        self.commentAction(self.memorial, nil, nil)
     }
     
     var memorial: Memorial! {
@@ -77,10 +52,23 @@ class MemorialTableViewCell: UITableViewCell, UITableViewDelegate, UITableViewDa
             
             self.memorialImageButton.metaImage = self.memorial.image
             
+            // clear comments
+            self.commentView.subviews.forEach { (view) -> () in
+                self.commentView.removeArrangedSubview(view)
+                view.removeFromSuperview()
+            }
             for m in self.memorial.comments {
-                var v = MemorialCommentView()
+                let v = MemorialCommentView()
                 v.setup()
-                v.contentLabel.text = "\(m.content) \(m.content)\(m.content)\(m.content)"
+                v.comment = m
+                v.onClicked = { [unowned self] comment in
+                    let myUserId = Util.loggedUser!.sid.value
+                    if comment.fromUserId == myUserId {
+                        self.deleteAction(comment.id)
+                    } else {
+                        self.commentAction(self.memorial, comment.fromUserId, comment.fromNickname)
+                    }
+                }
                 self.commentView.addArrangedSubview(v)
             }
         }

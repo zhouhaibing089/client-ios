@@ -24,6 +24,7 @@
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="lz6-sn-wRg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="1wC-Es-MHA"/>
                 <constraint firstAttribute="bottom" secondItem="lz6-sn-wRg" secondAttribute="bottom" id="3Ps-pY-ELJ"/>
@@ -38,7 +39,15 @@
                     <exclude reference="GpV-HF-gm7"/>
                 </mask>
             </variation>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="8bc-jW-C8j" appends="YES" id="vVL-Lp-cn1"/>
+            </connections>
             <point key="canvasLocation" x="394.5" y="-104.5"/>
         </view>
+        <tapGestureRecognizer id="8bc-jW-C8j">
+            <connections>
+                <action selector="clicked:" destination="-1" id="fd2-dh-3wW"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>

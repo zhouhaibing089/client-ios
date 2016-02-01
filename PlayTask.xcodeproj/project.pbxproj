@@ -54,7 +54,6 @@
 		499708EF1BCF63F500424F5E /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499708EE1BCF63F500424F5E /* NewTaskViewController.swift */; };
 		4998593D1BDB169C00C222E7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4998593C1BDB169C00C222E7 /* Task.swift */; };
 		49A976BB1BE73B02001300FB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A976BA1BE73B02001300FB /* LoginViewController.swift */; };
-		49B4F31F1C5486D70094A438 /* MemorialCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4F31E1C5486D70094A438 /* MemorialCommentTableViewCell.swift */; };
 		49B4F3211C5488290094A438 /* MemorialComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4F3201C5488290094A438 /* MemorialComment.swift */; };
 		49B4F32A1C56489F0094A438 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4F3291C56489F0094A438 /* Badge.swift */; };
 		49B860241C461E8B004641DF /* DungeonEmbeddedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B860231C461E8B004641DF /* DungeonEmbeddedViewController.swift */; };
@@ -156,7 +155,6 @@
 		499708F51BCF68FD00424F5E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		4998593C1BDB169C00C222E7 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		49A976BA1BE73B02001300FB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		49B4F31E1C5486D70094A438 /* MemorialCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorialCommentTableViewCell.swift; sourceTree = "<group>"; };
 		49B4F3201C5488290094A438 /* MemorialComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorialComment.swift; sourceTree = "<group>"; };
 		49B4F3291C56489F0094A438 /* Badge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		49B860231C461E8B004641DF /* DungeonEmbeddedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DungeonEmbeddedViewController.swift; sourceTree = "<group>"; };
@@ -269,7 +267,6 @@
 				491B6FED1C44E20A000FD353 /* DungeonTableViewCell.swift */,
 				49422DF41C48E83600C316B3 /* DungeonTaskTableViewCell.swift */,
 				496486AE1C51DB22008C9A2C /* MemorialTableViewCell.swift */,
-				49B4F31E1C5486D70094A438 /* MemorialCommentTableViewCell.swift */,
 				490BEA9E1C5742A3005CAF3C /* DungeonNotificationTableViewCell.swift */,
 				490BEAA21C575679005CAF3C /* MemorialCommentDetailTableViewCell.swift */,
 				4938E43B1C587A7B00FC977C /* MemorialComment.xib */,
@@ -628,7 +625,6 @@
 				49953DFE1BDB2D6900B25EC8 /* Wish.swift in Sources */,
 				490BEAA51C57A4E8005CAF3C /* PersonalViewController.swift in Sources */,
 				49D321331BF35DFA00A6E0A7 /* WishAPI.swift in Sources */,
-				49B4F31F1C5486D70094A438 /* MemorialCommentTableViewCell.swift in Sources */,
 				49C8D3D41BE8BE1000E8EBF5 /* Config.swift in Sources */,
 				49BC5A1D1BF9B9CE00A0EC96 /* PasswordViewController.swift in Sources */,
 				49B860241C461E8B004641DF /* DungeonEmbeddedViewController.swift in Sources */,
