@@ -98,9 +98,10 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
             if toUserId != nil {
                 self.commentTextView.hint = String(format: "回复%@：", toNickname!)
             }
-            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         }
         cell.deleteAction = { [unowned self] (commentId) in
+            self.closeCommentView()
             let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
             actionSheet.addAction(UIAlertAction(title: "删除", style: UIAlertActionStyle.Destructive, handler: { (action) -> Void in
                 // TODO delete

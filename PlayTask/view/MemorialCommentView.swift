@@ -17,8 +17,8 @@ class MemorialCommentView: XibView {
     
     var onClicked: ((MemorialComment) -> Void)?
     
-    let commentTemplate = "<strong>%@</strong>：%@"
-    let binaryCommentTemplate = "<strong>%@</strong> 回复 <strong>%@</strong>：%@"
+    let commentTemplate = "<span style=\"font-family: '%@'; font-size: %fpx\"><strong>%@</strong>: %@</span>"
+    let binaryCommentTemplate = "<span style=\"font-family: '%@'; font-size: %fpx\"><strong>%@</strong> 回复 <strong>%@</strong>: %@</span>"
     
     @IBAction func clicked(sender: UITapGestureRecognizer) {
         self.contentView.backgroundColor = UIColor.lightGrayColor()
@@ -30,13 +30,15 @@ class MemorialCommentView: XibView {
     }
     var comment: MemorialComment! {
         didSet {
+            let fontName = self.contentLabel.font.fontName
+            let fontSize = self.contentLabel.font.pointSize
             if let toUserId = self.comment.toUserId {
                 self.contentLabel.attributedText = NSAttributedString(html:
-                    String(format: binaryCommentTemplate, self.comment.fromNickname,
+                    String(format: binaryCommentTemplate, fontName, fontSize, comment.fromNickname,
                         self.comment.toNickname!, self.comment.content))
             } else {
                 self.contentLabel.attributedText = NSAttributedString(html:
-                    String(format: commentTemplate, self.comment.fromNickname,
+                    String(format: commentTemplate, fontName, fontSize, self.comment.fromNickname,
                         self.comment.content))
             }
         }

@@ -17,8 +17,8 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lz6-sn-wRg">
-                    <rect key="frame" x="8" y="0.0" width="487" height="105"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <rect key="frame" x="8" y="2" width="487" height="101"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -26,9 +26,9 @@
             <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="lz6-sn-wRg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="1wC-Es-MHA"/>
-                <constraint firstAttribute="bottom" secondItem="lz6-sn-wRg" secondAttribute="bottom" id="3Ps-pY-ELJ"/>
+                <constraint firstAttribute="bottom" secondItem="lz6-sn-wRg" secondAttribute="bottom" constant="2" id="3Ps-pY-ELJ"/>
                 <constraint firstItem="lz6-sn-wRg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="GpV-HF-gm7"/>
-                <constraint firstItem="lz6-sn-wRg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="SzB-H0-Hjd"/>
+                <constraint firstItem="lz6-sn-wRg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="2" id="SzB-H0-Hjd"/>
                 <constraint firstItem="lz6-sn-wRg" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="ggj-Va-rOb"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

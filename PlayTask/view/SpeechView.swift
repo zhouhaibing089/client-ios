@@ -34,6 +34,11 @@ class SpeechView: UIView {
     var borderRadius: CGFloat = 0
     @IBInspectable
     var color: UIColor = UIColor.lightGrayColor()
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.contentMode = .Redraw
+    }
 
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
