@@ -58,9 +58,22 @@ class MemorialTableViewCell: UITableViewCell {
                 self.commentView.removeArrangedSubview(view)
                 view.removeFromSuperview()
             }
-            for m in self.memorial.comments {
-                let v = MemorialCommentView()
-                v.setup()
+            
+            // reuse commentView arranged view
+            let vc = self.commentView.arrangedSubviews.count
+            let cc = self.memorial.comments.count
+            if vc < cc {
+                for _ in vc...(cc - 1) {
+                    let v = MemorialCommentView()
+                    v.setup()
+                    self.commentView.addArrangedSubview(v)
+                }
+            }
+            for (i, v) in self.commentView.arrangedSubviews.enumerate() {
+                v.hidden = i >= cc
+            }
+            for (i, m) in self.memorial.comments.enumerate() {
+                let v = self.commentView.arrangedSubviews[i] as! MemorialCommentView
                 v.comment = m
                 v.onClicked = { [unowned self] comment in
                     let myUserId = Util.loggedUser!.sid.value
@@ -70,7 +83,6 @@ class MemorialTableViewCell: UITableViewCell {
                         self.commentAction(self.memorial, comment.fromUserId, comment.fromNickname)
                     }
                 }
-                self.commentView.addArrangedSubview(v)
             }
         }
     }

@@ -46,8 +46,12 @@ extension API {
         })
     }
     
-    class func getMemorials(dungeon: Dungeon) -> Observable<Memorial> {
-        return API.req(.GET, "/dungeons/\(dungeon.id)/memorials").flatMap({ (json) -> Observable<Memorial> in
+    class func getMemorials(dungeon: Dungeon, before: NSDate? = nil) -> Observable<Memorial> {
+        var params = [String: AnyObject]()
+        if before != nil {
+            params["before"] = before?.millisecondsSince1970
+        }
+        return API.req(.GET, "/dungeons/\(dungeon.id)/memorials", parameters: params).flatMap({ (json) -> Observable<Memorial> in
             var memorials = [Memorial]()
             for (_, subJson) : (String, JSON) in json {
                 memorials.append(Memorial(json: subJson))

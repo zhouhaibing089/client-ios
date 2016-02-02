@@ -425,7 +425,16 @@
                                 <view key="tableFooterView" contentMode="scaleToFill" id="COd-4H-fMH">
                                     <rect key="frame" x="0.0" y="658" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Hv9-IL-IQ2">
+                                            <rect key="frame" x="177" y="12" width="20" height="20"/>
+                                        </activityIndicatorView>
+                                    </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="Hv9-IL-IQ2" firstAttribute="centerX" secondItem="COd-4H-fMH" secondAttribute="centerX" id="aFk-xf-ILk"/>
+                                        <constraint firstItem="Hv9-IL-IQ2" firstAttribute="centerY" secondItem="COd-4H-fMH" secondAttribute="centerY" id="hgA-xB-GeV"/>
+                                    </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="memorial" rowHeight="311" id="6td-ze-lJ0" customClass="MemorialTableViewCell" customModule="PlayTask" customModuleProvider="target">
@@ -640,6 +649,7 @@
                         <outlet property="coverImageView" destination="Ehc-CL-c4G" id="PI2-rk-ilx"/>
                         <outlet property="coverWidthConstraint" destination="wdE-65-hFK" id="d1a-36-Or7"/>
                         <outlet property="dungeonTitleLabel" destination="eJv-Wd-CI5" id="Dkz-Yv-c1s"/>
+                        <outlet property="loadIndicator" destination="Hv9-IL-IQ2" id="9GS-8o-Xf3"/>
                         <outlet property="messageAlertButton" destination="RaU-on-qZM" id="wM3-U0-FeM"/>
                         <outlet property="tableView" destination="IUU-pn-mWh" id="YmM-RC-7MN"/>
                         <segue destination="aRL-H2-C1S" kind="custom" identifier="preview@Main" customClass="YNModalSegue" customModule="YNSwift" id="Jw8-xj-kf1"/>

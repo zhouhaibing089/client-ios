@@ -13,6 +13,7 @@ import RxSwift
 class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var coverImageView: UIImageView!
 
+    @IBOutlet weak var loadIndicator: UIActivityIndicatorView!
     @IBOutlet weak var dungeonTitleLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView! {
         didSet {
@@ -230,6 +231,39 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
                 pvc.rawImage = qiniuImageButton.imageForState(UIControlState.Normal)
                 pvc.imageUrl = qiniuImageButton.metaImage.url
             }
+        }
+    }
+    
+    func load() {
+        if self.loadIndicator.isAnimating() {
+            return
+        }
+        if let before = self.memorials.last?.last?.createdTime {
+            self.loadIndicator.startAnimating()
+            var tmp = [Memorial]()
+            API.getMemorials(self.dungeon, before: before).subscribe { event in
+                switch (event) {
+                case .Next(let m):
+                    tmp.append(m)
+                    break
+                case .Error(let e):
+                    self.loadIndicator.stopAnimating()
+                    break
+                case .Completed:
+                    self.memorials.append(tmp)
+                    self.update()
+                    self.loadIndicator.stopAnimating()
+                    break
+                }
+            }
+        }
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offset = scrollView.contentOffset.y
+        let maxOffset = scrollView.contentSize.height - scrollView.bounds.height
+        if maxOffset - offset < 44 {
+            self.load()
         }
     }
 
