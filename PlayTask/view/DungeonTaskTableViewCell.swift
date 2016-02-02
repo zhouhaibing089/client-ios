@@ -21,6 +21,7 @@ class DungeonTaskTableViewCell: UITableViewCell {
             statusStackView.distribution = OAStackViewDistribution.FillEqually
         }
     }
+    
     var dungeon: Dungeon! {
         didSet {
             self.update()
