@@ -398,6 +398,7 @@
                                                     <constraints>
                                                         <constraint firstItem="Bgq-55-su8" firstAttribute="top" secondItem="h26-2J-oPs" secondAttribute="top" constant="8" placeholder="YES" id="2xr-KP-T0X"/>
                                                         <constraint firstItem="Bgq-55-su8" firstAttribute="centerX" secondItem="h26-2J-oPs" secondAttribute="centerX" placeholder="YES" id="Cpb-bq-58X"/>
+                                                        <constraint firstAttribute="width" constant="96" id="M0U-0p-e7R"/>
                                                         <constraint firstItem="68z-xX-7pp" firstAttribute="top" secondItem="Bgq-55-su8" secondAttribute="bottom" constant="4" placeholder="YES" id="NXU-UV-SOj"/>
                                                         <constraint firstItem="68z-xX-7pp" firstAttribute="centerX" secondItem="h26-2J-oPs" secondAttribute="centerX" placeholder="YES" id="U2o-n5-BEo"/>
                                                     </constraints>
