@@ -262,7 +262,7 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let offset = scrollView.contentOffset.y
         let maxOffset = scrollView.contentSize.height - scrollView.bounds.height
-        if maxOffset - offset < 44 {
+        if offset > 0 && maxOffset - offset < 44 {
             self.load()
         }
     }

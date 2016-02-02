@@ -17,19 +17,30 @@ class DungeonTaskViewController: TaskViewController {
         case Dungeon
     }
     
+    @IBOutlet weak var loadIndicator: UIActivityIndicatorView!
+    
     var mode = Mode.Task
     
-    var dungeons = [Dungeon]()
+    var dungeons = [[Dungeon]]()
     var badgeView: JSBadgeView!
     
     var previousSelectedSegment = -1
     var currentSelectedSegment = 0
+    
+    var refreshControl: UIRefreshControl!
+    var refreshTableViewController: UITableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.badgeView = JSBadgeView(parentView: self.taskTypeSegmentControl.superview!, alignment: JSBadgeViewAlignment.TopRight)
         self.badgeView.badgePositionAdjustment = CGPoint(x: -12, y: 8)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBadge:", name: Config.Notification.BADGE, object: nil)
+        
+        // pull to refresh
+        self.refreshTableViewController = UITableViewController()
+        self.refreshTableViewController.tableView = self.tableView
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
     }
     
     func updateBadge(notification: NSNotification) {
@@ -50,12 +61,18 @@ class DungeonTaskViewController: TaskViewController {
         if sender.selectedSegmentIndex == 3 {
             self.mode = Mode.Dungeon
             self.tableView.allowsSelection = true
+            self.tableView.hidden = false
+            // enable refresh control
+            self.refreshTableViewController.refreshControl = self.refreshControl
             if Util.loggedUser == nil {
                 // not loged in
                 self.performSegueWithIdentifier("login@Main", sender: nil)
                 return
             }
+            self.refreshControl.beginRefreshing()
+            self.refresh(self.refreshControl)
         } else {
+            self.refreshTableViewController.refreshControl = nil
             self.tableView.allowsSelection = false
             self.mode = Mode.Task
         }
@@ -66,14 +83,14 @@ class DungeonTaskViewController: TaskViewController {
         if self.mode == Mode.Task {
             return super.numberOfSectionsInTableView(tableView)
         }
-        return 1
+        return self.dungeons.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.mode == Mode.Task {
             return super.tableView(tableView, numberOfRowsInSection: section)
         }
-        return self.self.dungeons.count
+        return self.self.dungeons[section].count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -81,7 +98,7 @@ class DungeonTaskViewController: TaskViewController {
             return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         }
         let cell = tableView.dequeueReusableCellWithIdentifier("dungeon") as! DungeonTaskTableViewCell
-        cell.dungeon = self.dungeons[indexPath.row]
+        cell.dungeon = self.dungeons[indexPath.section][indexPath.row]
         cell.layoutIfNeeded() // for iOS 8 UILabel to be right
         return cell
     }
@@ -101,7 +118,7 @@ class DungeonTaskViewController: TaskViewController {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("index@Dungeon", sender: self.dungeons[indexPath.row])
+        self.performSegueWithIdentifier("index@Dungeon", sender: self.dungeons[indexPath.section][indexPath.row])
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
@@ -124,6 +141,12 @@ class DungeonTaskViewController: TaskViewController {
         if self.mode == Mode.Task {
             return super.refresh()
         }
+    }
+    
+    func refresh(refreshControl: UIRefreshControl) {
+        if self.mode == Mode.Task {
+            return refreshControl.endRefreshing()
+        }
         if Util.loggedUser == nil {
             // not logged in, switch to first segment
             self.taskTypeSegmentControl.selectedSegmentIndex = 0
@@ -134,20 +157,54 @@ class DungeonTaskViewController: TaskViewController {
         API.getJoinedDungeons(Util.currentUser).subscribe { event in
             switch event {
             case .Completed:
-                self.dungeons = tmp
-                if tmp.count == 0 {
-                    self.tableView.hidden = true
-                } else {
-                    self.tableView.hidden = false
-                }
+                self.dungeons = [tmp]
                 self.tableView.reloadData()
+                refreshControl.endRefreshing()
                 break
             case .Error(let e):
+                refreshControl.endRefreshing()
                 break
             case .Next(let d):
                 tmp.append(d)
                 break
             }
+        }
+    }
+    
+    func load() {
+        if self.loadIndicator.isAnimating() || self.refreshControl.refreshing {
+            return
+        }
+        if let before = self.dungeons.last?.last?.createdTime {
+            self.loadIndicator.startAnimating()
+            var tmp = [Dungeon]()
+            API.getJoinedDungeons(Util.currentUser, before: before).subscribe { event in
+                switch event {
+                case .Completed:
+                    self.dungeons.append(tmp)
+                    self.tableView.reloadData()
+                    self.loadIndicator.stopAnimating()
+                    break
+                case .Error(let e):
+                    self.loadIndicator.stopAnimating()
+                    break
+                case .Next(let d):
+                    tmp.append(d)
+                    break
+                }
+            }
+        }
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if self.mode == Mode.Task {
+            return
+        }
+        let offset = scrollView.contentOffset.y
+        let maxOffset = scrollView.contentSize.height - scrollView.bounds.height
+        if offset > 0 && maxOffset - offset < 44 {
+            // scroll down and reached bottom
+            self.load()
         }
     }
     

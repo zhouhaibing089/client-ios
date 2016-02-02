@@ -21,8 +21,12 @@ extension API {
         }
     }
     
-    class func getJoinedDungeons(user: User) -> Observable<Dungeon> {
-        return API.req(.GET, "/users/\(user.sid.value!)/dungeons").flatMap({ (json) -> Observable<Dungeon> in
+    class func getJoinedDungeons(user: User, before: NSDate? = nil) -> Observable<Dungeon> {
+        var params = [String: AnyObject]()
+        if before != nil {
+            params["before"] = before!.millisecondsSince1970
+        }
+        return API.req(.GET, "/users/\(user.sid.value!)/dungeons", parameters: params).flatMap({ (json) -> Observable<Dungeon> in
             var dungeons = [Dungeon]()
             for (_, subJson) : (String, JSON) in json {
                 dungeons.append(Dungeon(json: subJson))

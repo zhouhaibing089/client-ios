@@ -263,8 +263,8 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xw9-OF-6m7">
-                                <rect key="frame" x="0.0" y="116" width="600" height="387"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xw9-OF-6m7">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="503"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="task" rowHeight="73" id="law-gN-hj7" customClass="TaskTableViewCell" customModule="PlayTask" customModuleProvider="target">
@@ -274,13 +274,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="72"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" misplaced="YES" text="跑步30分钟" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rv9-n2-eHR">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="跑步30分钟" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rv9-n2-eHR">
                                                     <rect key="frame" x="48" y="8" width="475" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjT-W8-1cO">
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjT-W8-1cO">
                                                     <rect key="frame" x="8" y="12" width="32" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="cbc-i0-S5H"/>
@@ -290,7 +290,7 @@
                                                         <action selector="toggle:" destination="law-gN-hj7" eventType="touchUpInside" id="0Vf-Va-vdM"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0/1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zda-l4-GX9">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zda-l4-GX9">
                                                     <rect key="frame" x="48" y="47" width="20" height="17"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -509,19 +509,30 @@
                                             <action selector="showDone:" destination="eFE-jf-rzT" eventType="touchUpInside" id="Uhg-HN-lP1"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oRf-xJ-Dji">
+                                        <rect key="frame" x="523" y="14" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="blv-wM-G8q" firstAttribute="centerY" secondItem="5Xh-3G-Ys5" secondAttribute="centerY" id="1Qx-gC-Ufy"/>
+                                    <constraint firstItem="dSA-Vp-G8x" firstAttribute="leading" secondItem="oRf-xJ-Dji" secondAttribute="trailing" constant="8" symbolic="YES" id="4C0-Rp-WvJ"/>
                                     <constraint firstItem="yu5-aO-tlJ" firstAttribute="centerY" secondItem="5Xh-3G-Ys5" secondAttribute="centerY" id="BDn-9q-MTO"/>
                                     <constraint firstItem="blv-wM-G8q" firstAttribute="leading" secondItem="5Xh-3G-Ys5" secondAttribute="leading" constant="20" symbolic="YES" id="DRe-2R-RiM"/>
                                     <constraint firstAttribute="height" constant="48" id="NF6-2K-ck9"/>
                                     <constraint firstItem="dSA-Vp-G8x" firstAttribute="centerY" secondItem="5Xh-3G-Ys5" secondAttribute="centerY" id="OqQ-XW-NEO"/>
                                     <constraint firstItem="YPP-Ep-acD" firstAttribute="centerY" secondItem="5Xh-3G-Ys5" secondAttribute="centerY" id="Ovq-Js-TK0"/>
+                                    <constraint firstItem="oRf-xJ-Dji" firstAttribute="centerY" secondItem="5Xh-3G-Ys5" secondAttribute="centerY" id="bJ0-dM-w0M"/>
                                     <constraint firstAttribute="trailing" secondItem="dSA-Vp-G8x" secondAttribute="trailing" constant="8" id="cn7-Sr-KdD"/>
+                                    <constraint firstItem="oRf-xJ-Dji" firstAttribute="bottom" secondItem="yu5-aO-tlJ" secondAttribute="bottom" id="jvI-rO-XwN"/>
                                     <constraint firstItem="YPP-Ep-acD" firstAttribute="leading" secondItem="blv-wM-G8q" secondAttribute="trailing" constant="8" symbolic="YES" id="kgh-NU-HRy"/>
                                     <constraint firstItem="yu5-aO-tlJ" firstAttribute="leading" secondItem="YPP-Ep-acD" secondAttribute="trailing" constant="8" symbolic="YES" id="sZU-Gq-chL"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="jvI-rO-XwN"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -571,6 +582,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bronzeLabel" destination="yu5-aO-tlJ" id="nGF-im-AtS"/>
+                        <outlet property="loadIndicator" destination="oRf-xJ-Dji" id="seq-ek-VEf"/>
                         <outlet property="scoreLabel" destination="blv-wM-G8q" id="Aah-Fz-1sc"/>
                         <outlet property="showDoneButton" destination="dSA-Vp-G8x" id="SG0-3b-kHh"/>
                         <outlet property="tableView" destination="xw9-OF-6m7" id="XH6-Lr-lLv"/>

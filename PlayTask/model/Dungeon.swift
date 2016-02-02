@@ -37,6 +37,7 @@ class Dungeon {
     var target: Int
     var progress: Int
     var utc: Bool // start_time, finish_time, 是 utc 还是 local
+    var createdTime: NSDate
     
     init(json: JSON) {
         self.id = json["dungeon_id"].int ?? json["id"].intValue
@@ -61,6 +62,6 @@ class Dungeon {
             self.startTime = NSDate(millisecondsSince1970: json["start_time"].doubleValue - offset)
             self.finishTime = NSDate(millisecondsSince1970: json["finish_time"].doubleValue - offset)
         }
-
+        self.createdTime = NSDate(millisecondsSince1970: json["created_time"].doubleValue)
     }
 }
