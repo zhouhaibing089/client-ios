@@ -173,7 +173,7 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
                 tmp.append(m)
                 break
             case .Completed:
-                self.memorials.append(tmp)
+                self.memorials = [tmp]
                 self.update()
                 sender?.endRefreshing()
                 break

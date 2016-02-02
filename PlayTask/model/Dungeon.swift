@@ -39,7 +39,7 @@ class Dungeon {
     var utc: Bool // start_time, finish_time, 是 utc 还是 local
     
     init(json: JSON) {
-        self.id = json["id"].intValue
+        self.id = json["dungeon_id"].int ?? json["id"].intValue
         self.title = json["title"].stringValue
         self.maxPlayer = json["max_player"].intValue
         self.currentPlayer = json["current_player"].intValue
