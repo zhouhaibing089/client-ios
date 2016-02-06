@@ -30,16 +30,25 @@ class MemorialCommentView: XibView {
     }
     var comment: MemorialComment! {
         didSet {
-            let fontName = self.contentLabel.font.fontName
             let fontSize = self.contentLabel.font.pointSize
+            let bold = [
+                NSFontAttributeName: UIFont(descriptor: self.contentLabel.font.fontDescriptor().fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits.TraitBold), size: fontSize)
+            ]
             if let toUserId = self.comment.toUserId {
-                self.contentLabel.attributedText = NSAttributedString(html:
-                    String(format: binaryCommentTemplate, fontName, fontSize, comment.fromNickname,
-                        self.comment.toNickname!, self.comment.content))
+                let s = NSMutableAttributedString()
+                let fn = NSAttributedString(string: comment.fromNickname, attributes: bold)
+                let tn = NSAttributedString(string: comment.fromNickname, attributes: bold)
+                s.appendAttributedString(fn)
+                s.appendAttributedString(NSAttributedString(string: " 回复 "))
+                s.appendAttributedString(tn)
+                s.appendAttributedString(NSAttributedString(string: ": " + self.comment.content))
+                self.contentLabel.attributedText = s
             } else {
-                self.contentLabel.attributedText = NSAttributedString(html:
-                    String(format: commentTemplate, fontName, fontSize, self.comment.fromNickname,
-                        self.comment.content))
+                let s = NSMutableAttributedString()
+                let fn = NSAttributedString(string: comment.fromNickname, attributes: bold)
+                s.appendAttributedString(fn)
+                s.appendAttributedString(NSAttributedString(string: ": " + self.comment.content))
+                self.contentLabel.attributedText = s
             }
         }
     }
