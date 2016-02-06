@@ -53,7 +53,9 @@ class DungeonNotificationViewController: UIViewController, UITableViewDelegate, 
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let dn = self.notifications[indexPath.section][indexPath.row]
-        self.performSegueWithIdentifier("memorial", sender: dn)
+        if dn.memorial != nil {
+            self.performSegueWithIdentifier("memorial", sender: dn)
+        }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     

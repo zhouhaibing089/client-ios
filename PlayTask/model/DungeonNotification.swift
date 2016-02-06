@@ -13,7 +13,7 @@ class DungeonNotification {
     var avatarUrl: String
     var nickname: String
     var message: String
-    var memorial: Memorial
+    var memorial: Memorial?
     var createdTime: NSDate
     
     init(json: JSON) {

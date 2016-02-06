@@ -46,7 +46,7 @@ extension API {
             "content": content,
             "image_ids": String(JSON(imageIds))
             ]).map({ (json) -> Memorial in
-            return Memorial(json: json)
+            return Memorial(json: json)!
         })
     }
     
@@ -58,7 +58,7 @@ extension API {
         return API.req(.GET, "/dungeons/\(dungeon.id)/memorials", parameters: params).flatMap({ (json) -> Observable<Memorial> in
             var memorials = [Memorial]()
             for (_, subJson) : (String, JSON) in json {
-                memorials.append(Memorial(json: subJson))
+                memorials.append(Memorial(json: subJson)!)
             }
             return memorials.toObservable()
         })

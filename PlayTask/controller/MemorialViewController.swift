@@ -14,9 +14,24 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var commentTextView: YNTextView!
+    @IBOutlet weak var commentTextView: YNTextView! {
+        didSet {
+            self.commentTextView.layer.borderColor = UIColor.lightGrayColor().CGColor
+            self.commentTextView.layer.borderWidth = 1 / UIScreen.screenScale
+            self.commentTextView.maxHeight = 33 * 8 / UIScreen.screenScale
+            self.commentTextView.layer.cornerRadius = 2
+        }
+    }
+    @IBOutlet weak var imageButton: QiniuImageButton!
+    @IBOutlet weak var commentView: UIView! {
+        didSet {
+            let topBorder = CALayer()
+            topBorder.backgroundColor = UIColor.lightGrayColor().CGColor
+            topBorder.frame = CGRectMake(0, 0, CGRectGetWidth(self.commentView.frame), 1 / UIScreen.screenScale)
+            self.commentView.layer.addSublayer(topBorder)
+        }
+    }
     
     var memorial: Memorial!
     var commentToUserId: Int?
@@ -69,8 +84,15 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
         self.avatarImageView.af_setImageWithURL(NSURL(string: self.memorial.avatarUrl)!)
         self.nicknameLabel.text = self.memorial.nickname
         self.contentLabel.text = self.memorial.content
-        if let image = self.memorial.image {
-            self.imageView.af_setImageWithURL(NSURL(string: image.url)!)
-        }
+        self.imageButton.metaImage = self.memorial.image
+        self.timeLabel.text = self.memorial.createdTime.toReadable()
+        
+        // update table head, call AFTER set imageButton's metaImage
+        let tableHeaderView = self.tableView.tableHeaderView!
+        tableHeaderView.bounds.size.width = self.view.bounds.width
+        tableHeaderView.layoutIfNeeded()
+        let size = tableHeaderView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+        tableHeaderView.frame.size.height = size.height
+        self.tableView.tableHeaderView = tableHeaderView
     }
 }

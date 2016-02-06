@@ -45,7 +45,7 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
         didSet {
             self.commentTextView.layer.borderColor = UIColor.lightGrayColor().CGColor
             self.commentTextView.layer.borderWidth = 1 / UIScreen.screenScale
-            self.commentTextView.maxHeight = 33 * 4
+            self.commentTextView.maxHeight = 33 * 8 / UIScreen.screenScale
         }
     }
     
@@ -150,7 +150,6 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
         // table header view doesn's have a width constraint, so systemLayoutSizeFittingSize is confused.
         self.coverWidthConstraint.constant = self.view.bounds.width
         
-        //self.tableView.tableHeaderView = nil
         tableHeaderView.layoutIfNeeded()
         let size = tableHeaderView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
         tableHeaderView.frame.size.height = size.height
