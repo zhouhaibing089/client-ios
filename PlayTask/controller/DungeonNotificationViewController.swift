@@ -14,6 +14,7 @@ class DungeonNotificationViewController: UIViewController, UITableViewDelegate, 
     
     var dungeon: Dungeon!
 
+    @IBOutlet weak var loadIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             self.tableView.delegate = self
@@ -24,8 +25,15 @@ class DungeonNotificationViewController: UIViewController, UITableViewDelegate, 
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.refresh()
-        // Do any additional setup after loading the view.
+        
+        // pull to refresh
+        let tableViewController = UITableViewController()
+        tableViewController.tableView = self.tableView
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        tableViewController.refreshControl = refreshControl
+        refreshControl.beginRefreshing()
+        self.refresh(refreshControl)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -46,23 +54,60 @@ class DungeonNotificationViewController: UIViewController, UITableViewDelegate, 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let dn = self.notifications[indexPath.section][indexPath.row]
         self.performSegueWithIdentifier("memorial", sender: dn)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    func refresh() {
+    func refresh(sender: UIRefreshControl) {
         var dns = [DungeonNotification]()
         API.getDungeonNotifications(Util.currentUser, dungeonId: self.dungeon.id).subscribe({ event in
             switch event {
             case .Completed:
-                self.notifications.append(dns)
+                self.notifications = [dns]
                 self.tableView.reloadData()
+                sender.endRefreshing()
                 break
             case .Next(let dn):
                 dns.append(dn)
                 break
             case .Error(let t):
+                sender.endRefreshing()
                 break
             }
         })
+    }
+    
+    func load() {
+        if self.loadIndicator.isAnimating() {
+            return
+        }
+        if let before = self.notifications.last?.last?.createdTime {
+            self.loadIndicator.startAnimating()
+            var tmp = [DungeonNotification]()
+            API.getDungeonNotifications(Util.currentUser, dungeonId: self.dungeon.id, before: before).subscribe { event in
+                switch (event) {
+                case .Next(let n):
+                    tmp.append(n)
+                    break
+                case .Error(let e):
+                    self.loadIndicator.stopAnimating()
+                    break
+                case .Completed:
+                    self.notifications.append(tmp)
+                    self.loadIndicator.stopAnimating()
+                    self.tableView.reloadData()
+                    break
+                }
+            }
+        }
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offset = scrollView.contentOffset.y
+        let maxOffset = scrollView.contentSize.height - scrollView.bounds.height
+        if offset > 0 && maxOffset - offset < 44 {
+            // scroll down and reached bottom
+            self.load()
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Foundation
-
 extension NSDate {
     func beginOfDay() -> NSDate {
         let cal = NSCalendar.currentCalendar()
