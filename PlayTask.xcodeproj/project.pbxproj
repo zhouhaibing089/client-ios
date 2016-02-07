@@ -11,7 +11,7 @@
 		490BEA9D1C5737DD005CAF3C /* DungeonNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BEA9C1C5737DD005CAF3C /* DungeonNotification.swift */; };
 		490BEA9F1C5742A3005CAF3C /* DungeonNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BEA9E1C5742A3005CAF3C /* DungeonNotificationTableViewCell.swift */; };
 		490BEAA11C575621005CAF3C /* MemorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BEAA01C575621005CAF3C /* MemorialViewController.swift */; };
-		490BEAA31C575679005CAF3C /* MemorialCommentDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BEAA21C575679005CAF3C /* MemorialCommentDetailTableViewCell.swift */; };
+		490BEAA31C575679005CAF3C /* MemorialCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BEAA21C575679005CAF3C /* MemorialCommentTableViewCell.swift */; };
 		490BEAA51C57A4E8005CAF3C /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BEAA41C57A4E8005CAF3C /* PersonalViewController.swift */; };
 		491B6FD61C3FC469000FD353 /* libUMOnlineConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 491B6FD41C3FC469000FD353 /* libUMOnlineConfig.a */; };
 		491B6FDA1C40F599000FD353 /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491B6FD91C40F598000FD353 /* Task.storyboard */; };
@@ -102,7 +102,7 @@
 		490BEA9C1C5737DD005CAF3C /* DungeonNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DungeonNotification.swift; sourceTree = "<group>"; };
 		490BEA9E1C5742A3005CAF3C /* DungeonNotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DungeonNotificationTableViewCell.swift; sourceTree = "<group>"; };
 		490BEAA01C575621005CAF3C /* MemorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorialViewController.swift; sourceTree = "<group>"; };
-		490BEAA21C575679005CAF3C /* MemorialCommentDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorialCommentDetailTableViewCell.swift; sourceTree = "<group>"; };
+		490BEAA21C575679005CAF3C /* MemorialCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorialCommentTableViewCell.swift; sourceTree = "<group>"; };
 		490BEAA41C57A4E8005CAF3C /* PersonalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
 		491B6FD41C3FC469000FD353 /* libUMOnlineConfig.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMOnlineConfig.a; sourceTree = "<group>"; };
 		491B6FD51C3FC469000FD353 /* UMOnlineConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMOnlineConfig.h; sourceTree = "<group>"; };
@@ -270,7 +270,7 @@
 				49422DF41C48E83600C316B3 /* DungeonTaskTableViewCell.swift */,
 				496486AE1C51DB22008C9A2C /* MemorialTableViewCell.swift */,
 				490BEA9E1C5742A3005CAF3C /* DungeonNotificationTableViewCell.swift */,
-				490BEAA21C575679005CAF3C /* MemorialCommentDetailTableViewCell.swift */,
+				490BEAA21C575679005CAF3C /* MemorialCommentTableViewCell.swift */,
 				4938E43B1C587A7B00FC977C /* MemorialComment.xib */,
 				4938E43D1C587A9800FC977C /* MemorialCommentView.swift */,
 				4938E44A1C5F625400FC977C /* SpeechView.swift */,
@@ -622,7 +622,7 @@
 				491B6FE81C44A69D000FD353 /* DungeonListViewController.swift in Sources */,
 				490BEA9F1C5742A3005CAF3C /* DungeonNotificationTableViewCell.swift in Sources */,
 				49F4A0211C169D4D002D21D6 /* StatisticViewController.swift in Sources */,
-				490BEAA31C575679005CAF3C /* MemorialCommentDetailTableViewCell.swift in Sources */,
+				490BEAA31C575679005CAF3C /* MemorialCommentTableViewCell.swift in Sources */,
 				498BAC9C1BD0EA5300ABB357 /* MoreViewController.swift in Sources */,
 				49C8D3D21BE8ACC400E8EBF5 /* API.swift in Sources */,
 				49953DFE1BDB2D6900B25EC8 /* Wish.swift in Sources */,

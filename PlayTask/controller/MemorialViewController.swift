@@ -11,6 +11,7 @@ import YNSwift
 
 class MemorialViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var sendIndicator: UIActivityIndicatorView!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -54,7 +55,7 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("comment", forIndexPath: indexPath) as! MemorialCommentDetailTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("comment", forIndexPath: indexPath) as! MemorialCommentTableViewCell
         cell.comment = self.memorial.comments[indexPath.row]
         return cell
     }
@@ -70,13 +71,63 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
             self.presentViewController(actionSheet, animated: true, completion: nil)
         } else {
             self.commentTextView.hint = "回复 \(comment.fromNickname)："
+            if self.commentToUserId != comment.fromUserId {
+                self.commentToUserId = comment.fromUserId
+                self.commentTextView.text = ""
+            }
             self.commentTextView.becomeFirstResponder()
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        self.endComment(false)
     }
     
     @IBAction func send(sender: UIButton) {
+        self.sendIndicator.startAnimating()
+        sender.hidden = true
         API.commentMemorial(Util.currentUser, memorialId: self.memorial.id, toUserId: self.commentToUserId, content: self.commentTextView.text).subscribe { (event) -> Void in
-            
+            switch event {
+            case .Completed:
+                self.tableView.reloadData()
+                self.sendIndicator.stopAnimating()
+                self.endComment(true)
+                sender.hidden = false
+                break
+            case .Error(let e):
+                self.sendIndicator.stopAnimating()
+                sender.hidden = false
+                break
+            case .Next(let c):
+                self.memorial.comments.append(c)
+                break
+            }
+        }
+    }
+    
+    @IBAction func preview(sender: QiniuImageButton) {
+        self.performSegueWithIdentifier("preview@Main", sender: sender)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "preview@Main" {
+            let segue = segue as! YNSegue
+            if let pvc = segue.instantiated as? PreviewViewController {
+                pvc.rawImage = (sender as! UIButton).imageForState(UIControlState.Normal)
+                pvc.imageUrl = self.memorial.image?.url
+            }
+        }
+    }
+    
+    func endComment(clean: Bool) {
+        self.commentTextView.endEditing(true)
+        if clean {
+            self.commentTextView.text = ""
+        }
+        if self.commentTextView.text == "" {
+            self.commentTextView.hint = "评论"
+            self.commentToUserId = nil
         }
     }
     

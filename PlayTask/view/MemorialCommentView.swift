@@ -31,6 +31,9 @@ class MemorialCommentView: XibView {
     var comment: MemorialComment! {
         didSet {
             let fontSize = self.contentLabel.font.pointSize
+            let normal = [
+                NSFontAttributeName: self.contentLabel.font
+            ]
             let bold = [
                 NSFontAttributeName: UIFont(descriptor: self.contentLabel.font.fontDescriptor().fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits.TraitBold), size: fontSize)
             ]
@@ -39,9 +42,9 @@ class MemorialCommentView: XibView {
                 let fn = NSAttributedString(string: comment.fromNickname, attributes: bold)
                 let tn = NSAttributedString(string: comment.fromNickname, attributes: bold)
                 s.appendAttributedString(fn)
-                s.appendAttributedString(NSAttributedString(string: " 回复 "))
+                s.appendAttributedString(NSAttributedString(string: " 回复 ", attributes: normal))
                 s.appendAttributedString(tn)
-                s.appendAttributedString(NSAttributedString(string: ": " + self.comment.content))
+                s.appendAttributedString(NSAttributedString(string: ": \(self.comment.content)", attributes: normal))
                 self.contentLabel.attributedText = s
             } else {
                 let s = NSMutableAttributedString()

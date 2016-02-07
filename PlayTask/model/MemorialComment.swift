@@ -18,6 +18,7 @@ class MemorialComment {
     var content: String
     var memorialId: Int
     var fromAvatarUrl: String
+    var createdTime: NSDate
     
     init(json: JSON) {
         self.id = json["id"].intValue
@@ -28,5 +29,6 @@ class MemorialComment {
         self.toNickname = json["to_nickname"].string
         self.memorialId = json["memorial_id"].intValue
         self.fromAvatarUrl = json["from_avatar_url"].stringValue
+        self.createdTime = NSDate(millisecondsSince1970: json["created_time"].doubleValue)
     }
 }
