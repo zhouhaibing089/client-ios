@@ -15,5 +15,6 @@
 #import "Qiniu/QiniuSDK.h"
 #import "JSBadgeView/JSBadgeView.h"
 #import "OAStackView/OAStackView.h"
+#import "AlipaySDK/AlipaySDK.h"
 
 #endif /* BridgeHeader_h */

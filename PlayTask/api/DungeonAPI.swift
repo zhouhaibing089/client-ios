@@ -64,6 +64,7 @@ extension API {
         })
     }
     
+    /// 评论副本里的状态
     class func commentMemorial(user: User, memorialId: Int, toUserId: Int?, content: String) -> Observable<MemorialComment> {
         var parameters: [String: AnyObject] = [
             "from_user_id": user.sid.value!,
@@ -77,6 +78,7 @@ extension API {
         })
     }
     
+    /// 获取副本下的消息
     class func getDungeonNotifications(user: User, dungeonId: Int, before: NSDate? = nil) -> Observable<DungeonNotification> {
         var params = [String: AnyObject]()
         if before != nil {
@@ -88,6 +90,15 @@ extension API {
                 dns.append(DungeonNotification(json: subJson))
             }
             return dns.toObservable()
+        })
+    }
+    
+    // MARK: - 支付相关
+    
+    /// 创建支付订单
+    class func createOrder(dungeonId: Int) -> Observable<String> {
+        return API.req(.POST, "/dungeons/\(dungeonId)/orders").map({ (json) -> String in
+            json.stringValue
         })
     }
     

@@ -62,6 +62,7 @@ class DungeonDetailViewController: UIViewController {
 
     @IBAction func join(sender: UIButton) {
         if self.dungeon.bronzePledge > 0 {
+            // TODO: 支付铜币说明
             let alert = UIAlertController(title: "支付押金", message: "支付铜币的说明", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "支付", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
@@ -92,8 +93,22 @@ class DungeonDetailViewController: UIViewController {
             self.presentViewController(alert, animated: true, completion: nil)
             return
         }
+        // TODO: 支付押金说明
         let actionSheet = UIAlertController(title: "支付押金", message: "押金为。。。说明", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        actionSheet.addAction(UIAlertAction(title: "支付宝", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+        actionSheet.addAction(UIAlertAction(title: "支付宝", style: UIAlertActionStyle.Default, handler: { [unowned self] (action) -> Void in
+            API.createOrder(self.dungeon.id).subscribe { event in
+                switch event {
+                case .Next(let n):
+                    AlipaySDK.defaultService().payOrder(n, fromScheme: "", callback: { (result) -> Void in
+                        
+                    })
+                    break
+                case .Error(let e):
+                    break
+                case .Completed:
+                    break
+                }
+            }
             return
         }))
         actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))

@@ -55,6 +55,19 @@
 		499708EF1BCF63F500424F5E /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499708EE1BCF63F500424F5E /* NewTaskViewController.swift */; };
 		4998593D1BDB169C00C222E7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4998593C1BDB169C00C222E7 /* Task.swift */; };
 		49A976BB1BE73B02001300FB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A976BA1BE73B02001300FB /* LoginViewController.swift */; };
+		49AC6D961C77418E0028093D /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AC6D951C77418E0028093D /* AlipaySDK.framework */; };
+		49AC6D981C7741980028093D /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 49AC6D971C7741980028093D /* AlipaySDK.bundle */; };
+		49AC6D9B1C7742570028093D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 498BACA01BD1446900ABB357 /* libz.tbd */; };
+		49AC6D9D1C7742630028093D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AC6D9C1C7742630028093D /* SystemConfiguration.framework */; };
+		49AC6D9F1C77426D0028093D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AC6D9E1C77426D0028093D /* CoreTelephony.framework */; };
+		49AC6DA11C7742770028093D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AC6DA01C7742770028093D /* QuartzCore.framework */; };
+		49AC6DA31C7742800028093D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AC6DA21C7742800028093D /* CoreText.framework */; };
+		49AC6DA51C77428B0028093D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AC6DA41C77428B0028093D /* CoreGraphics.framework */; };
+		49AC6DA71C7742940028093D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AC6DA61C7742940028093D /* UIKit.framework */; };
+		49AC6DA91C77429C0028093D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AC6DA81C77429C0028093D /* Foundation.framework */; };
+		49AC6DAB1C7742B00028093D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AC6DAA1C7742B00028093D /* CFNetwork.framework */; };
+		49AC6DAD1C7742B60028093D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AC6DAC1C7742B60028093D /* CoreMotion.framework */; };
+		49AC6DAF1C77443E0028093D /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AC6DAE1C77443E0028093D /* libc++.tbd */; };
 		49B4F3211C5488290094A438 /* MemorialComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4F3201C5488290094A438 /* MemorialComment.swift */; };
 		49B4F32A1C56489F0094A438 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B4F3291C56489F0094A438 /* Badge.swift */; };
 		49B860241C461E8B004641DF /* DungeonEmbeddedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B860231C461E8B004641DF /* DungeonEmbeddedViewController.swift */; };
@@ -157,6 +170,19 @@
 		499708F51BCF68FD00424F5E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		4998593C1BDB169C00C222E7 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		49A976BA1BE73B02001300FB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		49AC6D951C77418E0028093D /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		49AC6D971C7741980028093D /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		49AC6D991C77424E0028093D /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
+		49AC6D9C1C7742630028093D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		49AC6D9E1C77426D0028093D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		49AC6DA01C7742770028093D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		49AC6DA21C7742800028093D /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		49AC6DA41C77428B0028093D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		49AC6DA61C7742940028093D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		49AC6DA81C77429C0028093D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		49AC6DAA1C7742B00028093D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		49AC6DAC1C7742B60028093D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		49AC6DAE1C77443E0028093D /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		49B4F3201C5488290094A438 /* MemorialComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorialComment.swift; sourceTree = "<group>"; };
 		49B4F3291C56489F0094A438 /* Badge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		49B860231C461E8B004641DF /* DungeonEmbeddedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DungeonEmbeddedViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +211,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49AC6DAF1C77443E0028093D /* libc++.tbd in Frameworks */,
+				49AC6D9B1C7742570028093D /* libz.tbd in Frameworks */,
+				49AC6D9D1C7742630028093D /* SystemConfiguration.framework in Frameworks */,
+				49AC6D9F1C77426D0028093D /* CoreTelephony.framework in Frameworks */,
+				49AC6DA11C7742770028093D /* QuartzCore.framework in Frameworks */,
+				49AC6DA31C7742800028093D /* CoreText.framework in Frameworks */,
+				49AC6DA51C77428B0028093D /* CoreGraphics.framework in Frameworks */,
+				49AC6DA71C7742940028093D /* UIKit.framework in Frameworks */,
+				49AC6DA91C77429C0028093D /* Foundation.framework in Frameworks */,
+				49AC6DAB1C7742B00028093D /* CFNetwork.framework in Frameworks */,
+				49AC6DAD1C7742B60028093D /* CoreMotion.framework in Frameworks */,
+				49AC6D961C77418E0028093D /* AlipaySDK.framework in Frameworks */,
 				491B6FD61C3FC469000FD353 /* libUMOnlineConfig.a in Frameworks */,
 				5177522D0A08272C32C53545 /* Pods.framework in Frameworks */,
 			);
@@ -344,9 +382,11 @@
 		499708F21BCF688000424F5E /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				499708F31BCF68AC00424F5E /* BridgeHeader.h */,
 				491B6FD41C3FC469000FD353 /* libUMOnlineConfig.a */,
 				491B6FD51C3FC469000FD353 /* UMOnlineConfig.h */,
-				499708F31BCF68AC00424F5E /* BridgeHeader.h */,
+				49AC6D971C7741980028093D /* AlipaySDK.bundle */,
+				49AC6D951C77418E0028093D /* AlipaySDK.framework */,
 			);
 			name = lib;
 			sourceTree = "<group>";
@@ -390,6 +430,17 @@
 		7E14BC58D189A1B880D48C2B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49AC6DAE1C77443E0028093D /* libc++.tbd */,
+				49AC6DAC1C7742B60028093D /* CoreMotion.framework */,
+				49AC6DAA1C7742B00028093D /* CFNetwork.framework */,
+				49AC6DA81C77429C0028093D /* Foundation.framework */,
+				49AC6DA61C7742940028093D /* UIKit.framework */,
+				49AC6DA41C77428B0028093D /* CoreGraphics.framework */,
+				49AC6DA21C7742800028093D /* CoreText.framework */,
+				49AC6DA01C7742770028093D /* QuartzCore.framework */,
+				49AC6D9E1C77426D0028093D /* CoreTelephony.framework */,
+				49AC6D9C1C7742630028093D /* SystemConfiguration.framework */,
+				49AC6D991C77424E0028093D /* libc++abi.tbd */,
 				498BACA01BD1446900ABB357 /* libz.tbd */,
 				27FE39AB88BE9E71239939D4 /* Pods.framework */,
 			);
@@ -511,6 +562,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49AC6D981C7741980028093D /* AlipaySDK.bundle in Resources */,
 				4938E43C1C587A7B00FC977C /* MemorialComment.xib in Resources */,
 				491B6FDA1C40F599000FD353 /* Task.storyboard in Resources */,
 				49422DF91C4F68A400C316B3 /* Dungeon.storyboard in Resources */,
@@ -792,6 +844,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PlayTask",
+				);
 				INFOPLIST_FILE = PlayTask/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -813,6 +869,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PlayTask",
+				);
 				INFOPLIST_FILE = PlayTask/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
