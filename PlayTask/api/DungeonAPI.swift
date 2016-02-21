@@ -96,8 +96,10 @@ extension API {
     // MARK: - 支付相关
     
     /// 创建支付订单
-    class func createOrder(dungeonId: Int) -> Observable<String> {
-        return API.req(.POST, "/dungeons/\(dungeonId)/orders").map({ (json) -> String in
+    class func createOrder(dungeonId: Int, zone: String) -> Observable<String> {
+        return API.req(.POST, "/dungeons/\(dungeonId)/orders", parameters: [
+            "zone": zone
+            ]).map({ (json) -> String in
             json.stringValue
         })
     }

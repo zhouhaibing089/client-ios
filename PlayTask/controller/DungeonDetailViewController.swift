@@ -96,7 +96,7 @@ class DungeonDetailViewController: UIViewController {
         // TODO: 支付押金说明
         let actionSheet = UIAlertController(title: "支付押金", message: "押金为。。。说明", preferredStyle: UIAlertControllerStyle.ActionSheet)
         actionSheet.addAction(UIAlertAction(title: "支付宝", style: UIAlertActionStyle.Default, handler: { [unowned self] (action) -> Void in
-            API.createOrder(self.dungeon.id).subscribe { event in
+            API.createOrder(self.dungeon.id, zone: NSTimeZone.localTimeZone().name).subscribe { event in
                 switch event {
                 case .Next(let n):
                     AlipaySDK.defaultService().payOrder(n, fromScheme: "", callback: { (result) -> Void in
