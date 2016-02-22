@@ -251,8 +251,4 @@ class DungeonTaskViewController: TaskViewController {
         }
         return NSAttributedString(string: "点击右上角的 \"+\" 加入副本")
     }
-    
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
-        return true
-    }
 }

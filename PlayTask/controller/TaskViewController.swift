@@ -292,6 +292,10 @@ class TaskViewController: UIViewController, UIToolbarDelegate, DZNEmptyDataSetDe
         }
     }
     
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         if self.showDone {
             return NSAttributedString(string: UMOnlineConfig.getConfigParams("taskDoneEmptyDescription") ?? "")

@@ -9,8 +9,9 @@
 import UIKit
 import YNSwift
 import RxSwift
+import DZNEmptyDataSet
 
-class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var coverImageView: UIImageView!
 
     @IBOutlet weak var loadIndicator: UIActivityIndicatorView!
@@ -73,6 +74,10 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableViewController.refreshControl = refreshControl
         refreshControl.beginRefreshing()
         self.refresh(refreshControl)
+        
+        // empty data set
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -266,4 +271,16 @@ class DungeonViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
 
+    // MARK: - empty data set
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "无内容")
+    }
+    
+    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+        return self.tableView.tableHeaderView!.frame.size.height * 2 / 3;
+    }
+    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
 }
