@@ -45,7 +45,7 @@ extension API {
         return API.req(.POST, "/dungeons/\(dungeon.id)/users/\(user.sid.value!)/memorials", parameters: [
             "content": content,
             "image_ids": String(JSON(imageIds))
-            ]).map({ (json) -> Memorial in
+            ], suppressError: false).map({ (json) -> Memorial in
             return Memorial(json: json)!
         })
     }

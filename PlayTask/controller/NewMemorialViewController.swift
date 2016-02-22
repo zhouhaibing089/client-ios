@@ -87,6 +87,7 @@ class NewMemorialViewController: UITableViewController, UIImagePickerControllerD
                 return Observable.create({ (observer) -> Disposable in
                     upManager.putData(UIImageJPEGRepresentation(self.selectedImage!, 0.6), key: nil, token: token, complete: { (info, key, resp) -> Void in
                         if resp == nil {
+                            CRToastManager.showNotificationWithMessage("上传图片失败, 请稍后再试", completionBlock: nil)
                             observer.onError(NetworkError.Unknown(Int(info.statusCode)))
                         } else {
                             observer.onNext(JSON(resp))
@@ -111,6 +112,15 @@ class NewMemorialViewController: UITableViewController, UIImagePickerControllerD
             
             }, onError: { (e) -> Void in
                 hud.hide(true)
+                if let error = e as? APIError {
+                    switch error {
+                    case .Custom(let status, let info, let data):
+                        CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
+                        break
+                    default:
+                        break
+                    }
+                }
             }, onCompleted: { () -> Void in
                 hud.switchToSuccess(duration: 1.0, labelText: "发送成功", completionBlock: nil)
             }, onDisposed: { () -> Void in
@@ -163,7 +173,12 @@ class NewMemorialViewController: UITableViewController, UIImagePickerControllerD
             }
         }
     }
+    
     @IBAction func cancelSend(sender: UITapGestureRecognizer) {
         self.sendDisposable?.dispose()
+    }
+    
+    override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        self.view.endEditing(true)
     }
 }
