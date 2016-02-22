@@ -691,6 +691,7 @@
                         <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mb7-dd-HYL">
                             <rect key="frame" x="113" y="7" width="150" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <state key="normal" title="本组(12) ▾"/>
                             <connections>
                                 <action selector="switchScope:" destination="ZLh-Iq-w0h" eventType="touchUpInside" id="cQ3-FC-FjL"/>
