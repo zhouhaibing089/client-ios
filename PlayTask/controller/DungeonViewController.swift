@@ -167,6 +167,10 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
             let nvc = segue.destinationViewController as! UINavigationController
             if let nmvc = nvc.viewControllers.first as? NewMemorialViewController {
                 nmvc.dungeon = self.dungeon
+                nmvc.onNewMemorial = { [unowned self] memorial in
+                    self.memorials.insert([memorial], atIndex: 0)
+                    self.update()
+                }
             }
         } else if segue.identifier == "notification" {
             if let dnvc = segue.destinationViewController as? DungeonNotificationViewController {

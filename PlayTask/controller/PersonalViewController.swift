@@ -123,7 +123,9 @@ class PersonalViewController: UITableViewController, UIImagePickerControllerDele
             }, onCompleted: { () -> Void in
                 hud.switchToSuccess(duration: 1, labelText: "头像设置成功", completionBlock: nil)
             }, onDisposed: { () -> Void in
-                hud.hide(true)
+                if hud.mode != .CustomView {
+                    hud.hide(true)
+                }
         })
 
         picker.dismissViewControllerAnimated(true, completion: nil)

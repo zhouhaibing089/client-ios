@@ -25,6 +25,7 @@ class NewMemorialViewController: UITableViewController, UIImagePickerControllerD
     @IBOutlet weak var contentTextView: YNTextView!
     
     var dungeon: Dungeon!
+    var onNewMemorial: ((Memorial) -> Void)?
     
     var selectedImage: UIImage? {
         didSet {
@@ -109,7 +110,7 @@ class NewMemorialViewController: UITableViewController, UIImagePickerControllerD
             sendObservable = API.sendMemorial(Util.loggedUser!, dungeon: self.dungeon, content: content, imageIds: [])
         }
         self.sendDisposable = sendObservable.subscribe(onNext: { (memorial) -> Void in
-            
+                self.onNewMemorial?(memorial)
             }, onError: { (e) -> Void in
                 hud.hide(true)
                 if let error = e as? APIError {
@@ -122,9 +123,13 @@ class NewMemorialViewController: UITableViewController, UIImagePickerControllerD
                     }
                 }
             }, onCompleted: { () -> Void in
-                hud.switchToSuccess(duration: 1.0, labelText: "发送成功", completionBlock: nil)
+                hud.switchToSuccess(duration: 1.0, labelText: "发送成功", completionBlock: {
+                    self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                })
             }, onDisposed: { () -> Void in
-                hud.hide(true)
+                if hud.mode != .CustomView { // not sended successfully
+                    hud.hide(true)
+                }
         })
     }
     
@@ -180,5 +185,5 @@ class NewMemorialViewController: UITableViewController, UIImagePickerControllerD
     
     override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         self.view.endEditing(true)
-    }
+    }    
 }
