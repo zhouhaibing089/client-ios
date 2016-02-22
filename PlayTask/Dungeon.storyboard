@@ -687,6 +687,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3Ls-Ay-pbO">
+                        <nil key="title"/>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mb7-dd-HYL">
+                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="本组(12) ▾"/>
+                            <connections>
+                                <action selector="switchScope:" destination="ZLh-Iq-w0h" eventType="touchUpInside" id="cQ3-FC-FjL"/>
+                            </connections>
+                        </button>
                         <barButtonItem key="rightBarButtonItem" image="create_new" id="bHB-4Z-y1Y">
                             <connections>
                                 <segue destination="dLW-MK-uv1" kind="presentation" identifier="new" id="9si-AY-ZRK"/>
@@ -705,6 +714,7 @@
                         <outlet property="loadIndicator" destination="Hv9-IL-IQ2" id="9GS-8o-Xf3"/>
                         <outlet property="messageAlertButton" destination="RaU-on-qZM" id="wM3-U0-FeM"/>
                         <outlet property="tableView" destination="IUU-pn-mWh" id="YmM-RC-7MN"/>
+                        <outlet property="titleButton" destination="mb7-dd-HYL" id="UlZ-Nz-mf6"/>
                         <segue destination="aRL-H2-C1S" kind="custom" identifier="preview@Main" customClass="YNModalSegue" customModule="YNSwift" id="Jw8-xj-kf1"/>
                     </connections>
                 </viewController>

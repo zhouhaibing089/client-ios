@@ -252,6 +252,11 @@
                                                         <constraint firstAttribute="width" constant="64" id="OFV-CL-2RO"/>
                                                         <constraint firstAttribute="width" secondItem="sON-mg-Reb" secondAttribute="height" multiplier="1:1" id="ZtH-7V-pmE"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                             </subviews>
                                             <constraints>

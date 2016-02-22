@@ -49,6 +49,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
             self.commentTextView.maxHeight = 33 * 8 / UIScreen.screenScale
         }
     }
+    @IBOutlet weak var titleButton: UIButton!
     
     var memorials = [[Memorial]]()
     var dungeon: Dungeon!
@@ -57,6 +58,8 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     var commentMemorial: Memorial!
     var commentToUserId: Int?
     var commentIndexPath: NSIndexPath!
+    
+    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,11 +72,11 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         // pull to refresh
         let tableViewController = UITableViewController()
         tableViewController.tableView = self.tableView
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        tableViewController.refreshControl = refreshControl
-        refreshControl.beginRefreshing()
-        self.refresh(refreshControl)
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        tableViewController.refreshControl = self.refreshControl
+        self.refreshControl.beginRefreshing()
+        self.refresh(self.refreshControl)
         
         // empty data set
         self.tableView.emptyDataSetSource = self
@@ -123,70 +126,11 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         return cell
     }
     
-    func update() {
-        // cover image
-        self.coverImageView.af_setImageWithURL(NSURL(string: self.dungeon.cover)!)
-        if let loggedUser = Util.loggedUser {
-            if let avatarUrl = NSURL(string: loggedUser.avatarUrl) {
-                self.avatarImageView.af_setImageWithURL(avatarUrl)
-            }
-        }
-        
-        // message alert
-        let messageCount = Util.currentUser.badge.getCountByDungeonId(self.dungeon.id)
-        if messageCount > 0 {
-            self.messageAlertButton.setTitle(String(format: "您有%d条新消息", messageCount), forState: UIControlState.Normal)
-            self.messageAlertButton.hidden = false
-        } else {
-            self.messageAlertButton.hidden = true
-        }
-        
-        // dungeon title
-        self.dungeonTitleLabel.text = self.dungeon.title
-        
-        // table header view header
-        let tableHeaderView = self.tableView.tableHeaderView!
-        tableHeaderView.bounds.size.width = self.view.bounds.width
-        
-        // cover has a relative constraint, which will cause systemLayoutSizeFittingSize get wrong size
-        // because table header view doesn't have width constraint
-        // see: http://stackoverflow.com/questions/27064070/auto-layout-with-relative-constraints-not-affecting-systemlayoutsizefittingsize
-        // in a world, cover depends on table header view's width, however (image view dones't have instinct size neither),
-        // table header view doesn's have a width constraint, so systemLayoutSizeFittingSize is confused.
-        self.coverWidthConstraint.constant = self.view.bounds.width
-        
-        tableHeaderView.layoutIfNeeded()
-        let size = tableHeaderView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
-        tableHeaderView.frame.size.height = size.height
-        self.tableView.tableHeaderView = tableHeaderView
-        
-        self.tableView.reloadData()
-    }
-    
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         if !self.commentIndicator.isAnimating() {
             self.closeCommentView()
         }
         
-    }
-    
-    func refresh(sender: UIRefreshControl? = nil) {
-        var tmp = [Memorial]()
-        API.getMemorials(self.dungeon).subscribe { (event) -> Void in
-            switch event {
-            case .Next(let m):
-                tmp.append(m)
-                break
-            case .Completed:
-                self.memorials = [tmp]
-                self.update()
-                sender?.endRefreshing()
-                break
-            case .Error(let e):
-                sender?.endRefreshing()
-                break
-            }
-        }
     }
     
     @IBAction func sendComment(sender: UIButton) {
@@ -238,6 +182,82 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         }
     }
     
+    // MARK: - refresh
+    func refresh(sender: UIRefreshControl? = nil) {
+        var tmp = [Memorial]()
+        API.getMemorials(self.dungeon, all: self.scope == Scope.All).subscribe { (event) -> Void in
+            switch event {
+            case .Next(let m):
+                tmp.append(m)
+                break
+            case .Completed:
+                self.memorials = [tmp]
+                self.update()
+                sender?.endRefreshing()
+                break
+            case .Error(let e):
+                sender?.endRefreshing()
+                break
+            }
+        }
+    }
+    
+    func update() {
+        // cover image
+        self.coverImageView.af_setImageWithURL(NSURL(string: self.dungeon.cover)!)
+        if let loggedUser = Util.loggedUser {
+            if let avatarUrl = NSURL(string: loggedUser.avatarUrl) {
+                self.avatarImageView.af_setImageWithURL(avatarUrl)
+            }
+        }
+        
+        // message alert
+        let messageCount = Util.currentUser.badge.getCountByDungeonId(self.dungeon.id)
+        if messageCount > 0 {
+            self.messageAlertButton.setTitle(String(format: "您有%d条新消息", messageCount), forState: UIControlState.Normal)
+            self.messageAlertButton.hidden = false
+        } else {
+            self.messageAlertButton.hidden = true
+        }
+        
+        // dungeon title
+        self.dungeonTitleLabel.text = self.dungeon.title
+        
+        // table header view header
+        let tableHeaderView = self.tableView.tableHeaderView!
+        tableHeaderView.bounds.size.width = self.view.bounds.width
+        
+        // cover has a relative constraint, which will cause systemLayoutSizeFittingSize get wrong size
+        // because table header view doesn't have width constraint
+        // see: http://stackoverflow.com/questions/27064070/auto-layout-with-relative-constraints-not-affecting-systemlayoutsizefittingsize
+        // in a world, cover depends on table header view's width, however (image view dones't have instinct size neither),
+        // table header view doesn's have a width constraint, so systemLayoutSizeFittingSize is confused.
+        self.coverWidthConstraint.constant = self.view.bounds.width
+        
+        tableHeaderView.layoutIfNeeded()
+        let size = tableHeaderView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+        tableHeaderView.frame.size.height = size.height
+        self.tableView.tableHeaderView = tableHeaderView
+        
+        // title
+        switch self.scope {
+        case .Group:
+            UIView.performWithoutAnimation({ () -> Void in
+                self.titleButton.setTitle(String(format: "本组(%d) ▾", self.dungeon.currentPlayer), forState: UIControlState.Normal)
+                self.titleButton.layoutIfNeeded()
+            })
+            break
+        case .All:
+            UIView.performWithoutAnimation({ () -> Void in
+                self.titleButton.setTitle("全部 ▾", forState: UIControlState.Normal)
+                self.titleButton.layoutIfNeeded()
+            })
+            break
+        }
+        
+        self.tableView.reloadData()
+    }
+    
     func load() {
         if self.loadIndicator.isAnimating() {
             return
@@ -245,7 +265,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         if let before = self.memorials.last?.last?.createdTime {
             self.loadIndicator.startAnimating()
             var tmp = [Memorial]()
-            API.getMemorials(self.dungeon, before: before).subscribe { event in
+            API.getMemorials(self.dungeon, all: self.scope == Scope.All, before: before).subscribe { event in
                 switch (event) {
                 case .Next(let m):
                     tmp.append(m)
@@ -282,5 +302,31 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
         return true
+    }
+    
+    // MARK: - Switch scope
+    
+    enum Scope {
+        case Group
+        case All
+    }
+    
+    var scope = Scope.Group {
+        didSet {
+            self.refresh(self.refreshControl)
+        }
+    }
+    
+    @IBAction func switchScope(sender: UIButton) {
+        var actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        actionSheet.addAction(UIAlertAction(title: "看全部", style: UIAlertActionStyle.Default, handler: { [unowned self] (action) -> Void in
+            self.scope = Scope.All
+        }))
+        actionSheet.addAction(UIAlertAction(title: "只看本组", style: UIAlertActionStyle.Default, handler: { [unowned self] (action) -> Void in
+            self.scope = Scope.Group
+            
+        }))
+        actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
+        self.presentViewController(actionSheet, animated: true, completion: nil)
     }
 }
