@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
-class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSource, UITableViewDelegate {
+class TaskViewController: UIViewController, UIToolbarDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var bronzeLabel: UILabel!
     @IBOutlet weak var tipsLabel: UILabel!
@@ -84,6 +85,10 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
                 }
             }
         }
+        
+        // empty dateset
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.emptyDataSetSource = self
         
         self.navigationController?.view.backgroundColor = UIColor.whiteColor();
         
@@ -243,6 +248,7 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
         self.presentViewController(actionSheet, animated: true, completion: nil)
     }
 
+    // MARK: - refresh
     func refresh() {
         let user = Util.currentUser
         self.scoreLabel.text = "\(user.score)"
@@ -266,16 +272,31 @@ class TaskViewController: UIViewController, UIToolbarDelegate, UITableViewDataSo
                 }
             }
         }
-        if self.currentTasks.count == 0 {
-            self.tableView.hidden = true
-            if self.showDone {
-                self.tipsLabel.text = UMOnlineConfig.getConfigParams("taskDoneTips") ?? "已完成的任务"
-            } else {
-                self.tipsLabel.text = UMOnlineConfig.getConfigParams("taskUndoneTips") ?? "没有未完成的任务"
-            }
-        } else {
-            self.tableView.hidden = false
-        }
+        self.update()
+        
+    }
+    
+    func update() {
+        self.tableView.tableFooterView = nil
+        self.tableView.reloadEmptyDataSet()
         self.tableView.reloadData()
+    }
+    
+    // MARK: - empty dataset
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        self.tableView.tableFooterView = UIView()
+        if self.showDone {
+            return NSAttributedString(string: "没有已完成的任务")
+        } else {
+            return NSAttributedString(string: "没有未完成的任务")
+        }
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        if self.showDone {
+            return NSAttributedString(string: UMOnlineConfig.getConfigParams("taskDoneEmptyDescription") ?? "")
+        } else {
+            return NSAttributedString(string: UMOnlineConfig.getConfigParams("taskUndoneEmptyDescription") ?? "")
+        }
     }
 }

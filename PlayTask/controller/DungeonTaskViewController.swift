@@ -122,6 +122,30 @@ class DungeonTaskViewController: TaskViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if self.mode == Mode.Task {
+            return super.prepareForSegue(segue, sender: sender)
+        }
+        if let segue = segue as? YNSegue {
+            if segue.identifier == "index@Dungeon" {
+                if let dvc = segue.instantiated as? DungeonViewController {
+                    dvc.dungeon = sender as! Dungeon
+                }
+            } else if segue.identifier == "login@Main" {
+                let navigationController = segue.instantiated as! UINavigationController
+                if let lvc = navigationController.viewControllers.first as? LoginViewController {
+                    lvc.onResult = { logged in
+                        if !logged {
+                            // canceled log in, swith to previous segment
+                            self.taskTypeSegmentControl.selectedSegmentIndex = self.previousSelectedSegment
+                            self.changeTaskType(self.taskTypeSegmentControl)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     override func showMenu(sender: UIBarButtonItem) {
         if self.mode == Mode.Task {
             return super.showMenu(sender)
@@ -137,6 +161,8 @@ class DungeonTaskViewController: TaskViewController {
         self.presentViewController(actionSheet, animated: true, completion: nil)
     }
     
+    
+    // MARK: - refresh load update
     override func refresh() {
         if self.mode == Mode.Task {
             return super.refresh()
@@ -154,11 +180,13 @@ class DungeonTaskViewController: TaskViewController {
             return
         }
         var tmp = [Dungeon]()
+        // reload empty dataset upon switch task type
+        self.tableView.reloadEmptyDataSet()
         API.getJoinedDungeons(Util.currentUser).subscribe { event in
             switch event {
             case .Completed:
                 self.dungeons = [tmp]
-                self.tableView.reloadData()
+                self.update()
                 refreshControl.endRefreshing()
                 break
             case .Error(let e):
@@ -182,7 +210,7 @@ class DungeonTaskViewController: TaskViewController {
                 switch event {
                 case .Completed:
                     self.dungeons.append(tmp)
-                    self.tableView.reloadData()
+                    self.update()
                     self.loadIndicator.stopAnimating()
                     break
                 case .Error(let e):
@@ -207,28 +235,24 @@ class DungeonTaskViewController: TaskViewController {
             self.load()
         }
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+    // MARK: - empty dataset
+    override func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         if self.mode == Mode.Task {
-            return super.prepareForSegue(segue, sender: sender)
+            return super.titleForEmptyDataSet(scrollView)
         }
-        if let segue = segue as? YNSegue {
-            if segue.identifier == "index@Dungeon" {
-                if let dvc = segue.instantiated as? DungeonViewController {
-                    dvc.dungeon = sender as! Dungeon
-                }
-            } else if segue.identifier == "login@Main" {
-                let navigationController = segue.instantiated as! UINavigationController
-                if let lvc = navigationController.viewControllers.first as? LoginViewController {
-                    lvc.onResult = { logged in
-                        if !logged {
-                            // canceled log in, swith to previous segment
-                            self.taskTypeSegmentControl.selectedSegmentIndex = self.previousSelectedSegment
-                            self.changeTaskType(self.taskTypeSegmentControl)
-                        }
-                    }
-                }
-            }
+        self.tableView.tableFooterView = UIView()
+        return NSAttributedString(string: "没有副本")
+    }
+    
+    override func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        if self.mode == Mode.Task {
+            return super.descriptionForEmptyDataSet(scrollView)
         }
+        return NSAttributedString(string: "点击右上角的 \"+\" 加入副本")
+    }
+    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
     }
 }
