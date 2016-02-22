@@ -58,7 +58,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="this is comment" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6M-My-FmZ">
-                                                    <rect key="frame" x="64" y="26" width="231" height="20"/>
+                                                    <rect key="frame" x="64" y="34" width="231" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -121,7 +121,7 @@
                                                 <constraint firstItem="tx6-ll-e73" firstAttribute="leading" secondItem="NAt-Yb-WVF" secondAttribute="trailing" constant="8" symbolic="YES" id="tAp-LV-Ked"/>
                                                 <constraint firstItem="Bpl-vj-9wA" firstAttribute="top" secondItem="Z5B-RQ-eMz" secondAttribute="topMargin" id="u0E-aU-vPY"/>
                                                 <constraint firstItem="NVd-G4-MUt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="N6M-My-FmZ" secondAttribute="bottom" constant="8" symbolic="YES" id="wSa-ik-0R2"/>
-                                                <constraint firstItem="N6M-My-FmZ" firstAttribute="top" secondItem="tx6-ll-e73" secondAttribute="bottom" id="wj9-bm-n1T"/>
+                                                <constraint firstItem="N6M-My-FmZ" firstAttribute="top" secondItem="tx6-ll-e73" secondAttribute="bottom" constant="8" symbolic="YES" id="wj9-bm-n1T"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -161,7 +161,7 @@
             </objects>
             <point key="canvasLocation" x="1777.5" y="-829.5"/>
         </scene>
-        <!--Memorial View Controller-->
+        <!--详情-->
         <scene sceneID="6IH-pE-iRA">
             <objects>
                 <viewController id="O9T-ov-kak" customClass="MemorialViewController" customModule="PlayTask" customModuleProvider="target" sceneMemberID="viewController">
@@ -373,6 +373,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="详情" id="v1X-IP-fPw"/>
                     <connections>
                         <outlet property="avatarImageView" destination="Uh6-a5-sAj" id="O9h-I6-C9z"/>
                         <outlet property="commentTextView" destination="PSO-Ru-0GF" id="xI8-F2-St0"/>
@@ -902,6 +903,6 @@
         <image name="select_image_button" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Jw8-xj-kf1"/>
+        <segue reference="gSv-CI-yEA"/>
     </inferredMetricsTieBreakers>
 </document>
