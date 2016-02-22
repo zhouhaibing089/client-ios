@@ -741,79 +741,105 @@
             <point key="canvasLocation" x="1799" y="814"/>
         </scene>
         <!--New Memorial View Controller-->
-        <scene sceneID="fYb-7v-uhN">
+        <scene sceneID="hWX-bm-Sed">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="dFt-3O-EG2" customClass="NewMemorialViewController" customModule="PlayTask" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="w6t-jY-55a"/>
-                        <viewControllerLayoutGuide type="bottom" id="nKT-Ue-Rc6"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PYW-b4-APE">
+                <tableViewController id="GYd-VO-58i" customClass="NewMemorialViewController" customModule="PlayTask" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="v52-Ux-CBP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="这一刻的想法..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="A2E-p6-kIj" customClass="YNTextView" customModule="YNSwift">
-                                <rect key="frame" x="16" y="72" width="343" height="128"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="m6C-nb-RbL"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jA1-R6-RiD">
-                                <rect key="frame" x="16" y="208" width="64" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="jA1-R6-RiD" secondAttribute="height" multiplier="1:1" id="0bn-UM-B6O"/>
-                                    <constraint firstAttribute="width" constant="64" id="3Zo-Q6-Nwz"/>
-                                </constraints>
-                                <state key="normal" image="select_image_button">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="selectImage:" destination="dFt-3O-EG2" eventType="touchUpInside" id="FkZ-zp-RRl"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="A2E-p6-kIj" firstAttribute="leading" secondItem="PYW-b4-APE" secondAttribute="leadingMargin" id="2Fe-Ek-eIr"/>
-                            <constraint firstItem="jA1-R6-RiD" firstAttribute="leading" secondItem="A2E-p6-kIj" secondAttribute="leading" id="Kxg-UH-0To"/>
-                            <constraint firstItem="nKT-Ue-Rc6" firstAttribute="top" secondItem="A2E-p6-kIj" secondAttribute="bottom" constant="400" id="V4t-ec-0Mh"/>
-                            <constraint firstItem="jA1-R6-RiD" firstAttribute="width" secondItem="PYW-b4-APE" secondAttribute="height" multiplier="1:1" id="W6z-Mc-h1L"/>
-                            <constraint firstItem="jA1-R6-RiD" firstAttribute="top" secondItem="A2E-p6-kIj" secondAttribute="bottom" constant="8" symbolic="YES" id="elx-13-LzF"/>
-                            <constraint firstItem="A2E-p6-kIj" firstAttribute="top" secondItem="w6t-jY-55a" secondAttribute="bottom" constant="8" symbolic="YES" id="wav-Ca-q09"/>
-                            <constraint firstItem="A2E-p6-kIj" firstAttribute="trailing" secondItem="PYW-b4-APE" secondAttribute="trailingMargin" id="zV9-96-jLe"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="W6z-Mc-h1L"/>
-                                <exclude reference="V4t-ec-0Mh"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <navigationItem key="navigationItem" id="Bde-Xc-54p">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="V7Y-Rc-5aJ">
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                        <sections>
+                            <tableViewSection id="fEW-SS-8Ro">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="168" id="Th8-1O-UbN">
+                                        <rect key="frame" x="0.0" y="99" width="375" height="168"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Th8-1O-UbN" id="6TZ-VE-ihf">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="168"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="这一刻的想法..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="A2E-p6-kIj" customClass="YNTextView" customModule="YNSwift">
+                                                    <rect key="frame" x="8" y="8" width="359" height="128"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="128" id="0tQ-6c-gDd"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="A2E-p6-kIj" secondAttribute="bottom" id="BLw-SH-fpe"/>
+                                                <constraint firstItem="A2E-p6-kIj" firstAttribute="leading" secondItem="6TZ-VE-ihf" secondAttribute="leadingMargin" id="EI4-fd-QFW"/>
+                                                <constraint firstItem="A2E-p6-kIj" firstAttribute="trailing" secondItem="6TZ-VE-ihf" secondAttribute="trailingMargin" id="VeQ-QF-k48"/>
+                                                <constraint firstItem="A2E-p6-kIj" firstAttribute="top" secondItem="6TZ-VE-ihf" secondAttribute="topMargin" id="fK4-i3-i4A"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="95" id="3OX-AF-SDN">
+                                        <rect key="frame" x="0.0" y="267" width="375" height="95"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3OX-AF-SDN" id="qPb-cx-0EJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="95"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jA1-R6-RiD">
+                                                    <rect key="frame" x="8" y="8" width="64" height="64"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="jA1-R6-RiD" secondAttribute="height" multiplier="1:1" id="0bn-UM-B6O"/>
+                                                        <constraint firstAttribute="width" constant="64" id="3Zo-Q6-Nwz"/>
+                                                    </constraints>
+                                                    <state key="normal" image="select_image_button">
+                                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="selectImage:" destination="GYd-VO-58i" eventType="touchUpInside" id="6qY-GZ-UOi"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="jA1-R6-RiD" secondAttribute="bottom" id="AH6-rj-a8i"/>
+                                                <constraint firstAttribute="topMargin" secondItem="jA1-R6-RiD" secondAttribute="top" id="G9r-QG-HD6"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="jA1-R6-RiD" secondAttribute="leading" id="QiF-ul-W2I"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="GYd-VO-58i" id="lWS-N3-ecY"/>
+                            <outlet property="delegate" destination="GYd-VO-58i" id="E9X-5r-6py"/>
+                            <outletCollection property="gestureRecognizers" destination="nU5-3v-4zp" appends="YES" id="0hR-IU-2rh"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="B06-KQ-tJR">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="AEP-E4-hkN">
                             <connections>
-                                <action selector="cancel:" destination="dFt-3O-EG2" id="8I1-5N-fLO"/>
+                                <action selector="cancel:" destination="GYd-VO-58i" id="isV-5J-Q6m"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="完成" id="sRd-dC-0xK">
+                        <barButtonItem key="rightBarButtonItem" title="发送" id="QfH-w4-LXN">
                             <connections>
-                                <action selector="send:" destination="dFt-3O-EG2" id="UEg-7C-ZxD"/>
+                                <action selector="send:" destination="GYd-VO-58i" id="E58-9v-aKu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="contentTextView" destination="A2E-p6-kIj" id="85Z-WO-JCJ"/>
-                        <outlet property="selectImageButton" destination="jA1-R6-RiD" id="lg0-yE-gf5"/>
-                        <outlet property="sendButton" destination="sRd-dC-0xK" id="kma-gX-bwr"/>
-                        <segue destination="yGh-n2-JB7" kind="custom" identifier="preview@Main" customClass="YNModalSegue" customModule="YNSwift" id="SdN-Fr-twN"/>
+                        <outlet property="contentTextView" destination="A2E-p6-kIj" id="uNY-IQ-WfO"/>
+                        <outlet property="selectImageButton" destination="jA1-R6-RiD" id="rq2-Sw-HJa"/>
+                        <outlet property="sendButton" destination="QfH-w4-LXN" id="QUO-3m-Wt6"/>
+                        <segue destination="yGh-n2-JB7" kind="custom" identifier="preview@Main" customClass="YNModalSegue" customModule="YNSwift" id="HCq-zB-EXS"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kNt-hH-ibe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w1H-dC-5cn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="nU5-3v-4zp">
+                    <connections>
+                        <action selector="cancelSend:" destination="GYd-VO-58i" id="36s-UO-aLd"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2981.5" y="-72.5"/>
+            <point key="canvasLocation" x="2922.5" y="-72.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="5qu-X6-lCL">
@@ -862,7 +888,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="dFt-3O-EG2" kind="relationship" relationship="rootViewController" id="LRF-OC-N6N"/>
+                        <segue destination="GYd-VO-58i" kind="relationship" relationship="rootViewController" id="Hpg-X7-9KR"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4On-Hb-VgY" userLabel="First Responder" sceneMemberID="firstResponder"/>

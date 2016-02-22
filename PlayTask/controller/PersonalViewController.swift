@@ -84,7 +84,7 @@ class PersonalViewController: UITableViewController, UIImagePickerControllerDele
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         self.avatarImageView.image = image
-        let hud = MBProgressHUD.show()
+        let hud = MBProgressHUD.show(self.tableView)
         hud.mode = MBProgressHUDMode.Determinate
         hud.labelText = "上传头像中"
         hud.detailsLabelText = "轻触取消"
@@ -116,18 +116,14 @@ class PersonalViewController: UITableViewController, UIImagePickerControllerDele
             return API.changeAvatar(Util.currentUser, avatar: image.id).map({ (bool) -> QiniuImage in
                 return image
             })
-        }).subscribe({ (event) -> Void in
-            switch event {
-            case .Completed:
-                hud.switchToSuccess(duration: 1, labelText: "头像设置成功", completionBlock: nil)
-                break
-            case .Next(let e):
-                Util.currentUser.update(["avatarUrl": e.url])
-                break
-            case .Error(let e):
+        }).subscribe(onNext: { (qiniuImage) -> Void in
+                Util.currentUser.update(["avatarUrl": qiniuImage.url])
+            }, onError: { (e) -> Void in
                 hud.hide(true)
-                break
-            }
+            }, onCompleted: { () -> Void in
+                hud.switchToSuccess(duration: 1, labelText: "头像设置成功", completionBlock: nil)
+            }, onDisposed: { () -> Void in
+                hud.hide(true)
         })
 
         picker.dismissViewControllerAnimated(true, completion: nil)

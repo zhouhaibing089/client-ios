@@ -12,8 +12,9 @@ import CRToast
 import RxSwift
 import Qiniu
 import SwiftyJSON
+import MBProgressHUD
 
-class NewMemorialViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class NewMemorialViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var selectImageButton: UIButton! {
         didSet {
@@ -38,7 +39,9 @@ class NewMemorialViewController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.contentTextView.minHeight = 33 * 4 / UIScreen.screenScale
+        self.contentTextView.layoutIfNeeded()
+        self.tableView.estimatedRowHeight = 44
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,17 +49,41 @@ class NewMemorialViewController: UIViewController, UIImagePickerControllerDelega
         // Dispose of any resources that can be recreated.
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.min
+    }
+    
     @IBAction func cancel(sender: UIBarButtonItem) {
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    var cancelUploadImage = false
+    var sendDisposable: Disposable?
 
     @IBAction func send(sender: UIBarButtonItem) {
         var sendObservable: Observable<Memorial>
-        let content = self.contentTextView.text
+        let content = re.sub("\\s+", " ", self.contentTextView.text)
+        if contentTextView.text == "" && self.selectedImage == nil {
+            return
+        }
+        let hud = MBProgressHUD.show(self.tableView)
+
+        self.cancelUploadImage = false
         if self.selectedImage != nil {
+            hud.mode = .Determinate
+            hud.labelText = "上传中"
+            hud.detailsLabelText = "轻触取消"
             let uploadImageObservable = API.getQiniuToken().flatMap({ (token) -> Observable<JSON> in
                 let upManager = QNUploadManager()
-                
+                let option = QNUploadOption(mime: nil, progressHandler: { (key, progress) -> Void in
+                    hud.progress = progress
+                    }, params: nil, checkCrc: true, cancellationSignal: { () -> Bool in
+                        self.cancelUploadImage
+                })
                 return Observable.create({ (observer) -> Disposable in
                     upManager.putData(UIImageJPEGRepresentation(self.selectedImage!, 0.6), key: nil, token: token, complete: { (info, key, resp) -> Void in
                         if resp == nil {
@@ -65,9 +92,9 @@ class NewMemorialViewController: UIViewController, UIImagePickerControllerDelega
                             observer.onNext(JSON(resp))
                             observer.onCompleted()
                         }
-                    }, option: nil)
+                    }, option: option)
                     return AnonymousDisposable {
-                        // TODO cancel upload
+                        self.cancelUploadImage = true
                     }
                 })
             }).flatMap({ (json) -> Observable<QiniuImage> in
@@ -80,17 +107,15 @@ class NewMemorialViewController: UIViewController, UIImagePickerControllerDelega
         } else {
             sendObservable = API.sendMemorial(Util.loggedUser!, dungeon: self.dungeon, content: content, imageIds: [])
         }
-        
-        sendObservable.subscribe { (event) -> Void in
-            switch event {
-            case .Completed:
-                break
-            case .Error(let error):
-                break
-            case .Next(let memorial):
-                break
-            }
-        }
+        self.sendDisposable = sendObservable.subscribe(onNext: { (memorial) -> Void in
+            
+            }, onError: { (e) -> Void in
+                hud.hide(true)
+            }, onCompleted: { () -> Void in
+                hud.switchToSuccess(duration: 1.0, labelText: "发送成功", completionBlock: nil)
+            }, onDisposed: { () -> Void in
+                hud.hide(true)
+        })
     }
     
     @IBAction func selectImage(sender: UIButton) {
@@ -137,5 +162,8 @@ class NewMemorialViewController: UIViewController, UIImagePickerControllerDelega
                 self.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
             }
         }
+    }
+    @IBAction func cancelSend(sender: UITapGestureRecognizer) {
+        self.sendDisposable?.dispose()
     }
 }
