@@ -69,8 +69,7 @@ class DungeonTaskViewController: TaskViewController {
                 self.performSegueWithIdentifier("login@Main", sender: nil)
                 return
             }
-            self.refreshControl.beginRefreshing()
-            self.refresh(self.refreshControl)
+            self.refresh()
         } else {
             self.refreshTableViewController.refreshControl = nil
             self.tableView.allowsSelection = false
@@ -167,11 +166,14 @@ class DungeonTaskViewController: TaskViewController {
         if self.mode == Mode.Task {
             return super.refresh()
         }
+        self.loadIndicator.startAnimating()
+        self.refresh(self.refreshControl)
     }
     
     func refresh(refreshControl: UIRefreshControl) {
         if self.mode == Mode.Task {
-            return refreshControl.endRefreshing()
+            refreshControl.endRefreshing()
+            return
         }
         if Util.loggedUser == nil {
             // not logged in, switch to first segment
@@ -188,8 +190,10 @@ class DungeonTaskViewController: TaskViewController {
                 self.dungeons = [tmp]
                 self.update()
                 refreshControl.endRefreshing()
+                self.loadIndicator.stopAnimating()
                 break
             case .Error(let e):
+                self.loadIndicator.stopAnimating()
                 refreshControl.endRefreshing()
                 break
             case .Next(let d):

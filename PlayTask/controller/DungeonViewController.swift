@@ -61,11 +61,15 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     
     var refreshControl: UIRefreshControl!
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.update()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.update()
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
 
