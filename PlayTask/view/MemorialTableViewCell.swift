@@ -39,7 +39,10 @@ class MemorialTableViewCell: UITableViewCell {
         didSet {
             self.contentLabel.text = self.memorial.content
             self.timeLabel.text = self.memorial.createdTime.toReadable()
-            self.nicknameButton.setTitle(self.memorial.nickname, forState: UIControlState.Normal)
+            UIView.performWithoutAnimation { () -> Void in
+                self.nicknameButton.setTitle(self.memorial.nickname, forState: UIControlState.Normal)
+                self.nicknameButton.layoutIfNeeded()
+            }
             self.avatarImageView.af_setImageWithURL(NSURL(string: self.memorial.avatarUrl)!)
             switch self.memorial.status {
             case .Waiting:
