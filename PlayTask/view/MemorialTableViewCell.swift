@@ -25,7 +25,7 @@ class MemorialTableViewCell: UITableViewCell {
     
     var onImageClicked: ((QiniuImageButton) -> Void)?
     
-    // memorial id, to user id, to nickname
+    // memorial id, from memorial comment id, to nickname
     var commentAction: ((Memorial, Int?, String?) -> Void)!
     // memorial id
     var deleteMemorialAction: ((Int) -> Void)!
@@ -84,7 +84,7 @@ class MemorialTableViewCell: UITableViewCell {
                     if comment.fromUserId == myUserId {
                         self.deleteMemorialCommentAction(comment.id)
                     } else {
-                        self.commentAction(self.memorial, comment.fromUserId, comment.fromNickname)
+                        self.commentAction(self.memorial, comment.id, comment.fromNickname)
                     }
                 }
             }

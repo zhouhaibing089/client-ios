@@ -56,7 +56,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     
     // 当前发送的评论的元信息
     var commentMemorial: Memorial!
-    var commentToUserId: Int?
+    var toMemorialCommentId: Int?
     var commentIndexPath: NSIndexPath!
     
     var refreshControl: UIRefreshControl!
@@ -94,17 +94,17 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("memorial", forIndexPath: indexPath) as! MemorialTableViewCell
         cell.memorial = self.memorials[indexPath.section][indexPath.row]
-        cell.commentAction = { [unowned self] (memorial, toUserId, toNickname) in
+        cell.commentAction = { [unowned self] (memorial, toMemorialCommentId, toNickname) in
             self.commentView.hidden = false
             self.commentTextView.becomeFirstResponder()
-            if self.commentMemorial?.id != memorial.id || self.commentToUserId != toUserId {
+            if self.commentMemorial?.id != memorial.id || self.toMemorialCommentId != toMemorialCommentId {
                 // 这次评论和上次评论的对象不一样时, 清空已输入的内容
                 self.commentTextView.text = ""
             }
             self.commentMemorial = memorial
-            self.commentToUserId = toUserId
+            self.toMemorialCommentId = toMemorialCommentId
             self.commentIndexPath = indexPath
-            if toUserId != nil {
+            if toMemorialCommentId != nil {
                 self.commentTextView.hint = String(format: "回复%@：", toNickname!)
             }
             self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
@@ -171,7 +171,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         sender.hidden = true
         self.commentIndicator.startAnimating()
         API.commentMemorial(Util.loggedUser!, memorialId: self.commentMemorial.id,
-            toUserId: self.commentToUserId, content: self.commentTextView.text).subscribe({ event in
+            toMemorialCommentId: self.toMemorialCommentId, content: self.commentTextView.text, fromDungeonId: self.dungeon.id).subscribe({ event in
                 switch event {
                 case .Next(let c):
                     self.commentMemorial.comments.append(c)
@@ -278,6 +278,12 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         self.tableView.tableHeaderView = tableHeaderView
         
         // title
+        self.updateTitle()
+        
+        self.tableView.reloadData()
+    }
+    
+    func updateTitle() {
         switch self.scope {
         case .Group:
             UIView.performWithoutAnimation({ () -> Void in
@@ -292,8 +298,6 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
             })
             break
         }
-        
-        self.tableView.reloadData()
     }
     
     func load() {
@@ -352,6 +356,8 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     var scope = Scope.Group {
         didSet {
             self.refresh(self.refreshControl)
+            // make ui response as quick as possible
+            self.updateTitle()
         }
     }
     

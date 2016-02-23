@@ -66,13 +66,14 @@ extension API {
     }
     
     /// 评论副本里的状态
-    class func commentMemorial(user: User, memorialId: Int, toUserId: Int?, content: String) -> Observable<MemorialComment> {
+    class func commentMemorial(user: User, memorialId: Int, toMemorialCommentId: Int?, content: String, fromDungeonId: Int) -> Observable<MemorialComment> {
         var parameters: [String: AnyObject] = [
             "from_user_id": user.sid.value!,
-            "content": content
+            "content": content,
+            "from_dungeon_id": fromDungeonId
         ]
-        if let toUserId = toUserId {
-            parameters["to_user_id"] = toUserId
+        if let toMemorialCommentId = toMemorialCommentId {
+            parameters["to_memorial_comment_id"] = toMemorialCommentId
         }
         return API.req(.POST, "/memorials/\(memorialId)/comments", parameters: parameters, suppressError: false).map({ (json) -> MemorialComment in
             return MemorialComment(json: json)

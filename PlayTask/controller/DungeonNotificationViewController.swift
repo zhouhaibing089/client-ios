@@ -116,6 +116,7 @@ class DungeonNotificationViewController: UIViewController, UITableViewDelegate, 
         if segue.identifier == "memorial" {
             if let mvc = segue.destinationViewController as? MemorialViewController {
                 mvc.memorial = (sender as! DungeonNotification).memorial
+                mvc.fromDungeonId = self.dungeon.id
             }
         }
     }

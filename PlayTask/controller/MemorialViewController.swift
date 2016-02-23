@@ -36,7 +36,8 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     var memorial: Memorial!
-    var commentToUserId: Int?
+    var fromDungeonId: Int!
+    var toMemorialCommentId: Int?
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -84,10 +85,8 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
             self.presentViewController(actionSheet, animated: true, completion: nil)
         } else {
             self.commentTextView.hint = "回复 \(comment.fromNickname)："
-            if self.commentToUserId != comment.fromUserId {
-                self.commentToUserId = comment.fromUserId
-                self.commentTextView.text = ""
-            }
+            self.toMemorialCommentId = comment.id
+            self.commentTextView.text = ""
             self.commentTextView.becomeFirstResponder()
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -100,7 +99,7 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func send(sender: UIButton) {
         self.sendIndicator.startAnimating()
         sender.hidden = true
-        API.commentMemorial(Util.currentUser, memorialId: self.memorial.id, toUserId: self.commentToUserId, content: self.commentTextView.text).subscribe { (event) -> Void in
+        API.commentMemorial(Util.currentUser, memorialId: self.memorial.id, toMemorialCommentId: self.toMemorialCommentId, content: self.commentTextView.text, fromDungeonId: self.fromDungeonId).subscribe { (event) -> Void in
             switch event {
             case .Completed:
                 self.tableView.reloadData()
@@ -140,7 +139,7 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
         }
         if self.commentTextView.text == "" {
             self.commentTextView.hint = "评论"
-            self.commentToUserId = nil
+            self.toMemorialCommentId = nil
         }
     }
     
