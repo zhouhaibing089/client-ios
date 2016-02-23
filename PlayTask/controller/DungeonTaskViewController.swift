@@ -171,6 +171,8 @@ class DungeonTaskViewController: TaskViewController {
     }
     
     func refresh(refreshControl: UIRefreshControl) {
+        // Make ui response as quick as possible
+        self.update()
         if self.mode == Mode.Task {
             refreshControl.endRefreshing()
             return
