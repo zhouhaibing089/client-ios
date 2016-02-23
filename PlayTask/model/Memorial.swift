@@ -41,7 +41,7 @@ class Memorial {
         self.reason = json["reason"].string
         self.comments = [MemorialComment]()
         for (_, subJson) : (String, JSON) in json["comments"] {
-            self.comments.append(MemorialComment(json: subJson))
+            self.comments.append(MemorialComment(json: subJson)!)
         }
         self.userId = json["user_id"].intValue
         if json["id"].int == nil {

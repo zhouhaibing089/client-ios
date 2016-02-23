@@ -76,7 +76,7 @@ extension API {
             parameters["to_memorial_comment_id"] = toMemorialCommentId
         }
         return API.req(.POST, "/memorials/\(memorialId)/comments", parameters: parameters, suppressError: false).map({ (json) -> MemorialComment in
-            return MemorialComment(json: json)
+            return MemorialComment(json: json)!
         })
     }
     

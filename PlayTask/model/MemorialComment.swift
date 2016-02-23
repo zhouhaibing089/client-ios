@@ -20,7 +20,7 @@ class MemorialComment {
     var fromAvatarUrl: String
     var createdTime: NSDate
     
-    init(json: JSON) {
+    init?(json: JSON) {
         self.id = json["id"].intValue
         self.fromUserId = json["from_user_id"].intValue
         self.toUserId = json["to_user_id"].int
@@ -30,5 +30,8 @@ class MemorialComment {
         self.memorialId = json["memorial_id"].intValue
         self.fromAvatarUrl = json["from_avatar_url"].stringValue
         self.createdTime = NSDate(millisecondsSince1970: json["created_time"].doubleValue)
+        if json["id"].int == nil {
+            return nil
+        }
     }
 }

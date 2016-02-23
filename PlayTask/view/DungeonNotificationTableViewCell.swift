@@ -21,7 +21,27 @@ class DungeonNotificationTableViewCell: UITableViewCell {
         didSet {
             self.avatarImageView.af_setImageWithURL(NSURL(string: self.notification.avatarUrl)!)
             self.nicknameLabel.text = self.notification.nickname
-            self.contentLabel.text = self.notification.message
+            if let content = self.notification.content {
+                self.contentLabel.text = self.notification.content
+            } else if let comment = self.notification.memorialComment {
+                let fontSize = self.contentLabel.font.pointSize
+                let normal = [
+                    NSFontAttributeName: self.contentLabel.font
+                ]
+                let bold = [
+                    NSFontAttributeName: UIFont(descriptor: self.contentLabel.font.fontDescriptor().fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits.TraitBold), size: fontSize)
+                ]
+                if let toUserId = comment.toUserId {
+                    let s = NSMutableAttributedString()
+                    let tn = NSAttributedString(string: comment.toNickname!, attributes: bold)
+                    s.appendAttributedString(NSAttributedString(string: "回复 ", attributes: normal))
+                    s.appendAttributedString(tn)
+                    s.appendAttributedString(NSAttributedString(string: ": \(comment.content)", attributes: normal))
+                    self.contentLabel.attributedText = s
+                } else {
+                    self.contentLabel.attributedText = NSAttributedString(string: comment.content)
+                }
+            }
             self.timeLabel.text = self.notification.createdTime.toReadable()
             if let memorial = self.notification.memorial {
                 if let image = memorial.image {
