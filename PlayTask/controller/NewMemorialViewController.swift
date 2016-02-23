@@ -104,7 +104,7 @@ class NewMemorialViewController: UITableViewController, UIImagePickerControllerD
                     width: json["width"].doubleValue, height: json["height"].doubleValue)
             })
             sendObservable = uploadImageObservable.flatMap { (image) -> Observable<Memorial> in
-                API.sendMemorial(Util.loggedUser!, dungeon: self.dungeon, content: content, imageIds: [image.id])
+                API.sendMemorial(Util.loggedUser!, dungeon: self.dungeon, content: content, imageIds: [image.id!])
             }
         } else {
             sendObservable = API.sendMemorial(Util.loggedUser!, dungeon: self.dungeon, content: content, imageIds: [])

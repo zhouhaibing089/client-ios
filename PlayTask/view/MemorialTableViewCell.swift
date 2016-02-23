@@ -17,7 +17,7 @@ class MemorialTableViewCell: UITableViewCell {
     @IBOutlet weak var nicknameButton: UIButton!
     
     @IBOutlet weak var memorialImageButton: QiniuImageButton!
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet var avatarButton: QiniuImageButton!
     @IBOutlet weak var commentView: OAStackView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
@@ -43,7 +43,9 @@ class MemorialTableViewCell: UITableViewCell {
                 self.nicknameButton.setTitle(self.memorial.nickname, forState: UIControlState.Normal)
                 self.nicknameButton.layoutIfNeeded()
             }
-            self.avatarImageView.af_setImageWithURL(NSURL(string: self.memorial.avatarUrl)!)
+            // Width and height is not important. Just need to be large enough
+            // to prevent image button to shrink size
+            self.avatarButton.metaImage = QiniuImage(url: self.memorial.avatarUrl, width: 512, height: 512)
             switch self.memorial.status {
             case .Waiting:
                 self.statusLabel.text = "待审核"
@@ -98,5 +100,8 @@ class MemorialTableViewCell: UITableViewCell {
     }
     @IBAction func deleteMemorial(sender: UIButton) {
         self.deleteMemorialAction(self.memorial.id)
+    }
+    @IBAction func viewAvatar(sender: QiniuImageButton) {
+        self.onImageClicked?(sender)
     }
 }

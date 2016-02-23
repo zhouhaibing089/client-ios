@@ -513,13 +513,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="310"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wz2-io-zvX">
-                                                    <rect key="frame" x="8" y="8" width="48" height="48"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="wz2-io-zvX" secondAttribute="height" multiplier="1:1" id="0xg-1Q-z4m"/>
-                                                        <constraint firstAttribute="width" constant="48" id="Oib-AU-0nP"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krH-6b-3WX">
                                                     <rect key="frame" x="64" y="8" width="55" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
@@ -609,38 +602,49 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bX-2N-GhY" customClass="QiniuImageButton" customModule="YNSwift">
+                                                    <rect key="frame" x="8" y="8" width="48" height="48"/>
+                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="48" id="jzo-7W-UJR"/>
+                                                        <constraint firstAttribute="width" secondItem="4bX-2N-GhY" secondAttribute="height" multiplier="1:1" id="ula-wb-vC5"/>
+                                                        <constraint firstAttribute="height" constant="48" id="wLK-4a-1hv"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="ula-wb-vC5"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <connections>
+                                                        <action selector="viewAvatar:" destination="6td-ze-lJ0" eventType="touchUpInside" id="uf1-K8-pyX"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="m2v-iL-vYy" firstAttribute="leading" secondItem="wz2-io-zvX" secondAttribute="trailing" constant="8" symbolic="YES" id="09r-n5-e0d"/>
                                                 <constraint firstItem="e0w-F1-TZY" firstAttribute="leading" secondItem="FKz-BT-Afq" secondAttribute="leading" id="1uu-AP-Ifk"/>
                                                 <constraint firstItem="pyS-14-YCO" firstAttribute="baseline" secondItem="e0w-F1-TZY" secondAttribute="baseline" id="BmK-Us-EoR"/>
                                                 <constraint firstItem="pyS-14-YCO" firstAttribute="leading" secondItem="e0w-F1-TZY" secondAttribute="trailing" constant="8" id="Dzl-gf-l3v"/>
+                                                <constraint firstItem="4bX-2N-GhY" firstAttribute="top" secondItem="LPn-bl-8qq" secondAttribute="topMargin" id="Gwp-zj-O0Z"/>
                                                 <constraint firstItem="FKz-BT-Afq" firstAttribute="leading" secondItem="krH-6b-3WX" secondAttribute="leading" id="Ka8-eZ-C9w"/>
+                                                <constraint firstItem="krH-6b-3WX" firstAttribute="leading" secondItem="4bX-2N-GhY" secondAttribute="trailing" constant="8" symbolic="YES" id="MSv-Iy-nah"/>
+                                                <constraint firstItem="krH-6b-3WX" firstAttribute="top" secondItem="4bX-2N-GhY" secondAttribute="top" id="RFZ-27-2b1"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="4bX-2N-GhY" secondAttribute="bottom" id="Svx-OE-QqL"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="m2v-iL-vYy" secondAttribute="bottom" id="UJL-0y-6bG"/>
                                                 <constraint firstItem="Df4-FW-IMa" firstAttribute="baseline" secondItem="pyS-14-YCO" secondAttribute="baseline" id="WGP-XV-bkC"/>
                                                 <constraint firstItem="FKz-BT-Afq" firstAttribute="trailing" secondItem="LPn-bl-8qq" secondAttribute="trailingMargin" id="aE4-QZ-McB"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="wz2-io-zvX" secondAttribute="bottom" constant="46" id="bDN-np-RXR"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="4bX-2N-GhY" secondAttribute="leading" id="cuP-2u-16m"/>
                                                 <constraint firstItem="m2v-iL-vYy" firstAttribute="top" secondItem="e0w-F1-TZY" secondAttribute="bottom" constant="8" symbolic="YES" id="dIy-ln-aZB"/>
                                                 <constraint firstItem="FKz-BT-Afq" firstAttribute="top" secondItem="krH-6b-3WX" secondAttribute="bottom" id="etL-C6-jok"/>
-                                                <constraint firstItem="wz2-io-zvX" firstAttribute="top" secondItem="LPn-bl-8qq" secondAttribute="topMargin" id="gvD-ln-AOt"/>
+                                                <constraint firstItem="wJF-fX-yWD" firstAttribute="leading" secondItem="FKz-BT-Afq" secondAttribute="leading" id="gWP-lR-bdq"/>
                                                 <constraint firstItem="e0w-F1-TZY" firstAttribute="top" secondItem="wJF-fX-yWD" secondAttribute="bottom" constant="8" symbolic="YES" id="hQA-vw-o6q"/>
-                                                <constraint firstItem="wJF-fX-yWD" firstAttribute="leading" secondItem="wz2-io-zvX" secondAttribute="trailing" constant="8" symbolic="YES" id="hyF-eo-28G"/>
-                                                <constraint firstItem="wz2-io-zvX" firstAttribute="leading" secondItem="LPn-bl-8qq" secondAttribute="leadingMargin" id="iHu-d0-gm3"/>
-                                                <constraint firstItem="krH-6b-3WX" firstAttribute="top" secondItem="wz2-io-zvX" secondAttribute="top" id="npI-2f-ZXa"/>
+                                                <constraint firstItem="m2v-iL-vYy" firstAttribute="leading" secondItem="krH-6b-3WX" secondAttribute="leading" id="kzt-1i-vo4"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="m2v-iL-vYy" secondAttribute="trailing" id="oqC-Hy-xAO"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Df4-FW-IMa" secondAttribute="trailing" id="pUz-y3-LhO"/>
                                                 <constraint firstItem="wJF-fX-yWD" firstAttribute="top" secondItem="FKz-BT-Afq" secondAttribute="bottom" constant="8" symbolic="YES" id="pxW-pq-DvA"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="wz2-io-zvX" secondAttribute="bottom" id="yiB-tT-QCZ"/>
-                                                <constraint firstItem="krH-6b-3WX" firstAttribute="leading" secondItem="wz2-io-zvX" secondAttribute="trailing" constant="8" symbolic="YES" id="zpZ-kI-FQB"/>
                                             </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="bDN-np-RXR"/>
-                                                </mask>
-                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="avatarImageView" destination="wz2-io-zvX" id="El8-5m-NbN"/>
+                                            <outlet property="avatarButton" destination="4bX-2N-GhY" id="IGq-NL-MIX"/>
                                             <outlet property="commentView" destination="HjU-2o-Yzv" id="iqe-AM-tuH"/>
                                             <outlet property="contentLabel" destination="FKz-BT-Afq" id="AhK-Lo-eYB"/>
                                             <outlet property="deleteButton" destination="pyS-14-YCO" id="kyV-MA-8n4"/>
@@ -929,6 +933,6 @@
         <image name="select_image_button" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gSv-CI-yEA"/>
+        <segue reference="Jw8-xj-kf1"/>
     </inferredMetricsTieBreakers>
 </document>
