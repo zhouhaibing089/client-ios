@@ -74,7 +74,7 @@ extension API {
         if let toUserId = toUserId {
             parameters["to_user_id"] = toUserId
         }
-        return API.req(.POST, "/memorials/\(memorialId)/comments", parameters: parameters).map({ (json) -> MemorialComment in
+        return API.req(.POST, "/memorials/\(memorialId)/comments", parameters: parameters, suppressError: false).map({ (json) -> MemorialComment in
             return MemorialComment(json: json)
         })
     }

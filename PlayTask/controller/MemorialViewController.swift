@@ -24,6 +24,7 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
             self.commentTextView.layer.cornerRadius = 2
         }
     }
+    @IBOutlet var deleteButton: UIButton!
     @IBOutlet weak var imageButton: QiniuImageButton!
     @IBOutlet weak var commentView: UIView! {
         didSet {
@@ -42,8 +43,9 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.estimatedRowHeight = 44
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         self.update()
-        // Do any additional setup after loading the view.
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -63,9 +65,20 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let comment = self.memorial.comments[indexPath.row]
         if comment.fromUserId == Util.currentUser.sid.value! {
-            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-            actionSheet.addAction(UIAlertAction(title: "删除", style: UIAlertActionStyle.Destructive, handler: { (action) -> Void in
-                // TODO delete
+            let actionSheet = UIAlertController(title: nil, message: "删除评论", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            actionSheet.addAction(UIAlertAction(title: "删除", style: UIAlertActionStyle.Destructive, handler: { [unowned self](action) -> Void in
+                API.deleteMemorialComment(comment.id).subscribe({ (event) -> Void in
+                    switch event {
+                    case .Error(let e):
+                        break
+                    case .Next(let n):
+                        break
+                    case .Completed:
+                        break
+                    }
+                })
+                self.memorial.comments.removeAtIndex(indexPath.row)
+                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             }))
             actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
             self.presentViewController(actionSheet, animated: true, completion: nil)
@@ -131,7 +144,27 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    @IBAction func deleteMemorial(sender: UIButton) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        actionSheet.addAction(UIAlertAction(title: "删除", style: UIAlertActionStyle.Destructive, handler: { [unowned self] (action) -> Void in
+            API.deleteMemorial(self.memorial).subscribe({ (event) -> Void in
+                switch event {
+                case .Error(let e):
+                    break
+                case .Next(let n):
+                    break
+                case .Completed:
+                    break
+                }
+            })
+            self.navigationController?.popViewControllerAnimated(true)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
+        self.presentViewController(actionSheet, animated: true, completion: nil)
+    }
+    
     func update() {
+        self.deleteButton.hidden = (self.memorial.userId != Util.currentUser.sid.value ?? -1)
         self.avatarImageView.af_setImageWithURL(NSURL(string: self.memorial.avatarUrl)!)
         self.nicknameLabel.text = self.memorial.nickname
         self.contentLabel.text = self.memorial.content
