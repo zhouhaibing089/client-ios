@@ -94,6 +94,20 @@ extension API {
         })
     }
     
+    /// 删除 Memorial
+    class func deleteMemorial(memorial: Memorial) -> Observable<Bool> {
+        return API.req(.DELETE, "/memorials/\(memorial.id)").map({ (json) -> Bool in
+            true
+        })
+    }
+    
+    // 删除 Memorial 评论
+    class func deleteMemorialComment(commentId: Int) -> Observable<Bool> {
+        return API.req(.DELETE, "/memorial_comments/\(commentId)").map({ (json) -> Bool in
+            true
+        })
+    }
+    
     // MARK: - 支付相关
     
     /// 创建支付订单

@@ -26,6 +26,7 @@ class Memorial {
     var status: MemorialStatus
     var reason: String?
     var comments: [MemorialComment]
+    var userId: Int
     
     init?(json: JSON) {
         self.id = json["id"].intValue
@@ -42,6 +43,7 @@ class Memorial {
         for (_, subJson) : (String, JSON) in json["comments"] {
             self.comments.append(MemorialComment(json: subJson))
         }
+        self.userId = json["user_id"].intValue
         if json["id"].int == nil {
             return nil
         }

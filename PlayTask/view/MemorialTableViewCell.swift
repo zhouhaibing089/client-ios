@@ -21,13 +21,15 @@ class MemorialTableViewCell: UITableViewCell {
     @IBOutlet weak var commentView: OAStackView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet var deleteButton: UIButton!
     
     var onImageClicked: ((QiniuImageButton) -> Void)?
     
     // memorial id, to user id, to nickname
     var commentAction: ((Memorial, Int?, String?) -> Void)!
-    // comment id
-    var deleteAction: ((Int) -> Void)!
+    // memorial id
+    var deleteMemorialAction: ((Int) -> Void)!
+    var deleteMemorialCommentAction: ((Int) -> Void)!
 
     @IBAction func comment(sender: UIButton) {
         self.commentAction(self.memorial, nil, nil)
@@ -50,6 +52,8 @@ class MemorialTableViewCell: UITableViewCell {
                 self.statusLabel.text = "审核未通过：\(self.memorial.reason ?? "")"
                 break
             }
+            
+            self.deleteButton.hidden = self.memorial.userId != (Util.currentUser.sid.value ?? -1)
             
             self.memorialImageButton.metaImage = self.memorial.image
             
@@ -78,7 +82,7 @@ class MemorialTableViewCell: UITableViewCell {
                 v.onClicked = { [unowned self] comment in
                     let myUserId = Util.loggedUser!.sid.value
                     if comment.fromUserId == myUserId {
-                        self.deleteAction(comment.id)
+                        self.deleteMemorialCommentAction(comment.id)
                     } else {
                         self.commentAction(self.memorial, comment.fromUserId, comment.fromNickname)
                     }
@@ -88,5 +92,8 @@ class MemorialTableViewCell: UITableViewCell {
     }
     @IBAction func preview(sender: QiniuImageButton) {
         self.onImageClicked?(sender)
+    }
+    @IBAction func deleteMemorial(sender: UIButton) {
+        self.deleteMemorialAction(self.memorial.id)
     }
 }

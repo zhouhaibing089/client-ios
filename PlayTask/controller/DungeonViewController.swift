@@ -109,11 +109,45 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
             }
             self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         }
-        cell.deleteAction = { [unowned self] (commentId) in
+        // 删除 memorial
+        cell.deleteMemorialAction = { [unowned self, cell] (memorialId) in
             self.closeCommentView()
             let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
             actionSheet.addAction(UIAlertAction(title: "删除", style: UIAlertActionStyle.Destructive, handler: { (action) -> Void in
-                // TODO delete
+                API.deleteMemorial(cell.memorial).subscribe({ (event) -> Void in
+                    switch event {
+                    case .Completed:
+                        break
+                    case .Error(let e):
+                        break
+                    case .Next(let n):
+                        break
+                    }
+                })
+                self.memorials[indexPath.section].removeAtIndex(indexPath.row)
+                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            }))
+            actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
+            self.presentViewController(actionSheet, animated: true, completion: nil)
+            
+        }
+        // 删除评论
+        cell.deleteMemorialCommentAction = { [unowned self, cell] (commentId) in
+            self.closeCommentView()
+            let actionSheet = UIAlertController(title: nil, message: "删除评论", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            actionSheet.addAction(UIAlertAction(title: "删除", style: UIAlertActionStyle.Destructive, handler: { (action) -> Void in
+                API.deleteMemorialComment(commentId).subscribe({ (event) -> Void in
+                    switch event {
+                    case .Completed:
+                        break
+                    case .Error(let e):
+                        break
+                    case .Next(let n):
+                        break
+                    }
+                })
+                cell.memorial.comments = cell.memorial.comments.filter { $0.id != commentId }
+                self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Automatic)
             }))
             actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
             self.presentViewController(actionSheet, animated: true, completion: nil)
