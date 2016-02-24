@@ -107,24 +107,30 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("memorial", forIndexPath: indexPath) as! MemorialTableViewCell
         cell.memorial = self.memorials[indexPath.section][indexPath.row]
-        cell.commentAction = { [unowned self] (memorial, toMemorialCommentId, toNickname) in
-            self.commentView.hidden = false
-            self.commentTextView.becomeFirstResponder()
-            if self.commentMemorial?.id != memorial.id || self.toMemorialCommentId != toMemorialCommentId {
+        cell.commentAction = { [weak self] (memorial, toMemorialCommentId, toNickname) in
+            guard let weakSelf = self else {
+                return
+            }
+            weakSelf.commentView.hidden = false
+            weakSelf.commentTextView.becomeFirstResponder()
+            if weakSelf.commentMemorial?.id != memorial.id || weakSelf.toMemorialCommentId != toMemorialCommentId {
                 // 这次评论和上次评论的对象不一样时, 清空已输入的内容
-                self.commentTextView.text = ""
+                weakSelf.commentTextView.text = ""
             }
-            self.commentMemorial = memorial
-            self.toMemorialCommentId = toMemorialCommentId
-            self.commentIndexPath = indexPath
+            weakSelf.commentMemorial = memorial
+            weakSelf.toMemorialCommentId = toMemorialCommentId
+            weakSelf.commentIndexPath = indexPath
             if toMemorialCommentId != nil {
-                self.commentTextView.hint = String(format: "回复%@：", toNickname!)
+                weakSelf.commentTextView.hint = String(format: "回复%@：", toNickname!)
             }
-            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+            weakSelf.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         }
         // 删除 memorial
-        cell.deleteMemorialAction = { [unowned self, cell] (memorialId) in
-            self.closeCommentView()
+        cell.deleteMemorialAction = { [weak self, cell] (memorialId) in
+            guard let weakSelf = self else {
+                return
+            }
+            weakSelf.closeCommentView()
             let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
             actionSheet.addAction(UIAlertAction(title: "删除", style: UIAlertActionStyle.Destructive, handler: { (action) -> Void in
                 API.deleteMemorial(cell.memorial).subscribe({ (event) -> Void in
@@ -137,16 +143,19 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
                         break
                     }
                 })
-                self.memorials[indexPath.section].removeAtIndex(indexPath.row)
-                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                weakSelf.memorials[indexPath.section].removeAtIndex(indexPath.row)
+                weakSelf.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             }))
             actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
-            self.presentViewController(actionSheet, animated: true, completion: nil)
+            weakSelf.presentViewController(actionSheet, animated: true, completion: nil)
             
         }
         // 删除评论
-        cell.deleteMemorialCommentAction = { [unowned self, cell] (commentId) in
-            self.closeCommentView()
+        cell.deleteMemorialCommentAction = { [weak self, cell] (commentId) in
+            guard let weakSelf = self else {
+                return
+            }
+            weakSelf.closeCommentView()
             let actionSheet = UIAlertController(title: nil, message: "删除评论", preferredStyle: UIAlertControllerStyle.ActionSheet)
             actionSheet.addAction(UIAlertAction(title: "删除", style: UIAlertActionStyle.Destructive, handler: { (action) -> Void in
                 API.deleteMemorialComment(commentId).subscribe({ (event) -> Void in
@@ -160,17 +169,17 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
                     }
                 })
                 cell.memorial.comments = cell.memorial.comments.filter { $0.id != commentId }
-                self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Automatic)
+                weakSelf.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Automatic)
             }))
             actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
-            self.presentViewController(actionSheet, animated: true, completion: nil)
+            weakSelf.presentViewController(actionSheet, animated: true, completion: nil)
             
         }
-        cell.onImageClicked = { [unowned self] qiniuImageButton in
-            self.performSegueWithIdentifier("preview@Main", sender: qiniuImageButton)
+        cell.onImageClicked = { [weak self] qiniuImageButton in
+            self?.performSegueWithIdentifier("preview@Main", sender: qiniuImageButton)
         }
-        cell.onNicknameClicked = { [unowned self] userId, nickname in
-            self.performSegueWithIdentifier("others_dungeon", sender: ["user_id": userId, "nickname": nickname])
+        cell.onNicknameClicked = { [weak self] userId, nickname in
+            self?.performSegueWithIdentifier("others_dungeon", sender: ["user_id": userId, "nickname": nickname])
         }
         cell.layoutIfNeeded()
         return cell
