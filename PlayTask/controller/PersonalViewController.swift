@@ -12,6 +12,7 @@ import MBProgressHUD
 import Qiniu
 import SwiftyJSON
 import YNSwift
+import CRToast
 
 class PersonalViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -53,7 +54,31 @@ class PersonalViewController: UITableViewController, UIImagePickerControllerDele
                 })
                 prompt.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
                 prompt.addAction(UIAlertAction(title: "完成", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-                    // submit
+                    let hud = MBProgressHUD.show()
+                    let nickname = prompt.textFields!.first!.text!
+                    API.changeNickname(Util.currentUser, nickname: nickname).subscribe({ (event) -> Void in
+                        switch event {
+                        case .Completed:
+                            hud.switchToSuccess(duration: 1.0, labelText: "修改成功")
+                            Util.currentUser.update(["nickname": nickname])
+                            self.tableView.reloadData()
+                            break
+                        case .Error(let e):
+                            if let error = e as? APIError {
+                                switch error {
+                                case .Custom(_, let info, _):
+                                    CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
+                                    break
+                                default:
+                                    break
+                                }
+                            }
+                            hud.hide(true)
+                            break
+                        case .Next(_):
+                            break
+                        }
+                    })
                 }))
                
                 self.presentViewController(prompt, animated: true, completion: nil)

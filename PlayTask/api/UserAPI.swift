@@ -80,4 +80,11 @@ extension API {
                 return true
         }
     }
+    
+    class func changeNickname(user: User, nickname: String) -> Observable<Bool> {
+        return API.req(.PUT, "/users/\(user.sid.value!)", parameters: ["nickname": nickname],
+            suppressError: false).map  { json in
+                return true
+        }
+    }
 }
