@@ -229,9 +229,13 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         } else if segue.identifier == "preview@Main" {
             let s = segue as! YNSegue
             if let pvc = s.instantiated as? PreviewViewController {
-                let qiniuImageButton = sender as! QiniuImageButton
-                pvc.rawImage = qiniuImageButton.imageForState(UIControlState.Normal)
-                pvc.imageUrl = qiniuImageButton.metaImage.url
+                if let qiniuImageButton = sender as? QiniuImageButton {
+                    pvc.rawImage = qiniuImageButton.imageForState(UIControlState.Normal)
+                    pvc.imageUrl = qiniuImageButton.metaImage.url
+                } else {
+                    pvc.rawImage = self.avatarImageView.image
+                    pvc.imageUrl = Util.currentUser.avatarUrl
+                }
             }
         } else if segue.identifier == "others_dungeon" {
             if let dvc = segue.destinationViewController as? DungeonViewController {
@@ -295,7 +299,9 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         // cover image
         self.coverImageView.af_setImageWithURL(NSURL(string: self.dungeon.cover)!)
         if let loggedUser = Util.loggedUser {
-            if let avatarUrl = NSURL(string: loggedUser.avatarUrl) {
+            let qiniuImage = QiniuImage(url: loggedUser.avatarUrl, width: 512, height: 512)
+            let size = self.avatarImageView.bounds.size.height * UIScreen.screenScale
+            if let avatarUrl = NSURL(string: qiniuImage.getUrlForMaxWidth(size, maxHeight: size)) {
                 self.avatarImageView.af_setImageWithURL(avatarUrl)
             }
         }
@@ -479,7 +485,15 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
         self.presentViewController(actionSheet, animated: true, completion: nil)
     }
+    
     @IBAction func viewMyself(sender: UITapGestureRecognizer) {
-        self.performSegueWithIdentifier("others_dungeon", sender: ["user_id": Util.currentUser.sid.value!, "nickname": Util.currentUser.nickname])
+        switch scope {
+        case .Myself:
+            self.performSegueWithIdentifier("preview@Main", sender: "avatar")
+            break
+        default:
+            self.performSegueWithIdentifier("others_dungeon", sender: ["user_id": Util.currentUser.sid.value!, "nickname": Util.currentUser.nickname])
+            break
+        }
     }
 }
