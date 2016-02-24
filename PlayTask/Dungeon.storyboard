@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--消息-->
@@ -159,7 +160,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kge-Fj-YLq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1777.5" y="-829.5"/>
+            <point key="canvasLocation" x="1738.5" y="-829.5"/>
         </scene>
         <!--详情-->
         <scene sceneID="6IH-pE-iRA">
@@ -442,10 +443,14 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oy9-Pu-Hi6" userLabel="Avatar">
                                             <rect key="frame" x="291" y="161" width="64" height="64"/>
                                             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="64" id="Bxo-gY-u8Q"/>
                                                 <constraint firstAttribute="width" secondItem="Oy9-Pu-Hi6" secondAttribute="height" multiplier="1:1" id="CKM-CA-QtN"/>
                                             </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="QyV-3k-Me2" appends="YES" id="yRp-uf-Vjt"/>
+                                            </connections>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dungeon Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJv-Wd-CI5">
                                             <rect key="frame" x="164" y="182" width="119" height="21"/>
@@ -518,6 +523,10 @@
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="4"/>
                                                     <state key="normal" title="Yoncise"/>
+                                                    <connections>
+                                                        <action selector="viewOthers:" destination="6td-ze-lJ0" eventType="touchUpInside" id="r37-eK-hVm"/>
+                                                        <segue destination="ZLh-Iq-w0h" kind="show" identifier="others_dungeon" id="B19-Ac-j4t"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lksdjflskdjflsjdlf" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FKz-BT-Afq">
                                                     <rect key="frame" x="64" y="30" width="303" height="20"/>
@@ -722,17 +731,24 @@
                         <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mb7-dd-HYL">
                             <rect key="frame" x="113" y="7" width="150" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <state key="normal" title="本组(12) ▾"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <state key="normal" title="消息"/>
                             <connections>
                                 <action selector="switchScope:" destination="ZLh-Iq-w0h" eventType="touchUpInside" id="cQ3-FC-FjL"/>
                             </connections>
                         </button>
-                        <barButtonItem key="rightBarButtonItem" image="create_new" id="bHB-4Z-y1Y">
-                            <connections>
-                                <segue destination="dLW-MK-uv1" kind="presentation" identifier="new" id="9si-AY-ZRK"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="create_new" id="bHB-4Z-y1Y">
+                                <connections>
+                                    <segue destination="dLW-MK-uv1" kind="presentation" identifier="new" id="9si-AY-ZRK"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="more_filled" id="gOO-DO-RK6">
+                                <connections>
+                                    <action selector="more:" destination="ZLh-Iq-w0h" id="Vyh-8h-ddc"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -745,14 +761,21 @@
                         <outlet property="dungeonTitleLabel" destination="eJv-Wd-CI5" id="Dkz-Yv-c1s"/>
                         <outlet property="loadIndicator" destination="Hv9-IL-IQ2" id="9GS-8o-Xf3"/>
                         <outlet property="messageAlertButton" destination="RaU-on-qZM" id="wM3-U0-FeM"/>
+                        <outlet property="moreBarButton" destination="gOO-DO-RK6" id="m9h-hv-Jas"/>
+                        <outlet property="newBarButton" destination="bHB-4Z-y1Y" id="e8s-Iw-Gd0"/>
                         <outlet property="tableView" destination="IUU-pn-mWh" id="YmM-RC-7MN"/>
                         <outlet property="titleButton" destination="mb7-dd-HYL" id="UlZ-Nz-mf6"/>
                         <segue destination="aRL-H2-C1S" kind="custom" identifier="preview@Main" customClass="YNModalSegue" customModule="YNSwift" id="Jw8-xj-kf1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RAO-w1-m7m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="QyV-3k-Me2">
+                    <connections>
+                        <action selector="viewMyself:" destination="ZLh-Iq-w0h" id="KS9-Om-UXi"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1777.5" y="-39.5"/>
+            <point key="canvasLocation" x="1738.5" y="-72.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ZY2-fn-wvy">
@@ -930,9 +953,11 @@
     </scenes>
     <resources>
         <image name="create_new" width="22" height="22"/>
+        <image name="more_filled" width="25" height="25"/>
         <image name="select_image_button" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="J3R-Ya-t0Q"/>
         <segue reference="Jw8-xj-kf1"/>
     </inferredMetricsTieBreakers>
 </document>

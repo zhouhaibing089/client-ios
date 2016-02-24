@@ -24,6 +24,7 @@ class MemorialTableViewCell: UITableViewCell {
     @IBOutlet var deleteButton: UIButton!
     
     var onImageClicked: ((QiniuImageButton) -> Void)?
+    var onNicknameClicked: ((Int, String) -> Void)?
     
     // memorial id, from memorial comment id, to nickname
     var commentAction: ((Memorial, Int?, String?) -> Void)!
@@ -94,6 +95,9 @@ class MemorialTableViewCell: UITableViewCell {
                 }
             }
         }
+    }
+    @IBAction func viewOthers(sender: UIButton) {
+        self.onNicknameClicked?(self.memorial.userId, self.memorial.nickname)
     }
     @IBAction func preview(sender: QiniuImageButton) {
         self.onImageClicked?(sender)

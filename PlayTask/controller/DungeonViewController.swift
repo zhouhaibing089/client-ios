@@ -9,11 +9,14 @@
 import UIKit
 import YNSwift
 import RxSwift
+import SwiftyJSON
 import DZNEmptyDataSet
 
 class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var coverImageView: UIImageView!
 
+    @IBOutlet var newBarButton: UIBarButtonItem!
+    @IBOutlet var moreBarButton: UIBarButtonItem!
     @IBOutlet weak var loadIndicator: UIActivityIndicatorView!
     @IBOutlet weak var dungeonTitleLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView! {
@@ -26,6 +29,8 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
             outerBorder.borderColor = UIColor.grayColor().CGColor
             outerBorder.borderWidth = outerBorderWidth
             self.avatarImageView.layer.addSublayer(outerBorder)
+            // allow user to click to view self
+            self.avatarImageView.userInteractionEnabled = true
         }
     }
     @IBOutlet weak var messageAlertButton: UIButton!
@@ -49,7 +54,11 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
             self.commentTextView.maxHeight = 33 * 8 / UIScreen.screenScale
         }
     }
-    @IBOutlet weak var titleButton: UIButton!
+    @IBOutlet weak var titleButton: UIButton! {
+        didSet {
+            self.titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Disabled)
+        }
+    }
     
     var memorials = [[Memorial]]()
     var dungeon: Dungeon!
@@ -160,6 +169,9 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         cell.onImageClicked = { [unowned self] qiniuImageButton in
             self.performSegueWithIdentifier("preview@Main", sender: qiniuImageButton)
         }
+        cell.onNicknameClicked = { [unowned self] userId, nickname in
+            self.performSegueWithIdentifier("others_dungeon", sender: ["user_id": userId, "nickname": nickname])
+        }
         cell.layoutIfNeeded()
         return cell
     }
@@ -221,13 +233,48 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
                 pvc.rawImage = qiniuImageButton.imageForState(UIControlState.Normal)
                 pvc.imageUrl = qiniuImageButton.metaImage.url
             }
+        } else if segue.identifier == "others_dungeon" {
+            if let dvc = segue.destinationViewController as? DungeonViewController {
+                dvc.dungeon = self.dungeon
+                let json = JSON(sender as! NSDictionary)
+                if let userId = json["user_id"].int, let nickname = json["nickname"].string {
+                    if userId == Util.currentUser.sid.value {
+                        dvc.scope = Scope.Myself
+                    } else {
+                        dvc.scope = Scope.Personal(userId, nickname)
+                    }
+                }
+            }
         }
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if identifier == "others_dungeon" {
+            // triggered by Storyboard
+            return !(sender is UIButton)
+        }
+        return true
     }
     
     // MARK: - refresh
     func refresh(sender: UIRefreshControl? = nil) {
         var tmp = [Memorial]()
-        API.getMemorials(self.dungeon, all: self.scope == Scope.All).subscribe { (event) -> Void in
+        var observable: Observable<Memorial> = Observable.empty()
+        switch self.scope {
+        case .All:
+            observable = API.getMemorials(self.dungeon, all: true)
+            break
+        case .Group:
+            observable = API.getMemorials(self.dungeon, all: false)
+            break
+        case .Myself:
+            observable = API.getMemorialsOfUser(Util.currentUser.sid.value!, inDungeon: self.dungeon)
+            break
+        case .Personal(let userId, _):
+            observable = API.getMemorialsOfUser(userId, inDungeon: self.dungeon)
+            break
+        }
+        observable.subscribe { (event) -> Void in
             switch event {
             case .Next(let m):
                 tmp.append(m)
@@ -253,14 +300,28 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
             }
         }
         
-        // message alert
-        let messageCount = Util.currentUser.badge.getCountByDungeonId(self.dungeon.id)
-        if messageCount > 0 {
-            self.messageAlertButton.setTitle(String(format: "您有%d条新消息", messageCount), forState: UIControlState.Normal)
-            self.messageAlertButton.hidden = false
-        } else {
+        switch self.scope {
+        case .All, .Group:
+            // message alert
+            let messageCount = Util.currentUser.badge.getCountByDungeonId(self.dungeon.id)
+            if messageCount > 0 {
+                self.messageAlertButton.setTitle(String(format: "您有%d条新消息", messageCount), forState: UIControlState.Normal)
+                self.messageAlertButton.hidden = false
+            } else {
+                self.messageAlertButton.hidden = true
+            }
+            // bar button
+            self.navigationItem.rightBarButtonItems = [self.newBarButton]
+            break
+        case .Myself:
+            self.navigationItem.rightBarButtonItems = [self.moreBarButton]
             self.messageAlertButton.hidden = true
+        case .Personal(_, _):
+            self.navigationItem.rightBarButtonItems = []
+            self.messageAlertButton.hidden = true
+            break
         }
+        
         
         // dungeon title
         self.dungeonTitleLabel.text = self.dungeon.title
@@ -288,6 +349,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     }
     
     func updateTitle() {
+        self.titleButton.enabled = true
         switch self.scope {
         case .Group:
             UIView.performWithoutAnimation({ () -> Void in
@@ -301,6 +363,20 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
                 self.titleButton.layoutIfNeeded()
             })
             break
+        case .Myself:
+            self.titleButton.enabled = false
+            UIView.performWithoutAnimation({ () -> Void in
+                self.titleButton.setTitle(Util.currentUser.nickname, forState: UIControlState.Normal)
+                self.titleButton.layoutIfNeeded()
+            })
+            break
+        case .Personal(_, let nickname):
+            self.titleButton.enabled = false
+            UIView.performWithoutAnimation({ () -> Void in
+                self.titleButton.setTitle(nickname, forState: UIControlState.Normal)
+                self.titleButton.layoutIfNeeded()
+            })
+            break
         }
     }
     
@@ -311,7 +387,22 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         if let before = self.memorials.last?.last?.createdTime {
             self.loadIndicator.startAnimating()
             var tmp = [Memorial]()
-            API.getMemorials(self.dungeon, all: self.scope == Scope.All, before: before).subscribe { event in
+            var observable: Observable<Memorial> = Observable.empty()
+            switch self.scope {
+            case .All:
+                observable = API.getMemorials(self.dungeon, all: true, before: before)
+                break
+            case .Group:
+                observable = API.getMemorials(self.dungeon, all: false, before: before)
+                break
+            case .Myself:
+                observable = API.getMemorialsOfUser(Util.currentUser.sid.value!, inDungeon: self.dungeon, before: before)
+                break
+            case .Personal(let userId, _):
+                observable = API.getMemorialsOfUser(userId, inDungeon: self.dungeon, before: before)
+                break
+            }
+            observable.subscribe { event in
                 switch (event) {
                 case .Next(let m):
                     tmp.append(m)
@@ -353,6 +444,8 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     // MARK: - Switch scope
     
     enum Scope {
+        case Myself
+        case Personal(Int, String)
         case Group
         case All
     }
@@ -366,7 +459,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     }
     
     @IBAction func switchScope(sender: UIButton) {
-        var actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         actionSheet.addAction(UIAlertAction(title: "看全部", style: UIAlertActionStyle.Default, handler: { [unowned self] (action) -> Void in
             self.scope = Scope.All
         }))
@@ -376,5 +469,17 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         }))
         actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
         self.presentViewController(actionSheet, animated: true, completion: nil)
+    }
+    
+    @IBAction func more(sender: UIBarButtonItem) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        actionSheet.addAction(UIAlertAction(title: "消息列表", style: UIAlertActionStyle.Default, handler: { [unowned self] (action) -> Void in
+            self.performSegueWithIdentifier("notification", sender: sender)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
+        self.presentViewController(actionSheet, animated: true, completion: nil)
+    }
+    @IBAction func viewMyself(sender: UITapGestureRecognizer) {
+        self.performSegueWithIdentifier("others_dungeon", sender: ["user_id": Util.currentUser.sid.value!, "nickname": Util.currentUser.nickname])
     }
 }

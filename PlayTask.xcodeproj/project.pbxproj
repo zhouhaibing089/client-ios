@@ -21,6 +21,7 @@
 		491B6FE81C44A69D000FD353 /* DungeonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491B6FE71C44A69D000FD353 /* DungeonListViewController.swift */; };
 		491B6FEA1C44AEB7000FD353 /* DungeonAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491B6FE91C44AEB7000FD353 /* DungeonAPI.swift */; };
 		491B6FEE1C44E20A000FD353 /* DungeonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491B6FED1C44E20A000FD353 /* DungeonTableViewCell.swift */; };
+		49258EE81C7D4A9100AD3576 /* MemorialAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49258EE71C7D4A9100AD3576 /* MemorialAPI.swift */; };
 		4938E43C1C587A7B00FC977C /* MemorialComment.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938E43B1C587A7B00FC977C /* MemorialComment.xib */; };
 		4938E43E1C587A9800FC977C /* MemorialCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938E43D1C587A9800FC977C /* MemorialCommentView.swift */; };
 		4938E44B1C5F625400FC977C /* SpeechView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938E44A1C5F625400FC977C /* SpeechView.swift */; };
@@ -126,6 +127,7 @@
 		491B6FE71C44A69D000FD353 /* DungeonListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DungeonListViewController.swift; sourceTree = "<group>"; };
 		491B6FE91C44AEB7000FD353 /* DungeonAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DungeonAPI.swift; sourceTree = "<group>"; };
 		491B6FED1C44E20A000FD353 /* DungeonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DungeonTableViewCell.swift; sourceTree = "<group>"; };
+		49258EE71C7D4A9100AD3576 /* MemorialAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorialAPI.swift; sourceTree = "<group>"; };
 		4938E43B1C587A7B00FC977C /* MemorialComment.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemorialComment.xib; sourceTree = "<group>"; };
 		4938E43D1C587A9800FC977C /* MemorialCommentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorialCommentView.swift; sourceTree = "<group>"; };
 		4938E44A1C5F625400FC977C /* SpeechView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechView.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				49D321321BF35DFA00A6E0A7 /* WishAPI.swift */,
 				491B6FE91C44AEB7000FD353 /* DungeonAPI.swift */,
 				49F02DDE1C5260F700E9BA7A /* ImageAPI.swift */,
+				49258EE71C7D4A9100AD3576 /* MemorialAPI.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -659,6 +662,7 @@
 				499708BF1BCF506E00424F5E /* AppDelegate.swift in Sources */,
 				4938E43E1C587A9800FC977C /* MemorialCommentView.swift in Sources */,
 				49422DFD1C4F75E900C316B3 /* Memorial.swift in Sources */,
+				49258EE81C7D4A9100AD3576 /* MemorialAPI.swift in Sources */,
 				49953E041BDB371400B25EC8 /* Bill.swift in Sources */,
 				49B860261C461ECC004641DF /* DungeonDetailViewController.swift in Sources */,
 				490BEA9B1C5735DF005CAF3C /* DungeonNotificationViewController.swift in Sources */,
