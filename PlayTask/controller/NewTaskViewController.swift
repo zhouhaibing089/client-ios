@@ -21,7 +21,7 @@ class NewTaskViewController: UITableViewController {
     var onTaskAdded: ((Task) -> Void)?
     
     var modifiedTask: Task?
-    var defaultTaskType: TaskType!
+    var defaultTaskType = TaskType.Daily
     
     override func viewDidLoad() {
         super.viewDidLoad()
