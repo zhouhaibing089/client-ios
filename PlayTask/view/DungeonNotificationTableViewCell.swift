@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YNSwift
 
 class DungeonNotificationTableViewCell: UITableViewCell {
     
@@ -19,10 +20,12 @@ class DungeonNotificationTableViewCell: UITableViewCell {
     @IBOutlet weak var contentLabel: UILabel!
     var notification: DungeonNotification! {
         didSet {
-            self.avatarImageView.af_setImageWithURL(NSURL(string: self.notification.avatarUrl)!)
+            let avatar = QiniuImage(url: self.notification.avatarUrl, width: 512, height: 512)
+            let size = self.avatarImageView.bounds.size.height * UIScreen.screenScale
+            self.avatarImageView.af_setImageWithURL(NSURL(string: avatar.getUrlForMaxWidth(size, maxHeight: size))!)
             self.nicknameLabel.text = self.notification.nickname
             if let content = self.notification.content {
-                self.contentLabel.text = self.notification.content
+                self.contentLabel.text = content
             } else if let comment = self.notification.memorialComment {
                 let fontSize = self.contentLabel.font.pointSize
                 let normal = [
@@ -31,7 +34,7 @@ class DungeonNotificationTableViewCell: UITableViewCell {
                 let bold = [
                     NSFontAttributeName: UIFont(descriptor: self.contentLabel.font.fontDescriptor().fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits.TraitBold), size: fontSize)
                 ]
-                if let toUserId = comment.toUserId {
+                if let _ = comment.toUserId {
                     let s = NSMutableAttributedString()
                     let tn = NSAttributedString(string: comment.toNickname!, attributes: bold)
                     s.appendAttributedString(NSAttributedString(string: "回复 ", attributes: normal))
