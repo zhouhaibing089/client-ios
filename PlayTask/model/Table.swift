@@ -55,6 +55,20 @@ class Table: Object {
         }
     }
     
+    /// Updated from standalone object which has same primarykey as an object in realm
+    func update() {
+        let realm = try! Realm()
+        try! realm.write {
+            self.modifiedTime = NSDate()
+            realm.add(self, update: true)
+        }
+        if Util.appDelegate.syncStatus != SyncStatus.Syncing {
+            Util.appDelegate.syncStatus = SyncStatus.Unsynced
+        }
+    }
+
+    
+    /// Updated common data from json returned by server
     func update(json json: JSON) {
         var value = [String: AnyObject]()
         value["sid"] = json["id"].intValue
@@ -63,6 +77,7 @@ class Table: Object {
         value["synchronizedTime"] = NSDate()
         self.update(value)
     }
+    
     
     func sync() {
         if let syncTime = self.synchronizedTime {

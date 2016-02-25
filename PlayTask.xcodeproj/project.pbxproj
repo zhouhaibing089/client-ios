@@ -34,6 +34,10 @@
 		495EB5C91BD0A93400E0E829 /* BillItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */; };
 		496486AB1C50C9B7008C9A2C /* NewMemorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496486AA1C50C9B7008C9A2C /* NewMemorialViewController.swift */; };
 		496486AF1C51DB22008C9A2C /* MemorialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496486AE1C51DB22008C9A2C /* MemorialTableViewCell.swift */; };
+		49791ABD1C7EEC5A004867C8 /* TaskAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49791ABC1C7EEC5A004867C8 /* TaskAlarmViewController.swift */; };
+		49791ABF1C7EF44B004867C8 /* TaskAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49791ABE1C7EF44B004867C8 /* TaskAlarm.swift */; };
+		49791AC21C7F25E4004867C8 /* TaskAlarmRepeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49791AC11C7F25E4004867C8 /* TaskAlarmRepeatViewController.swift */; };
+		49791AC41C7F260A004867C8 /* TaskAlarmLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49791AC31C7F260A004867C8 /* TaskAlarmLabelViewController.swift */; };
 		49840DD11BCF9B61001F493D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD01BCF9B61001F493D /* Util.swift */; };
 		49840DD91BCFA997001F493D /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD81BCFA997001F493D /* TaskTableViewCell.swift */; };
 		498BAC901BD0CDE600ABB357 /* WishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */; };
@@ -140,6 +144,10 @@
 		495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillItemTableViewCell.swift; sourceTree = "<group>"; };
 		496486AA1C50C9B7008C9A2C /* NewMemorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMemorialViewController.swift; sourceTree = "<group>"; };
 		496486AE1C51DB22008C9A2C /* MemorialTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorialTableViewCell.swift; sourceTree = "<group>"; };
+		49791ABC1C7EEC5A004867C8 /* TaskAlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAlarmViewController.swift; sourceTree = "<group>"; };
+		49791ABE1C7EF44B004867C8 /* TaskAlarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAlarm.swift; sourceTree = "<group>"; };
+		49791AC11C7F25E4004867C8 /* TaskAlarmRepeatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAlarmRepeatViewController.swift; sourceTree = "<group>"; };
+		49791AC31C7F260A004867C8 /* TaskAlarmLabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAlarmLabelViewController.swift; sourceTree = "<group>"; };
 		49840DD01BCF9B61001F493D /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		49840DD81BCFA997001F493D /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishViewController.swift; sourceTree = "<group>"; };
@@ -247,6 +255,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49791AC01C7F25BA004867C8 /* alarm */ = {
+			isa = PBXGroup;
+			children = (
+				49791ABC1C7EEC5A004867C8 /* TaskAlarmViewController.swift */,
+				49791AC11C7F25E4004867C8 /* TaskAlarmRepeatViewController.swift */,
+				49791AC31C7F260A004867C8 /* TaskAlarmLabelViewController.swift */,
+			);
+			name = alarm;
+			sourceTree = "<group>";
+		};
 		49840DD21BCF9B69001F493D /* util */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +277,7 @@
 		49840DD51BCFA928001F493D /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				49791AC01C7F25BA004867C8 /* alarm */,
 				49B860221C461E42004641DF /* dungeon */,
 				499708EE1BCF63F500424F5E /* NewTaskViewController.swift */,
 				499708EC1BCF635A00424F5E /* TaskViewController.swift */,
@@ -293,6 +312,7 @@
 				49B4F3201C5488290094A438 /* MemorialComment.swift */,
 				49B4F3291C56489F0094A438 /* Badge.swift */,
 				490BEA9C1C5737DD005CAF3C /* DungeonNotification.swift */,
+				49791ABE1C7EF44B004867C8 /* TaskAlarm.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -670,8 +690,10 @@
 				495EB5C71BD0A80800E0E829 /* BillViewController.swift in Sources */,
 				49422DF51C48E83600C316B3 /* DungeonTaskTableViewCell.swift in Sources */,
 				49953E001BDB2F6500B25EC8 /* TaskHistory.swift in Sources */,
+				49791ABD1C7EEC5A004867C8 /* TaskAlarmViewController.swift in Sources */,
 				49C8D3CC1BE88C4900E8EBF5 /* RegisterViewController.swift in Sources */,
 				49B4F32A1C56489F0094A438 /* Badge.swift in Sources */,
+				49791AC21C7F25E4004867C8 /* TaskAlarmRepeatViewController.swift in Sources */,
 				49422DFB1C4F74CC00C316B3 /* DungeonViewController.swift in Sources */,
 				49C8D3DA1BEF6DE700E8EBF5 /* TaskAPI.swift in Sources */,
 				49F02DDF1C5260F700E9BA7A /* ImageAPI.swift in Sources */,
@@ -690,10 +712,12 @@
 				49B860241C461E8B004641DF /* DungeonEmbeddedViewController.swift in Sources */,
 				49F8092B1C1B10C7006A5DF5 /* StatisticDetailViewController.swift in Sources */,
 				4998593D1BDB169C00C222E7 /* Task.swift in Sources */,
+				49791AC41C7F260A004867C8 /* TaskAlarmLabelViewController.swift in Sources */,
 				49953DFC1BDB1F0400B25EC8 /* Table.swift in Sources */,
 				491B6FEE1C44E20A000FD353 /* DungeonTableViewCell.swift in Sources */,
 				49F02DDD1C52204300E9BA7A /* PreviewViewController.swift in Sources */,
 				49F4A0231C16C574002D21D6 /* StatisticTableViewCell.swift in Sources */,
+				49791ABF1C7EF44B004867C8 /* TaskAlarm.swift in Sources */,
 				490BEAA11C575621005CAF3C /* MemorialViewController.swift in Sources */,
 				49F8093E1C1E7239006A5DF5 /* BubbleView.swift in Sources */,
 				499708EF1BCF63F500424F5E /* NewTaskViewController.swift in Sources */,

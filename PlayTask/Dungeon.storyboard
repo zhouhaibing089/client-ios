@@ -415,7 +415,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hxX-YT-I9b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2364.5" y="-829.5"/>
+            <point key="canvasLocation" x="2396.5" y="-829.5"/>
         </scene>
         <!--Dungeon View Controller-->
         <scene sceneID="OOn-gx-55D">
@@ -962,7 +962,7 @@
         <image name="select_image_button" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Jw8-xj-kf1"/>
+        <segue reference="gSv-CI-yEA"/>
         <segue reference="J3R-Ya-t0Q"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -177,7 +177,17 @@ class TaskViewController: UIViewController, UIToolbarDelegate, DZNEmptyDataSetDe
                     }
                 }
             }
+        } else if segue.identifier == "alarm" {
+            if let tavc = segue.destinationViewController as? TaskAlarmViewController {
+                tavc.task = sender as! Task
+            }
         }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let task = self.currentTasks[indexPath.row]
+        self.performSegueWithIdentifier("alarm", sender: task)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {

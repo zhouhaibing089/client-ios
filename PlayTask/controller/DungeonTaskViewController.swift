@@ -60,7 +60,6 @@ class DungeonTaskViewController: TaskViewController {
         self.currentSelectedSegment = sender.selectedSegmentIndex
         if sender.selectedSegmentIndex == 3 {
             self.mode = Mode.Dungeon
-            self.tableView.allowsSelection = true
             self.tableView.hidden = false
             // enable refresh control
             self.refreshTableViewController.refreshControl = self.refreshControl
@@ -72,7 +71,6 @@ class DungeonTaskViewController: TaskViewController {
             self.refresh()
         } else {
             self.refreshTableViewController.refreshControl = nil
-            self.tableView.allowsSelection = false
             self.mode = Mode.Task
         }
         super.changeTaskType(sender)
@@ -116,7 +114,10 @@ class DungeonTaskViewController: TaskViewController {
         return UITableViewCellEditingStyle.None
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if self.mode == Mode.Task {
+            return super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+        }
         self.performSegueWithIdentifier("index@Dungeon", sender: self.dungeons[indexPath.section][indexPath.row])
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }

@@ -50,7 +50,7 @@ class DungeonNotificationTableViewCell: UITableViewCell {
                 if let image = memorial.image {
                     self.briefImageView.hidden = false
                     self.briefLabel.hidden = true
-                    self.briefImageView.af_setImageWithURL(NSURL(string: image.getUrlForMaxWidth(64, maxHeight: 64))!)
+                    self.briefImageView.af_setImageWithURL(NSURL(string: image.getUrlForMaxWidth(64 * UIScreen.screenScale, maxHeight: 64 * UIScreen.screenScale))!)
                 } else {
                     self.briefImageView.hidden = true
                     self.briefLabel.hidden = false
