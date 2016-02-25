@@ -249,6 +249,7 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sON-mg-Reb">
                                                     <rect key="frame" x="495" y="8" width="64" height="64"/>
                                                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="64" id="OFV-CL-2RO"/>
                                                         <constraint firstAttribute="width" secondItem="sON-mg-Reb" secondAttribute="height" multiplier="1:1" id="ZtH-7V-pmE"/>
@@ -258,6 +259,9 @@
                                                             <integer key="value" value="6"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="scC-Pi-hgp" appends="YES" id="pL4-bW-G1c"/>
+                                                    </connections>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -346,12 +350,18 @@
                     </tableView>
                     <connections>
                         <outlet property="avatarImageView" destination="sON-mg-Reb" id="qQQ-sh-pkI"/>
+                        <segue destination="9uk-EX-3Wa" kind="presentation" identifier="preview" id="qx1-sV-zZU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2UB-kP-bK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer cancelsTouchesInView="NO" id="eJT-zv-8eU">
                     <connections>
                         <action selector="tap:" destination="8LM-SE-DNG" id="4mN-Ps-Uur"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="scC-Pi-hgp">
+                    <connections>
+                        <action selector="viewLargeAvatar:" destination="8LM-SE-DNG" id="NhX-AO-Eqz"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

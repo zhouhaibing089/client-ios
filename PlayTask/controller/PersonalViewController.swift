@@ -16,14 +16,21 @@ import CRToast
 
 class PersonalViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarImageView: UIImageView! {
+        didSet {
+            self.avatarImageView.userInteractionEnabled = true
+        }
+    }
     var cancelUploadAvatar = false
     var cancelUploadDisposable: Disposable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.estimatedRowHeight = 44
-        self.avatarImageView.af_setImageWithURL(NSURL(string: Util.currentUser.avatarUrl)!)
+        
+        let avatar = QiniuImage(url: Util.currentUser.avatarUrl, width: 512, height: 512)
+        let size = self.avatarImageView.bounds.size.height * UIScreen.screenScale
+        self.avatarImageView.af_setImageWithURL(NSURL(string: avatar.getUrlForMaxWidth(size, maxHeight: size))!)
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -156,7 +163,22 @@ class PersonalViewController: UITableViewController, UIImagePickerControllerDele
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func viewLargeAvatar(sender: UITapGestureRecognizer) {
+        if Util.currentUser.avatarUrl != "" {
+            self.performSegueWithIdentifier("preview", sender: nil)
+        }
+    }
+    
     @IBAction func tap(sender: UITapGestureRecognizer) {
         self.cancelUploadDisposable?.dispose()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "preview" {
+            if let pvc = segue.destinationViewController as? PreviewViewController {
+                pvc.rawImage = self.avatarImageView.image
+                pvc.imageUrl = Util.currentUser.avatarUrl
+            }
+        }
     }
 }
