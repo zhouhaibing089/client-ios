@@ -47,6 +47,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NAt-Yb-WVF">
                                                     <rect key="frame" x="8" y="8" width="48" height="48"/>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="NAt-Yb-WVF" secondAttribute="height" multiplier="1:1" id="stD-XU-7HS"/>
                                                         <constraint firstAttribute="width" constant="48" id="tsW-3N-1QQ"/>
@@ -184,6 +185,7 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uh6-a5-sAj">
                                             <rect key="frame" x="8" y="8" width="48" height="48"/>
+                                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="48" id="2XR-HU-wDU"/>
                                                 <constraint firstAttribute="width" secondItem="Uh6-a5-sAj" secondAttribute="height" multiplier="1:1" id="nUf-vC-QRe"/>
@@ -268,6 +270,7 @@
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FEv-H5-Fpg">
                                                             <rect key="frame" x="8" y="8" width="36" height="36"/>
+                                                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="FEv-H5-Fpg" secondAttribute="height" multiplier="1:1" id="F4P-GR-n4t"/>
                                                                 <constraint firstAttribute="width" constant="36" id="ZeU-4X-OJz"/>
@@ -743,7 +746,7 @@
                                     <segue destination="dLW-MK-uv1" kind="presentation" identifier="new" id="9si-AY-ZRK"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="more_filled" id="gOO-DO-RK6">
+                            <barButtonItem image="more" id="gOO-DO-RK6">
                                 <connections>
                                     <action selector="more:" destination="ZLh-Iq-w0h" id="Vyh-8h-ddc"/>
                                 </connections>
@@ -953,11 +956,11 @@
     </scenes>
     <resources>
         <image name="create_new" width="22" height="22"/>
-        <image name="more_filled" width="25" height="25"/>
+        <image name="more" width="25" height="25"/>
         <image name="select_image_button" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="J3R-Ya-t0Q"/>
         <segue reference="Jw8-xj-kf1"/>
+        <segue reference="J3R-Ya-t0Q"/>
     </inferredMetricsTieBreakers>
 </document>
