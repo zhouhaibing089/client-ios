@@ -110,4 +110,11 @@ class TaskAlarm: Table {
             return false
         }
     }
+    
+    class func scheduleNotifications() {
+        let realm = try! Realm()
+        // TODO: real schedule
+        let alarms = realm.objects(TaskAlarm).filter("task.deleted == false")
+        return
+    }
 }

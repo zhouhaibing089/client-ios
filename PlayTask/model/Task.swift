@@ -169,13 +169,12 @@ final class Task: Table {
         return count
     }
     
-    class func scheduleNotification() {
+    class func scheduleNotifications() {
         let localNotification = UILocalNotification()
         localNotification.fireDate = NSDate().endOfDay().dateByAddingTimeInterval(1)
         localNotification.applicationIconBadgeNumber = Task.getPinnedTasksNumOnTheDate(localNotification.fireDate!)
         let application = UIApplication.sharedApplication()
-        application.cancelAllLocalNotifications()
-        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        application.scheduleLocalNotification(localNotification)
     }
     
     override func push() -> Observable<Table> {
