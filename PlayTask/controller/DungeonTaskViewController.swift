@@ -186,7 +186,7 @@ class DungeonTaskViewController: TaskViewController {
         var tmp = [Dungeon]()
         // reload empty dataset upon switch task type
         self.tableView.reloadEmptyDataSet()
-        API.getJoinedDungeons(Util.currentUser).subscribe { event in
+        API.getJoinedDungeons(Util.currentUser, closed: self.showDone).subscribe { event in
             switch event {
             case .Completed:
                 self.dungeons = [tmp]
@@ -212,7 +212,7 @@ class DungeonTaskViewController: TaskViewController {
         if let before = self.dungeons.last?.last?.createdTime {
             self.loadIndicator.startAnimating()
             var tmp = [Dungeon]()
-            API.getJoinedDungeons(Util.currentUser, before: before).subscribe { event in
+            API.getJoinedDungeons(Util.currentUser, closed: self.showDone, before: before).subscribe { event in
                 switch event {
                 case .Completed:
                     self.dungeons.append(tmp)
@@ -248,7 +248,11 @@ class DungeonTaskViewController: TaskViewController {
             return super.titleForEmptyDataSet(scrollView)
         }
         self.tableView.tableFooterView = UIView()
-        return NSAttributedString(string: "没有副本")
+        if self.showDone {
+            return NSAttributedString(string: "无完结副本")
+        } else {
+            return NSAttributedString(string: "无副本")
+        }
     }
     
     override func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
