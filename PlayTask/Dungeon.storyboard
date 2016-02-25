@@ -735,7 +735,9 @@
                             <rect key="frame" x="113" y="7" width="150" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                            <state key="normal" title="消息"/>
+                            <state key="normal" title="本组(2) ▾">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                             <connections>
                                 <action selector="switchScope:" destination="ZLh-Iq-w0h" eventType="touchUpInside" id="cQ3-FC-FjL"/>
                             </connections>
