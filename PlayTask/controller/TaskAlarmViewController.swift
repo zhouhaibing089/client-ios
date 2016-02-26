@@ -16,7 +16,6 @@ class TaskAlarmViewController: UITableViewController, UIPickerViewDelegate, UIPi
     // used to store data temporarily
     var tmpAlarm: TaskAlarm!
     
-    @IBOutlet var vibrationSwitch: UISwitch!
     @IBOutlet var soundSwitch: UISwitch!
     
     @IBOutlet var timePicker: UIPickerView!
@@ -52,11 +51,7 @@ class TaskAlarmViewController: UITableViewController, UIPickerViewDelegate, UIPi
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if self.taskAlarm != nil && !self.taskAlarm!.deleted {
-            return 3
-        } else {
-            return 2
-        }
+        return self.taskAlarm?.getLocalNotification() == nil ? 2 : 3
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -148,10 +143,9 @@ class TaskAlarmViewController: UITableViewController, UIPickerViewDelegate, UIPi
             self.tmpAlarm.friday = alarm.friday
             self.tmpAlarm.saturday = alarm.saturday
             
-            self.tmpAlarm.vibration = alarm.vibration
             self.tmpAlarm.sound = alarm.sound
             self.tmpAlarm.label = alarm.label
-
+            
         } else {
             self.tmpAlarm = TaskAlarm()
             self.tmpAlarm.task = self.task
@@ -176,7 +170,6 @@ class TaskAlarmViewController: UITableViewController, UIPickerViewDelegate, UIPi
     func update() {
         self.timePicker.selectRow(self.tmpAlarm.hour, inComponent: 0, animated: false)
         self.timePicker.selectRow(self.tmpAlarm.minute, inComponent: 1, animated: false)
-        self.vibrationSwitch.setOn(self.tmpAlarm.vibration, animated: false)
         self.soundSwitch.setOn(self.tmpAlarm.sound, animated: false)
         self.tableView.reloadData()
     }
@@ -188,15 +181,14 @@ class TaskAlarmViewController: UITableViewController, UIPickerViewDelegate, UIPi
         } else {
             self.tmpAlarm.save()
         }
+        self.tmpAlarm.schedule()
         self.navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func soundChange(sender: UISwitch) {
         self.tmpAlarm.sound = sender.on
     }
-    @IBAction func vibrationChange(sender: UISwitch) {
-        self.tmpAlarm.vibration = sender.on
-    }
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "repeat" {
             if let tarvc = segue.destinationViewController as? TaskAlarmRepeatViewController {
@@ -211,6 +203,7 @@ class TaskAlarmViewController: UITableViewController, UIPickerViewDelegate, UIPi
     @IBAction func deleteAlarm(sender: UIButton? = nil) {
         self.taskAlarm?.delete()
         self.navigationController?.popViewControllerAnimated(true)
+        self.taskAlarm?.schedule()
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

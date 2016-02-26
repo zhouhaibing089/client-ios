@@ -23,11 +23,9 @@ class TaskAlarm: Table {
     dynamic var friday = false
     dynamic var saturday = false
     
-    dynamic var vibration = true
     dynamic var sound = true
-    
     dynamic var label: String = ""
-
+    
     class func getAlarmForTask(task: Task) -> TaskAlarm? {
         let realm = try! Realm()
         return realm.objects(TaskAlarm).filter("task == %@", task).first
@@ -113,8 +111,111 @@ class TaskAlarm: Table {
     
     class func scheduleNotifications() {
         let realm = try! Realm()
-        // TODO: real schedule
-        let alarms = realm.objects(TaskAlarm).filter("task.deleted == false")
+        let alarms = realm.objects(TaskAlarm).filter("task.deleted == false AND deleted == false").filter { (alarm) -> Bool in
+            return alarm.task.type != TaskType.Normal.rawValue && !alarm.task.isDone()
+        }
+        for a in alarms {
+            a.schedule()
+        }
         return
+    }
+    
+    /// remove delivered no repeat alarms
+    class func removeDeliveredAlarms() {
+        let realm = try! Realm()
+        let alarms = realm.objects(TaskAlarm).filter("task.deleted == false AND deleted == false").filter { (alarm) -> Bool in
+            return alarm.task.type != TaskType.Normal.rawValue && !alarm.task.isDone()
+        }
+        for a in alarms {
+            var noRepeat = true
+            for i in 0...6 {
+                if !a.getDay(i) {
+                    noRepeat = false
+                    break
+                }
+            }
+            if a.getLocalNotification() == nil {
+                a.delete()
+            }
+        }
+    }
+    
+    func schedule() {
+        let application = UIApplication.sharedApplication()
+        
+        if let n = self.getLocalNotification() {
+            application.cancelLocalNotification(n)
+            if self.deleted { // cancel notification
+                return
+            }
+        }
+        let nowComponents = NSDate().getComponents()
+        var fireDates = [NSDate]()
+        let cal = NSCalendar.currentCalendar()
+        for i in 0...6 { // generate firedates
+            let on = self.getDay(i)
+            if !on {
+                continue
+            }
+            let weekday = nowComponents.weekday
+            var components: NSDateComponents
+            if i > weekday { // later
+                components = cal.dateByAddingUnit(.Day, value: i - weekday, toDate: NSDate(), options: [])!.getComponents()
+            } else if i < weekday { // earlier
+                components = cal.dateByAddingUnit(.Day, value: 7 - (weekday - i), toDate: NSDate(), options: [])!.getComponents()
+            } else {
+                if nowComponents.hour > self.hour || (nowComponents.hour == self.hour && nowComponents.minute >= self.minute) {
+                    // same day but earlier
+                    components = cal.dateByAddingUnit(.Day, value: 7, toDate: NSDate(), options: [])!.getComponents()
+                } else {
+                    components = NSDate().getComponents()
+                }
+            }
+            components.hour = self.hour
+            components.minute = self.minute
+            components.second = 0
+            fireDates.append(cal.dateFromComponents(components)!)
+        }
+        
+        var repeatInterval = NSCalendarUnit.WeekOfYear
+        if fireDates.count == 0 {
+            // no repeat
+            var components: NSDateComponents
+            if nowComponents.hour > self.hour || (nowComponents.hour == self.hour && nowComponents.minute >= self.minute) {
+                // earlier
+                components = cal.dateByAddingUnit(.Day, value: 7, toDate: NSDate(), options: [])!.getComponents()
+            } else {
+                components = NSDate().getComponents()
+            }
+            components.hour = self.hour
+            components.minute = self.minute
+            components.second = 0
+            fireDates.append(cal.dateFromComponents(components)!)
+            repeatInterval = NSCalendarUnit(rawValue: 0)
+        }
+        for fd in fireDates { // schedule notification
+            let notification = UILocalNotification()
+            notification.fireDate = fd
+            notification.timeZone = NSTimeZone.defaultTimeZone()
+            notification.repeatInterval = repeatInterval
+            notification.alertBody = self.label
+            notification.userInfo = ["task_alarm_id": self.id]
+            if self.sound {
+                notification.soundName = "Radar.aif"
+            }
+            application.scheduleLocalNotification(notification)
+        }
+    }
+    
+    func getLocalNotification() -> UILocalNotification? {
+        let application = UIApplication.sharedApplication()
+        for n in application.scheduledLocalNotifications ?? [] {
+            if let id = n.userInfo?["task_alarm_id"] as? String {
+                if id == self.id {
+                    return n
+                }
+            }
+        }
+        return nil
     }
 }

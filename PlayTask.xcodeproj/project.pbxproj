@@ -38,6 +38,7 @@
 		49791ABF1C7EF44B004867C8 /* TaskAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49791ABE1C7EF44B004867C8 /* TaskAlarm.swift */; };
 		49791AC21C7F25E4004867C8 /* TaskAlarmRepeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49791AC11C7F25E4004867C8 /* TaskAlarmRepeatViewController.swift */; };
 		49791AC41C7F260A004867C8 /* TaskAlarmLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49791AC31C7F260A004867C8 /* TaskAlarmLabelViewController.swift */; };
+		49791AC91C803FF6004867C8 /* Radar.aif in Resources */ = {isa = PBXBuildFile; fileRef = 49791AC81C803FF6004867C8 /* Radar.aif */; };
 		49840DD11BCF9B61001F493D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD01BCF9B61001F493D /* Util.swift */; };
 		49840DD91BCFA997001F493D /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49840DD81BCFA997001F493D /* TaskTableViewCell.swift */; };
 		498BAC901BD0CDE600ABB357 /* WishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */; };
@@ -148,6 +149,7 @@
 		49791ABE1C7EF44B004867C8 /* TaskAlarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAlarm.swift; sourceTree = "<group>"; };
 		49791AC11C7F25E4004867C8 /* TaskAlarmRepeatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAlarmRepeatViewController.swift; sourceTree = "<group>"; };
 		49791AC31C7F260A004867C8 /* TaskAlarmLabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAlarmLabelViewController.swift; sourceTree = "<group>"; };
+		49791AC81C803FF6004867C8 /* Radar.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = Radar.aif; sourceTree = "<group>"; };
 		49840DD01BCF9B61001F493D /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		49840DD81BCFA997001F493D /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		498BAC8F1BD0CDE600ABB357 /* WishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +267,14 @@
 			name = alarm;
 			sourceTree = "<group>";
 		};
+		49791AC71C8033F2004867C8 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				49791AC81C803FF6004867C8 /* Radar.aif */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
 		49840DD21BCF9B69001F493D /* util */ = {
 			isa = PBXGroup;
 			children = (
@@ -363,6 +373,7 @@
 		499708BD1BCF506E00424F5E /* PlayTask */ = {
 			isa = PBXGroup;
 			children = (
+				49791AC71C8033F2004867C8 /* assets */,
 				49C8D3D01BE8AC9F00E8EBF5 /* api */,
 				49840DD71BCFA977001F493D /* view */,
 				49840DD61BCFA940001F493D /* model */,
@@ -586,6 +597,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49AC6D981C7741980028093D /* AlipaySDK.bundle in Resources */,
+				49791AC91C803FF6004867C8 /* Radar.aif in Resources */,
 				4938E43C1C587A7B00FC977C /* MemorialComment.xib in Resources */,
 				491B6FDA1C40F599000FD353 /* Task.storyboard in Resources */,
 				49422DF91C4F68A400C316B3 /* Dungeon.storyboard in Resources */,
