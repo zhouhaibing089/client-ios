@@ -155,8 +155,9 @@ class TaskAlarmViewController: UITableViewController, UIPickerViewDelegate, UIPi
             self.tmpAlarm = TaskAlarm()
             self.tmpAlarm.task = self.task
             self.tmpAlarm.label = self.task.title
-            self.tmpAlarm.hour = 12
-            self.tmpAlarm.minute = 00
+            let nowComponents = NSDate().getComponents()
+            self.tmpAlarm.hour = nowComponents.hour
+            self.tmpAlarm.minute = nowComponents.minute
             if self.task.type == TaskType.Daily.rawValue {
                 // daily task repeat everyday by default
                 self.tmpAlarm.sunday = true

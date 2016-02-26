@@ -111,7 +111,7 @@ class TaskAlarm: Table {
     
     class func scheduleNotifications() {
         let realm = try! Realm()
-        let alarms = realm.objects(TaskAlarm).filter("task.deleted == false AND deleted == false").filter { (alarm) -> Bool in
+        let alarms = realm.objects(TaskAlarm).filter("(task.userSid == %@ OR task.userSid == nil) AND task.deleted == false AND deleted == false", Util.currentUser.sid.value ?? -1).filter { (alarm) -> Bool in
             return alarm.task.type != TaskType.Normal.rawValue && !alarm.task.isDone()
         }
         for a in alarms {
@@ -157,7 +157,8 @@ class TaskAlarm: Table {
             if !on {
                 continue
             }
-            let weekday = nowComponents.weekday
+            // weekday 1...7. so, minus 1
+            let weekday = nowComponents.weekday - 1
             var components: NSDateComponents
             if i > weekday { // later
                 components = cal.dateByAddingUnit(.Day, value: i - weekday, toDate: NSDate(), options: [])!.getComponents()
