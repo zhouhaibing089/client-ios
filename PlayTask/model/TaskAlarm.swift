@@ -112,7 +112,8 @@ class TaskAlarm: Table {
     class func scheduleNotifications() {
         let realm = try! Realm()
         let alarms = realm.objects(TaskAlarm).filter("(task.userSid == %@ OR task.userSid == nil) AND task.deleted == false AND deleted == false", Util.currentUser.sid.value ?? -1).filter { (alarm) -> Bool in
-            return alarm.task.type != TaskType.Normal.rawValue && !alarm.task.isDone()
+            // 不是普通任务或者是未完成的普通任务
+            return alarm.task.type != TaskType.Normal.rawValue || !alarm.task.isDone()
         }
         for a in alarms {
             a.schedule()
@@ -123,9 +124,7 @@ class TaskAlarm: Table {
     /// remove delivered no repeat alarms
     class func removeDeliveredAlarms() {
         let realm = try! Realm()
-        let alarms = realm.objects(TaskAlarm).filter("(task.userSid == %@ OR task.userSid == nil) AND task.deleted == false AND deleted == false", Util.currentUser.sid.value ?? -1).filter { (alarm) -> Bool in
-            return alarm.task.type != TaskType.Normal.rawValue && !alarm.task.isDone()
-        }
+        let alarms = realm.objects(TaskAlarm).filter("deleted == false", Util.currentUser.sid.value ?? -1)
         for a in alarms {
             var noRepeat = true
             for i in 0...6 {
@@ -134,8 +133,15 @@ class TaskAlarm: Table {
                     break
                 }
             }
-            if a.getLocalNotification() == nil {
-                a.delete()
+            if noRepeat {
+                if a.getLocalNotification() == nil {
+                    a.delete()
+                }
+            } else {
+                // 已完成的普通任务
+                if a.task.type == TaskType.Normal.rawValue && a.task.isDone() {
+                    a.delete()
+                }
             }
         }
     }
