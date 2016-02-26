@@ -133,15 +133,8 @@ class TaskAlarm: Table {
                     break
                 }
             }
-            if noRepeat {
-                if a.getLocalNotification() == nil {
-                    a.delete()
-                }
-            } else {
-                // 已完成的普通任务
-                if a.task.type == TaskType.Normal.rawValue && a.task.isDone() {
-                    a.delete()
-                }
+            if noRepeat && a.getLocalNotification() == nil {
+                a.delete()
             }
         }
     }
