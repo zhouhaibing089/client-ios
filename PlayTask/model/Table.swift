@@ -103,6 +103,11 @@ class Table: Object {
         return r
     }
     
+    class func getById<T: Table>(type: T.Type, id: String) -> T? {
+        let realm = try! Realm()
+        return realm.objectForPrimaryKey(type, key: id)
+    }
+    
     func push() -> Observable<Table> {
         return Observable.empty()
     }

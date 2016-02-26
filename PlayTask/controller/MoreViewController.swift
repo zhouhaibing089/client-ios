@@ -107,6 +107,8 @@ class MoreViewController: UITableViewController {
                     switch event {
                     case .Next(_):
                         self.tableView.reloadData()
+                        // 清除 Alarm
+                        Util.application.cancelAllLocalNotifications()
                         hud.switchToSuccess(duration: 1, labelText: "退出成功")
                         break
                     default:

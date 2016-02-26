@@ -123,7 +123,7 @@ class TaskAlarm: Table {
     /// remove delivered no repeat alarms
     class func removeDeliveredAlarms() {
         let realm = try! Realm()
-        let alarms = realm.objects(TaskAlarm).filter("task.deleted == false AND deleted == false").filter { (alarm) -> Bool in
+        let alarms = realm.objects(TaskAlarm).filter("(task.userSid == %@ OR task.userSid == nil) AND task.deleted == false AND deleted == false", Util.currentUser.sid.value ?? -1).filter { (alarm) -> Bool in
             return alarm.task.type != TaskType.Normal.rawValue && !alarm.task.isDone()
         }
         for a in alarms {

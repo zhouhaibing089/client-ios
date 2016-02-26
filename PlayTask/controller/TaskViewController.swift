@@ -12,7 +12,6 @@ import DZNEmptyDataSet
 class TaskViewController: UIViewController, UIToolbarDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var bronzeLabel: UILabel!
-    @IBOutlet weak var tipsLabel: UILabel!
     @IBOutlet weak var taskTypeSegmentControl: UISegmentedControl!
     @IBOutlet weak var scoreLabel: UILabel!
     

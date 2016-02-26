@@ -51,7 +51,12 @@ class TaskAlarmViewController: UITableViewController, UIPickerViewDelegate, UIPi
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.taskAlarm?.getLocalNotification() == nil ? 2 : 3
+        if let ta = self.taskAlarm {
+            if !ta.deleted && ta.getLocalNotification() != nil {
+                return 3
+            }
+        }
+        return 2
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -127,7 +132,7 @@ class TaskAlarmViewController: UITableViewController, UIPickerViewDelegate, UIPi
         self.taskAlarm = TaskAlarm.getAlarmForTask(self.task)
         self.tmpAlarm = TaskAlarm()
         
-        if self.taskAlarm != nil && !self.taskAlarm!.deleted {
+        if self.taskAlarm != nil {
             let alarm = self.taskAlarm!
             
             self.tmpAlarm.task = alarm.task
@@ -150,8 +155,8 @@ class TaskAlarmViewController: UITableViewController, UIPickerViewDelegate, UIPi
             self.tmpAlarm = TaskAlarm()
             self.tmpAlarm.task = self.task
             self.tmpAlarm.label = self.task.title
-            self.tmpAlarm.hour = 6
-            self.tmpAlarm.minute = 24
+            self.tmpAlarm.hour = 12
+            self.tmpAlarm.minute = 00
             if self.task.type == TaskType.Daily.rawValue {
                 // daily task repeat everyday by default
                 self.tmpAlarm.sunday = true

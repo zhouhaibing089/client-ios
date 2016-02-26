@@ -86,7 +86,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        return
+        if let taskAlarmId = notification.userInfo?["task_alarm_id"] as? String {
+            if let ta = TaskAlarm.getById(TaskAlarm.self, id: taskAlarmId) {
+                if notification.repeatInterval.rawValue == 0 {
+                    ta.delete()
+                }
+                let alert = UIAlertController(title: "提醒", message: ta.label, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "标记为已完成", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                    let user = Util.currentUser
+                    user.update(["score": user.score + ta.task.score])
+                    ta.task.setDone(true)
+                    // let task view controller refresh
+                    let notificationCenter = NSNotificationCenter.defaultCenter()
+                    notificationCenter.postNotificationName(UIApplicationDidBecomeActiveNotification, object: nil)
+                }))
+                alert.addAction(UIAlertAction(title: "知道了", style: UIAlertActionStyle.Default, handler: nil))
+                
+                // FIXME: Can not show correctlly when displaying modal view controller
+                self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
