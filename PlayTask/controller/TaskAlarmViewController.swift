@@ -181,6 +181,8 @@ class TaskAlarmViewController: UITableViewController, UIPickerViewDelegate, UIPi
         } else {
             self.tmpAlarm.save()
         }
+        // 取消已经 schduled 的 notification
+        self.tmpAlarm.cancelLocalNotification()
         self.tmpAlarm.schedule()
         self.navigationController?.popViewControllerAnimated(true)
     }
@@ -202,8 +204,8 @@ class TaskAlarmViewController: UITableViewController, UIPickerViewDelegate, UIPi
     }
     @IBAction func deleteAlarm(sender: UIButton? = nil) {
         self.taskAlarm?.delete()
+        self.tmpAlarm.cancelLocalNotification()
         self.navigationController?.popViewControllerAnimated(true)
-        self.taskAlarm?.schedule()
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

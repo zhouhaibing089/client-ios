@@ -140,15 +140,15 @@ class TaskAlarm: Table {
         }
     }
     
+    func cancelLocalNotification() {
+        if let n = self.getLocalNotification() {
+            let application = UIApplication.sharedApplication()
+            application.cancelLocalNotification(n)
+        }
+    }
+    
     func schedule() {
         let application = UIApplication.sharedApplication()
-        
-        if let n = self.getLocalNotification() {
-            application.cancelLocalNotification(n)
-            if self.deleted { // cancel notification
-                return
-            }
-        }
         let nowComponents = NSDate().getComponents()
         var fireDates = [NSDate]()
         let cal = NSCalendar.currentCalendar()
