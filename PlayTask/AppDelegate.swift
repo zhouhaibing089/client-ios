@@ -93,6 +93,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 let alert = UIAlertController(title: "提醒", message: ta.label, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "标记为已完成", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                    if ta.task.isDone() {
+                        return
+                    }
                     let user = Util.currentUser
                     user.update(["score": user.score + ta.task.score])
                     ta.task.setDone(true)
