@@ -284,8 +284,8 @@
                                                         <action selector="toggle:" destination="law-gN-hj7" eventType="touchUpInside" id="0Vf-Va-vdM"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zda-l4-GX9">
-                                                    <rect key="frame" x="48" y="47" width="20" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/1, 09:24" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zda-l4-GX9">
+                                                    <rect key="frame" x="48" y="47" width="66" height="17"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -316,6 +316,7 @@
                                                 <constraint firstItem="eK6-cZ-sqS" firstAttribute="centerY" secondItem="20O-yk-lGd" secondAttribute="centerY" id="T8p-jo-LxC"/>
                                                 <constraint firstItem="zda-l4-GX9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rv9-n2-eHR" secondAttribute="bottom" constant="8" symbolic="YES" id="VbU-nv-qdv"/>
                                                 <constraint firstItem="rv9-n2-eHR" firstAttribute="leading" secondItem="tjT-W8-1cO" secondAttribute="trailing" constant="8" symbolic="YES" id="e60-1y-yFc"/>
+                                                <constraint firstItem="zvD-kv-n7g" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zda-l4-GX9" secondAttribute="trailing" constant="8" symbolic="YES" id="gqu-TX-qY9"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="zda-l4-GX9" secondAttribute="bottom" id="hgN-hu-cfG"/>
                                                 <constraint firstItem="zvD-kv-n7g" firstAttribute="centerX" secondItem="20O-yk-lGd" secondAttribute="centerX" id="iYE-NQ-j8G"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="rv9-n2-eHR" secondAttribute="bottom" id="jhJ-xS-oRR"/>

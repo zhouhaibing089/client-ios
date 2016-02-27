@@ -29,6 +29,38 @@ class TaskTableViewCell: UITableViewCell {
             }
             if let alarm = self.task.getAlarm() {
                 self.loopLabel.text? += String(format: ", %02d:%02d", alarm.hour, alarm.minute)
+                // repeat
+                let weekdays = alarm.monday && alarm.tuesday && alarm.wednesday && alarm.thursday && alarm.friday
+                let everyday = weekdays && alarm.sunday && alarm.saturday
+                if weekdays && !alarm.sunday && !alarm.saturday {
+                    self.loopLabel.text? += "@工作日"
+                } else if !everyday {
+                    var detail = "@"
+                    if alarm.sunday {
+                        detail += "周日 "
+                    }
+                    if alarm.monday {
+                        detail += "周一 "
+                    }
+                    if alarm.tuesday {
+                        detail += "周二 "
+                    }
+                    if alarm.wednesday {
+                        detail += "周三 "
+                    }
+                    if alarm.thursday {
+                        detail += "周四 "
+                    }
+                    if alarm.friday {
+                        detail += "周五 "
+                    }
+                    if alarm.saturday {
+                        detail += "周六 "
+                    }
+                    if detail != "@" {
+                        self.loopLabel.text? += detail.substringToIndex(detail.endIndex.advancedBy(-1))
+                    }
+                }
             }
             switch self.mode {
             case .Normal:
