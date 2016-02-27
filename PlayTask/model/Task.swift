@@ -225,4 +225,11 @@ final class Task: Table {
         super.delete()
         TaskAlarm.getAlarmForTask(self)?.delete()
     }
+    
+    func getAlarm() -> TaskAlarm? {
+        if let alarm = TaskAlarm.getAlarmForTask(self) {
+            return alarm.deleted ? nil : alarm
+        }
+        return nil
+    }
 }

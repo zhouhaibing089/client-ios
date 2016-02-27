@@ -27,6 +27,9 @@ class TaskTableViewCell: UITableViewCell {
             } else {
                 self.loopLabel.text = "\(completedTimes)/\(self.task.loop)"
             }
+            if let alarm = self.task.getAlarm() {
+                self.loopLabel.text? += String(format: ", %02d:%02d", alarm.hour, alarm.minute)
+            }
             switch self.mode {
             case .Normal:
                 if self.task.isDone() {
