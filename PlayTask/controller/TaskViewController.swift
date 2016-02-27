@@ -299,9 +299,9 @@ class TaskViewController: UIViewController, UIToolbarDelegate, DZNEmptyDataSetDe
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         self.tableView.tableFooterView = UIView()
         if self.showDone {
-            return NSAttributedString(string: "无已完成的任务")
+            return NSAttributedString(string: "已完成任务")
         } else {
-            return NSAttributedString(string: "无未完成的任务")
+            return NSAttributedString(string: "无任务")
         }
     }
     

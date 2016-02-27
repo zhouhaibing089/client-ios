@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rvP-cJ-fEo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rvP-cJ-fEo">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -19,12 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tips" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfd-Xi-S9q">
-                                <rect key="frame" x="20" y="290" width="560" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="joU-52-BUH">
                                 <rect key="frame" x="0.0" y="503" width="600" height="48"/>
                                 <subviews>
@@ -130,14 +124,10 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="joU-52-BUH" firstAttribute="leading" secondItem="lQi-hu-QnA" secondAttribute="leading" id="17S-90-4F4"/>
-                            <constraint firstItem="hfd-Xi-S9q" firstAttribute="leading" secondItem="lQi-hu-QnA" secondAttribute="leadingMargin" id="7Uf-A3-LiQ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hfd-Xi-S9q" secondAttribute="trailing" id="D5p-vk-hc2"/>
                             <constraint firstItem="16R-0S-28d" firstAttribute="width" secondItem="lQi-hu-QnA" secondAttribute="width" id="IlY-X6-tPs"/>
                             <constraint firstItem="KFY-68-ugf" firstAttribute="top" secondItem="16R-0S-28d" secondAttribute="bottom" constant="48" id="KEa-Lj-Rh1"/>
                             <constraint firstItem="joU-52-BUH" firstAttribute="top" secondItem="16R-0S-28d" secondAttribute="bottom" id="KuA-wf-VXx"/>
                             <constraint firstAttribute="topMargin" secondItem="16R-0S-28d" secondAttribute="top" id="QYT-An-drO"/>
-                            <constraint firstItem="hfd-Xi-S9q" firstAttribute="centerY" secondItem="lQi-hu-QnA" secondAttribute="centerY" id="aRg-bt-zl0"/>
-                            <constraint firstItem="hfd-Xi-S9q" firstAttribute="centerX" secondItem="lQi-hu-QnA" secondAttribute="centerX" id="bW8-N4-mc3"/>
                             <constraint firstItem="KFY-68-ugf" firstAttribute="top" secondItem="joU-52-BUH" secondAttribute="bottom" id="cYI-Ti-G7V"/>
                             <constraint firstItem="16R-0S-28d" firstAttribute="centerX" secondItem="lQi-hu-QnA" secondAttribute="centerX" id="dwE-dT-wl9"/>
                             <constraint firstAttribute="trailing" secondItem="joU-52-BUH" secondAttribute="trailing" id="kWf-aL-HnH"/>
@@ -162,7 +152,6 @@
                         <outlet property="bronzeLabel" destination="uXm-Yu-UIt" id="3AJ-GR-CSi"/>
                         <outlet property="scoreLabel" destination="Qle-y0-a6U" id="w9h-aB-8Oo"/>
                         <outlet property="tableView" destination="16R-0S-28d" id="ngs-5i-kqL"/>
-                        <outlet property="tipsLabel" destination="hfd-Xi-S9q" id="zpM-cD-SbJ"/>
                         <segue destination="MEs-mn-qHx" kind="presentation" identifier="new" id="T9Z-19-DGw"/>
                     </connections>
                 </viewController>

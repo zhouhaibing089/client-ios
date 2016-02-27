@@ -8,13 +8,13 @@
 
 import UIKit
 import YNSwift
+import DZNEmptyDataSet
 
-class WishViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class WishViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, UITableViewDelegate, UITableViewDataSource {
     
     var wishes: [Wish]!
     
     @IBOutlet weak var bronzeLabel: UILabel!
-    @IBOutlet weak var tipsLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -25,6 +25,10 @@ class WishViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // 去除 navigation controller 切换时的阴影
         self.navigationController?.view.backgroundColor = UIColor.whiteColor();
+        
+        // empty dateset
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.emptyDataSetSource = self
         
         var contentInset =  self.navigationController!.navigationBar.frame.height
         contentInset += self.navigationController!.navigationBar.frame.origin.y
@@ -196,6 +200,9 @@ class WishViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func refresh() {
+        self.wishes = Wish.getWishes()
+        
+        // update
         let user = Util.currentUser
         self.scoreLabel.text = "\(user.score)"
         if user.score >= 0 {
@@ -203,14 +210,22 @@ class WishViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             self.scoreLabel.textColor = UIColor.redColor()
         }
+        self.tableView.tableFooterView = nil
         self.bronzeLabel.text = "\(user.bronze)"
-        self.wishes = Wish.getWishes()
-        if self.wishes.count == 0 {
-            self.tableView.hidden = true
-            self.tipsLabel.text = UMOnlineConfig.getConfigParams("wishTips") ?? "弗洛伊德认为，人的潜意识中储存着很多原始的欲望与冲动"
-        } else {
-            self.tableView.hidden = false
-        }
         self.tableView.reloadData()
+    }
+    
+    // MARK: - empty dataset
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        self.tableView.tableFooterView = UIView()
+        return NSAttributedString(string: "无欲望")
+    }
+    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: UMOnlineConfig.getConfigParams("wishEmptyDescription") ?? "弗洛伊德认为，人的潜意识中储存着很多原始的欲望与冲动")
     }
 }
