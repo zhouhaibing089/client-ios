@@ -131,8 +131,10 @@ class BillViewController: UIViewController, UITableViewDelegate, UITableViewData
         7: "六"
     ]
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let component = self.billItems[section].first?.getBillTime().getComponents()
-        return "\(component!.day)日 - 星期\(self.weekday[component!.weekday]!)"
+        if let component = self.billItems[section].first?.getBillTime().getComponents() {
+            return "\(component.day)日 - 星期\(self.weekday[component.weekday]!)"
+        }
+        return nil
     }
     
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
