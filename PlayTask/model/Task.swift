@@ -77,6 +77,9 @@ final class Task: Table {
                 let th = TaskHistory(task: self)
                 th.save()
             }
+            if self.type == TaskType.Normal.rawValue && self.isDone() {
+                TaskAlarm.getAlarmForTask(self)?.delete()
+            }
         } else {
             self.undo()
         }

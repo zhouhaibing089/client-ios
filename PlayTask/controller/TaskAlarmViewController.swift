@@ -210,7 +210,6 @@ class TaskAlarmViewController: UITableViewController, UIPickerViewDelegate, UIPi
     }
     @IBAction func deleteAlarm(sender: UIButton? = nil) {
         self.taskAlarm?.delete()
-        self.tmpAlarm.cancelLocalNotification()
         self.navigationController?.popViewControllerAnimated(true)
     }
     

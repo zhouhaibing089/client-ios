@@ -218,4 +218,10 @@ class TaskAlarm: Table {
         }
         return nil
     }
+    
+    /// delete and cancel scheduled local notification
+    override func delete() {
+        super.delete()
+        self.cancelLocalNotification()
+    }
 }
