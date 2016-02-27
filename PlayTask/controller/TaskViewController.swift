@@ -165,6 +165,10 @@ class TaskViewController: UIViewController, UIToolbarDelegate, DZNEmptyDataSetDe
                     ntvc.modifiedTask = t
                     ntvc.onTaskAdded = { task in
                         task.update(["rank": t.rank, "pinned": t.pinned])
+                        if let alarm = TaskAlarm.getAlarmForTask(t) {
+                            // preserve alarm
+                            alarm.update(["task": task])
+                        }
                         t.delete()
                         self.refresh()
                     }
