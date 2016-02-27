@@ -217,4 +217,9 @@ final class Task: Table {
             return task
         })
     }
+    
+    override func delete() {
+        super.delete()
+        TaskAlarm.getAlarmForTask(self)?.delete()
+    }
 }
