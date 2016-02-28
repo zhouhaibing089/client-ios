@@ -14,6 +14,7 @@
 		490BEAA31C575679005CAF3C /* MemorialCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BEAA21C575679005CAF3C /* MemorialCommentTableViewCell.swift */; };
 		490BEAA51C57A4E8005CAF3C /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BEAA41C57A4E8005CAF3C /* PersonalViewController.swift */; };
 		4912383F1C82AB9C00198E16 /* DeveloperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4912383E1C82AB9C00198E16 /* DeveloperViewController.swift */; };
+		491238411C82FB7C00198E16 /* ComplainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491238401C82FB7C00198E16 /* ComplainViewController.swift */; };
 		491B6FD61C3FC469000FD353 /* libUMOnlineConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 491B6FD41C3FC469000FD353 /* libUMOnlineConfig.a */; };
 		491B6FDA1C40F599000FD353 /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491B6FD91C40F598000FD353 /* Task.storyboard */; };
 		491B6FDE1C40FE01000FD353 /* Wish.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491B6FDD1C40FE01000FD353 /* Wish.storyboard */; };
@@ -125,6 +126,7 @@
 		490BEAA21C575679005CAF3C /* MemorialCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorialCommentTableViewCell.swift; sourceTree = "<group>"; };
 		490BEAA41C57A4E8005CAF3C /* PersonalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
 		4912383E1C82AB9C00198E16 /* DeveloperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperViewController.swift; sourceTree = "<group>"; };
+		491238401C82FB7C00198E16 /* ComplainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplainViewController.swift; sourceTree = "<group>"; };
 		491B6FD41C3FC469000FD353 /* libUMOnlineConfig.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMOnlineConfig.a; sourceTree = "<group>"; };
 		491B6FD51C3FC469000FD353 /* UMOnlineConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMOnlineConfig.h; sourceTree = "<group>"; };
 		491B6FD91C40F598000FD353 /* Task.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Task.storyboard; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				49F8092A1C1B10C7006A5DF5 /* StatisticDetailViewController.swift */,
 				490BEAA41C57A4E8005CAF3C /* PersonalViewController.swift */,
 				4912383E1C82AB9C00198E16 /* DeveloperViewController.swift */,
+				491238401C82FB7C00198E16 /* ComplainViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 				49953E001BDB2F6500B25EC8 /* TaskHistory.swift in Sources */,
 				49791ABD1C7EEC5A004867C8 /* TaskAlarmViewController.swift in Sources */,
 				49C8D3CC1BE88C4900E8EBF5 /* RegisterViewController.swift in Sources */,
+				491238411C82FB7C00198E16 /* ComplainViewController.swift in Sources */,
 				49B4F32A1C56489F0094A438 /* Badge.swift in Sources */,
 				49791AC21C7F25E4004867C8 /* TaskAlarmRepeatViewController.swift in Sources */,
 				49422DFB1C4F74CC00C316B3 /* DungeonViewController.swift in Sources */,

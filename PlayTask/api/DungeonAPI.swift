@@ -12,7 +12,7 @@ import SwiftyJSON
 
 extension API {
     class func getDungeons() -> Observable<Dungeon> {
-        return API.req(.GET, "/dungeons").flatMap { json -> Observable<Dungeon> in
+        return API.req(.GET, "/dungeons", suppressError: false).flatMap { json -> Observable<Dungeon> in
             var dungeons = [Dungeon]()
             for (_, subJson) : (String, JSON) in json {
                 dungeons.append(Dungeon(json: subJson))
@@ -27,7 +27,7 @@ extension API {
             params["before"] = before!.millisecondsSince1970
         }
         params["closed"] = String(closed)
-        return API.req(.GET, "/users/\(user.sid.value!)/dungeons", parameters: params).flatMap({ (json) -> Observable<Dungeon> in
+        return API.req(.GET, "/users/\(user.sid.value!)/dungeons", parameters: params, suppressError: false).flatMap({ (json) -> Observable<Dungeon> in
             var dungeons = [Dungeon]()
             for (_, subJson) : (String, JSON) in json {
                 dungeons.append(Dungeon(json: subJson))
@@ -48,7 +48,7 @@ extension API {
         if before != nil {
             params["before"] = before?.millisecondsSince1970
         }
-        return API.req(.GET, "/dungeons/\(dungeonId)/users/\(user.sid.value!)/notifications", parameters: params).flatMap({ (json) -> Observable<DungeonNotification> in
+        return API.req(.GET, "/dungeons/\(dungeonId)/users/\(user.sid.value!)/notifications", parameters: params, suppressError: false).flatMap({ (json) -> Observable<DungeonNotification> in
             var dns = [DungeonNotification]()
             for (_, subJson) in json {
                 dns.append(DungeonNotification(json: subJson))
@@ -63,9 +63,18 @@ extension API {
     class func createOrder(dungeonId: Int, zone: String) -> Observable<String> {
         return API.req(.POST, "/dungeons/\(dungeonId)/orders", parameters: [
             "zone": zone
-            ]).map({ (json) -> String in
+            ], suppressError: false).map({ (json) -> String in
             json.stringValue
         })
+    }
+    
+    // MARK: - 申诉
+    class func complain(dungeon: Dungeon, content: String) -> Observable<Bool> {
+        return API.req(.POST, "/dungeons/\(dungeon.id)/complains", parameters: [
+            "content": content,
+            ], suppressError: false).map({ (json) -> Bool in
+                return true
+            })
     }
     
 }

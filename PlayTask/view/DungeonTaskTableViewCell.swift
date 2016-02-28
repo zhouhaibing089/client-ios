@@ -30,6 +30,8 @@ class DungeonTaskTableViewCell: UITableViewCell {
     
     weak var timer: NSTimer?
     
+    var onSubStatusButtonClicked: ((Dungeon -> Void))!
+    
     func update() {
         self.badgeView.hidden = Util.currentUser.badge.getCountByDungeonId(self.dungeon.id) == 0
         
@@ -104,4 +106,7 @@ class DungeonTaskTableViewCell: UITableViewCell {
         }
     }
 
+    @IBAction func subStatusButtonClicked(sender: UIButton) {
+        self.onSubStatusButtonClicked(self.dungeon)
+    }
 }

@@ -12,7 +12,7 @@ import YNSwift
 
 extension API {
     class func getQiniuToken() -> Observable<String> {
-        return API.req(.POST, "/qiniu_tokens").map({ (json) -> String in
+        return API.req(.POST, "/qiniu_tokens", suppressError: false).map({ (json) -> String in
             return json.stringValue
         })
     }
@@ -24,7 +24,7 @@ extension API {
             "orientation": orientation,
             "width": width,
             "height": height
-            ]).map({ (json) -> QiniuImage in
+            ], suppressError: false).map({ (json) -> QiniuImage in
                 return QiniuImage(json: json)
             })
     }

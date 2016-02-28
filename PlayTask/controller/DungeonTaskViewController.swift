@@ -96,6 +96,11 @@ class DungeonTaskViewController: TaskViewController {
         }
         let cell = tableView.dequeueReusableCellWithIdentifier("dungeon") as! DungeonTaskTableViewCell
         cell.dungeon = self.dungeons[indexPath.section][indexPath.row]
+        cell.onSubStatusButtonClicked = { [unowned self] dungeon in
+            if dungeon.status == .Failed {
+                self.performSegueWithIdentifier("complain", sender: dungeon)
+            }
+        }
         cell.layoutIfNeeded() // for iOS 8 UILabel to be right
         return cell
     }
@@ -125,6 +130,11 @@ class DungeonTaskViewController: TaskViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if self.mode == Mode.Task {
             return super.prepareForSegue(segue, sender: sender)
+        }
+        if segue.identifier == "complain" {
+            if let cvc = segue.destinationViewController as? ComplainViewController {
+                cvc.dungeon = sender as! Dungeon
+            }
         }
         if let segue = segue as? YNSegue {
             if segue.identifier == "index@Dungeon" {

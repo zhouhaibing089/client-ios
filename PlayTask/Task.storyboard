@@ -387,6 +387,9 @@
                                                             <rect key="frame" x="24" y="29" width="49" height="27"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                             <state key="normal" title="12:33:01"/>
+                                                            <connections>
+                                                                <action selector="subStatusButtonClicked:" destination="iBx-kY-OWD" eventType="touchUpInside" id="HQ4-n7-A3t"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -582,6 +585,7 @@
                         <segue destination="Sda-MC-jXA" kind="custom" identifier="index@Dungeon" customClass="YNShowSegue" customModule="YNSwift" id="sAs-bY-hBQ"/>
                         <segue destination="ghg-QM-27W" kind="custom" identifier="login@Main" customClass="YNModalSegue" customModule="YNSwift" id="fz8-VQ-du0"/>
                         <segue destination="IPZ-MX-Nr3" kind="show" identifier="alarm" id="mQZ-ca-ctT"/>
+                        <segue destination="f9X-9i-LRX" kind="show" identifier="complain" id="1Eu-PR-hci"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r94-Mp-o4X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -916,7 +920,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zv2-3U-kDW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3653.5" y="1275.5"/>
+            <point key="canvasLocation" x="3644.5" y="1246.5"/>
         </scene>
         <!--重复-->
         <scene sceneID="twE-yr-F6n">
@@ -1060,7 +1064,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UhE-Zm-dbZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4284" y="1250"/>
+            <point key="canvasLocation" x="4197.5" y="1246.5"/>
         </scene>
         <!--标签-->
         <scene sceneID="7kK-RE-V2v">
@@ -1115,7 +1119,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NPd-zo-Szz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4283.5" y="1983.5"/>
+            <point key="canvasLocation" x="3644.5" y="2159.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="76s-6g-pD1">
@@ -1153,6 +1157,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sWe-BY-ajD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2150" y="485"/>
+        </scene>
+        <!--申诉-->
+        <scene sceneID="qlj-H1-1An">
+            <objects>
+                <tableViewController hidesBottomBarWhenPushed="YES" id="f9X-9i-LRX" customClass="ComplainViewController" customModule="PlayTask" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="h7f-bo-kh6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="Etl-O0-GVF">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="263" id="6rF-Vc-zyy">
+                                        <rect key="frame" x="0.0" y="99" width="600" height="263"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6rF-Vc-zyy" id="dhn-tg-OM3">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="262"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="申诉理由" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Edq-wo-BKI" customClass="YNTextView" customModule="YNSwift">
+                                                    <rect key="frame" x="8" y="8" width="584" height="160"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="160" id="1k4-aw-QcZ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Edq-wo-BKI" firstAttribute="top" secondItem="dhn-tg-OM3" secondAttribute="topMargin" id="5lV-Ni-AwB"/>
+                                                <constraint firstItem="Edq-wo-BKI" firstAttribute="leading" secondItem="dhn-tg-OM3" secondAttribute="leadingMargin" id="d1j-oy-rxi"/>
+                                                <constraint firstItem="Edq-wo-BKI" firstAttribute="trailing" secondItem="dhn-tg-OM3" secondAttribute="trailingMargin" id="hQU-BH-2f8"/>
+                                                <constraint firstItem="Edq-wo-BKI" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="dhn-tg-OM3" secondAttribute="bottomMargin" id="sTf-gY-JCy"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="f9X-9i-LRX" id="mzI-Bk-BvY"/>
+                            <outlet property="delegate" destination="f9X-9i-LRX" id="2RB-Mw-wtf"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="申诉" id="nSm-Ar-v0r">
+                        <barButtonItem key="rightBarButtonItem" title="发送" id="mjp-0s-y7l">
+                            <connections>
+                                <action selector="send:" destination="f9X-9i-LRX" id="SFF-XJ-sI6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="contentTextView" destination="Edq-wo-BKI" id="Ghe-YL-rM6"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lpu-q7-gkf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2150" y="1213"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="UTI-TD-yvh">
