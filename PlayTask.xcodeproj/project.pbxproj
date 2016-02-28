@@ -13,6 +13,7 @@
 		490BEAA11C575621005CAF3C /* MemorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BEAA01C575621005CAF3C /* MemorialViewController.swift */; };
 		490BEAA31C575679005CAF3C /* MemorialCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BEAA21C575679005CAF3C /* MemorialCommentTableViewCell.swift */; };
 		490BEAA51C57A4E8005CAF3C /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490BEAA41C57A4E8005CAF3C /* PersonalViewController.swift */; };
+		4912383F1C82AB9C00198E16 /* DeveloperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4912383E1C82AB9C00198E16 /* DeveloperViewController.swift */; };
 		491B6FD61C3FC469000FD353 /* libUMOnlineConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 491B6FD41C3FC469000FD353 /* libUMOnlineConfig.a */; };
 		491B6FDA1C40F599000FD353 /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491B6FD91C40F598000FD353 /* Task.storyboard */; };
 		491B6FDE1C40FE01000FD353 /* Wish.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 491B6FDD1C40FE01000FD353 /* Wish.storyboard */; };
@@ -123,6 +124,7 @@
 		490BEAA01C575621005CAF3C /* MemorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorialViewController.swift; sourceTree = "<group>"; };
 		490BEAA21C575679005CAF3C /* MemorialCommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemorialCommentTableViewCell.swift; sourceTree = "<group>"; };
 		490BEAA41C57A4E8005CAF3C /* PersonalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
+		4912383E1C82AB9C00198E16 /* DeveloperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperViewController.swift; sourceTree = "<group>"; };
 		491B6FD41C3FC469000FD353 /* libUMOnlineConfig.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMOnlineConfig.a; sourceTree = "<group>"; };
 		491B6FD51C3FC469000FD353 /* UMOnlineConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMOnlineConfig.h; sourceTree = "<group>"; };
 		491B6FD91C40F598000FD353 /* Task.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Task.storyboard; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 				49F4A0201C169D4D002D21D6 /* StatisticViewController.swift */,
 				49F8092A1C1B10C7006A5DF5 /* StatisticDetailViewController.swift */,
 				490BEAA41C57A4E8005CAF3C /* PersonalViewController.swift */,
+				4912383E1C82AB9C00198E16 /* DeveloperViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -694,6 +697,7 @@
 				499708BF1BCF506E00424F5E /* AppDelegate.swift in Sources */,
 				4938E43E1C587A9800FC977C /* MemorialCommentView.swift in Sources */,
 				49422DFD1C4F75E900C316B3 /* Memorial.swift in Sources */,
+				4912383F1C82AB9C00198E16 /* DeveloperViewController.swift in Sources */,
 				49258EE81C7D4A9100AD3576 /* MemorialAPI.swift in Sources */,
 				49953E041BDB371400B25EC8 /* Bill.swift in Sources */,
 				49B860261C461ECC004641DF /* DungeonDetailViewController.swift in Sources */,

@@ -24,6 +24,12 @@ class MoreViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.showSection(section) {
+            #if DEBUG
+                // 开发者选项
+                if section == 0 {
+                    return 4
+                }
+            #endif
             return super.tableView(tableView, numberOfRowsInSection: section)
         } else {
             return 0

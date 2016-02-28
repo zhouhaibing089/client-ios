@@ -10,10 +10,11 @@ import Foundation
 
 class Config {
     class API {
-        static let ROOT = "http://127.0.0.1:8080/playtask/v1"
+        static var ROOT = "http://127.0.0.1:8080/playtask/v1"
     }
     class Notification {
         static let SYNC = "sync"
         static let BADGE = "badge"
     }
 }
+
