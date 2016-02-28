@@ -368,7 +368,12 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         switch self.scope {
         case .Group:
             UIView.performWithoutAnimation({ () -> Void in
-                self.titleButton.setTitle(String(format: "本组(%d) ▾", self.dungeon.currentPlayer), forState: UIControlState.Normal)
+                if self.dungeon.status != DungeonStatus.Open {
+                    // 只有副本状态正常的时候才可以查看所有人的 memorial
+                    self.titleButton.setTitle(String(format: "本组(%d)", self.dungeon.currentPlayer), forState: UIControlState.Normal)
+                } else {
+                    self.titleButton.setTitle(String(format: "本组(%d) ▾", self.dungeon.currentPlayer), forState: UIControlState.Normal)
+                }
                 self.titleButton.layoutIfNeeded()
             })
             break
@@ -474,6 +479,10 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     }
     
     @IBAction func switchScope(sender: UIButton) {
+        if self.dungeon.status != DungeonStatus.Open {
+            // 只有副本状态正常的时候才可以查看所有人的状态
+            return
+        }
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         actionSheet.addAction(UIAlertAction(title: "看全部", style: UIAlertActionStyle.Default, handler: { [unowned self] (action) -> Void in
             self.scope = Scope.All
