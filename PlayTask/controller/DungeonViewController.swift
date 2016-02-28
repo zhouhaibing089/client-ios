@@ -145,6 +145,9 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
                 })
                 weakSelf.memorials[indexPath.section].removeAtIndex(indexPath.row)
                 weakSelf.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                NSTimer.delay(1) { () -> Void in
+                    tableView.reloadData()
+                }
             }))
             actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
             weakSelf.presentViewController(actionSheet, animated: true, completion: nil)
@@ -368,7 +371,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         switch self.scope {
         case .Group:
             UIView.performWithoutAnimation({ () -> Void in
-                if self.dungeon.status != DungeonStatus.Open {
+                if self.dungeon.status != DungeonStatus.Joined {
                     // 只有副本状态正常的时候才可以查看所有人的 memorial
                     self.titleButton.setTitle(String(format: "本组(%d)", self.dungeon.currentPlayer), forState: UIControlState.Normal)
                 } else {
@@ -479,7 +482,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     }
     
     @IBAction func switchScope(sender: UIButton) {
-        if self.dungeon.status != DungeonStatus.Open {
+        if self.dungeon.status != DungeonStatus.Joined {
             // 只有副本状态正常的时候才可以查看所有人的状态
             return
         }

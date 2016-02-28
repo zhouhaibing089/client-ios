@@ -74,6 +74,7 @@ class NewMemorialViewController: UITableViewController, UIImagePickerControllerD
         let hud = MBProgressHUD.show(self.tableView)
 
         self.cancelUploadImage = false
+        let zone = NSTimeZone.defaultTimeZone().name
         if self.selectedImage != nil {
             hud.mode = .Determinate
             hud.labelText = "上传中"
@@ -104,10 +105,10 @@ class NewMemorialViewController: UITableViewController, UIImagePickerControllerD
                     width: json["width"].doubleValue, height: json["height"].doubleValue)
             })
             sendObservable = uploadImageObservable.flatMap { (image) -> Observable<Memorial> in
-                API.sendMemorial(Util.loggedUser!, dungeon: self.dungeon, content: content, imageIds: [image.id!])
+                API.sendMemorial(Util.loggedUser!, dungeon: self.dungeon, content: content, imageIds: [image.id!], zone: zone)
             }
         } else {
-            sendObservable = API.sendMemorial(Util.loggedUser!, dungeon: self.dungeon, content: content, imageIds: [])
+            sendObservable = API.sendMemorial(Util.loggedUser!, dungeon: self.dungeon, content: content, imageIds: [], zone: zone)
         }
         self.sendDisposable = sendObservable.subscribe(onNext: { (memorial) -> Void in
                 self.onNewMemorial?(memorial)

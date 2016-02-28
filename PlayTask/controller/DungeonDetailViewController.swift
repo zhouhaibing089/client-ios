@@ -68,7 +68,7 @@ class DungeonDetailViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "支付", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
                 API.joinDungeon(Util.loggedUser!, dungeon: self.dungeon,
-                    zone: NSTimeZone.localTimeZone().name).subscribe({ (event) -> Void in
+                    zone: NSTimeZone.defaultTimeZone().name).subscribe({ (event) -> Void in
                     switch event {
                     case .Next(let dungeon):
                         self.dungeon = dungeon
