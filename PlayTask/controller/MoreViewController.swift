@@ -177,7 +177,11 @@ class MoreViewController: UITableViewController {
         self.tableView.reloadData()
         MobClick.beginLogPageView("more")
         self.nicknameLabel.text = Util.currentUser.nickname
-        self.avatarImageView.af_setImageWithURL(NSURL(string: Util.currentUser.avatarUrl)!)
+        
+        let avatar = QiniuImage(url: Util.currentUser.avatarUrl, width: 512, height: 512)
+        let size = self.avatarImageView.bounds.size.height * UIScreen.screenScale
+        self.avatarImageView.af_setImageWithURL(NSURL(string: avatar.getUrlForMaxWidth(size, maxHeight: size))!)
+        
         self.syncStatusChanged(nil)
     }
     
