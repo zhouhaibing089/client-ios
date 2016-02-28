@@ -40,14 +40,15 @@ class DungeonDetailViewController: UIViewController {
     }
     
     func update() {
-        self.playerLabel.text = String(format: self.playerLabel.text!, self.dungeon.currentPlayer, self.dungeon.maxPlayer)
         let pledge: Int = Int(max(self.dungeon.cashPledge, self.dungeon.bronzePledge))
         var unit = "铜币"
         if self.dungeon.cashPledge > 0 {
             unit = "元"
         }
-        self.pledgeLabel.text = String(format: self.pledgeLabel.text!, pledge, unit)
-        self.playerLabel.text = String(format: self.playerLabel.text!, self.dungeon.currentPlayer, self.dungeon.maxPlayer)
+        // 押金
+        self.pledgeLabel.text = String(format: "%d%@", pledge, unit)
+        // 人数
+        self.playerLabel.text = String(format: "%d/%d", self.dungeon.currentPlayer, self.dungeon.maxPlayer)
         switch self.dungeon.status {
         case .Joined:
             self.joinButton.enabled = false

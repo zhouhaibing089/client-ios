@@ -449,7 +449,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     }
     
     func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
-        return self.tableView.tableHeaderView!.frame.size.height * 2 / 3;
+        return self.tableView.tableHeaderView!.frame.size.height * 1 / 2;
     }
     
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
