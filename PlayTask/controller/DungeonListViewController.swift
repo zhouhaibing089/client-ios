@@ -43,6 +43,7 @@ class DungeonListViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("dungeon", forIndexPath: indexPath) as! DungeonTableViewCell
         cell.dungeon = self.dungeons[indexPath.row]
+        cell.selectionStyle = .None
         return cell
     }
     
@@ -53,7 +54,6 @@ class DungeonListViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let dungeon = self.dungeons[indexPath.row]
         self.performSegueWithIdentifier("detail", sender: dungeon)
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
     func refresh(sender: UIRefreshControl? = nil) {
