@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
-class DungeonListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DungeonListViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -29,6 +30,9 @@ class DungeonListViewController: UIViewController, UITableViewDelegate, UITableV
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         tableViewController.refreshControl = refreshControl
+        
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.emptyDataSetSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,5 +85,14 @@ class DungeonListViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
     }
-
+    
+    // MARK: - Empty Data Set
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "无副本")
+    }
+    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
 }

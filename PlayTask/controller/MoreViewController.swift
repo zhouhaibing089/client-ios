@@ -74,7 +74,7 @@ class MoreViewController: UITableViewController {
         case 2:
             return Util.loggedUser == nil
         case 3:
-            let showSupport = UMOnlineConfig.getConfigParams("showSupport") ?? "false"
+            let showSupport = UMOnlineConfig.getConfigParams("showSupport") ?? "true"
             return showSupport == "true"
         default:
             return true
