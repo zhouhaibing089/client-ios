@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     var syncDisposable: Disposable?
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         // 配置 CRToast
@@ -48,11 +48,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 友盟统计
         MobClick.startWithAppkey("5620ffafe0f55a758500000c")
-        UMOnlineConfig.updateOnlineConfigWithAppkey("5620ffafe0f55a758500000c")
         
         // 通知
         let mySettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(mySettings)
+        application.registerUserNotificationSettings(mySettings)
+        application.registerForRemoteNotifications()
         
         // Migrtion
         Realm.Configuration.defaultConfiguration = Realm.Configuration(
@@ -119,20 +119,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         
+        // Will NOT be called in first launch
+        self.autoLogin()
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        self.autoLogin()
+        
+        // Will be call every time
+        UMOnlineConfig.updateOnlineConfigWithAppkey("5620ffafe0f55a758500000c")
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let hex = NSMutableString()
+        let bytes = UnsafePointer<UInt8>(deviceToken.bytes)
+        
+        for var i = 0; i < deviceToken.length; i++  {
+            hex.appendFormat("%02hhx", bytes[i])
+        }
+        Util.deviceToken = hex.lowercaseString
+        self.autoLogin()
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        // 注册失败直接自动登录
+        self.autoLogin()
+    }
+    
     func autoLogin() {
         if let sessionId = Util.sessionId {
-            API.loginWithSessionId(sessionId).subscribe { event in
+            API.loginWithSessionId(sessionId, deviceToken: Util.deviceToken).subscribe { event in
                 switch event {
                 case .Next(_):
                     break

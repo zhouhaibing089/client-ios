@@ -15,14 +15,11 @@ class DeveloperViewController: UITableViewController {
             self.apiRootTextField.text = Config.API.ROOT
         }
     }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
-    
+        
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        Config.API.ROOT = self.apiRootTextField.text!
+        #if DEBUG
+            Config.API.ROOT = self.apiRootTextField.text!
+        #endif
     }
 }

@@ -10,7 +10,11 @@ import Foundation
 
 class Config {
     class API {
-        static var ROOT = "http://127.0.0.1:8080/playtask/v1"
+        #if DEBUG
+            static var ROOT = "http://192.168.1.101:8080/playtask/v1"
+        #else
+            static let ROOT = "http://api.yon.im/playtask/v1"
+        #endif
     }
     class Notification {
         static let SYNC = "sync"

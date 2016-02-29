@@ -45,7 +45,7 @@ class RegisterViewController: UITableViewController {
         // Xcode bug, 直接将这个 closure 传给 flatMap 函数, 编译不通过报错
         let login: (User) -> Observable<Bool> = { user in
             hud.switchToSuccess(duration: nil, labelText: "注册成功")
-            return API.loginWithAccount(account, password: password)
+            return API.loginWithAccount(account, password: password, deviceToken: Util.deviceToken)
         }
         API.registerWithAccount(account, email: email, password: password).flatMap(login).subscribe { event in
             switch event {

@@ -25,6 +25,18 @@ class Util {
         }
     }
     
+    static var deviceToken: String? {
+        get {
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            return userDefaults.stringForKey("device_token")
+        }
+        set {
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.setObject(newValue, forKey: "device_token")
+            userDefaults.synchronize()
+        }
+    }
+    
     static var lastLoggedUserSid: Int? {
         get {
             let userDefaults = NSUserDefaults.standardUserDefaults()

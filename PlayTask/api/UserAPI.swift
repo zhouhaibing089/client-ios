@@ -20,8 +20,13 @@ extension API {
         }
     }
     
-    class func loginWithAccount(account: String, password: String) -> Observable<Bool> {
-        return API.req(.POST, "/sessions", parameters: ["account": account, "password": password], suppressError: false).map { json in
+    class func loginWithAccount(account: String, password: String, deviceToken: String?) -> Observable<Bool> {
+        var parameters: [String: AnyObject] = ["account": account, "password": password]
+        if deviceToken != nil {
+            parameters["device_token"] = deviceToken
+        }
+        
+        return API.req(.POST, "/sessions", parameters: parameters, suppressError: false).map { json in
             let sid = json["user"]["id"].intValue
             if let user = User.getBySid(sid) {
                 Util.loggedUser = user
@@ -35,8 +40,12 @@ extension API {
         }
     }
     
-    class func loginWithSessionId(sessionId: String) -> Observable<Bool> {
-        return API.req(.GET, "/sessions/\(sessionId)").map { json in
+    class func loginWithSessionId(sessionId: String, deviceToken: String?) -> Observable<Bool> {
+        var parameters = [String: AnyObject]()
+        if deviceToken != nil {
+            parameters["device_token"] = deviceToken
+        }
+        return API.req(.GET, "/sessions/\(sessionId)", parameters: parameters).map { json in
             let sid = json["user"]["id"].intValue
             if let user = User.getBySid(sid) {
                 Util.loggedUser = user
