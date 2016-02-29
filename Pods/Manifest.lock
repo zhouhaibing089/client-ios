@@ -20,9 +20,9 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Alamofire (3.2.0)
+  - Alamofire (3.2.1)
   - AlamofireImage (2.3.1):
-    - Alamofire (~> 3.1)
+    - Alamofire (~> 3.2)
   - Charts (2.1.6)
   - CRToast (0.0.9)
   - DZNEmptyDataSet (1.7.3)
@@ -33,11 +33,11 @@ PODS:
   - Qiniu (7.0.16):
     - AFNetworking (~> 2.0)
     - HappyDNS (~> 0.2)
-  - Realm (0.98.1):
-    - Realm/Headers (= 0.98.1)
-  - Realm/Headers (0.98.1)
-  - RealmSwift (0.98.1):
-    - Realm (= 0.98.1)
+  - Realm (0.98.3):
+    - Realm/Headers (= 0.98.3)
+  - Realm/Headers (0.98.3)
+  - RealmSwift (0.98.3):
+    - Realm (= 0.98.3)
   - RxBlocking (2.0.0):
     - RxSwift (~> 2.0)
   - RxCocoa (2.0.0):
@@ -63,29 +63,32 @@ DEPENDENCIES:
   - JSBadgeView
   - OAStackView
   - Qiniu (~> 7.0)
-  - RealmSwift (= 0.98.1)
+  - RealmSwift
   - RxBlocking (~> 2.0)
   - RxCocoa (~> 2.0)
   - RxSwift (~> 2.0)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
   - UMengAnalytics-NO-IDFA (= 3.6.7)
-  - YNSwift (from `/Users/yoncise/Workspace/YNSwift`)
+  - YNSwift (from `https://github.com/Yoncise/YNSwift.git`)
 
 EXTERNAL SOURCES:
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
   YNSwift:
-    :path: /Users/yoncise/Workspace/YNSwift
+    :git: https://github.com/Yoncise/YNSwift.git
 
 CHECKOUT OPTIONS:
   SwiftyJSON:
     :commit: 42bdb102d2624b143c07850ebdc1537d5b6579b6
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+  YNSwift:
+    :commit: d09aa64ceac74dc1f26d23553e465b7035a06035
+    :git: https://github.com/Yoncise/YNSwift.git
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  Alamofire: 4da478599fccddff361205c8929333d7fe18dceb
-  AlamofireImage: 8256f88835f58257a76ea2738d3773be5057f7ed
+  Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
+  AlamofireImage: e52336282757bbe1644f075d6cb85f19c891f939
   Charts: 5e1e5ac23898e5b09d226a2fc3e9d86bc281937e
   CRToast: 5a78c22b921c5ed3487488af605bc403a9c92fed
   DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef
@@ -94,8 +97,8 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   OAStackView: 95e7cb79cbea25c2342f496a44bdbe8bd4c8d510
   Qiniu: 51a8702cddc02b50867e10cef99291b9a8a006b1
-  Realm: ca4a4122e939e228e10694fc49011386cb2ecb07
-  RealmSwift: 7d3c7033427816a2c3417ba0d004d694987e503a
+  Realm: c6a7d00221a2d5177810a674aebd40c5e0b70b0f
+  RealmSwift: d6ecad6e4c2a645d6ac956c2c7e9efb375f39c31
   RxBlocking: a95a10ed54eb5d116f6c9a87047ff671e181d07b
   RxCocoa: b0ebd70b4f7450bdb3c8987b122f8fd568dc1e2f
   RxSwift: d83246efa6f16c50c143bec134649d045498f601

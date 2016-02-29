@@ -21,7 +21,10 @@ public extension MBProgressHUD {
         self.completionBlock = completionBlock
     }
     
-    public class func show() -> MBProgressHUD! {
+    public class func show(view: UIView? = nil) -> MBProgressHUD! {
+        if let view = view {
+            return MBProgressHUD.showHUDAddedTo(view, animated: true)
+        }
         if let window = UIApplication.sharedApplication().delegate?.window {
             return MBProgressHUD.showHUDAddedTo(window, animated: true)
         }
