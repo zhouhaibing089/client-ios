@@ -263,14 +263,6 @@ class TaskViewController: UIViewController, UIToolbarDelegate, DZNEmptyDataSetDe
 
     // MARK: - refresh
     func refresh() {
-        let user = Util.currentUser
-        self.scoreLabel.text = "\(user.score)"
-        if user.score >= 0 {
-            self.scoreLabel.textColor = UIColor.blackColor()
-        } else {
-            self.scoreLabel.textColor = UIColor.redColor()
-        }
-        self.bronzeLabel.text = "\(user.bronze)"
         for (type, tasks) in Task.getTasks() {
             self.tasks[0][type] = [Task]()
             self.tasks[1][type] = [Task]()
@@ -290,6 +282,15 @@ class TaskViewController: UIViewController, UIToolbarDelegate, DZNEmptyDataSetDe
     }
     
     func update() {
+        let user = Util.currentUser
+        self.scoreLabel.text = "\(user.score)"
+        if user.score >= 0 {
+            self.scoreLabel.textColor = UIColor.blackColor()
+        } else {
+            self.scoreLabel.textColor = UIColor.redColor()
+        }
+        self.bronzeLabel.text = "\(user.bronze)"
+        
         self.tableView.tableFooterView = nil
         self.tableView.reloadEmptyDataSet()
         self.tableView.reloadData()
