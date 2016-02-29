@@ -98,7 +98,18 @@ class DungeonTaskViewController: TaskViewController {
         cell.dungeon = self.dungeons[indexPath.section][indexPath.row]
         cell.onSubStatusButtonClicked = { [unowned self] dungeon in
             if dungeon.status == .Failed {
+            }
+            switch dungeon.status {
+            case .Failed:
                 self.performSegueWithIdentifier("complain", sender: dungeon)
+                break
+            case .Success:
+                let alert = UIAlertController(title: "详情", message: dungeon.report, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Cancel, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                break
+            default:
+                break
             }
         }
         cell.layoutIfNeeded() // for iOS 8 UILabel to be right

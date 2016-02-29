@@ -38,6 +38,7 @@ class Dungeon {
     var progress: Int
     var utc: Bool // start_time, finish_time, 是 utc 还是 local
     var createdTime: NSDate
+    var report: String? // 副本成功的详情描述
     
     init(json: JSON) {
         self.id = json["dungeon_id"].int ?? json["id"].intValue
@@ -63,5 +64,6 @@ class Dungeon {
             self.finishTime = NSDate(millisecondsSince1970: json["finish_time"].doubleValue - offset)
         }
         self.createdTime = NSDate(millisecondsSince1970: json["created_time"].doubleValue)
+        self.report = json["report"].string
     }
 }
