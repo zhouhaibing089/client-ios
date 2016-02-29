@@ -22,7 +22,9 @@ class DungeonListViewController: UIViewController, DZNEmptyDataSetDelegate, DZNE
         self.tableView.dataSource = self
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
-        self.refresh()
+        
+        self.tableView.emptyDataSetDelegate = self
+        self.tableView.emptyDataSetSource = self
         
         // pull to refresh
         let tableViewController = UITableViewController()
@@ -31,13 +33,9 @@ class DungeonListViewController: UIViewController, DZNEmptyDataSetDelegate, DZNE
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         tableViewController.refreshControl = refreshControl
         
-        self.tableView.emptyDataSetDelegate = self
-        self.tableView.emptyDataSetSource = self
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        refreshControl.beginRefreshing()
+        self.tableView.setContentOffset(CGPointMake(0, self.tableView.contentOffset.y - refreshControl.frame.size.height), animated: true)
+        self.refresh(refreshControl)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
