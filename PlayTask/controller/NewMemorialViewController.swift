@@ -78,7 +78,7 @@ class NewMemorialViewController: UITableViewController, UIImagePickerControllerD
         let zone = NSTimeZone.defaultTimeZone().name
         if self.selectedImage != nil {
             hud.mode = .Determinate
-            hud.labelText = "上传中"
+            hud.labelText = "图片上传中"
             hud.detailsLabelText = "轻触取消"
             let uploadImageObservable = API.getQiniuToken().flatMap({ (token) -> Observable<JSON> in
                 let upManager = QNUploadManager()
@@ -89,8 +89,8 @@ class NewMemorialViewController: UITableViewController, UIImagePickerControllerD
                 })
                 return Observable.create({ (observer) -> Disposable in
                     upManager.putData(UIImageJPEGRepresentation(self.selectedImage!, 0.6), key: nil, token: token, complete: { (info, key, resp) -> Void in
-                        if resp == nil {
-                            CRToastManager.showNotificationWithMessage("上传图片失败, 请稍后再试", completionBlock: nil)
+                        if resp == nil && !info.canceled {
+                            CRToastManager.showNotificationWithMessage("上传图片失败, 请稍后再试 \(info.statusCode)", completionBlock: nil)
                             observer.onError(NetworkError.Unknown(Int(info.statusCode)))
                         } else {
                             observer.onNext(JSON(resp))
@@ -146,7 +146,7 @@ class NewMemorialViewController: UITableViewController, UIImagePickerControllerD
                 self.displayImagePickerForSourceType(UIImagePickerControllerSourceType.Camera)
             }))
             actionSheet.addAction(UIAlertAction(title: "从手机相册选择", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-                self.displayImagePickerForSourceType(UIImagePickerControllerSourceType.SavedPhotosAlbum)
+                self.displayImagePickerForSourceType(UIImagePickerControllerSourceType.PhotoLibrary)
                 
             }))
             actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))

@@ -45,7 +45,7 @@ class PersonalViewController: UITableViewController, UIImagePickerControllerDele
                     self.displayImagePickerForSourceType(UIImagePickerControllerSourceType.Camera)
                 }))
                 actionSheet.addAction(UIAlertAction(title: "从手机相册选择", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-                    self.displayImagePickerForSourceType(UIImagePickerControllerSourceType.SavedPhotosAlbum)
+                    self.displayImagePickerForSourceType(UIImagePickerControllerSourceType.PhotoLibrary)
                     
                 }))
                 actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
@@ -130,7 +130,8 @@ class PersonalViewController: UITableViewController, UIImagePickerControllerDele
                 })
                 self.cancelUploadAvatar = false
                 upManager.putData(UIImageJPEGRepresentation(image, 0.6), key: nil, token: token, complete: { (info, key, resp) -> Void in
-                    if resp == nil {
+                    if resp == nil && !info.canceled {
+                        CRToastManager.showNotificationWithMessage("上传头像失败, 请稍后再试 \(info.statusCode)", completionBlock: nil)
                         observer.onError(NetworkError.Unknown(Int(info.statusCode)))
                     } else {
                         observer.onNext(JSON(resp))
