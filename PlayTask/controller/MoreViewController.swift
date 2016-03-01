@@ -136,6 +136,7 @@ class MoreViewController: UITableViewController {
                 alert.addAction(UIAlertAction(title: "复制", style: UIAlertActionStyle.Default, handler: { _ in
                     let pasteboard = UIPasteboard.generalPasteboard()
                     pasteboard.string = supportAlertMessage
+                    MBProgressHUD.show().switchToSuccess(duration: 1, labelText: "已复制", completionBlock: nil)
                 }))
 
                 self.presentViewController(alert, animated: true, completion: nil)

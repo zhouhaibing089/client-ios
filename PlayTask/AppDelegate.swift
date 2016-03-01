@@ -63,6 +63,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         let createdTime = oldObject!["createdTime"] as! NSDate
                         newObject!["satisfiedTime"] = createdTime
                     }
+                } else if oldSchemaVersion < 2 {
+                    migration.enumerate(User.className()) { oldObject, newObject in
+                        let account = oldObject!["account"] as! String
+                        newObject!["nickname"] = account
+                    }
                 }
         })
         
