@@ -34,6 +34,7 @@ class Badge {
     
     func setDungeon(dungeon: Dungeon, count: Int) {
         self.dungeons[String(dungeon.id)] = JSON(0)
+        NSNotificationCenter.defaultCenter().postNotificationName(Config.Notification.BADGE, object: nil)
     }
     
 }
