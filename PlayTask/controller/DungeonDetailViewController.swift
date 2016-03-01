@@ -70,6 +70,10 @@ class DungeonDetailViewController: UIViewController {
                     zone: NSTimeZone.defaultTimeZone().name).subscribe({ (event) -> Void in
                     switch event {
                     case .Next(let dungeon):
+                        // update dungeon list's original dungeon
+                        // so this view will show correctly if user entered from dungeon list again
+                        self.dungeon.currentPlayer = dungeon.currentPlayer
+                        self.dungeon.status = dungeon.status
                         self.dungeon = dungeon
                         break
                     case .Completed:
