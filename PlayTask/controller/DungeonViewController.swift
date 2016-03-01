@@ -487,11 +487,11 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
             return
         }
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-        actionSheet.addAction(UIAlertAction(title: "看全部", style: UIAlertActionStyle.Default, handler: { [unowned self] (action) -> Void in
-            self.scope = Scope.All
+        actionSheet.addAction(UIAlertAction(title: "看全部", style: UIAlertActionStyle.Default, handler: { [weak self] (action) -> Void in
+            self?.scope = Scope.All
         }))
-        actionSheet.addAction(UIAlertAction(title: "只看本组", style: UIAlertActionStyle.Default, handler: { [unowned self] (action) -> Void in
-            self.scope = Scope.Group
+        actionSheet.addAction(UIAlertAction(title: "只看本组", style: UIAlertActionStyle.Default, handler: { [weak self] (action) -> Void in
+            self?.scope = Scope.Group
             
         }))
         actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
@@ -500,8 +500,8 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     
     @IBAction func more(sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-        actionSheet.addAction(UIAlertAction(title: "消息列表", style: UIAlertActionStyle.Default, handler: { [unowned self] (action) -> Void in
-            self.performSegueWithIdentifier("notification", sender: sender)
+        actionSheet.addAction(UIAlertAction(title: "消息列表", style: UIAlertActionStyle.Default, handler: { [weak self] (action) -> Void in
+            self?.performSegueWithIdentifier("notification", sender: sender)
         }))
         actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
         self.presentViewController(actionSheet, animated: true, completion: nil)
