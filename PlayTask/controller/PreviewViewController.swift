@@ -121,9 +121,12 @@ class PreviewViewController: UIViewController, UIScrollViewDelegate {
         let widthRatio = self.scrollView.bounds.width / self.imageView.bounds.width
         let heightRatio = self.scrollView.bounds.height / self.imageView.bounds.height
         self.scrollView.minimumZoomScale = min(widthRatio, heightRatio)
-        self.scrollView.maximumZoomScale = max(1, self.scrollView.minimumZoomScale)
-        self.scrollView.zoomToRect(self.imageView.frame, animated: false)
-        self.scrollView.bounds.origin = CGPoint(x: 0, y: 0)
+        self.scrollView.maximumZoomScale = max(1, self.scrollView.minimumZoomScale) * 1.5
+        // zoomToRect is buggy when you zoom to same frame twice
+        // http://petersteinberger.com/blog/2013/how-to-center-uiscrollview/
+        // so, set zomm scale and contentOffset manually
+        self.scrollView.setZoomScale(self.scrollView.minimumZoomScale, animated: false)
+        self.scrollView.contentOffset = CGPoint(x: 0, y: 0)
         self.scrollViewDidZoom(self.scrollView)
     }
 
