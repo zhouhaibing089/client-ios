@@ -187,6 +187,7 @@
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NC7-gp-JqW">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
+                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="NC7-gp-JqW" secondAttribute="height" multiplier="16:9" id="5qr-Nb-YgJ"/>
                                     </constraints>
