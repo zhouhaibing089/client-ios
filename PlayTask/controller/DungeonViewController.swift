@@ -26,7 +26,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
             let outerBorder = CALayer()
             let outerBorderWidth = 1 / UIScreen.screenScale
             outerBorder.frame = CGRectMake(-outerBorderWidth, -outerBorderWidth, self.avatarImageView.frame.width + 2 * outerBorderWidth, self.avatarImageView.frame.height + 2 * outerBorderWidth)
-            outerBorder.borderColor = UIColor.grayColor().CGColor
+            outerBorder.borderColor = UIColor.lightGrayColor().CGColor
             outerBorder.borderWidth = outerBorderWidth
             self.avatarImageView.layer.addSublayer(outerBorder)
             // allow user to click to view self
