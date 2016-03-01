@@ -14,6 +14,8 @@ class PreviewViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
             self.scrollView.delegate = self
+            self.scrollView.alwaysBounceVertical = true
+            self.scrollView.alwaysBounceHorizontal = true
         }
     }
     // double tap to zoom in
