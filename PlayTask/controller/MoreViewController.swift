@@ -180,7 +180,7 @@ class MoreViewController: UITableViewController {
         self.nicknameLabel.text = Util.currentUser.nickname
         
         let avatar = QiniuImage(url: Util.currentUser.avatarUrl, width: 512, height: 512)
-        let size = self.avatarImageView.bounds.size.height * UIScreen.screenScale
+        let size = self.avatarImageView.bounds.size.height
         self.avatarImageView.af_setImageWithURL(NSURL(string: avatar.getUrlForMaxWidth(size, maxHeight: size))!)
         
         self.syncStatusChanged(nil)

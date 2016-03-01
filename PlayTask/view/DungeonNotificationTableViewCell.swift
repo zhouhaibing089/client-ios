@@ -21,7 +21,7 @@ class DungeonNotificationTableViewCell: UITableViewCell {
     var notification: DungeonNotification! {
         didSet {
             let avatar = QiniuImage(url: self.notification.avatarUrl, width: 512, height: 512)
-            let size = self.avatarImageView.bounds.size.height * UIScreen.screenScale
+            let size = self.avatarImageView.bounds.size.height
             self.avatarImageView.af_setImageWithURL(NSURL(string: avatar.getUrlForMaxWidth(size, maxHeight: size))!)
             self.nicknameLabel.text = self.notification.nickname
             if let content = self.notification.content {
@@ -50,7 +50,8 @@ class DungeonNotificationTableViewCell: UITableViewCell {
                 if let image = memorial.image {
                     self.briefImageView.hidden = false
                     self.briefLabel.hidden = true
-                    self.briefImageView.af_setImageWithURL(NSURL(string: image.getUrlForMaxWidth(64 * UIScreen.screenScale, maxHeight: 64 * UIScreen.screenScale))!)
+                    let size = self.briefImageView.frame.width
+                    self.briefImageView.af_setImageWithURL(NSURL(string: image.getUrlForMaxWidth(size, maxHeight: size))!)
                 } else {
                     self.briefImageView.hidden = true
                     self.briefLabel.hidden = false

@@ -308,11 +308,10 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     }
     
     func update() {
-        // cover image
-        self.coverImageView.af_setImageWithURL(NSURL(string: self.dungeon.cover)!)
+        // avatar
         if let loggedUser = Util.loggedUser {
             let qiniuImage = QiniuImage(url: loggedUser.avatarUrl, width: 512, height: 512)
-            let size = self.avatarImageView.bounds.size.height * UIScreen.screenScale
+            let size = self.avatarImageView.bounds.size.height
             if let avatarUrl = NSURL(string: qiniuImage.getUrlForMaxWidth(size, maxHeight: size)) {
                 self.avatarImageView.af_setImageWithURL(avatarUrl)
             }
@@ -359,6 +358,13 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         let size = tableHeaderView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
         tableHeaderView.frame.size.height = size.height
         self.tableView.tableHeaderView = tableHeaderView
+        
+        // cover image
+        let coverWidth = self.coverImageView.frame.width
+        let coverHeight = self.coverImageView.frame.height
+        let cover = QiniuImage(url: self.dungeon.cover, width: coverWidth, height: coverHeight)
+        self.coverImageView.af_setImageWithURL(NSURL(string: cover.getUrlForMaxWidth(coverWidth, maxHeight: coverHeight))!)
+        
         
         // title
         self.updateTitle()

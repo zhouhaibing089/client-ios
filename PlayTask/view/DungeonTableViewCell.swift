@@ -8,6 +8,7 @@
 
 import UIKit
 import AlamofireImage
+import YNSwift
 
 class DungeonTableViewCell: UITableViewCell {
 
@@ -17,6 +18,11 @@ class DungeonTableViewCell: UITableViewCell {
     var dungeon: Dungeon! {
         didSet {
             self.titleLabel.text = self.dungeon.title
+            
+            let coverWidth = self.coverImageView.frame.width
+            let coverHeight = self.coverImageView.frame.height
+            let cover = QiniuImage(url: self.dungeon.cover, width: coverWidth, height: coverHeight)
+            self.coverImageView.af_setImageWithURL(NSURL(string: cover.getUrlForMaxWidth(coverWidth, maxHeight: coverHeight))!)
             self.coverImageView.af_setImageWithURL(NSURL(string: self.dungeon.cover)!)
         }
     }
