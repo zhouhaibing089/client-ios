@@ -66,6 +66,7 @@ class NewMemorialViewController: UITableViewController, UIImagePickerControllerD
     var sendDisposable: Disposable?
 
     @IBAction func send(sender: UIBarButtonItem) {
+        self.view.endEditing(true)
         var sendObservable: Observable<Memorial>
         let content = re.sub("\\s+", " ", self.contentTextView.text)
         if contentTextView.text == "" && self.selectedImage == nil {

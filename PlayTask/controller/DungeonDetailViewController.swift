@@ -40,7 +40,7 @@ class DungeonDetailViewController: UIViewController {
     }
     
     func update() {
-        let pledge: Int = Int(max(self.dungeon.cashPledge, self.dungeon.bronzePledge))
+        let pledge: Int = Int(max(self.dungeon.cashPledge!, self.dungeon.bronzePledge!))
         var unit = "铜币"
         if self.dungeon.cashPledge > 0 {
             unit = "元"
@@ -48,7 +48,7 @@ class DungeonDetailViewController: UIViewController {
         // 押金
         self.pledgeLabel.text = String(format: "%d%@", pledge, unit)
         // 人数
-        self.playerLabel.text = String(format: "%d/%d", self.dungeon.currentPlayer, self.dungeon.maxPlayer)
+        self.playerLabel.text = String(format: "%d/%d", self.dungeon.currentPlayer, self.dungeon.maxPlayer!)
         switch self.dungeon.status {
         case .Joined:
             self.joinButton.enabled = false
@@ -63,8 +63,7 @@ class DungeonDetailViewController: UIViewController {
 
     @IBAction func join(sender: UIButton) {
         if self.dungeon.bronzePledge > 0 {
-            // TODO: 支付铜币说明
-            let alert = UIAlertController(title: "支付押金", message: "支付铜币的说明", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "支付押金", message: self.dungeon.payDescription, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "支付", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
                 API.joinDungeon(Util.loggedUser!, dungeon: self.dungeon,
@@ -94,8 +93,7 @@ class DungeonDetailViewController: UIViewController {
             self.presentViewController(alert, animated: true, completion: nil)
             return
         }
-        // TODO: 支付押金说明
-        let actionSheet = UIAlertController(title: "支付押金", message: "押金为。。。说明", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let actionSheet = UIAlertController(title: "支付押金", message: self.dungeon.payDescription, preferredStyle: UIAlertControllerStyle.ActionSheet)
         actionSheet.addAction(UIAlertAction(title: "支付宝", style: UIAlertActionStyle.Default, handler: { [unowned self] (action) -> Void in
             API.createOrder(self.dungeon.id, zone: NSTimeZone.localTimeZone().name).subscribe { event in
                 switch event {

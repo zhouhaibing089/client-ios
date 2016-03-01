@@ -14,6 +14,7 @@ class DungeonTaskTableViewCell: UITableViewCell {
     @IBOutlet weak var mainStatusLabel: UILabel!
     @IBOutlet weak var subStatusButton: UIButton!
     @IBOutlet weak var badgeView: UIView!
+    @IBOutlet var progressLabel: UILabel!
     @IBOutlet weak var statusStackView: OAStackView! {
         didSet {
             statusStackView.axis = UILayoutConstraintAxis.Vertical
@@ -38,16 +39,18 @@ class DungeonTaskTableViewCell: UITableViewCell {
         self.titleLabel.text = self.dungeon.title
         self.subStatusButton.enabled = false
         self.subStatusButton.hidden = false
+        self.progressLabel.text = "\(self.dungeon.progress!)/\(self.dungeon.target)"
+
         timer?.invalidate()
         switch self.dungeon.status {
         case .Joined:
             let now = NSDate()
-            switch now.compare(self.dungeon.startTime) {
+            switch now.compare(self.dungeon.startTime!) {
             case .OrderedAscending:
                 self.mainStatusLabel.text = "副本重置"
                 
                 timer = NSTimer.loop(1, handler: { (timer) -> Void in
-                    let countDown = self.dungeon.startTime.differenceFrom(NSDate(), unit: [NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second])
+                    let countDown = self.dungeon.startTime!.differenceFrom(NSDate(), unit: [NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second])
                     if countDown.second < 0 {
                         timer.invalidate()
                         self.update()
@@ -59,11 +62,11 @@ class DungeonTaskTableViewCell: UITableViewCell {
                     })
                 })
             case .OrderedDescending:
-                switch now.compare(self.dungeon.finishTime) {
+                switch now.compare(self.dungeon.finishTime!) {
                 case .OrderedAscending:
                     self.mainStatusLabel.text = "副本开启"
                     timer = NSTimer.loop(1, handler: { (timer) -> Void in
-                        let countDown = self.dungeon.finishTime.differenceFrom(NSDate(), unit: [NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second])
+                        let countDown = self.dungeon.finishTime!.differenceFrom(NSDate(), unit: [NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second])
                         if countDown.second < 0 {
                             timer.invalidate()
                             self.update()
