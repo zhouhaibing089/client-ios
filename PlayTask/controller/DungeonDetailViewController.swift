@@ -62,7 +62,7 @@ class DungeonDetailViewController: UIViewController {
     }
 
     @IBAction func join(sender: UIButton) {
-        if self.dungeon.bronzePledge > 0 {
+        if self.dungeon.cashPledge == 0 {
             let alert = UIAlertController(title: "支付押金", message: self.dungeon.payDescription, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "支付", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
