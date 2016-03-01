@@ -139,6 +139,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        if (url.host == "safepay") {
+            // 跳转支付宝钱包进行支付，处理支付结果
+            AlipaySDK.defaultService().processOrderWithPaymentResult(url, standbyCallback: { (result) -> Void in
+                NSNotificationCenter.defaultCenter().postNotificationName(Config.Notification.ALIPAY_DUNGEON, object: result)
+            })
+        }
+        return true
+    }
+    
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let hex = NSMutableString()
         let bytes = UnsafePointer<UInt8>(deviceToken.bytes)

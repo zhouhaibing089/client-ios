@@ -19,6 +19,7 @@ class Config {
     class Notification {
         static let SYNC = "sync"
         static let BADGE = "badge"
+        static let ALIPAY_DUNGEON = "alipay_dungeon"
     }
 }
 

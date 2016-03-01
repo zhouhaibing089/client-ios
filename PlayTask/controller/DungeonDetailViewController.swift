@@ -8,6 +8,8 @@
 
 import UIKit
 import CRToast
+import SwiftyJSON
+import YNSwift
 
 class DungeonDetailViewController: UIViewController {
     
@@ -19,15 +21,14 @@ class DungeonDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "alipayDungeon:", name: Config.Notification.ALIPAY_DUNGEON, object: nil)
         self.update()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "embedded" {
             if let devc = segue.destinationViewController as? DungeonEmbeddedViewController {
@@ -102,11 +103,20 @@ class DungeonDetailViewController: UIViewController {
             API.createOrder(self.dungeon.id, zone: NSTimeZone.localTimeZone().name).subscribe { event in
                 switch event {
                 case .Next(let n):
-                    AlipaySDK.defaultService().payOrder(n, fromScheme: "", callback: { (result) -> Void in
-                        
+                    AlipaySDK.defaultService().payOrder(n, fromScheme: "playtask", callback: { (result) -> Void in
+                        NSNotificationCenter.defaultCenter().postNotificationName(Config.Notification.ALIPAY_DUNGEON, object: result)
                     })
                     break
                 case .Error(let e):
+                    if let error = e as? APIError {
+                        switch error {
+                        case .Custom(_, let info, _):
+                            CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
+                            break
+                        default:
+                            break
+                        }
+                    }
                     break
                 case .Completed:
                     break
@@ -116,5 +126,19 @@ class DungeonDetailViewController: UIViewController {
         }))
         actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
         self.presentViewController(actionSheet, animated: true, completion: nil)
+    }
+    
+    // MARK: - Handle alipay order message
+    func alipayDungeon(notification: NSNotification) {
+        if let result = notification.object as? NSDictionary {
+            let json = JSON(result)
+            let resultStatus = json["resultStatus"].intValue
+            let result = json["result"].stringValue
+            if resultStatus == 9000 && result.containsString("success=\"true\"") {
+                self.dungeon.status = DungeonStatus.Joined
+                self.dungeon.currentPlayer++
+                self.update()
+            }
+        }
     }
 }
