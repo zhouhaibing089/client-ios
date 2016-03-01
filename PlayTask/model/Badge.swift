@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 class Badge {
-    var dungeons: [String: JSON]
+    private var dungeons: [String: JSON]
     
     init(json: JSON) {
         self.dungeons = json["dungeons"].dictionaryValue
@@ -31,4 +31,9 @@ class Badge {
     func getCountByDungeonId(dungeonId: Int) -> Int {
         return self.dungeons[String(dungeonId)]?.intValue ?? 0
     }
+    
+    func setDungeon(dungeon: Dungeon, count: Int) {
+        self.dungeons[String(dungeon.id)] = JSON(0)
+    }
+    
 }

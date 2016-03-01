@@ -68,7 +68,7 @@ class DungeonNotificationViewController: UIViewController, UITableViewDelegate, 
                 self.tableView.reloadData()
                 sender.endRefreshing()
                 // clear badge
-                Util.currentUser.badge = Badge()
+                Util.currentUser.badge.setDungeon(self.dungeon, count: 0)
                 break
             case .Next(let dn):
                 dns.append(dn)
