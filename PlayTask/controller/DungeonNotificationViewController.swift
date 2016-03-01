@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
-class DungeonNotificationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DungeonNotificationViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource,UITableViewDelegate, UITableViewDataSource {
     
     var notifications = [[DungeonNotification]]()
     
@@ -21,6 +22,8 @@ class DungeonNotificationViewController: UIViewController, UITableViewDelegate, 
             self.tableView.dataSource = self
             self.tableView.rowHeight = UITableViewAutomaticDimension
             self.tableView.estimatedRowHeight = 44
+            self.tableView.emptyDataSetDelegate = self
+            self.tableView.emptyDataSetSource = self
         }
     }
     override func viewDidLoad() {
@@ -121,5 +124,13 @@ class DungeonNotificationViewController: UIViewController, UITableViewDelegate, 
                 mvc.fromDungeonId = self.dungeon.id
             }
         }
+    }
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "无消息")
+    }
+    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
     }
 }
