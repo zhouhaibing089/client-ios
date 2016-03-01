@@ -43,6 +43,7 @@ class Table: Object {
         self.sync()
     }
     
+    /// Update self according to value
     func update(var value: [String: AnyObject]) {
         let realm = try! Realm()
         try! realm.write {
