@@ -241,6 +241,10 @@ class DungeonTaskViewController: TaskViewController {
         if self.loadIndicator.isAnimating() || self.refreshControl.refreshing {
             return
         }
+        if self.dungeons.first?.count < Config.LOAD_THRESHOLD {
+            return
+        }
+        
         if let before = self.dungeons.last?.last?.createdTime {
             self.loadIndicator.startAnimating()
             var tmp = [Dungeon]()

@@ -435,6 +435,9 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         if self.loadIndicator.isAnimating() {
             return
         }
+        if self.memorials.first?.count < Config.LOAD_THRESHOLD {
+            return
+        }
         if let before = self.memorials.last?.last?.createdTime {
             self.loadIndicator.startAnimating()
             var tmp = [Memorial]()

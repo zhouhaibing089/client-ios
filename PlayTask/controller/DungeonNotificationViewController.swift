@@ -98,6 +98,9 @@ class DungeonNotificationViewController: UIViewController, DZNEmptyDataSetDelega
         if self.loadIndicator.isAnimating() {
             return
         }
+        if self.notifications.first?.count < Config.LOAD_THRESHOLD {
+            return
+        }
         if let before = self.notifications.last?.last?.createdTime {
             self.loadIndicator.startAnimating()
             var tmp = [DungeonNotification]()

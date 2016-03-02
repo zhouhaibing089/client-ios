@@ -21,5 +21,7 @@ class Config {
         static let BADGE = "badge"
         static let ALIPAY_DUNGEON = "alipay_dungeon"
     }
+    
+    static let LOAD_THRESHOLD = 20
 }
 
