@@ -325,6 +325,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="avatarImageView" destination="FEv-H5-Fpg" id="yHV-L1-i3p"/>
+                                            <outlet property="commentBackgroundView" destination="amC-Zt-ZXX" id="w5x-65-5b6"/>
                                             <outlet property="contentLabel" destination="b10-UU-Ij1" id="Zj7-nh-5fg"/>
                                             <outlet property="nicknameLabel" destination="DrH-rc-hb2" id="Kpr-Pa-zQl"/>
                                             <outlet property="timeLabel" destination="q0Q-Zz-pDY" id="Foo-RS-If9"/>
@@ -575,7 +576,7 @@
                                                     <rect key="frame" x="64" y="209" width="303" height="93"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HjU-2o-Yzv" customClass="OAStackView">
-                                                            <rect key="frame" x="0.0" y="33" width="303" height="52"/>
+                                                            <rect key="frame" x="0.0" y="35" width="303" height="50"/>
                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="axisValue">
@@ -583,7 +584,7 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5e-c2-vIz">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待审核" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5e-c2-vIz">
                                                             <rect key="frame" x="8" y="16" width="287" height="17"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -593,7 +594,7 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="y5e-c2-vIz" firstAttribute="leading" secondItem="m2v-iL-vYy" secondAttribute="leading" constant="8" id="4AO-JG-9Cr"/>
-                                                        <constraint firstItem="HjU-2o-Yzv" firstAttribute="top" secondItem="y5e-c2-vIz" secondAttribute="bottom" id="7zp-4c-OiW"/>
+                                                        <constraint firstItem="HjU-2o-Yzv" firstAttribute="top" secondItem="y5e-c2-vIz" secondAttribute="bottom" constant="2" id="7zp-4c-OiW"/>
                                                         <constraint firstAttribute="trailing" secondItem="HjU-2o-Yzv" secondAttribute="trailing" id="LhQ-92-tHx"/>
                                                         <constraint firstItem="HjU-2o-Yzv" firstAttribute="leading" secondItem="m2v-iL-vYy" secondAttribute="leading" id="PR0-kh-r7d"/>
                                                         <constraint firstItem="y5e-c2-vIz" firstAttribute="top" secondItem="m2v-iL-vYy" secondAttribute="top" constant="16" id="eU8-cX-YVy"/>
@@ -964,6 +965,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="J3R-Ya-t0Q"/>
-        <segue reference="Jw8-xj-kf1"/>
+        <segue reference="gSv-CI-yEA"/>
     </inferredMetricsTieBreakers>
 </document>

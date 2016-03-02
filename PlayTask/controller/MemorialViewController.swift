@@ -61,10 +61,14 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("comment", forIndexPath: indexPath) as! MemorialCommentTableViewCell
         cell.comment = self.memorial.comments[indexPath.row]
+        cell.selectionStyle = .None
+        cell.layoutIfNeeded() // for iOS 8 UILabel to be right
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as? MemorialCommentTableViewCell
+        cell?.flash()
         let comment = self.memorial.comments[indexPath.row]
         if comment.fromUserId == Util.currentUser.sid.value! {
             let actionSheet = UIAlertController(title: nil, message: "删除评论", preferredStyle: UIAlertControllerStyle.ActionSheet)

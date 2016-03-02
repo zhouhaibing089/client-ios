@@ -13,6 +13,7 @@ class MemorialCommentTableViewCell: UITableViewCell {
     @IBOutlet weak var nicknameLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet var commentBackgroundView: UIView!
     
     let dateFormatter = NSDateFormatter()
     
@@ -50,6 +51,14 @@ class MemorialCommentTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func flash() {
+        self.commentBackgroundView.backgroundColor = UIColor.lightGrayColor()
+        
+        UIView.animateWithDuration(0.3, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            self.commentBackgroundView.backgroundColor = UIColor.groupTableViewBackgroundColor()
+            }, completion: nil)
     }
 
 }

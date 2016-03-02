@@ -52,6 +52,7 @@ class DungeonNotificationViewController: UIViewController, DZNEmptyDataSetDelega
         let dn = self.notifications[indexPath.section][indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("notification", forIndexPath: indexPath) as! DungeonNotificationTableViewCell
         cell.notification = dn
+        cell.layoutIfNeeded()
         return cell
     }
     
