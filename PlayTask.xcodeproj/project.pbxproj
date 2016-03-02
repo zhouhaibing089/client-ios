@@ -307,7 +307,6 @@
 				49F8092A1C1B10C7006A5DF5 /* StatisticDetailViewController.swift */,
 				490BEAA41C57A4E8005CAF3C /* PersonalViewController.swift */,
 				4912383E1C82AB9C00198E16 /* DeveloperViewController.swift */,
-				491238401C82FB7C00198E16 /* ComplainViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -441,6 +440,7 @@
 				496486AA1C50C9B7008C9A2C /* NewMemorialViewController.swift */,
 				490BEA9A1C5735DF005CAF3C /* DungeonNotificationViewController.swift */,
 				490BEAA01C575621005CAF3C /* MemorialViewController.swift */,
+				491238401C82FB7C00198E16 /* ComplainViewController.swift */,
 			);
 			name = dungeon;
 			sourceTree = "<group>";
