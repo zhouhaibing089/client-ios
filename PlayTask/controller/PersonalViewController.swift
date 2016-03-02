@@ -152,6 +152,15 @@ class PersonalViewController: UITableViewController, UIImagePickerControllerDele
         }).subscribe(onNext: { (qiniuImage) -> Void in
                 Util.currentUser.update(["avatarUrl": qiniuImage.url])
             }, onError: { (e) -> Void in
+                if let error = e as? APIError {
+                    switch error {
+                    case .Custom(_, let info, _):
+                        CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
+                        break
+                    default:
+                        break
+                    }
+                }
                 hud.hide(true)
             }, onCompleted: { () -> Void in
                 hud.switchToSuccess(duration: 1, labelText: "头像设置成功", completionBlock: nil)
