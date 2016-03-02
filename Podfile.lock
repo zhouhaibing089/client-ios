@@ -82,7 +82,7 @@ CHECKOUT OPTIONS:
     :commit: 42bdb102d2624b143c07850ebdc1537d5b6579b6
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
   YNSwift:
-    :commit: d09aa64ceac74dc1f26d23553e465b7035a06035
+    :commit: 6d5ecd9ffe0cb3415dfc5a4e8227fc409ea3b6a8
     :git: https://github.com/Yoncise/YNSwift.git
 
 SPEC CHECKSUMS:

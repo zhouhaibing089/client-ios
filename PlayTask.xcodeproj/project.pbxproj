@@ -569,7 +569,7 @@
 						DevelopmentTeam = CLRK9F7447;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -914,7 +914,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = im.yon.PlayTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "059bac0b-2b10-477d-9981-8a8c3d4f7404";
+				PROVISIONING_PROFILE = "7eebe495-9e42-40be-8311-d720eeb66bdd";
 				SWIFT_OBJC_BRIDGING_HEADER = PlayTask/BridgeHeader.h;
 			};
 			name = Debug;
@@ -939,7 +939,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = im.yon.PlayTask;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "059bac0b-2b10-477d-9981-8a8c3d4f7404";
+				PROVISIONING_PROFILE = "3c5ca372-1db2-4c81-a30e-cab7be7a9edd";
 				SWIFT_OBJC_BRIDGING_HEADER = PlayTask/BridgeHeader.h;
 			};
 			name = Release;

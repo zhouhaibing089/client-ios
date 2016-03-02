@@ -85,6 +85,10 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
                 })
                 self.memorial.comments.removeAtIndex(indexPath.row)
                 self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                NSTimer.delay(0.5) {
+                    // update indexPath
+                    self.tableView.reloadData()
+                }
             }))
             actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
             self.presentViewController(actionSheet, animated: true, completion: nil)

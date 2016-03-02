@@ -15,25 +15,31 @@ public class QiniuImageButton: UIButton {
     var maxHeight: CGFloat!
     var maxWidth: CGFloat!
     var minEdge: CGFloat = 60
-    public var metaImage: QiniuImage! {
+    public var metaImage: QiniuImage? {
         didSet {
             self.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
-            self.setImage(nil, forState: UIControlState.Normal)
-            if self.metaImage == nil {
-                self.heightConstraint.constant = 0
-                self.widthConstraint.constant = 0
-            } else {
+
+            if let metaImage = self.metaImage {
+                if oldValue?.url == metaImage.url {
+                    // ignore repeat set for same image
+                    return
+                }
+                self.setImage(nil, forState: UIControlState.Normal)
+
                 let minWidthRatio = self.minEdge / metaImage.height
                 let minHeightRatio = self.minEdge / metaImage.width
                 let widthRatio = max(self.maxWidth / metaImage.width, minWidthRatio)
                 let heightRatio = max(self.maxHeight / metaImage.height, minHeightRatio)
                 let ratio = min(heightRatio, widthRatio)
                 
-                let scaledHeight = ratio * self.metaImage.height
-                let scaledWidth = ratio * self.metaImage.width
+                let scaledHeight = ratio * metaImage.height
+                let scaledWidth = ratio * metaImage.width
                 self.heightConstraint.constant = CGFloat(min(scaledHeight, maxHeight))
                 self.widthConstraint.constant = CGFloat(min(scaledWidth, maxWidth))
-                self.af_setImageWithURL(self.metaImage.getUrlForMaxWidth(scaledWidth, maxHeight: scaledHeight), forState: UIControlState.Normal, completion: nil)
+                self.af_setImageWithURL(metaImage.getUrlForMaxWidth(scaledWidth, maxHeight: scaledHeight), forState: UIControlState.Normal, completion: nil)
+            } else {
+                self.heightConstraint.constant = 0
+                self.widthConstraint.constant = 0
             }
         }
     }

@@ -146,8 +146,9 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
                 })
                 weakSelf.memorials[indexPath.section].removeAtIndex(indexPath.row)
                 weakSelf.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-                NSTimer.delay(1) { () -> Void in
-                    tableView.reloadData()
+                NSTimer.delay(0.5) {
+                    // update indexPath
+                    weakSelf.tableView.reloadData()
                 }
             }))
             actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
@@ -173,7 +174,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
                     }
                 })
                 cell.memorial.comments = cell.memorial.comments.filter { $0.id != commentId }
-                weakSelf.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Automatic)
+                weakSelf.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             }))
             actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
             weakSelf.presentViewController(actionSheet, animated: true, completion: nil)
@@ -256,7 +257,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
             if let pvc = s.instantiated as? PreviewViewController {
                 if let qiniuImageButton = sender as? QiniuImageButton {
                     pvc.rawImage = qiniuImageButton.imageForState(UIControlState.Normal)
-                    pvc.imageUrl = qiniuImageButton.metaImage.url
+                    pvc.imageUrl = qiniuImageButton.metaImage?.url
                 } else {
                     pvc.rawImage = self.avatarImageView.image
                     pvc.imageUrl = Util.currentUser.avatarUrl
@@ -435,7 +436,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         if self.loadIndicator.isAnimating() {
             return
         }
-        if self.memorials.first?.count < Config.LOAD_THRESHOLD {
+        if self.memorials.last?.count < Config.LOAD_THRESHOLD {
             return
         }
         if let before = self.memorials.last?.last?.createdTime {

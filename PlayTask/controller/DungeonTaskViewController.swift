@@ -241,7 +241,7 @@ class DungeonTaskViewController: TaskViewController {
         if self.loadIndicator.isAnimating() || self.refreshControl.refreshing {
             return
         }
-        if self.dungeons.first?.count < Config.LOAD_THRESHOLD {
+        if self.dungeons.last?.count < Config.LOAD_THRESHOLD {
             return
         }
         
