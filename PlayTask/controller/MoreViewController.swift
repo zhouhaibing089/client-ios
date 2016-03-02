@@ -109,7 +109,7 @@ class MoreViewController: UITableViewController {
             case 2:
                 let hud = MBProgressHUD.show()
                 Util.appDelegate.syncDisposable?.dispose()
-                API.logoutWithSessionId(Util.sessionId!).subscribe { event in
+                _ = API.logoutWithSessionId(Util.sessionId!).subscribe { event in
                     switch event {
                     case .Next(_):
                         self.tableView.reloadData()

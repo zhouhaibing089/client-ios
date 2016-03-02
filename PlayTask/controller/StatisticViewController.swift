@@ -83,7 +83,7 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("line_chart", forIndexPath: indexPath) as! StatisticTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("line_chart", forIndexPath: indexPath) as! StatisticTableViewCell
         switch indexPath.row {
         case 0:
             cell.title = "收入"
@@ -114,7 +114,6 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
     
     func getData(statisticType: StatisticType) -> LineChartData {
         let now = NSDate()
-        let nowComp = now.getComponents()
         var begin: NSDate
         var end: NSDate
         switch self.period {
@@ -157,7 +156,7 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
                 xVars.append("\((index + 2) % 24)")
             }
             xVars.append("2")
-            bills.map({ (bill) in
+            _ = bills.map({ (bill) in
                 var index = bill.getBillTime().getComponents().hour - 2
                 if bill.getBillTime().getComponents().day != begin.getComponents().day {
                     // 第二天
@@ -185,7 +184,7 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
             for index in 0...6 {
                 xVars.append(dateFormatter.stringFromDate(now.addDay(index - 6)))
             }
-            bills.map({ (bill) in
+            _ = bills.map({ (bill) in
                 let index = 6 - end.differenceFrom(bill.getBillTime()).day
                 let score = statisticType == StatisticType.Outcome ? abs(bill.getBillScore()) : bill.getBillScore()
                 if let entry = entries[index] {
@@ -207,7 +206,7 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
             for index in 0...30 {
                 xVars.append(dateFormatter.stringFromDate(now.addDay(index - 30)))
             }
-            bills.map({ (bill) in
+            _ = bills.map({ (bill) in
                 let index = 30 - end.differenceFrom(bill.getBillTime()).day
                 let score = statisticType == StatisticType.Outcome ? abs(bill.getBillScore()) : bill.getBillScore()
                 if let entry = entries[index] {
@@ -228,7 +227,7 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
             for index in 1...12 {
                 xVars.append("\(index)月")
             }
-            bills.map({ (bill) in
+            _ = bills.map({ (bill) in
                 var index = bill.getBillTime().getComponents().month - 1
                 if begin.getComponents().year != bill.getBillTime().getComponents().year {
                     // 第二年 1 月 1 日 2 点前的数据
@@ -272,16 +271,16 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
         switch statisticType {
         case .Income:
             bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).filter("task.score > 0").map({ $0 })
-            bills.map({ sum += Double($0.getBillScore()) })
+            _ = bills.map({ sum += Double($0.getBillScore()) })
             break
         case .Outcome:
             bills = WishHistory.getWishHistoriesBetween(begin, and: end).map({ $0 })
-            bills.map({ sum += Double(abs($0.getBillScore())) })
+            _ = bills.map({ sum += Double(abs($0.getBillScore())) })
             break
         case .Balance:
             bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).filter("task.score > 0").map({ $0 })
             bills.appendContentsOf(WishHistory.getWishHistoriesBetween(begin, and: end).map({ $0 }))
-            bills.map({ sum += Double($0.getBillScore()) })
+            _ = bills.map({ sum += Double($0.getBillScore()) })
             break
         }
         if let firstDay = bills.first?.getBillTime() {
@@ -303,14 +302,14 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
             if bills.count == 0 {
                 return nil
             }
-            bills.map({ sum += $0.getBillScore() })
+            _ = bills.map({ sum += $0.getBillScore() })
             break
         case .Outcome:
             let bills = WishHistory.getWishHistoriesBetween(begin, and: end).map({ $0 })
             if bills.count == 0 {
                 return nil
             }
-            bills.map({ sum += abs($0.getBillScore()) })
+            _ = bills.map({ sum += abs($0.getBillScore()) })
             break
         default:
             var bills: [Bill] = TaskHistory.getTaskHistoriesBetween(begin, and: end).filter("task.score > 0").map({ $0 })
@@ -318,7 +317,7 @@ class StatisticViewController: UIViewController, UIToolbarDelegate, UITableViewD
             if bills.count == 0 {
                 return nil
             }
-            bills.map({ sum += $0.getBillScore() })
+            _ = bills.map({ sum += $0.getBillScore() })
             break
         }
         return sum

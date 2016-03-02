@@ -43,7 +43,7 @@ class LoginViewController: UITableViewController {
             return
         }
         let hud = MBProgressHUD.show()
-        API.loginWithAccount(account, password: password, deviceToken: Util.deviceToken).subscribe { event in
+        _ = API.loginWithAccount(account, password: password, deviceToken: Util.deviceToken).subscribe { event in
             switch event {
             case .Next(_):
                 Util.appDelegate.sync()

@@ -67,7 +67,7 @@ class DungeonDetailViewController: UIViewController {
             let alert = UIAlertController(title: "支付押金", message: self.dungeon.payDescription, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "支付", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-                API.joinDungeon(Util.loggedUser!, dungeon: self.dungeon,
+                _ = API.joinDungeon(Util.loggedUser!, dungeon: self.dungeon,
                     zone: NSTimeZone.defaultTimeZone().name).subscribe({ (event) -> Void in
                     switch event {
                     case .Next(let dungeon):
@@ -80,8 +80,8 @@ class DungeonDetailViewController: UIViewController {
                     case .Completed:
                         self.update()
                         break
-                    case .Error(let error):
-                        if let error = error as? APIError {
+                    case .Error(let e):
+                        if let error = e as? APIError {
                             switch error {
                             case .Custom(_, let info, _):
                                 CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
@@ -100,7 +100,7 @@ class DungeonDetailViewController: UIViewController {
         }
         let actionSheet = UIAlertController(title: "支付押金", message: self.dungeon.payDescription, preferredStyle: UIAlertControllerStyle.ActionSheet)
         actionSheet.addAction(UIAlertAction(title: "支付宝", style: UIAlertActionStyle.Default, handler: { [unowned self] (action) -> Void in
-            API.createOrder(self.dungeon.id, zone: NSTimeZone.localTimeZone().name).subscribe { event in
+            _ = API.createOrder(self.dungeon.id, zone: NSTimeZone.localTimeZone().name).subscribe { event in
                 switch event {
                 case .Next(let n):
                     AlipaySDK.defaultService().payOrder(n, fromScheme: "playtask", callback: { (result) -> Void in

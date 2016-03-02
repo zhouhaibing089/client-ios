@@ -86,7 +86,7 @@ class Table: Object {
                 return
             }
         }
-        self.push().retry(3).subscribeNext { _ in
+        _ = self.push().retry(3).subscribeNext { _ in
             let realm = try! Realm()
             try! realm.write {
                 self.synchronizedTime = NSDate()

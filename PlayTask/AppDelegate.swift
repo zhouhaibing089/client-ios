@@ -167,7 +167,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func autoLogin() {
         if let sessionId = Util.sessionId {
-            API.loginWithSessionId(sessionId, deviceToken: Util.deviceToken).subscribe { event in
+            _ = API.loginWithSessionId(sessionId, deviceToken: Util.deviceToken).subscribe { event in
                 switch event {
                 case .Next(_):
                     break

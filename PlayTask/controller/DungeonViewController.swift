@@ -134,13 +134,13 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
             weakSelf.closeCommentView()
             let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
             actionSheet.addAction(UIAlertAction(title: "删除", style: UIAlertActionStyle.Destructive, handler: { (action) -> Void in
-                API.deleteMemorial(cell.memorial).subscribe({ (event) -> Void in
+                _ = API.deleteMemorial(cell.memorial).subscribe({ (event) -> Void in
                     switch event {
                     case .Completed:
                         break
-                    case .Error(let e):
+                    case .Error(_):
                         break
-                    case .Next(let n):
+                    case .Next(_):
                         break
                     }
                 })
@@ -162,13 +162,13 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
             weakSelf.closeCommentView()
             let actionSheet = UIAlertController(title: nil, message: "删除评论", preferredStyle: UIAlertControllerStyle.ActionSheet)
             actionSheet.addAction(UIAlertAction(title: "删除", style: UIAlertActionStyle.Destructive, handler: { (action) -> Void in
-                API.deleteMemorialComment(commentId).subscribe({ (event) -> Void in
+                _ = API.deleteMemorialComment(commentId).subscribe({ (event) -> Void in
                     switch event {
                     case .Completed:
                         break
-                    case .Error(let e):
+                    case .Error(_):
                         break
-                    case .Next(let n):
+                    case .Next(_):
                         break
                     }
                 })
@@ -202,7 +202,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         }
         sender.hidden = true
         self.commentIndicator.startAnimating()
-        API.commentMemorial(Util.loggedUser!, memorialId: self.commentMemorial.id,
+        _ = API.commentMemorial(Util.loggedUser!, memorialId: self.commentMemorial.id,
             toMemorialCommentId: self.toMemorialCommentId, content: self.commentTextView.text, fromDungeonId: self.dungeon.id).subscribe({ event in
                 switch event {
                 case .Next(let c):
@@ -303,7 +303,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
             observable = API.getMemorialsOfUser(userId, inDungeon: self.dungeon)
             break
         }
-        observable.subscribe { (event) -> Void in
+        _ = observable.subscribe { (event) -> Void in
             switch event {
             case .Next(let m):
                 tmp.append(m)
@@ -314,6 +314,15 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
                 sender?.endRefreshing()
                 break
             case .Error(let e):
+                if let error = e as? APIError {
+                    switch error {
+                    case .Custom(_, let info, _):
+                        CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
+                        break
+                    default:
+                        break
+                    }
+                }
                 sender?.endRefreshing()
                 break
             }
@@ -444,12 +453,12 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
                 observable = API.getMemorialsOfUser(userId, inDungeon: self.dungeon, before: before)
                 break
             }
-            observable.subscribe { event in
+            _ = observable.subscribe { event in
                 switch (event) {
                 case .Next(let m):
                     tmp.append(m)
                     break
-                case .Error(let e):
+                case .Error(_):
                     self.loadIndicator.stopAnimating()
                     break
                 case .Completed:

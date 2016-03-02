@@ -45,14 +45,14 @@ class ComplainViewController: UITableViewController {
             return
         }
         let hud = MBProgressHUD.show()
-        API.complain(self.dungeon, content: content).subscribe { (event) -> Void in
+        _ = API.complain(self.dungeon, content: content).subscribe { (event) -> Void in
             switch event {
             case .Completed:
                 hud.switchToSuccess(duration: 1, labelText: "发送成功", completionBlock: { [unowned self] in
                     self.navigationController?.popViewControllerAnimated(true)
                 })
                 break
-            case .Next(let n):
+            case .Next(_):
                 break
             case .Error(let e):
                 if let error = e as? APIError {

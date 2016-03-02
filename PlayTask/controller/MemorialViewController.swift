@@ -69,11 +69,11 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
         if comment.fromUserId == Util.currentUser.sid.value! {
             let actionSheet = UIAlertController(title: nil, message: "删除评论", preferredStyle: UIAlertControllerStyle.ActionSheet)
             actionSheet.addAction(UIAlertAction(title: "删除", style: UIAlertActionStyle.Destructive, handler: { [unowned self](action) -> Void in
-                API.deleteMemorialComment(comment.id).subscribe({ (event) -> Void in
+                _ = API.deleteMemorialComment(comment.id).subscribe({ (event) -> Void in
                     switch event {
-                    case .Error(let e):
+                    case .Error(_):
                         break
-                    case .Next(let n):
+                    case .Next(_):
                         break
                     case .Completed:
                         break
@@ -103,7 +103,7 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
         }
         self.sendIndicator.startAnimating()
         sender.hidden = true
-        API.commentMemorial(Util.currentUser, memorialId: self.memorial.id, toMemorialCommentId: self.toMemorialCommentId, content: self.commentTextView.text, fromDungeonId: self.fromDungeonId).subscribe { (event) -> Void in
+        _ = API.commentMemorial(Util.currentUser, memorialId: self.memorial.id, toMemorialCommentId: self.toMemorialCommentId, content: self.commentTextView.text, fromDungeonId: self.fromDungeonId).subscribe { (event) -> Void in
             switch event {
             case .Completed:
                 self.tableView.reloadData()
@@ -159,11 +159,11 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func deleteMemorial(sender: UIButton) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         actionSheet.addAction(UIAlertAction(title: "删除", style: UIAlertActionStyle.Destructive, handler: { [unowned self] (action) -> Void in
-            API.deleteMemorial(self.memorial).subscribe({ (event) -> Void in
+            _ = API.deleteMemorial(self.memorial).subscribe({ (event) -> Void in
                 switch event {
-                case .Error(let e):
+                case .Error(_):
                     break
-                case .Next(let n):
+                case .Next(_):
                     break
                 case .Completed:
                     break

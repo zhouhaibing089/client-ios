@@ -8,6 +8,7 @@
 
 import UIKit
 import DZNEmptyDataSet
+import CRToast
 
 class DungeonNotificationViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource,UITableViewDelegate, UITableViewDataSource {
     
@@ -64,7 +65,7 @@ class DungeonNotificationViewController: UIViewController, DZNEmptyDataSetDelega
     
     func refresh(sender: UIRefreshControl) {
         var dns = [DungeonNotification]()
-        API.getDungeonNotifications(Util.currentUser, dungeonId: self.dungeon.id).subscribe({ event in
+        _ = API.getDungeonNotifications(Util.currentUser, dungeonId: self.dungeon.id).subscribe({ event in
             switch event {
             case .Completed:
                 self.notifications = [dns]
@@ -76,7 +77,16 @@ class DungeonNotificationViewController: UIViewController, DZNEmptyDataSetDelega
             case .Next(let dn):
                 dns.append(dn)
                 break
-            case .Error(let t):
+            case .Error(let e):
+                if let error = e as? APIError {
+                    switch error {
+                    case .Custom(_, let info, _):
+                        CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
+                        break
+                    default:
+                        break
+                    }
+                }
                 sender.endRefreshing()
                 break
             }
@@ -90,12 +100,12 @@ class DungeonNotificationViewController: UIViewController, DZNEmptyDataSetDelega
         if let before = self.notifications.last?.last?.createdTime {
             self.loadIndicator.startAnimating()
             var tmp = [DungeonNotification]()
-            API.getDungeonNotifications(Util.currentUser, dungeonId: self.dungeon.id, before: before).subscribe { event in
+            _ = API.getDungeonNotifications(Util.currentUser, dungeonId: self.dungeon.id, before: before).subscribe { event in
                 switch (event) {
                 case .Next(let n):
                     tmp.append(n)
                     break
-                case .Error(let e):
+                case .Error(_):
                     self.loadIndicator.stopAnimating()
                     break
                 case .Completed:

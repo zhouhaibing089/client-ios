@@ -8,6 +8,7 @@
 
 import UIKit
 import DZNEmptyDataSet
+import CRToast
 
 class DungeonListViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, UITableViewDelegate, UITableViewDataSource {
 
@@ -60,14 +61,23 @@ class DungeonListViewController: UIViewController, DZNEmptyDataSetDelegate, DZNE
 
     func refresh(sender: UIRefreshControl? = nil) {
         var tmp = [Dungeon]()
-        API.getDungeons().subscribe { event in
+        _ = API.getDungeons().subscribe { event in
             switch event {
             case .Completed:
                 self.dungeons = tmp
                 sender?.endRefreshing()
                 self.tableView.reloadData()
                 break
-            case .Error(_):
+            case .Error(let e):
+                if let error = e as? APIError {
+                    switch error {
+                    case .Custom(_, let info, _):
+                        CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
+                        break
+                    default:
+                        break
+                    }
+                }
                 sender?.endRefreshing()
                 break
             case .Next(let d):

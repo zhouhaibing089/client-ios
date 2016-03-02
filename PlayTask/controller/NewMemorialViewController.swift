@@ -117,7 +117,7 @@ class NewMemorialViewController: UITableViewController, UIImagePickerControllerD
                 hud.hide(true)
                 if let error = e as? APIError {
                     switch error {
-                    case .Custom(let status, let info, let data):
+                    case .Custom(_, let info, _):
                         CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
                         break
                     default:

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import YNSwift
 import JSBadgeView
+import CRToast
 
 class DungeonTaskViewController: TaskViewController {
     enum Mode {
@@ -208,7 +209,7 @@ class DungeonTaskViewController: TaskViewController {
         var tmp = [Dungeon]()
         // reload empty dataset upon switch task type
         self.tableView.reloadEmptyDataSet()
-        API.getJoinedDungeons(Util.currentUser, closed: self.showDone).subscribe { event in
+        _ = API.getJoinedDungeons(Util.currentUser, closed: self.showDone).subscribe { event in
             switch event {
             case .Completed:
                 self.dungeons = [tmp]
@@ -217,6 +218,15 @@ class DungeonTaskViewController: TaskViewController {
                 self.loadIndicator.stopAnimating()
                 break
             case .Error(let e):
+                if let error = e as? APIError {
+                    switch error {
+                    case .Custom(_, let info, _):
+                        CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
+                        break
+                    default:
+                        break
+                    }
+                }
                 self.loadIndicator.stopAnimating()
                 refreshControl.endRefreshing()
                 break
@@ -234,14 +244,14 @@ class DungeonTaskViewController: TaskViewController {
         if let before = self.dungeons.last?.last?.createdTime {
             self.loadIndicator.startAnimating()
             var tmp = [Dungeon]()
-            API.getJoinedDungeons(Util.currentUser, closed: self.showDone, before: before).subscribe { event in
+            _ = API.getJoinedDungeons(Util.currentUser, closed: self.showDone, before: before).subscribe { event in
                 switch event {
                 case .Completed:
                     self.dungeons.append(tmp)
                     self.update()
                     self.loadIndicator.stopAnimating()
                     break
-                case .Error(let e):
+                case .Error(_):
                     self.loadIndicator.stopAnimating()
                     break
                 case .Next(let d):

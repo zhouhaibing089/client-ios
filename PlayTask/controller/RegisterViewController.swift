@@ -47,7 +47,7 @@ class RegisterViewController: UITableViewController {
             hud.switchToSuccess(duration: nil, labelText: "注册成功")
             return API.loginWithAccount(account, password: password, deviceToken: Util.deviceToken)
         }
-        API.registerWithAccount(account, email: email, password: password).flatMap(login).subscribe { event in
+        _ = API.registerWithAccount(account, email: email, password: password).flatMap(login).subscribe { event in
             switch event {
             case .Next(_):
                 Util.appDelegate.sync()

@@ -39,6 +39,11 @@ class SpeechView: UIView {
         super.init(coder: aDecoder)
         self.contentMode = .Redraw
     }
+    
+    // IBdesignable will rendered failed if you don't override this method
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
 
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

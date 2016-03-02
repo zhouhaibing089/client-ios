@@ -158,7 +158,7 @@ class BillViewController: UIViewController, UITableViewDelegate, UITableViewData
             return $0.getBillTime().compare($1.getBillTime()) == NSComparisonResult.OrderedDescending
         }
         var currentDay = 0
-        bills.map { bill in
+        _ = bills.map { bill in
             let day = bill.getBillTime().getComponents().day
             if day != currentDay {
                 let count = self.billItems.count

@@ -63,7 +63,7 @@ class PersonalViewController: UITableViewController, UIImagePickerControllerDele
                 prompt.addAction(UIAlertAction(title: "完成", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
                     let hud = MBProgressHUD.show()
                     let nickname = prompt.textFields!.first!.text!
-                    API.changeNickname(Util.currentUser, nickname: nickname).subscribe({ (event) -> Void in
+                    _ = API.changeNickname(Util.currentUser, nickname: nickname).subscribe({ (event) -> Void in
                         switch event {
                         case .Completed:
                             hud.switchToSuccess(duration: 1.0, labelText: "修改成功")

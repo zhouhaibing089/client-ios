@@ -37,7 +37,7 @@ class PasswordViewController: UITableViewController {
             return
         }
         let hud = MBProgressHUD.show()
-        API.changePassword(Util.loggedUser!, oldPassword: oldPassword, newPassword: newPassword).subscribe { event in
+        _ = API.changePassword(Util.loggedUser!, oldPassword: oldPassword, newPassword: newPassword).subscribe { event in
             switch event {
             case .Next(_):
                 hud.switchToSuccess(duration: 1, labelText: " 修改成功") {

@@ -34,7 +34,7 @@ class MemorialCommentView: XibView {
             let bold = [
                 NSFontAttributeName: UIFont(descriptor: self.contentLabel.font.fontDescriptor().fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits.TraitBold), size: fontSize)
             ]
-            if let toUserId = self.comment.toUserId {
+            if self.comment.toUserId != nil {
                 let s = NSMutableAttributedString()
                 let fn = NSAttributedString(string: comment.fromNickname, attributes: bold)
                 let tn = NSAttributedString(string: comment.toNickname!, attributes: bold)

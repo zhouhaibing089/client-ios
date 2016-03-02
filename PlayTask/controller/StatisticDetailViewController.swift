@@ -137,7 +137,7 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
             var entries = [String: ChartDataEntry]()
             var xVals = [String]()
             let bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).filter("task.score > 0")
-            bills.map({ bill in
+            _ = bills.map({ bill in
                 self.sum += bill.getBillScore()
                 if let entry = entries[bill.getBillTitle()] {
                     entry.value += Double(bill.getBillScore())
@@ -162,7 +162,7 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
             var entries = [String: ChartDataEntry]()
             var xVals = [String]()
             let bills = WishHistory.getWishHistoriesBetween(begin, and: end)
-            bills.map({ bill in
+            _ = bills.map({ bill in
                 self.sum += abs(bill.getBillScore())
                 if let entry = entries[bill.getBillTitle()] {
                     entry.value += Double(abs(bill.getBillScore()))
@@ -191,7 +191,7 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
             
             var bills = TaskHistory.getTaskHistoriesBetween(begin, and: end).filter("task.score > 0").map({ $0 as Bill })
             bills.appendContentsOf(WishHistory.getWishHistoriesBetween(begin, and: end).map({ $0 }))
-            bills.map({ bill in
+            _ = bills.map({ bill in
                 self.sum += bill.getBillScore()
                 if let bill = bill as? TaskHistory {
                     entries[0].value += Double(bill.getBillScore())
