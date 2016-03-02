@@ -8,6 +8,7 @@
 
 import UIKit
 import YNSwift
+import CRToast
 
 class MemorialViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -97,6 +98,9 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func send(sender: UIButton) {
+        if self.commentTextView.text == "" {
+            return
+        }
         self.sendIndicator.startAnimating()
         sender.hidden = true
         API.commentMemorial(Util.currentUser, memorialId: self.memorial.id, toMemorialCommentId: self.toMemorialCommentId, content: self.commentTextView.text, fromDungeonId: self.fromDungeonId).subscribe { (event) -> Void in
@@ -108,6 +112,15 @@ class MemorialViewController: UIViewController, UITableViewDelegate, UITableView
                 sender.hidden = false
                 break
             case .Error(let e):
+                if let error = e as? APIError {
+                    switch error {
+                    case .Custom(_, let info, _):
+                        CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
+                        break
+                    default:
+                        break
+                    }
+                }
                 self.sendIndicator.stopAnimating()
                 sender.hidden = false
                 break

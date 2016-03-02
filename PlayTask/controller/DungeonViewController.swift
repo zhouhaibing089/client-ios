@@ -11,6 +11,7 @@ import YNSwift
 import RxSwift
 import SwiftyJSON
 import DZNEmptyDataSet
+import CRToast
 
 class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var coverImageView: UIImageView!
@@ -196,6 +197,9 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
     }
     
     @IBAction func sendComment(sender: UIButton) {
+        if self.commentTextView.text == "" {
+            return
+        }
         sender.hidden = true
         self.commentIndicator.startAnimating()
         API.commentMemorial(Util.loggedUser!, memorialId: self.commentMemorial.id,
@@ -212,6 +216,15 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
                     self.closeCommentView()
                     break
                 case .Error(let e):
+                    if let error = e as? APIError {
+                        switch error {
+                        case .Custom(_, let info, _):
+                            CRToastManager.showNotificationWithMessage(info, completionBlock: nil)
+                            break
+                        default:
+                            break
+                        }
+                    }
                     self.commentIndicator.stopAnimating()
                     sender.hidden = false
                     break
