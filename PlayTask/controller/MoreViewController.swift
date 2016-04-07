@@ -115,6 +115,9 @@ class MoreViewController: UITableViewController {
                         self.tableView.reloadData()
                         // 清除 Alarm
                         Util.application.cancelAllLocalNotifications()
+                        // clear badge
+                        let notificationCenter = NSNotificationCenter.defaultCenter()
+                        notificationCenter.postNotificationName(Config.Notification.BADGE, object: nil)
                         hud.switchToSuccess(duration: 1, labelText: "退出成功")
                         break
                     default:

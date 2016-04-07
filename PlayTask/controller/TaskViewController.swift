@@ -251,7 +251,11 @@ class TaskViewController: UIViewController, UIToolbarDelegate, DZNEmptyDataSetDe
             self.performSegueWithIdentifier("new", sender: nil)
         }))
         actionSheet.addAction(UIAlertAction(title: "加入副本", style: UIAlertActionStyle.Default, handler: { _ in
-            self.performSegueWithIdentifier("dungeon", sender: nil)
+            if Util.loggedUser != nil {
+                self.performSegueWithIdentifier("dungeon", sender: nil)
+            } else {
+                self.performSegueWithIdentifier("login@Main", sender: nil)
+            }
         }))
         actionSheet.addAction(UIAlertAction(title: "排序", style: UIAlertActionStyle.Default, handler: { _ in
             self.tableView.setEditing(false, animated: true)

@@ -177,7 +177,12 @@ class DungeonTaskViewController: TaskViewController {
             self.performSegueWithIdentifier("new", sender: nil)
         }))
         actionSheet.addAction(UIAlertAction(title: "加入副本", style: UIAlertActionStyle.Default, handler: { _ in
-            self.performSegueWithIdentifier("dungeon", sender: nil)
+            if Util.loggedUser != nil {
+                self.performSegueWithIdentifier("dungeon", sender: nil)
+            } else {
+                self.performSegueWithIdentifier("login@Main", sender: nil)
+            }
+
         }))
         actionSheet.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
         self.presentViewController(actionSheet, animated: true, completion: nil)
@@ -201,6 +206,7 @@ class DungeonTaskViewController: TaskViewController {
             return
         }
         if Util.loggedUser == nil {
+            self.loadIndicator.stopAnimating()
             // not logged in, switch to first segment
             self.taskTypeSegmentControl.selectedSegmentIndex = 0
             self.changeTaskType(self.taskTypeSegmentControl)
