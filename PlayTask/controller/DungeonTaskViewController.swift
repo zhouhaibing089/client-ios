@@ -35,13 +35,13 @@ class DungeonTaskViewController: TaskViewController {
         super.viewDidLoad()
         self.badgeView = JSBadgeView(parentView: self.taskTypeSegmentControl.superview!, alignment: JSBadgeViewAlignment.TopRight)
         self.badgeView.badgePositionAdjustment = CGPoint(x: -12, y: 8)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateBadge:", name: Config.Notification.BADGE, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DungeonTaskViewController.updateBadge(_:)), name: Config.Notification.BADGE, object: nil)
         
         // pull to refresh
         self.refreshTableViewController = UITableViewController()
         self.refreshTableViewController.tableView = self.tableView
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(DungeonTaskViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
     }
     
     func updateBadge(notification: NSNotification) {

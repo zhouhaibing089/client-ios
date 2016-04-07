@@ -156,7 +156,7 @@ class MoreViewController: UITableViewController {
         self.navigationController?.view.backgroundColor = UIColor.whiteColor();
         // estimatedRowHeight is REQUIRED, otherwise cell will get shrinked when clicked
         self.tableView.estimatedRowHeight = 44
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncStatusChanged:", name: Config.Notification.SYNC, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MoreViewController.syncStatusChanged(_:)), name: Config.Notification.SYNC, object: nil)
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

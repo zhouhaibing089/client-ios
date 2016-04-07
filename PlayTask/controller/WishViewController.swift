@@ -37,7 +37,7 @@ class WishViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmptyDat
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncStatusChanged:", name: Config.Notification.SYNC, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WishViewController.syncStatusChanged(_:)), name: Config.Notification.SYNC, object: nil)
     }
     
     func syncStatusChanged(notification: NSNotification) {
@@ -51,7 +51,8 @@ class WishViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmptyDat
         if self.tableView.editing {
             var i = 0
             for w in self.wishes {
-                w.update(["rank": ++i])
+                i += 1
+                w.update(["rank": i])
             }
             self.tableView.setEditing(false, animated: true)
         }

@@ -153,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let hex = NSMutableString()
         let bytes = UnsafePointer<UInt8>(deviceToken.bytes)
         
-        for var i = 0; i < deviceToken.length; i++  {
+        for i in 0 ..< deviceToken.length  {
             hex.appendFormat("%02hhx", bytes[i])
         }
         Util.deviceToken = hex.lowercaseString

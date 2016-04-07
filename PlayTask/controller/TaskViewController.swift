@@ -64,7 +64,8 @@ class TaskViewController: UIViewController, UIToolbarDelegate, DZNEmptyDataSetDe
         if self.tableView.editing {
             var i = 0
             for t in self.currentTasks {
-                t.update(["rank": ++i])
+                i += 1
+                t.update(["rank": i])
             }
             self.tableView.setEditing(false, animated: true)
         }
@@ -98,9 +99,9 @@ class TaskViewController: UIViewController, UIToolbarDelegate, DZNEmptyDataSetDe
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didBecomeActive:", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TaskViewController.didBecomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
     
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "syncStatusChanged:", name: Config.Notification.SYNC, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TaskViewController.syncStatusChanged(_:)), name: Config.Notification.SYNC, object: nil)
     }
 
     func syncStatusChanged(notification: NSNotification) {

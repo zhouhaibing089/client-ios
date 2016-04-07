@@ -44,7 +44,8 @@ class Table: Object {
     }
     
     /// Update self according to value
-    func update(var value: [String: AnyObject]) {
+    func update(value: [String: AnyObject]) {
+        var value = value
         let realm = try! Realm()
         try! realm.write {
             value["id"] = self.id

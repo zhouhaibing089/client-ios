@@ -13,9 +13,9 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
 
     @IBOutlet weak var bubbleView: BubbleView! {
         didSet {
-            let left =  UISwipeGestureRecognizer(target: self, action: "swipe:")
+            let left =  UISwipeGestureRecognizer(target: self, action: #selector(StatisticDetailViewController.swipe(_:)))
             left.direction = UISwipeGestureRecognizerDirection.Left
-            let right = UISwipeGestureRecognizer(target: self, action: "swipe:")
+            let right = UISwipeGestureRecognizer(target: self, action: #selector(StatisticDetailViewController.swipe(_:)))
             right.direction = UISwipeGestureRecognizerDirection.Right
             self.bubbleView.addGestureRecognizer(left)
             self.bubbleView.addGestureRecognizer(right)
@@ -26,12 +26,12 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
         var index = self.pieChartView.indexForAngle(90)
         let max = self.dataSet.entryCount
         if gesture.direction == UISwipeGestureRecognizerDirection.Right {
-            index++
+            index += 1
             if index >= max {
                 index = 0
             }
         } else if gesture.direction == UISwipeGestureRecognizerDirection.Left {
-            index--
+            index -= 1
             if index < 0 {
                 index = max - 1
             }
@@ -54,7 +54,7 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
                 self.spintToIndex(self.pieChartView.indexForAngle(90))
             }
             self.pieChartView.delegate = self
-            let gesture = UIPanGestureRecognizer(target: self, action: "pan:")
+            let gesture = UIPanGestureRecognizer(target: self, action: #selector(StatisticDetailViewController.pan(_:)))
             gesture.cancelsTouchesInView = false
             self.pieChartView.addGestureRecognizer(gesture)
         }
@@ -142,7 +142,7 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
                 if let entry = entries[bill.getBillTitle()] {
                     entry.value += Double(bill.getBillScore())
                     var desc = self.descriptions[entry.xIndex]!
-                    desc.1++
+                    desc.1 += 1
                     desc.2 += bill.getBillScore()
                     self.descriptions[entry.xIndex] = desc
                 } else {
@@ -167,7 +167,7 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
                 if let entry = entries[bill.getBillTitle()] {
                     entry.value += Double(abs(bill.getBillScore()))
                     var desc = self.descriptions[entry.xIndex]!
-                    desc.1++
+                    desc.1 += 1
                     desc.2 += abs(bill.getBillScore())
                     self.descriptions[entry.xIndex] = desc
                 } else {
@@ -196,13 +196,13 @@ class StatisticDetailViewController: UIViewController, ChartViewDelegate {
                 if let bill = bill as? TaskHistory {
                     entries[0].value += Double(bill.getBillScore())
                     var desc = self.descriptions[0]!
-                    desc.1++
+                    desc.1 += 1
                     desc.2 += abs(bill.getBillScore())
                     self.descriptions[0] = desc
                 } else {
                     entries[1].value += Double(abs(bill.getBillScore()))
                     var desc = self.descriptions[1]!
-                    desc.1++
+                    desc.1 += 1
                     desc.2 += abs(bill.getBillScore())
                     self.descriptions[1] = desc
                 }

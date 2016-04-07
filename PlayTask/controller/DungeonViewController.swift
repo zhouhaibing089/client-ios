@@ -87,7 +87,7 @@ class DungeonViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmpty
         let tableViewController = UITableViewController()
         tableViewController.tableView = self.tableView
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(DungeonViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         tableViewController.refreshControl = self.refreshControl
         self.refreshControl.beginRefreshing()
         self.refresh(self.refreshControl)

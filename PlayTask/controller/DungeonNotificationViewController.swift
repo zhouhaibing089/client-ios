@@ -34,7 +34,7 @@ class DungeonNotificationViewController: UIViewController, DZNEmptyDataSetDelega
         let tableViewController = UITableViewController()
         tableViewController.tableView = self.tableView
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(DungeonNotificationViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         tableViewController.refreshControl = refreshControl
         refreshControl.beginRefreshing()
         self.refresh(refreshControl)

@@ -21,7 +21,7 @@ class DungeonDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "alipayDungeon:", name: Config.Notification.ALIPAY_DUNGEON, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DungeonDetailViewController.alipayDungeon(_:)), name: Config.Notification.ALIPAY_DUNGEON, object: nil)
         self.update()
     }
     
@@ -136,7 +136,7 @@ class DungeonDetailViewController: UIViewController {
             let result = json["result"].stringValue
             if resultStatus == 9000 && result.containsString("success=\"true\"") {
                 self.dungeon.status = DungeonStatus.Joined
-                self.dungeon.currentPlayer++
+                self.dungeon.currentPlayer += 1
                 self.update()
             }
         }

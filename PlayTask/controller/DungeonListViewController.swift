@@ -33,7 +33,7 @@ class DungeonListViewController: UIViewController, DZNEmptyDataSetDelegate, DZNE
         let tableViewController = UITableViewController()
         tableViewController.tableView = self.tableView
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(DungeonListViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         tableViewController.refreshControl = refreshControl
         
         refreshControl.beginRefreshing()

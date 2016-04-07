@@ -144,11 +144,11 @@ final class Task: Table {
         for t in tasks[TaskType.Daily.rawValue]! {
             if onCurrentDay { // 当天
                 if t.pinned && !t.isDone() {
-                    count++
+                    count += 1
                 }
             } else {
                 if t.pinned {
-                    count++
+                    count += 1
                 }
             }
         }
@@ -156,17 +156,17 @@ final class Task: Table {
         for t in tasks[TaskType.Weekly.rawValue]! {
             if onCurrentWeek { // 当周
                 if t.pinned && !t.isDone() {
-                    count++
+                    count += 1
                 }
             } else {
                 if t.pinned {
-                    count++
+                    count += 1
                 }
             }
         }
         for t in tasks[TaskType.Normal.rawValue]! {
             if t.pinned && !t.isDone() {
-                count++
+                count += 1
             }
         }
         return count
