@@ -128,7 +128,7 @@ class TaskAlarm: Table {
         for a in alarms {
             var noRepeat = true
             for i in 0...6 {
-                if !a.getDay(i) {
+                if a.getDay(i) {
                     noRepeat = false
                     break
                 }
