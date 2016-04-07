@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eFE-jf-rzT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eFE-jf-rzT">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -31,7 +31,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jaI-zQ-IWG">
-                                                    <rect key="frame" x="8" y="8" width="359" height="202"/>
+                                                    <rect key="frame" x="8" y="0.0" width="359" height="202"/>
                                                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="jaI-zQ-IWG" secondAttribute="height" multiplier="16:9" id="Wbz-Fx-TDW"/>
@@ -43,16 +43,16 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYr-rq-UZi">
-                                                    <rect key="frame" x="24" y="157" width="46" height="29"/>
+                                                    <rect key="frame" x="24" y="149" width="46" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="jaI-zQ-IWG" secondAttribute="bottom" id="Bat-OL-K7Q"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="jaI-zQ-IWG" secondAttribute="bottom" id="Bat-OL-K7Q"/>
                                                 <constraint firstItem="VYr-rq-UZi" firstAttribute="leading" secondItem="jaI-zQ-IWG" secondAttribute="leading" constant="16" id="CsK-h8-Cz0"/>
-                                                <constraint firstItem="jaI-zQ-IWG" firstAttribute="top" secondItem="fYg-Hg-fQd" secondAttribute="topMargin" id="DOc-OO-bNZ"/>
+                                                <constraint firstItem="jaI-zQ-IWG" firstAttribute="top" secondItem="fYg-Hg-fQd" secondAttribute="top" id="DOc-OO-bNZ"/>
                                                 <constraint firstItem="VYr-rq-UZi" firstAttribute="leading" secondItem="fYg-Hg-fQd" secondAttribute="leading" constant="24" id="HdL-Fc-xpK"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="VYr-rq-UZi" secondAttribute="bottom" constant="24" id="Onw-sd-HWH"/>
                                                 <constraint firstItem="jaI-zQ-IWG" firstAttribute="bottom" secondItem="VYr-rq-UZi" secondAttribute="bottom" constant="24" id="m3W-K6-mi7"/>
@@ -282,13 +282,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="72"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="跑步30分钟" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rv9-n2-eHR">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" misplaced="YES" text="跑步30分钟" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rv9-n2-eHR">
                                                     <rect key="frame" x="48" y="8" width="475" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjT-W8-1cO">
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjT-W8-1cO">
                                                     <rect key="frame" x="8" y="12" width="32" height="48"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="48" id="cbc-i0-S5H"/>
@@ -298,7 +298,7 @@
                                                         <action selector="toggle:" destination="law-gN-hj7" eventType="touchUpInside" id="0Vf-Va-vdM"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/1, 09:24" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zda-l4-GX9">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0/1, 09:24" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zda-l4-GX9">
                                                     <rect key="frame" x="48" y="47" width="66" height="17"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

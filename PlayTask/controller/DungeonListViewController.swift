@@ -27,6 +27,8 @@ class DungeonListViewController: UIViewController, DZNEmptyDataSetDelegate, DZNE
         self.tableView.emptyDataSetDelegate = self
         self.tableView.emptyDataSetSource = self
         
+        self.tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        
         // pull to refresh
         let tableViewController = UITableViewController()
         tableViewController.tableView = self.tableView
