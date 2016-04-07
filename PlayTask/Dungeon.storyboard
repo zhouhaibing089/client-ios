@@ -197,8 +197,8 @@
                                             <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9e2-8b-PId">
-                                            <rect key="frame" x="64" y="34" width="56" height="20"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9e2-8b-PId">
+                                            <rect key="frame" x="64" y="34" width="303" height="20"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -245,6 +245,7 @@
                                         <constraint firstItem="xyE-qy-F3a" firstAttribute="top" secondItem="Uh6-a5-sAj" secondAttribute="top" id="d0E-zV-zRU"/>
                                         <constraint firstItem="9e2-8b-PId" firstAttribute="leading" secondItem="Uh6-a5-sAj" secondAttribute="trailing" constant="8" id="gTd-Ba-pY5"/>
                                         <constraint firstItem="zag-gg-jQy" firstAttribute="leading" secondItem="Uh6-a5-sAj" secondAttribute="trailing" constant="8" symbolic="YES" id="p2M-KM-a40"/>
+                                        <constraint firstAttribute="trailing" secondItem="9e2-8b-PId" secondAttribute="trailing" constant="8" id="xNS-uH-tO4"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -282,7 +283,7 @@
                                                             <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b10-UU-Ij1">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b10-UU-Ij1">
                                                             <rect key="frame" x="52" y="33" width="299" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
