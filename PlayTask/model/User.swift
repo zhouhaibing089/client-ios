@@ -16,6 +16,7 @@ class User: Table {
     dynamic var score = 0
     dynamic var bronze = 0
     dynamic var nickname = ""
+    dynamic var balance = 0
     
     let groups = List<Group>()
     
@@ -66,6 +67,7 @@ class User: Table {
         value["bronze"] = json["bronze"].intValue
         value["avatarUrl"] = json["avatar_url"].stringValue
         value["nickname"] = json["nickname"].stringValue
+        value["balance"] = json["balance"].intValue
         
         self.update(value)
     }

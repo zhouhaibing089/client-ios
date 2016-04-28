@@ -75,7 +75,6 @@ class DungeonDetailViewController: UIViewController {
                         // so this view will show correctly if user entered from dungeon list again
                         self.dungeon.currentPlayer = dungeon.currentPlayer
                         self.dungeon.status = dungeon.status
-                        self.dungeon = dungeon
                         break
                     case .Completed:
                         self.update()

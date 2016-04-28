@@ -106,7 +106,7 @@ class MoreViewController: UITableViewController {
             }
         } else if indexPath.section == 1 {
             switch indexPath.row {
-            case 2:
+            case 3:
                 let hud = MBProgressHUD.show()
                 Util.appDelegate.syncDisposable?.dispose()
                 _ = API.logoutWithSessionId(Util.sessionId!).subscribe { event in
