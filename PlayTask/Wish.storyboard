@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rvP-cJ-fEo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rvP-cJ-fEo">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -28,34 +27,11 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oIJ-ee-o7N">
-                                        <rect key="frame" x="55" y="20" width="8" height="8"/>
-                                        <color key="backgroundColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="8" id="gf8-vp-Kii"/>
-                                            <constraint firstAttribute="width" secondItem="oIJ-ee-o7N" secondAttribute="height" multiplier="1:1" id="kqo-hO-Nt9"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXm-Yu-UIt">
-                                        <rect key="frame" x="71" y="13" width="9" height="22"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
-                                        <color key="textColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="uXm-Yu-UIt" firstAttribute="centerY" secondItem="joU-52-BUH" secondAttribute="centerY" id="2r2-TB-qDA"/>
-                                    <constraint firstItem="oIJ-ee-o7N" firstAttribute="centerY" secondItem="joU-52-BUH" secondAttribute="centerY" id="5dA-WK-7mh"/>
                                     <constraint firstAttribute="height" constant="48" id="QyL-n3-KQs"/>
-                                    <constraint firstItem="uXm-Yu-UIt" firstAttribute="leading" secondItem="oIJ-ee-o7N" secondAttribute="trailing" constant="8" symbolic="YES" id="poj-6H-E0I"/>
                                     <constraint firstItem="Qle-y0-a6U" firstAttribute="centerY" secondItem="joU-52-BUH" secondAttribute="centerY" id="qZT-qM-uyX"/>
-                                    <constraint firstItem="oIJ-ee-o7N" firstAttribute="leading" secondItem="Qle-y0-a6U" secondAttribute="trailing" constant="8" symbolic="YES" id="ucv-2N-Ra5"/>
                                     <constraint firstItem="Qle-y0-a6U" firstAttribute="leading" secondItem="joU-52-BUH" secondAttribute="leading" constant="20" symbolic="YES" id="zaL-qh-Zbm"/>
                                 </constraints>
                             </view>
@@ -149,7 +125,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bronzeLabel" destination="uXm-Yu-UIt" id="3AJ-GR-CSi"/>
                         <outlet property="scoreLabel" destination="Qle-y0-a6U" id="w9h-aB-8Oo"/>
                         <outlet property="tableView" destination="16R-0S-28d" id="ngs-5i-kqL"/>
                         <segue destination="MEs-mn-qHx" kind="presentation" identifier="new" id="T9Z-19-DGw"/>

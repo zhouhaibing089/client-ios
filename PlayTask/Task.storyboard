@@ -495,25 +495,6 @@
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPP-Ep-acD" userLabel="Bronze">
-                                        <rect key="frame" x="55" y="20" width="8" height="8"/>
-                                        <color key="backgroundColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="8" id="9ev-OQ-zYV"/>
-                                            <constraint firstAttribute="width" secondItem="YPP-Ep-acD" secondAttribute="height" multiplier="1:1" id="dA8-HB-FvE"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yu5-aO-tlJ">
-                                        <rect key="frame" x="71" y="13" width="9" height="22"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
-                                        <color key="textColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSA-Vp-G8x">
                                         <rect key="frame" x="551" y="4" width="41" height="41"/>
                                         <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
@@ -530,22 +511,12 @@
                                 <constraints>
                                     <constraint firstItem="blv-wM-G8q" firstAttribute="centerY" secondItem="5Xh-3G-Ys5" secondAttribute="centerY" id="1Qx-gC-Ufy"/>
                                     <constraint firstItem="dSA-Vp-G8x" firstAttribute="leading" secondItem="oRf-xJ-Dji" secondAttribute="trailing" constant="8" symbolic="YES" id="4C0-Rp-WvJ"/>
-                                    <constraint firstItem="yu5-aO-tlJ" firstAttribute="centerY" secondItem="5Xh-3G-Ys5" secondAttribute="centerY" id="BDn-9q-MTO"/>
                                     <constraint firstItem="blv-wM-G8q" firstAttribute="leading" secondItem="5Xh-3G-Ys5" secondAttribute="leading" constant="20" symbolic="YES" id="DRe-2R-RiM"/>
                                     <constraint firstAttribute="height" constant="48" id="NF6-2K-ck9"/>
                                     <constraint firstItem="dSA-Vp-G8x" firstAttribute="centerY" secondItem="5Xh-3G-Ys5" secondAttribute="centerY" id="OqQ-XW-NEO"/>
-                                    <constraint firstItem="YPP-Ep-acD" firstAttribute="centerY" secondItem="5Xh-3G-Ys5" secondAttribute="centerY" id="Ovq-Js-TK0"/>
                                     <constraint firstItem="oRf-xJ-Dji" firstAttribute="centerY" secondItem="5Xh-3G-Ys5" secondAttribute="centerY" id="bJ0-dM-w0M"/>
                                     <constraint firstAttribute="trailing" secondItem="dSA-Vp-G8x" secondAttribute="trailing" constant="8" id="cn7-Sr-KdD"/>
-                                    <constraint firstItem="oRf-xJ-Dji" firstAttribute="bottom" secondItem="yu5-aO-tlJ" secondAttribute="bottom" id="jvI-rO-XwN"/>
-                                    <constraint firstItem="YPP-Ep-acD" firstAttribute="leading" secondItem="blv-wM-G8q" secondAttribute="trailing" constant="8" symbolic="YES" id="kgh-NU-HRy"/>
-                                    <constraint firstItem="yu5-aO-tlJ" firstAttribute="leading" secondItem="YPP-Ep-acD" secondAttribute="trailing" constant="8" symbolic="YES" id="sZU-Gq-chL"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="jvI-rO-XwN"/>
-                                    </mask>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -588,7 +559,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bronzeLabel" destination="yu5-aO-tlJ" id="nGF-im-AtS"/>
                         <outlet property="loadIndicator" destination="oRf-xJ-Dji" id="seq-ek-VEf"/>
                         <outlet property="scoreLabel" destination="blv-wM-G8q" id="Aah-Fz-1sc"/>
                         <outlet property="showDoneButton" destination="dSA-Vp-G8x" id="SG0-3b-kHh"/>

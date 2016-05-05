@@ -11,7 +11,6 @@ import DZNEmptyDataSet
 
 class TaskViewController: UIViewController, UIToolbarDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var bronzeLabel: UILabel!
     @IBOutlet weak var taskTypeSegmentControl: UISegmentedControl!
     @IBOutlet weak var scoreLabel: UILabel!
     
@@ -294,7 +293,6 @@ class TaskViewController: UIViewController, UIToolbarDelegate, DZNEmptyDataSetDe
         } else {
             self.scoreLabel.textColor = UIColor.redColor()
         }
-        self.bronzeLabel.text = "\(user.bronze)"
         
         self.tableView.tableFooterView = nil
         self.tableView.reloadEmptyDataSet()

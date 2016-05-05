@@ -89,6 +89,10 @@
 		49C8D3DA1BEF6DE700E8EBF5 /* TaskAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C8D3D91BEF6DE700E8EBF5 /* TaskAPI.swift */; };
 		49D321331BF35DFA00A6E0A7 /* WishAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D321321BF35DFA00A6E0A7 /* WishAPI.swift */; };
 		49E7B7C01CD1F96C00ED2785 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E7B7BF1CD1F96C00ED2785 /* WalletViewController.swift */; };
+		49E7B7C21CD24B2C00ED2785 /* BalanceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E7B7C11CD24B2C00ED2785 /* BalanceDetailViewController.swift */; };
+		49E7B7C61CD328B500ED2785 /* BalanceDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E7B7C51CD328B400ED2785 /* BalanceDetailTableViewCell.swift */; };
+		49E7B7CA1CD32A6A00ED2785 /* BalanceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E7B7C91CD32A6A00ED2785 /* BalanceDetail.swift */; };
+		49E7B7CC1CD32BC600ED2785 /* WalletAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E7B7CB1CD32BC600ED2785 /* WalletAPI.swift */; };
 		49F02DDD1C52204300E9BA7A /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F02DDC1C52204300E9BA7A /* PreviewViewController.swift */; };
 		49F02DDF1C5260F700E9BA7A /* ImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F02DDE1C5260F700E9BA7A /* ImageAPI.swift */; };
 		49F4A0211C169D4D002D21D6 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F4A0201C169D4D002D21D6 /* StatisticViewController.swift */; };
@@ -213,6 +217,10 @@
 		49C8D3D91BEF6DE700E8EBF5 /* TaskAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskAPI.swift; sourceTree = "<group>"; };
 		49D321321BF35DFA00A6E0A7 /* WishAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishAPI.swift; sourceTree = "<group>"; };
 		49E7B7BF1CD1F96C00ED2785 /* WalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
+		49E7B7C11CD24B2C00ED2785 /* BalanceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceDetailViewController.swift; sourceTree = "<group>"; };
+		49E7B7C51CD328B400ED2785 /* BalanceDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceDetailTableViewCell.swift; sourceTree = "<group>"; };
+		49E7B7C91CD32A6A00ED2785 /* BalanceDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceDetail.swift; sourceTree = "<group>"; };
+		49E7B7CB1CD32BC600ED2785 /* WalletAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletAPI.swift; sourceTree = "<group>"; };
 		49F02DDC1C52204300E9BA7A /* PreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		49F02DDE1C5260F700E9BA7A /* ImageAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAPI.swift; sourceTree = "<group>"; };
 		49F4A0201C169D4D002D21D6 /* StatisticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
@@ -317,6 +325,8 @@
 		49840DD61BCFA940001F493D /* model */ = {
 			isa = PBXGroup;
 			children = (
+				49E7B7C81CD32A4500ED2785 /* wallet */,
+				49E7B7C71CD32A2400ED2785 /* dungeon */,
 				4998593C1BDB169C00C222E7 /* Task.swift */,
 				49953DFB1BDB1F0400B25EC8 /* Table.swift */,
 				49953DFD1BDB2D6900B25EC8 /* Wish.swift */,
@@ -325,11 +335,7 @@
 				49953E031BDB371400B25EC8 /* Bill.swift */,
 				49953E051BDC67D900B25EC8 /* User.swift */,
 				49F8092C1C1B198B006A5DF5 /* Statistic.swift */,
-				491B6FE31C43E65A000FD353 /* Dungeon.swift */,
-				49422DFC1C4F75E900C316B3 /* Memorial.swift */,
-				49B4F3201C5488290094A438 /* MemorialComment.swift */,
 				49B4F3291C56489F0094A438 /* Badge.swift */,
-				490BEA9C1C5737DD005CAF3C /* DungeonNotification.swift */,
 				49791ABE1C7EF44B004867C8 /* TaskAlarm.swift */,
 			);
 			path = model;
@@ -338,19 +344,14 @@
 		49840DD71BCFA977001F493D /* view */ = {
 			isa = PBXGroup;
 			children = (
+				49E7B7C41CD3289700ED2785 /* wallet */,
+				49E7B7C31CD3286300ED2785 /* dungeon */,
 				49840DD81BCFA997001F493D /* TaskTableViewCell.swift */,
 				495EB5C81BD0A93400E0E829 /* BillItemTableViewCell.swift */,
 				498BAC951BD0D49400ABB357 /* WishTableViewCell.swift */,
 				49F4A0221C16C574002D21D6 /* StatisticTableViewCell.swift */,
 				49F8093B1C1E7224006A5DF5 /* Bubble.xib */,
 				49F8093D1C1E7239006A5DF5 /* BubbleView.swift */,
-				491B6FED1C44E20A000FD353 /* DungeonTableViewCell.swift */,
-				49422DF41C48E83600C316B3 /* DungeonTaskTableViewCell.swift */,
-				496486AE1C51DB22008C9A2C /* MemorialTableViewCell.swift */,
-				490BEA9E1C5742A3005CAF3C /* DungeonNotificationTableViewCell.swift */,
-				490BEAA21C575679005CAF3C /* MemorialCommentTableViewCell.swift */,
-				4938E43B1C587A7B00FC977C /* MemorialComment.xib */,
-				4938E43D1C587A9800FC977C /* MemorialCommentView.swift */,
 				4938E44A1C5F625400FC977C /* SpeechView.swift */,
 			);
 			path = view;
@@ -466,6 +467,7 @@
 				491B6FE91C44AEB7000FD353 /* DungeonAPI.swift */,
 				49F02DDE1C5260F700E9BA7A /* ImageAPI.swift */,
 				49258EE71C7D4A9100AD3576 /* MemorialAPI.swift */,
+				49E7B7CB1CD32BC600ED2785 /* WalletAPI.swift */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -474,6 +476,48 @@
 			isa = PBXGroup;
 			children = (
 				49E7B7BF1CD1F96C00ED2785 /* WalletViewController.swift */,
+				49E7B7C11CD24B2C00ED2785 /* BalanceDetailViewController.swift */,
+			);
+			name = wallet;
+			sourceTree = "<group>";
+		};
+		49E7B7C31CD3286300ED2785 /* dungeon */ = {
+			isa = PBXGroup;
+			children = (
+				491B6FED1C44E20A000FD353 /* DungeonTableViewCell.swift */,
+				49422DF41C48E83600C316B3 /* DungeonTaskTableViewCell.swift */,
+				496486AE1C51DB22008C9A2C /* MemorialTableViewCell.swift */,
+				490BEA9E1C5742A3005CAF3C /* DungeonNotificationTableViewCell.swift */,
+				490BEAA21C575679005CAF3C /* MemorialCommentTableViewCell.swift */,
+				4938E43B1C587A7B00FC977C /* MemorialComment.xib */,
+				4938E43D1C587A9800FC977C /* MemorialCommentView.swift */,
+			);
+			name = dungeon;
+			sourceTree = "<group>";
+		};
+		49E7B7C41CD3289700ED2785 /* wallet */ = {
+			isa = PBXGroup;
+			children = (
+				49E7B7C51CD328B400ED2785 /* BalanceDetailTableViewCell.swift */,
+			);
+			name = wallet;
+			sourceTree = "<group>";
+		};
+		49E7B7C71CD32A2400ED2785 /* dungeon */ = {
+			isa = PBXGroup;
+			children = (
+				491B6FE31C43E65A000FD353 /* Dungeon.swift */,
+				49422DFC1C4F75E900C316B3 /* Memorial.swift */,
+				490BEA9C1C5737DD005CAF3C /* DungeonNotification.swift */,
+				49B4F3201C5488290094A438 /* MemorialComment.swift */,
+			);
+			name = dungeon;
+			sourceTree = "<group>";
+		};
+		49E7B7C81CD32A4500ED2785 /* wallet */ = {
+			isa = PBXGroup;
+			children = (
+				49E7B7C91CD32A6A00ED2785 /* BalanceDetail.swift */,
 			);
 			name = wallet;
 			sourceTree = "<group>";
@@ -719,13 +763,16 @@
 				4912383F1C82AB9C00198E16 /* DeveloperViewController.swift in Sources */,
 				49258EE81C7D4A9100AD3576 /* MemorialAPI.swift in Sources */,
 				49953E041BDB371400B25EC8 /* Bill.swift in Sources */,
+				49E7B7C61CD328B500ED2785 /* BalanceDetailTableViewCell.swift in Sources */,
 				49B860261C461ECC004641DF /* DungeonDetailViewController.swift in Sources */,
 				490BEA9B1C5735DF005CAF3C /* DungeonNotificationViewController.swift in Sources */,
+				49E7B7C21CD24B2C00ED2785 /* BalanceDetailViewController.swift in Sources */,
 				49A976BB1BE73B02001300FB /* LoginViewController.swift in Sources */,
 				495EB5C71BD0A80800E0E829 /* BillViewController.swift in Sources */,
 				49422DF51C48E83600C316B3 /* DungeonTaskTableViewCell.swift in Sources */,
 				49953E001BDB2F6500B25EC8 /* TaskHistory.swift in Sources */,
 				49791ABD1C7EEC5A004867C8 /* TaskAlarmViewController.swift in Sources */,
+				49E7B7CA1CD32A6A00ED2785 /* BalanceDetail.swift in Sources */,
 				49C8D3CC1BE88C4900E8EBF5 /* RegisterViewController.swift in Sources */,
 				491238411C82FB7C00198E16 /* ComplainViewController.swift in Sources */,
 				49B4F32A1C56489F0094A438 /* Badge.swift in Sources */,
@@ -751,6 +798,7 @@
 				4998593D1BDB169C00C222E7 /* Task.swift in Sources */,
 				49791AC41C7F260A004867C8 /* TaskAlarmLabelViewController.swift in Sources */,
 				49953DFC1BDB1F0400B25EC8 /* Table.swift in Sources */,
+				49E7B7CC1CD32BC600ED2785 /* WalletAPI.swift in Sources */,
 				491B6FEE1C44E20A000FD353 /* DungeonTableViewCell.swift in Sources */,
 				49F02DDD1C52204300E9BA7A /* PreviewViewController.swift in Sources */,
 				49F4A0231C16C574002D21D6 /* StatisticTableViewCell.swift in Sources */,

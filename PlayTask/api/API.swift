@@ -72,6 +72,40 @@ class API {
     }
 }
 
+class APISubscriber<T>: ObserverType {
+    typealias E = T
+    
+    var onNext: ((E) -> Void)?
+    var onError: ((Int, String, JSON) -> Void)?
+    var onCompleted: (() -> Void)?
+    
+    init(onNext: ((E) -> Void)? = nil, onCompleted: (() -> Void)? = nil, onError: ((Int, String, JSON) -> Void)? = nil) {
+        self.onNext = onNext
+        self.onError = onError
+        self.onCompleted = onCompleted
+    }
+    
+    func on(event: Event<E>) {
+        switch event {
+        case .Completed:
+            self.onCompleted?()
+            break
+        case .Next(let n):
+            self.onNext?(n)
+            break
+        case .Error(let e):
+            if let error = e as? APIError {
+                switch error {
+                case .Custom(let status, let info, let data):
+                    self.onError?(status, info, data)
+                default:
+                    break
+                }
+            }
+        }
+    }
+}
+
 enum NetworkError: ErrorType {
     case Timeout
     case Unknown(Int)

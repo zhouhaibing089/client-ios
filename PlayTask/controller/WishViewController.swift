@@ -14,7 +14,6 @@ class WishViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmptyDat
     
     var wishes: [Wish]!
     
-    @IBOutlet weak var bronzeLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -212,7 +211,6 @@ class WishViewController: UIViewController, DZNEmptyDataSetDelegate, DZNEmptyDat
             self.scoreLabel.textColor = UIColor.redColor()
         }
         self.tableView.tableFooterView = nil
-        self.bronzeLabel.text = "\(user.bronze)"
         self.tableView.reloadData()
     }
     
